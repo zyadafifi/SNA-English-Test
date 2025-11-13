@@ -1,0 +1,200 @@
+{
+  "config": {
+    "title": "Listen to the scenario and answer questions",
+    "shuffleQuestions": true
+  },
+  "questions": [
+    {
+      "id": 1,
+      "scenario": "You want to go on a weekend trip with friends. Sarah wants to go to the mountains. Mike wants to go to the beach.",
+      "questions": [
+        {
+          "text": "What do you need to do?",
+          "type": "fill",
+          "template": "I need to choose ___________."
+        },
+        {
+          "text": "Who can give you advice?",
+          "type": "fill",
+          "template": "My ___________ can help me."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "scenario": "You will start a new job next Monday. You need to buy work clothes and prepare.",
+      "questions": [
+        {
+          "text": "When do you start work?",
+          "type": "fill",
+          "template": "I will start working ___________."
+        },
+        {
+          "text": "What do you need to buy?",
+          "type": "fill",
+          "template": "I need to buy ___________."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "scenario": "You are planning a birthday party for your friend this Saturday. You need to buy a cake.",
+      "questions": [
+        {
+          "text": "What are you planning?",
+          "type": "fill",
+          "template": "I am planning a ___________."
+        },
+        {
+          "text": "When is the party?",
+          "type": "fill",
+          "template": "The party is ___________."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "scenario": "You are moving to a new house next month. You need to pack your things.",
+      "questions": [
+        {
+          "text": "What are you doing next month?",
+          "type": "fill",
+          "template": "I am ___________ next month."
+        },
+        {
+          "text": "What do you need to do?",
+          "type": "fill",
+          "template": "I need to ___________ my things."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "scenario": "You have an important test next week. You have been studying every day.",
+      "questions": [
+        {
+          "text": "What do you have next week?",
+          "type": "fill",
+          "template": "I have an important ___________."
+        },
+        {
+          "text": "What have you been doing?",
+          "type": "fill",
+          "template": "I have been ___________ every day."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "scenario": "You want to learn how to cook. Your grandmother is teaching you her recipes.",
+      "questions": [
+        {
+          "text": "What do you want to learn?",
+          "type": "fill",
+          "template": "I want to learn how to ___________."
+        },
+        {
+          "text": "Who is teaching you?",
+          "type": "fill",
+          "template": "My ___________ is teaching me."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "scenario": "You want to get a pet dog. You need to buy food and toys for it.",
+      "questions": [
+        {
+          "text": "What do you want to get?",
+          "type": "fill",
+          "template": "I want to get a ___________."
+        },
+        {
+          "text": "What do you need to buy?",
+          "type": "fill",
+          "template": "I need to buy ___________ and toys."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "scenario": "You are starting a small business selling handmade jewelry. You need to create a website.",
+      "questions": [
+        {
+          "text": "What are you starting?",
+          "type": "fill",
+          "template": "I am starting a small ___________."
+        },
+        {
+          "text": "What do you need to create?",
+          "type": "fill",
+          "template": "I need to create a ___________."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "scenario": "You are fixing your kitchen. The old stove is broken and needs to be replaced.",
+      "questions": [
+        {
+          "text": "What are you fixing?",
+          "type": "fill",
+          "template": "I am fixing my ___________."
+        },
+        {
+          "text": "What needs to be replaced?",
+          "type": "fill",
+          "template": "The old ___________ needs to be replaced."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "scenario": "You are training for a running race in six months. You run every morning.",
+      "questions": [
+        {
+          "text": "What are you training for?",
+          "type": "fill",
+          "template": "I am training for a ___________."
+        },
+        {
+          "text": "When is the race?",
+          "type": "fill",
+          "template": "The race is in ___________."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "scenario": "You are learning English to get a better job. You take classes every evening.",
+      "questions": [
+        {
+          "text": "What are you learning?",
+          "type": "fill",
+          "template": "I am learning ___________."
+        },
+        {
+          "text": "Why are you learning it?",
+          "type": "fill",
+          "template": "I want to get a better ___________."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "scenario": "You are organizing a charity event to help poor children. You need volunteers to help.",
+      "questions": [
+        {
+          "text": "What are you organizing?",
+          "type": "fill",
+          "template": "I am organizing a charity ___________."
+        },
+        {
+          "text": "Who do you need?",
+          "type": "fill",
+          "template": "I need ___________ to help."
+        }
+      ]
+    }
+  ]
+}

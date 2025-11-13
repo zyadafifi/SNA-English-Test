@@ -1,0 +1,208 @@
+{
+  "config": {
+    "title": "Type what you hear",
+    "shuffleQuestions": true
+  },
+  "questions": [
+    {
+      "id": 1,
+      "correctText": "I am going to school today."
+    },
+    {
+      "id": 2,
+      "correctText": "The weather is nice and sunny."
+    },
+    {
+      "id": 3,
+      "correctText": "There is a coffee shop near here."
+    },
+    {
+      "id": 4,
+      "correctText": "The meeting starts at nine."
+    },
+    {
+      "id": 5,
+      "correctText": "I left my keys at home."
+    },
+    {
+      "id": 6,
+      "correctText": "The library is very quiet."
+    },
+    {
+      "id": 7,
+      "correctText": "The bus is late today."
+    },
+    {
+      "id": 8,
+      "correctText": "She is studying for her test."
+    },
+    {
+      "id": 9,
+      "correctText": "The restaurant looks busy."
+    },
+    {
+      "id": 10,
+      "correctText": "We need to buy food tomorrow."
+    },
+    {
+      "id": 11,
+      "correctText": "It is a beautiful day today."
+    },
+    {
+      "id": 12,
+      "correctText": "This book is very interesting."
+    },
+    {
+      "id": 13,
+      "correctText": "The plane is landing now."
+    },
+    {
+      "id": 14,
+      "correctText": "Children are playing in the park."
+    },
+    {
+      "id": 15,
+      "correctText": "My computer is working slowly."
+    },
+    {
+      "id": 16,
+      "correctText": "I have a doctor visit on Tuesday."
+    },
+    {
+      "id": 17,
+      "correctText": "The movie starts at eight."
+    },
+    {
+      "id": 18,
+      "correctText": "Traffic is heavy this morning."
+    },
+    {
+      "id": 19,
+      "correctText": "We are having a party on Saturday."
+    },
+    {
+      "id": 20,
+      "correctText": "My phone battery is low."
+    },
+    {
+      "id": 21,
+      "correctText": "He starts work on Monday."
+    },
+    {
+      "id": 22,
+      "correctText": "The flowers are very beautiful."
+    },
+    {
+      "id": 23,
+      "correctText": "Class is canceled today."
+    },
+    {
+      "id": 24,
+      "correctText": "The store closes at ten."
+    },
+    {
+      "id": 25,
+      "correctText": "This homework is difficult."
+    },
+    {
+      "id": 26,
+      "correctText": "The bus comes in fifteen minutes."
+    },
+    {
+      "id": 27,
+      "correctText": "She forgot her lunch today."
+    },
+    {
+      "id": 28,
+      "correctText": "The concert was amazing."
+    },
+    {
+      "id": 29,
+      "correctText": "We should visit the museum."
+    },
+    {
+      "id": 30,
+      "correctText": "The coffee tastes good."
+    },
+    {
+      "id": 31,
+      "correctText": "My sister lives in New York."
+    },
+    {
+      "id": 32,
+      "correctText": "The package will arrive tomorrow."
+    },
+    {
+      "id": 33,
+      "correctText": "He is learning to play guitar."
+    },
+    {
+      "id": 34,
+      "correctText": "The hotel has a nice view."
+    },
+    {
+      "id": 35,
+      "correctText": "I must finish this work by Friday."
+    },
+    {
+      "id": 36,
+      "correctText": "It got cold last night."
+    },
+    {
+      "id": 37,
+      "correctText": "She studies English at university."
+    },
+    {
+      "id": 38,
+      "correctText": "The restaurant has good food."
+    },
+    {
+      "id": 39,
+      "correctText": "We decided to go on vacation."
+    },
+    {
+      "id": 40,
+      "correctText": "The presentation went very well."
+    },
+    {
+      "id": 41,
+      "correctText": "My grandfather taught me to fish."
+    },
+    {
+      "id": 42,
+      "correctText": "The new mall opens next month."
+    },
+    {
+      "id": 43,
+      "correctText": "She drinks tea every morning."
+    },
+    {
+      "id": 44,
+      "correctText": "The mechanic fixed my car."
+    },
+    {
+      "id": 45,
+      "correctText": "We are planning a surprise party."
+    },
+    {
+      "id": 46,
+      "correctText": "The bakery sells good cake."
+    },
+    {
+      "id": 47,
+      "correctText": "I lost my wallet at the mall."
+    },
+    {
+      "id": 48,
+      "correctText": "The dentist visit is at three."
+    },
+    {
+      "id": 49,
+      "correctText": "My neighbor has a friendly dog."
+    },
+    {
+      "id": 50,
+      "correctText": "The walk was harder than expected."
+    }
+  ]
+}

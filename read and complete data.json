@@ -1,0 +1,148 @@
+{
+  "config": {
+    "title": "Complete the text with the correct words",
+    "shuffleQuestions": true
+  },
+  "questions": [
+    {
+      "id": 1,
+      "title": "Solar Energy",
+      "passage": "Solar energy comes from the sun. It is # and clean. The sun gives us # every day. Solar energy does not # the air. Many people use solar # on their houses.",
+      "correctAnswers": ["free", "light", "pollute", "panels"],
+      "visibleLetters": ["f__e", "l___t", "p_____e", "p____s"]
+    },
+    {
+      "id": 2,
+      "title": "Reading Books",
+      "passage": "Reading is very # for everyone. It helps you learn new # and improves your thinking. People who read often have better # skills. Reading also helps you # and feel better.",
+      "correctAnswers": ["good", "words", "communication", "relax"],
+      "visibleLetters": ["g__d", "w___s", "c_________on", "r___x"]
+    },
+    {
+      "id": 3,
+      "title": "Climate Change",
+      "passage": "Climate change is a big # today. The Earth is getting warmer because of human activities. This # ice to melt and sea levels to rise. We need to # action to protect our planet.",
+      "correctAnswers": ["problem", "causes", "take"],
+      "visibleLetters": ["p_____m", "c____s", "t__e"]
+    },
+    {
+      "id": 4,
+      "title": "The Internet",
+      "passage": "The Internet has # how we live and work. It started as a small # but now connects billions of people. Online shopping and social media have become # of daily life.",
+      "correctAnswers": ["changed", "network", "part"],
+      "visibleLetters": ["c_____d", "n_____k", "p__t"]
+    },
+    {
+      "id": 5,
+      "title": "Ocean Life",
+      "passage": "The ocean is # to many sea animals. But human activities are # the water and harming sea life. We must # the ocean for future generations.",
+      "correctAnswers": ["home", "polluting", "protect"],
+      "visibleLetters": ["h__e", "p______ng", "p_____t"]
+    },
+    {
+      "id": 6,
+      "title": "Exercise Benefits",
+      "passage": "Regular exercise is # for good health. It makes your heart # and helps you feel better. Exercise also helps you # better at night.",
+      "correctAnswers": ["important", "stronger", "sleep"],
+      "visibleLetters": ["i______nt", "s______r", "s___p"]
+    },
+    {
+      "id": 7,
+      "title": "Renewable Energy",
+      "passage": "Wind and solar power are # energy sources. They don't run out like oil and gas. Many countries are # more renewable energy to help the environment.",
+      "correctAnswers": ["renewable", "using"],
+      "visibleLetters": ["r_______e", "u___g"]
+    },
+    {
+      "id": 8,
+      "title": "Digital Age",
+      "passage": "We live in a digital age where # are everywhere. Smartphones and computers have # how we communicate and work. Social media has created new ways to # with others.",
+      "correctAnswers": ["computers", "changed", "connect"],
+      "visibleLetters": ["c_______s", "c_____d", "c_____t"]
+    },
+    {
+      "id": 9,
+      "title": "Space Exploration",
+      "passage": "Space exploration has helped us # more about the universe. Astronauts have # to the moon and space stations. These missions have led to many new #.",
+      "correctAnswers": ["learn", "traveled", "discoveries"],
+      "visibleLetters": ["l___n", "t______d", "d________s"]
+    },
+    {
+      "id": 10,
+      "title": "City Planning",
+      "passage": "Good city planning makes cities better places to #. It includes parks, schools, and good transportation. Planning also helps # traffic and pollution problems.",
+      "correctAnswers": ["live", "reduce"],
+      "visibleLetters": ["l__e", "r____e"]
+    },
+    {
+      "id": 11,
+      "title": "Artificial Intelligence",
+      "passage": "Artificial Intelligence is changing many #. AI can help doctors find diseases and help cars drive themselves. But we must be # about how we use this technology.",
+      "correctAnswers": ["industries", "careful"],
+      "visibleLetters": ["i________s", "c_____l"]
+    },
+    {
+      "id": 12,
+      "title": "Healthy Eating",
+      "passage": "Eating healthy food is # for your body. Fresh fruits and vegetables give you important #. Drinking water and eating less sugar helps you stay #.",
+      "correctAnswers": ["important", "vitamins", "healthy"],
+      "visibleLetters": ["i______nt", "v______s", "h_____y"]
+    },
+    {
+      "id": 13,
+      "title": "Music in Society",
+      "passage": "Music plays an important # in every culture. It can make people feel happy or sad. Music also helps people # together and express their feelings.",
+      "correctAnswers": ["role", "come"],
+      "visibleLetters": ["r__e", "c__e"]
+    },
+    {
+      "id": 14,
+      "title": "Transportation",
+      "passage": "Transportation helps people # from one place to another. Cars, buses, and trains are common ways to travel. Electric vehicles are becoming more # because they don't pollute the air.",
+      "correctAnswers": ["move", "popular"],
+      "visibleLetters": ["m__e", "p_____r"]
+    },
+    {
+      "id": 15,
+      "title": "Water Conservation",
+      "passage": "Water is very # for all life on Earth. We should not # water and should use it wisely. Simple actions like shorter showers can help # water.",
+      "correctAnswers": ["important", "waste", "save"],
+      "visibleLetters": ["i______nt", "w___e", "s__e"]
+    },
+    {
+      "id": 16,
+      "title": "Education Technology",
+      "passage": "Technology has changed how students #. Online classes and educational apps make learning more interesting. However, students still need to # with teachers and other students.",
+      "correctAnswers": ["learn", "interact"],
+      "visibleLetters": ["l___n", "i_____t"]
+    },
+    {
+      "id": 17,
+      "title": "Mental Health",
+      "passage": "Mental health is as important as physical health. People should talk about their # and ask for help when needed. Exercise and good sleep can # mental health.",
+      "correctAnswers": ["feelings", "improve"],
+      "visibleLetters": ["f_____s", "i_____e"]
+    },
+    {
+      "id": 18,
+      "title": "Global Trade",
+      "passage": "Countries around the world # goods with each other. This helps people get products from different countries. Trade also helps countries # economically.",
+      "correctAnswers": ["trade", "grow"],
+      "visibleLetters": ["t___e", "g__w"]
+    },
+    {
+      "id": 19,
+      "title": "Tourism",
+      "passage": "Tourism brings many # to local communities. It creates jobs and helps the economy. However, too many tourists can # the environment and local culture.",
+      "correctAnswers": ["benefits", "damage"],
+      "visibleLetters": ["b_____s", "d____e"]
+    },
+    {
+      "id": 20,
+      "title": "Future Cities",
+      "passage": "Future cities will be smarter and more #. They will use technology to # energy and reduce waste. Green buildings and clean transportation will make cities better places to live.",
+      "correctAnswers": ["sustainable", "save"],
+      "visibleLetters": ["s________e", "s__e"]
+    }
+  ]
+}

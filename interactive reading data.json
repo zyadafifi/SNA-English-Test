@@ -1,0 +1,263 @@
+{
+    "config": {
+      "title": "Select the best option for each missing word",
+      "shuffleQuestions": true
+    },
+    "questions": [
+      {
+        "id": 1,
+        "title": "City Transportation",
+        "passage": "Many cities have traffic problems. People use cars every day. Cities are making bike paths and electric buses. These help # pollution and make the air cleaner. More people should use public #.",
+        "questions": [
+          {
+            "question": "These help _____ pollution",
+            "options": ["increase", "reduce", "create", "ignore"],
+            "correctAnswer": 1
+          },
+          {
+            "question": "More people should use public _____",
+            "options": ["cars", "transportation", "houses", "phones"],
+            "correctAnswer": 1
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Learning Online",
+        "passage": "Many students now learn online. They can take classes from home. Online learning makes education # to access for everyone. Students can learn from teachers in different countries. This helps them learn new #.",
+        "questions": [
+          {
+            "question": "Online learning makes education _____ to access",
+            "options": ["harder", "easier", "impossible", "expensive"],
+            "correctAnswer": 1
+          },
+          {
+            "question": "This helps them learn new _____",
+            "options": ["problems", "skills", "worries", "fears"],
+            "correctAnswer": 1
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Healthy Farming",
+        "passage": "Farmers are using new ways to grow food. They use less water and fewer chemicals. This helps # the soil healthy. Good farming practices also help protect animals and #.",
+        "questions": [
+          {
+            "question": "This helps _____ the soil healthy",
+            "options": ["make", "keep", "destroy", "waste"],
+            "correctAnswer": 1
+          },
+          {
+            "question": "Good farming helps protect animals and _____",
+            "options": ["cars", "plants", "buildings", "roads"],
+            "correctAnswer": 1
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Space Travel",
+        "passage": "Space travel is becoming more popular. Private companies are building # to take people to space. These trips are expensive but many people want to # space.",
+        "questions": [
+          {
+            "question": "Private companies are building _____",
+            "options": ["cars", "rockets", "houses", "schools"],
+            "correctAnswer": 1
+          },
+          {
+            "question": "Many people want to _____ space",
+            "options": ["avoid", "visit", "destroy", "forget"],
+            "correctAnswer": 1
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Ocean Protection",
+        "passage": "The ocean has many problems. Plastic waste is # marine animals. People are working to clean the ocean and protect sea #.",
+        "questions": [
+          {
+            "question": "Plastic waste is _____ marine animals",
+            "options": ["helping", "harming", "feeding", "teaching"],
+            "correctAnswer": 1
+          },
+          {
+            "question": "People want to protect sea _____",
+            "options": ["pollution", "life", "plastic", "waste"],
+            "correctAnswer": 1
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Clean Energy",
+        "passage": "Solar and wind power are clean energy sources. They don't create # like coal and oil. Many countries are using more clean # to protect the environment.",
+        "questions": [
+          {
+            "question": "They don't create _____",
+            "options": ["energy", "pollution", "power", "electricity"],
+            "correctAnswer": 1
+          },
+          {
+            "question": "Many countries are using more clean _____",
+            "options": ["pollution", "energy", "waste", "problems"],
+            "correctAnswer": 1
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "City Farming",
+        "passage": "People are growing food in cities. They use rooftops and small spaces to grow vegetables. City farming helps provide # food and reduces transportation costs.",
+        "questions": [
+          {
+            "question": "City farming helps provide _____ food",
+            "options": ["expensive", "fresh", "old", "bad"],
+            "correctAnswer": 1
+          },
+          {
+            "question": "It also reduces transportation _____",
+            "options": ["benefits", "costs", "speed", "quality"],
+            "correctAnswer": 1
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Smart Medicine",
+        "passage": "Computers are helping doctors treat patients better. Smart programs can # diseases faster than before. This helps doctors give the right # to patients quickly.",
+        "questions": [
+          {
+            "question": "Smart programs can _____ diseases faster",
+            "options": ["create", "find", "hide", "spread"],
+            "correctAnswer": 1
+          },
+          {
+            "question": "This helps doctors give the right _____ to patients",
+            "options": ["problems", "treatment", "disease", "pain"],
+            "correctAnswer": 1
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Climate Change",
+        "passage": "The Earth's temperature is getting warmer. This causes problems like floods and storms. People need to # less energy and use clean power to help the #.",
+        "questions": [
+          {
+            "question": "People need to _____ less energy",
+            "options": ["make", "use", "create", "find"],
+            "correctAnswer": 1
+          },
+          {
+            "question": "This helps the _____",
+            "options": ["problems", "environment", "storms", "floods"],
+            "correctAnswer": 1
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "Digital Privacy",
+        "passage": "People share a lot of personal information online. Companies collect this data to sell products. People should be # about what information they share and protect their #.",
+        "questions": [
+          {
+            "question": "People should be _____ about sharing information",
+            "options": ["careless", "careful", "happy", "sad"],
+            "correctAnswer": 1
+          },
+          {
+            "question": "They should protect their _____",
+            "options": ["money", "privacy", "computers", "phones"],
+            "correctAnswer": 1
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "title": "Good Tourism",
+        "passage": "Tourism can help or hurt local communities. Good tourism creates # for local people and protects the environment. Tourists should respect local # and traditions.",
+        "questions": [
+          {
+            "question": "Good tourism creates _____ for local people",
+            "options": ["problems", "jobs", "pollution", "waste"],
+            "correctAnswer": 1
+          },
+          {
+            "question": "Tourists should respect local _____",
+            "options": ["problems", "culture", "pollution", "noise"],
+            "correctAnswer": 1
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "title": "Mental Health",
+        "passage": "Mental health is as important as physical health. People should talk about their # and ask for help when needed. Exercise and good sleep can improve mental #.",
+        "questions": [
+          {
+            "question": "People should talk about their _____",
+            "options": ["money", "feelings", "cars", "food"],
+            "correctAnswer": 1
+          },
+          {
+            "question": "Exercise can improve mental _____",
+            "options": ["problems", "health", "illness", "pain"],
+            "correctAnswer": 1
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "title": "Food Security",
+        "passage": "The world needs more food for growing populations. New farming methods help grow more # using less water and land. We also need to reduce food # to feed everyone.",
+        "questions": [
+          {
+            "question": "New methods help grow more _____",
+            "options": ["problems", "food", "waste", "pollution"],
+            "correctAnswer": 1
+          },
+          {
+            "question": "We need to reduce food _____",
+            "options": ["production", "waste", "quality", "taste"],
+            "correctAnswer": 1
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "title": "Internet Security",
+        "passage": "Cyber attacks are becoming more common. People and companies need to protect their computers and #. Strong passwords and updated software help keep information #.",
+        "questions": [
+          {
+            "question": "People need to protect their computers and _____",
+            "options": ["food", "data", "cars", "clothes"],
+            "correctAnswer": 1
+          },
+          {
+            "question": "This helps keep information _____",
+            "options": ["public", "safe", "slow", "expensive"],
+            "correctAnswer": 1
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "title": "Animal Protection",
+        "passage": "Many animals are losing their homes because of human activities. We need to # natural areas and create safe spaces for wildlife. Education helps people understand why animal # is important.",
+        "questions": [
+          {
+            "question": "We need to _____ natural areas",
+            "options": ["destroy", "protect", "sell", "ignore"],
+            "correctAnswer": 1
+          },
+          {
+            "question": "Education helps people understand animal _____",
+            "options": ["hunting", "protection", "selling", "training"],
+            "correctAnswer": 1
+          }
+        ]
+      }
+    ]
+  }

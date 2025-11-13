@@ -1,0 +1,145 @@
+{
+    "config": {
+      "title": "Read Then Speak",
+      "shuffleQuestions": true,
+      "prepareTime": 15,
+      "speakingTime": 90
+    },
+    "questions": [
+      {
+        "id": 1,
+        "topicText": "Talk about your favorite hobby and why you enjoy it.",
+        "topicQuestions": [
+          "What is your favorite hobby?",
+          "Why do you like this hobby?"
+        ],
+        "sampleAnswer": "My favorite hobby is reading books. I enjoy reading because it helps me learn new things and relax. When I read, I can visit different places and meet interesting characters. Reading also improves my vocabulary and helps me understand the world better. I like to read before going to sleep because it makes me feel calm and peaceful."
+      },
+      {
+        "id": 2,
+        "topicText": "Describe your best friend and explain why they are special to you.",
+        "topicQuestions": [
+          "Who is your best friend?",
+          "What makes them special?"
+        ],
+        "sampleAnswer": "My best friend is Sarah. She has been my friend since we were children. Sarah is special because she is always there when I need help. She listens to my problems and gives me good advice. We have fun together and share many interests. Sarah is honest, kind, and makes me laugh when I feel sad."
+      },
+      {
+        "id": 3,
+        "topicText": "Talk about a place you would like to visit and why.",
+        "topicQuestions": [
+          "Where would you like to visit?",
+          "Why do you want to go there?"
+        ],
+        "sampleAnswer": "I would like to visit Japan because I am interested in Japanese culture. I want to see the beautiful temples, try traditional food, and learn about their customs. Japan has modern cities and peaceful gardens. I also want to experience their transportation system and meet Japanese people to practice speaking their language."
+      },
+      {
+        "id": 4,
+        "topicText": "Describe your daily routine and what you like most about it.",
+        "topicQuestions": [
+          "What is your daily routine?",
+          "What do you like most about your day?"
+        ],
+        "sampleAnswer": "I wake up at 7 AM and have breakfast with my family. Then I go to work or school. In the evening, I like to exercise or read a book. I have dinner and spend time with my family watching TV or talking. What I like most is the evening time when I can relax and do things I enjoy after a busy day."
+      },
+      {
+        "id": 5,
+        "topicText": "Talk about your favorite food and how it is prepared.",
+        "topicQuestions": [
+          "What is your favorite food?",
+          "How is it made?"
+        ],
+        "sampleAnswer": "My favorite food is pizza. It is made with bread dough, tomato sauce, cheese, and different toppings like vegetables or meat. First, you roll the dough flat, then add sauce and cheese. You can add your favorite toppings and bake it in the oven. I like pizza because it tastes good and you can make it with many different ingredients."
+      },
+      {
+        "id": 6,
+        "topicText": "Describe a happy memory from your childhood.",
+        "topicQuestions": [
+          "What is your happy childhood memory?",
+          "Why was it special?"
+        ],
+        "sampleAnswer": "One of my happiest childhood memories is going to the beach with my family during summer vacation. We built sandcastles, played in the water, and had a picnic on the sand. My parents taught me how to swim, and we collected beautiful shells. It was special because we were all together, having fun and creating wonderful memories that I still remember today."
+      },
+      {
+        "id": 7,
+        "topicText": "Talk about a skill you would like to learn and why.",
+        "topicQuestions": [
+          "What skill would you like to learn?",
+          "Why is this skill important to you?"
+        ],
+        "sampleAnswer": "I would like to learn how to play the guitar. Music is beautiful and playing an instrument can bring joy to myself and others. Learning guitar would help me express my feelings through music and could be a good way to relax after work. I could also play songs for my friends and family during special occasions."
+      },
+      {
+        "id": 8,
+        "topicText": "Describe your favorite season and what you like to do during that time.",
+        "topicQuestions": [
+          "What is your favorite season?",
+          "What activities do you enjoy in this season?"
+        ],
+        "sampleAnswer": "My favorite season is spring because everything becomes green and beautiful. The weather is warm but not too hot. I like to go for walks in the park and see the flowers blooming. Spring is perfect for outdoor activities like picnics and bike rides. I also enjoy opening my windows to let fresh air into my house."
+      },
+      {
+        "id": 9,
+        "topicText": "Talk about your family and what makes them important to you.",
+        "topicQuestions": [
+          "Tell me about your family.",
+          "Why are they important to you?"
+        ],
+        "sampleAnswer": "My family consists of my parents, one sister, and me. My father works as a teacher and my mother is a nurse. My sister is younger than me and studies at university. They are important because they love and support me no matter what happens. We help each other solve problems and celebrate happy moments together."
+      },
+      {
+        "id": 10,
+        "topicText": "Describe your dream job and why you want to do it.",
+        "topicQuestions": [
+          "What is your dream job?",
+          "Why do you want this job?"
+        ],
+        "sampleAnswer": "My dream job is to be a teacher because I love helping people learn new things. Teaching allows me to share knowledge and make a positive difference in students' lives. I enjoy explaining difficult concepts in simple ways and seeing students understand and succeed. Teachers also have the opportunity to inspire young people to achieve their goals."
+      },
+      {
+        "id": 11,
+        "topicText": "Talk about a book or movie that you really enjoyed.",
+        "topicQuestions": [
+          "What book or movie did you enjoy?",
+          "What made it interesting?"
+        ],
+        "sampleAnswer": "I really enjoyed reading 'The Little Prince' because it has a beautiful story with important life lessons. The book talks about friendship, love, and what really matters in life. Even though it seems like a children's book, it has deep meaning for adults too. The simple writing style makes it easy to understand, but the message is very powerful."
+      },
+      {
+        "id": 12,
+        "topicText": "Describe a festival or celebration that is important in your culture.",
+        "topicQuestions": [
+          "What festival do you celebrate?",
+          "How do people celebrate it?"
+        ],
+        "sampleAnswer": "One important celebration in my culture is New Year's Day. People celebrate by having special meals with family and friends. We clean our houses, wear new clothes, and give gifts to children. There are fireworks at midnight and people make wishes for the new year. It's a time for new beginnings and spending time with loved ones."
+      },
+      {
+        "id": 13,
+        "topicText": "Talk about the importance of exercise and staying healthy.",
+        "topicQuestions": [
+          "Why is exercise important?",
+          "How do you stay healthy?"
+        ],
+        "sampleAnswer": "Exercise is important because it keeps our body strong and healthy. It helps prevent diseases, improves our mood, and gives us more energy. I stay healthy by walking every day, eating fruits and vegetables, and drinking plenty of water. Regular exercise also helps me sleep better and feel more confident about myself."
+      },
+      {
+        "id": 14,
+        "topicText": "Describe your hometown and what you like about it.",
+        "topicQuestions": [
+          "Where is your hometown?",
+          "What do you like about living there?"
+        ],
+        "sampleAnswer": "My hometown is a small city near the coast. I like it because it's peaceful and not too crowded. There are beautiful beaches where I can walk and relax. The people are friendly and always ready to help each other. We have good schools, parks, and everything we need for a comfortable life."
+      },
+      {
+        "id": 15,
+        "topicText": "Talk about the role of technology in modern life.",
+        "topicQuestions": [
+          "How does technology affect our daily lives?",
+          "What are the benefits and challenges?"
+        ],
+        "sampleAnswer": "Technology has changed our daily lives in many ways. We use smartphones to communicate, computers for work, and the internet to find information quickly. Technology makes life easier and connects us with people around the world. However, we need to be careful not to spend too much time on devices and remember to have face-to-face conversations with family and friends."
+      }
+    ]
+  }

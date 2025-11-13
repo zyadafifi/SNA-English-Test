@@ -1,0 +1,109 @@
+{
+  "config": {
+    "title": "Write a description of the image below for 1 minute",
+    "shuffleQuestions": true,
+    "timeLimit": 60
+  },
+  "questions": [
+    {
+      "id": 1,
+      "imageUrl": "https://images.unsplash.com/photo-1544717297-fa95b6ee9643?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+      "sampleAnswer": "In this image, I can see a young woman sitting at a wooden table in what looks like a coffee shop. She is holding a white coffee cup and appears to be enjoying her drink. She has long dark hair and is wearing casual clothes. There are some books or notebooks on the table, suggesting she might be studying or working. The background shows other people and the warm atmosphere of the café."
+    },
+    {
+      "id": 2,
+      "imageUrl": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+      "sampleAnswer": "This photograph shows a beautiful mountain landscape during what appears to be sunset or sunrise. There are multiple layers of mountains in the distance creating a dramatic silhouette. The sky displays warm colors from orange to pink, creating a peaceful atmosphere. In the foreground, there are some trees or vegetation. The lighting creates a nice contrast between the dark mountain shapes and the bright, colorful sky."
+    },
+    {
+      "id": 3,
+      "imageUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+      "sampleAnswer": "The image shows a professional man in a business suit walking with confidence. He appears to be in an urban environment, possibly a business district. The man is well-dressed in a dark suit and is carrying what looks like a briefcase. His posture suggests he is walking with purpose, maybe going to work or a meeting. The background is blurred, focusing attention on the man in the foreground."
+    },
+    {
+      "id": 4,
+      "imageUrl": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+      "sampleAnswer": "This image displays various fresh, healthy foods arranged on a wooden surface. There are colorful vegetables and fruits including tomatoes, leafy greens, and what appears to be some grains. The arrangement looks like ingredients for preparing nutritious meals. The presentation emphasizes the importance of eating fresh, natural foods. The wooden background gives the image a natural, organic feel."
+    },
+    {
+      "id": 5,
+      "imageUrl": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+      "sampleAnswer": "The photograph shows a modern workspace with a laptop computer open on a clean white desk. Next to the laptop are office supplies including notebooks and pens, plus a small plant for decoration. The workspace looks organized and minimal, with good lighting that creates a productive atmosphere. This setup is typical of modern office work or remote working environments."
+    },
+    {
+      "id": 6,
+      "imageUrl": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+      "sampleAnswer": "This image captures a beautiful coastal scene with crystal clear blue water. The photograph shows a clean beach or coastline with turquoise water that looks very inviting. You can see through the transparent water to the sandy bottom, showing how clean and pure it is. This type of scenery is typical of tropical or Mediterranean coastal areas and represents natural beauty."
+    },
+    {
+      "id": 7,
+      "imageUrl": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+      "sampleAnswer": "The image shows a group of people working together in what appears to be a modern office environment. Several individuals are gathered around a table, engaged in what looks like a meeting or brainstorming session. Some people are standing while others are seated, with work materials on the table. The atmosphere looks professional yet friendly, showing good teamwork and collaboration."
+    },
+    {
+      "id": 8,
+      "imageUrl": "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+      "sampleAnswer": "This photograph shows a person exercising outdoors, likely jogging or running. The individual is wearing suitable athletic clothing for running. The setting appears to be in a park or green area, perfect for outdoor exercise. The image represents the concept of physical fitness and healthy lifestyle choices. The lighting suggests it's during daytime, providing good conditions for exercise."
+    },
+    {
+      "id": 9,
+      "imageUrl": "https://images.unsplash.com/photo-1511988617509-a57c8a288659?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+      "sampleAnswer": "The image shows a delicious meal beautifully presented on a plate. The dish appears to be professionally prepared with various colorful ingredients arranged in an attractive way. There are vegetables and other components that make the food look both healthy and appetizing. The presentation suggests this could be from a restaurant or a carefully prepared home meal that emphasizes both nutrition and visual appeal."
+    },
+    {
+      "id": 10,
+      "imageUrl": "https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+      "sampleAnswer": "This image shows a happy family moment with what appears to be parents and children spending quality time together. The family members look content and engaged with each other, showing a loving relationship. They seem to be in a comfortable environment where families typically gather. The scene represents the importance of family bonds and the positive aspects of family life."
+    },
+    {
+      "id": 11,
+      "imageUrl": "https://images.unsplash.com/photo-1486312338219-ce68e2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+      "sampleAnswer": "The photograph shows someone working on a laptop computer in a focused work environment. The person appears to be typing or working on their computer screen, suggesting they are handling various tasks or projects. The workspace looks modern and organized with good lighting for productivity. This scene is common in today's digital work environment, whether in offices or home offices."
+    },
+    {
+      "id": 12,
+      "imageUrl": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+      "sampleAnswer": "This image shows a group of people in what appears to be a collaborative work meeting. The individuals seem engaged in discussion, possibly working on a project together. They look professional and focused, suggesting this is a workplace setting. There appear to be work materials visible, indicating an active work session with positive teamwork and collaboration."
+    },
+    {
+      "id": 13,
+      "imageUrl": "https://images.unsplash.com/photo-1502780402662-acc01917424e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+      "sampleAnswer": "The image shows a modern kitchen with a clean, contemporary design. The kitchen appears well-organized with modern appliances and fixtures. The lighting is bright and welcoming, creating an inviting space for cooking and food preparation. There might be some kitchen tools and ingredients visible, suggesting an active cooking environment that combines functionality with style."
+    },
+    {
+      "id": 14,
+      "imageUrl": "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+      "sampleAnswer": "This photograph shows an educational setting with students in what appears to be a classroom. The students seem engaged in learning activities, possibly listening to a lecture or working on assignments. The setting suggests a formal educational institution like a school or university. The atmosphere appears focused and academic, representing the importance of education and learning."
+    },
+    {
+      "id": 15,
+      "imageUrl": "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+      "sampleAnswer": "The image captures a beautiful garden filled with various plants and colorful flowers. There are different types of blooms and green foliage creating a vibrant, natural environment. The garden appears well-maintained with plants arranged in an attractive way. This represents the beauty of nature and gardening, creating a peaceful space for relaxation and enjoyment."
+    },
+    {
+      "id": 16,
+      "imageUrl": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+      "sampleAnswer": "This image shows people in what appears to be a business meeting or conference. The individuals are professionally dressed and seem engaged in serious discussion. There might be documents or presentation materials visible, suggesting this is a formal business environment. The participants look focused and attentive, indicating an important meeting where teams gather to discuss projects or make decisions."
+    },
+    {
+      "id": 17,
+      "imageUrl": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+      "sampleAnswer": "The photograph shows a peaceful forest scene with tall trees creating a natural canopy. Sunlight appears to filter through the leaves, creating beautiful light patterns. The image conveys a sense of peace and tranquility that comes from being in nature. There might be a walking path visible, suggesting this is a place for outdoor activities like hiking or nature walks."
+    },
+    {
+      "id": 18,
+      "imageUrl": "https://images.unsplash.com/photo-1556740758-90de374c12ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+      "sampleAnswer": "This image shows a modern restaurant or café interior with contemporary design. The space has stylish furniture and good lighting that creates a welcoming atmosphere for customers. There are tables and chairs arranged to provide a comfortable dining experience. The design shows attention to both function and style, creating an environment where people enjoy eating and socializing."
+    },
+    {
+      "id": 19,
+      "imageUrl": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+      "sampleAnswer": "The photograph shows someone engaged in studying or reading, possibly in a library or quiet study space. There are books and educational materials visible, suggesting academic work or learning activities. The person appears focused on their studies, representing dedication to education and personal development. The setting looks good for learning with proper lighting and minimal distractions."
+    },
+    {
+      "id": 20,
+      "imageUrl": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+      "sampleAnswer": "This image captures a professional business environment with people engaged in work activities. The individuals appear to be in an office setting, possibly discussing projects or collaborating on business tasks. The atmosphere looks professional and productive with modern office equipment visible. The scene represents contemporary workplace culture where teamwork and communication are essential for business success."
+    }
+  ]
+}

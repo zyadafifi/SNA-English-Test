@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Duolingo English Test Practice</title>
+
+    <!-- Resource Hints for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://dy8n3onijof8f.cloudfront.net" />
+
+    <!-- Optimized Font Loading -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Inline critical CSS optimization script -->
+    <script>
+      // Lazy load external images for better performance
+      document.addEventListener("DOMContentLoaded", function () {
+        const images = document.querySelectorAll('img[src^="https://"]');
+        images.forEach(function (img) {
+          // Skip if already has loading attribute
+          if (!img.hasAttribute("loading")) {
+            img.loading = "lazy";
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+        <a href="#" class="logo">
+          <img
+            alt="logo"
+            class="_2lOwd _1I5iz _33JSt"
+            src="assets/logo.png"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </a>
+        <div class="header-icons">
+          <div class="icon-decoration">
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 48 48"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <!-- Background circles -->
+              <circle
+                cx="24"
+                cy="24"
+                r="20"
+                fill="#f8f9fa"
+                stroke="#FFF3E0"
+                stroke-width="1"
+              />
+              <circle
+                cx="24"
+                cy="24"
+                r="14"
+                fill="#FFF3E0"
+                stroke="#ffc515"
+                stroke-width="1.5"
+              />
+
+              <!-- Center star -->
+              <path
+                d="M24 12L26.472 18.944L34 18.944L28.764 23.056L31.236 30L24 25.888L16.764 30L19.236 23.056L14 18.944L21.528 18.944L24 12Z"
+                fill="#ffc515"
+              />
+
+              <!-- Decorative dots -->
+              <circle cx="24" cy="8" r="2" fill="#ffc515" />
+              <circle cx="24" cy="40" r="2" fill="#ffc515" />
+              <circle cx="8" cy="24" r="2" fill="#ffc800" />
+              <circle cx="40" cy="24" r="2" fill="#ffc800" />
+
+              <!-- Corner accents -->
+              <circle cx="35.5" cy="12.5" r="1.5" fill="#ff4b4b" />
+              <circle cx="12.5" cy="12.5" r="1.5" fill="#ff4b4b" />
+              <circle cx="35.5" cy="35.5" r="1.5" fill="#ff4b4b" />
+              <circle cx="12.5" cy="35.5" r="1.5" fill="#ff4b4b" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="app-container">
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-content">
+          <div class="sidebar-item active">
+            <img
+              alt=""
+              class="_3HbAQ"
+              src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBpZD0iMS4gVGFiIEljb25zIC8gSG9tZSAtIGFjdGl2ZSI+PHBhdGggaWQ9ImhvdXNlIGJvZHkiIGQ9Ik0yNC41ODUyIDI1LjI2NkMyNC4yODgzIDI2LjgyNDUgMjIuOTI1NyAyNy45NTIxIDIxLjMzOTIgMjcuOTUyMUgxMC42NDAxQzkuMDUzNTQgMjcuOTUyMSA3LjY5MDk0IDI2LjgyNDUgNy4zOTQwOCAyNS4yNjZMNC45ODA5NiAxMi41OTcxTDE1LjkwMDEgNC41MjI0NkwyNi45OTg4IDEyLjU5NDNMMjQuNTg1MiAyNS4yNjZaIiBmaWxsPSIjRkZDODAwIi8+PHBhdGggaWQ9InBlcmNoIGxpbmUiIG9wYWNpdHk9IjAuNSIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMi44Njk2IDIyLjYwODdDMTIuODY5NiAyMi4wMzI0IDEzLjMzNjggMjEuNTY1MiAxMy45MTMxIDIxLjU2NTJIMTguMDg3QzE4LjY2MzMgMjEuNTY1MiAxOS4xMzA1IDIyLjAzMjQgMTkuMTMwNSAyMi42MDg3QzE5LjEzMDUgMjMuMTg1IDE4LjY2MzMgMjMuNjUyMSAxOC4wODcgMjMuNjUyMUgxMy45MTMxQzEzLjMzNjggMjMuNjUyMSAxMi44Njk2IDIzLjE4NSAxMi44Njk2IDIyLjYwODdaIiBmaWxsPSIjOTQ1MTUxIi8+PHBhdGggaWQ9IndpbmRvdyIgZD0iTTE5LjQ3ODUgMTYuMjk5NUMxOS40Nzg1IDE4LjIyMDUgMTcuOTIxMiAxOS43Nzc4IDE2LjAwMDIgMTkuNzc3OEMxNC4wNzkyIDE5Ljc3NzggMTIuNTIyIDE4LjIyMDUgMTIuNTIyIDE2LjI5OTVDMTIuNTIyIDE0LjM3ODYgMTQuMDc5MiAxMi44MjEzIDE2LjAwMDIgMTIuODIxM0MxNy45MjEyIDEyLjgyMTMgMTkuNDc4NSAxNC4zNzg2IDE5LjQ3ODUgMTYuMjk5NVoiIGZpbGw9IiM5NDUxNTEiLz48cGF0aCBpZD0icm9vZiIgZD0iTTE1LjgxNjcgMi43ODI4OEMxNi4yODA5IDIuNzgwNjIgMTYuNzUwNyAyLjkyMTA4IDE3LjE1NDUgMy4yMTQyNUwxNy4xNTUyIDMuMjE0NzZMMjkuMjk0MiAxMS45NjYxQzMwLjMwNDMgMTIuNyAzMC41MjgzIDE0LjExMzkgMjkuNzk0MyAxNS4xMjQxQzI5LjA2MDYgMTYuMTM0IDI3LjY0NzIgMTYuMzU4MSAyNi42MzcxIDE1LjYyNDhMMjYuNjM2NCAxNS42MjQzTDE1LjgwODYgNy44MTgyMUw0Ljk4MTA1IDE1LjYyNDFMNC45ODAyMSAxNS42MjQ3QzMuOTcwMDkgMTYuMzU3OSAyLjU1Njc5IDE2LjEzMzggMS44MjMwNiAxNS4xMjRDMS4wODkxMyAxNC4xMTM4IDEuMzEzMDYgMTIuNjk5OSAyLjMyMzI0IDExLjk2NkwyLjMyNDc5IDExLjk2NDhMMTQuNDYyMiAzLjIxNDYzTDE0LjQ2MjkgMy4yMTQxMkMxNC44NzE0IDIuOTE3NTYgMTUuMzQ3MyAyLjc3NzI4IDE1LjgxNjcgMi43ODI4OFoiIGZpbGw9IiNGRjRCNEIiLz48L2c+PC9zdmc+"
+            />
+            <span>MY TESTS</span>
+          </div>
+
+          <div class="sidebar-item highlighted">
+            <img
+              alt=""
+              class="_3HbAQ"
+              src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBjbGlwLXBhdGg9InVybCgjY2xpcDBfMjY5ODNfMTcyNjYpIj48bGluZSB4MT0iMTIuODAyNCIgeTE9IjE3LjQxNjIiIHgyPSIxOC44MjY5IiB5Mj0iMTMuOTM4IiBzdHJva2U9IiNDOUM3QzciIHN0cm9rZS13aWR0aD0iMi4xMzgwNSIvPjxyZWN0IHg9IjEzLjg4ODIiIHk9IjYuNzc2NjEiIHdpZHRoPSI2LjI2MDg3IiBoZWlnaHQ9IjE4LjA4NyIgcng9IjMuMTMwNDMiIHRyYW5zZm9ybT0icm90YXRlKC0zMCAxMy44ODgyIDYuNzc2NjEpIiBmaWxsPSIjMUNCMEY2Ii8+PHJlY3QgeD0iMy42NDY0OCIgeT0iMTIuNjg5NyIgd2lkdGg9IjYuMjYwODciIGhlaWdodD0iMTguMDg3IiByeD0iMy4xMzA0MyIgdHJhbnNmb3JtPSJyb3RhdGUoLTMwIDMuNjQ2NDggMTIuNjg5NykiIGZpbGw9IiMxQ0IwRjYiLz48cmVjdCB4PSIxOS40OTcxIiB5PSI2Ljc1MjIiIHdpZHRoPSI2LjI2MDg3IiBoZWlnaHQ9IjEyLjUyMTciIHJ4PSIzLjEzMDQzIiB0cmFuc2Zvcm09InJvdGF0ZSgtMzAgMTkuNDk3MSA2Ljc1MjIpIiBmaWxsPSIjMUNCMEY2Ii8+PHJlY3QgeD0iMC44MjAzMTIiIHk9IjE3LjUzNDQiIHdpZHRoPSI2LjI2MDg3IiBoZWlnaHQ9IjEyLjUyMTciIHJ4PSIzLjEzMDQzIiB0cmFuc2Zvcm09InJvdGF0ZSgtMzAgMC44MjAzMTIgMTcuNTM0NCkiIGZpbGw9IiMxQ0IwRjYiLz48cmVjdCBvcGFjaXR5PSIwLjMiIHg9IjMuNjAzNTIiIHk9IjE4LjIzIiB3aWR0aD0iMi4wODY5NiIgaGVpZ2h0PSIzLjQ3ODI2IiByeD0iMS4wNDM0OCIgdHJhbnNmb3JtPSJyb3RhdGUoLTMwIDMuNjAzNTIgMTguMjMpIiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IG9wYWNpdHk9IjAuMyIgeD0iMjMuMDgxNSIgeT0iNy43OTUxNyIgd2lkdGg9IjIuMDg2OTYiIGhlaWdodD0iMy40NzgyNiIgcng9IjEuMDQzNDgiIHRyYW5zZm9ybT0icm90YXRlKC0zMCAyMy4wODE1IDcuNzk1MTcpIiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IG9wYWNpdHk9IjAuMyIgeD0iNi4zODU3NCIgeT0iMTMuMzYwNiIgd2lkdGg9IjIuMDg2OTYiIGhlaWdodD0iNC4xNzM5MSIgcng9IjEuMDQzNDgiIHRyYW5zZm9ybT0icm90YXRlKC0zMCA2LjM4NTc0IDEzLjM2MDYpIiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IG9wYWNpdHk9IjAuMyIgeD0iMTYuODIwOCIgeT0iNy43OTUxNyIgd2lkdGg9IjIuMDg2OTYiIGhlaWdodD0iNC4xNzM5MSIgcng9IjEuMDQzNDgiIHRyYW5zZm9ybT0icm90YXRlKC0zMCAxNi44MjA4IDcuNzk1MTcpIiBmaWxsPSJ3aGl0ZSIvPjwvZz48ZGVmcz48Y2xpcFBhdGggaWQ9ImNsaXAwXzI2OTgzXzE3MjY2Ij48cmVjdCB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIGZpbGw9IndoaXRlIi8+PC9jbGlwUGF0aD48L2RlZnM+PC9zdmc+"
+            />
+            <span>PRACTICE</span>
+          </div>
+
+          <div class="sidebar-item">
+            <img
+              alt=""
+              class="_3HbAQ"
+              src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMy45NTk3MyA3LjEzOTg5QzIuNDI1MTcgNy4xMzk4OSAxLjE4MTE1IDguMzgzOTEgMS4xODExNSA5LjkxODQ4VjIyLjMwNDRDMS4xODExNSAyMy44MzkgMi40MjQzMSAyNS4wODMgMy45NTg4OCAyNS4wODNIOC45NjExOEMxMS43OTcyIDI1LjA4MyAxMi40OTQ1IDI1LjgzMDcgMTMuMTY4OSAyNi41NTM4QzE0Ljc1ODggMjguMjU4NCAxNi44MTMyIDI4LjE5MjYgMTguNDUzOCAyNi42ODQ0QzE5LjI0MDIgMjUuOTYxNSAyMC4wODk4IDI1LjE4MDUgMjMuMDQwMSAyNS4xODA1SDI4LjA0MjRDMjkuNTc3IDI1LjE4MDUgMzAuODIwMSAyMy45MzY1IDMwLjgyMDEgMjIuNDAyVjkuOTE4NDdDMzAuODIwMSA4LjM4MzkgMjkuNTc2MSA3LjEzOTg5IDI4LjA0MTUgNy4xMzk4OUgyMi42Njk2QzE5LjczNjUgNy4xMzk4OSAxNy4yMDE0IDguODQ0MjMgMTYuMDAwNiAxMS4zMTY2QzE0Ljc5OTkgOC44NDQyMyAxMi4yNjQ4IDcuMTM5ODkgOS4zMzE2NiA3LjEzOTg5SDMuOTU5NzNaIiBmaWxsPSIjNThDQzAyIi8+PHBhdGggZD0iTTYuMzY2NDIgNC4xNzYyN0M1LjEzODc3IDQuMTc2MjcgNC4xNDM1NSA1LjE3MTQ4IDQuMTQzNTUgNi4zOTkxNFYxOS43MzYzQzQuMTQzNTUgMjAuOTY0IDUuMTM3OTMgMjEuOTU5MiA2LjM2NTU5IDIxLjk1OTJIMTAuNDQxN0MxMi44ODkxIDIxLjk1OTIgMTMuNjUyNCAyMi42MzI5IDE0LjMzODUgMjMuMjM4NUMxNS41OTgyIDI0LjM1MDMgMTYuMjIwMyAyNC4zMTcgMTcuNDQzNiAyMy4yOTI2QzE4LjE4MjYgMjIuNjczNyAxOS4wMzU5IDIxLjk1OTIgMjEuNTU2NSAyMS45NTkySDI1LjYzMjZDMjYuODYwMyAyMS45NTkyIDI3Ljg1NDYgMjAuOTY0IDI3Ljg1NDYgMTkuNzM2M1Y2LjM5OTE0QzI3Ljg1NDYgNS4xNzE0OCAyNi44NTk0IDQuMTc2MjcgMjUuNjMxOCA0LjE3NjI3SDIxLjE4NkMxOC45NTQxIDQuMTc2MjcgMTcuMDEwMiA1LjQwOTg1IDE1Ljk5OTEgNy4yMzI0M0MxNC45ODggNS40MDk4NSAxMy4wNDQxIDQuMTc2MjcgMTAuODEyMiA0LjE3NjI3SDYuMzY2NDJaIiBmaWxsPSIjQjlFOEZGIi8+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xNC44ODc3IDUuNzk5MzJWMjMuNjc2NkMxNS43MDQyIDI0LjI0MzggMTYuMjcxOSAyNC4xODI2IDE3LjExMDYgMjMuNTU3N1Y1LjhDMTYuNjcxMSA2LjIxNjMgMTYuMjk1NCA2LjY5OTE5IDE1Ljk5OTUgNy4yMzI1MUMxNS43MDM1IDYuNjk4OSAxNS4zMjc1IDYuMjE1NzcgMTQuODg3NyA1Ljc5OTMyWiIgZmlsbD0iIzhBRDdGQyIvPjwvc3ZnPg=="
+            />
+            <span>TEST INFO</span>
+          </div>
+        </div>
+
+        <!-- Help Button with Menu at Bottom -->
+        <div class="sidebar-help">
+          <div class="help-container">
+            <!-- Help Menu -->
+            <div class="help-menu" id="helpMenu">
+              <a href="#" class="help-menu-item" onclick="openWhatsApp()">
+                <div class="help-menu-icon whatsapp-icon">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="#25D366"
+                  >
+                    <path
+                      d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"
+                    />
+                  </svg>
+                </div>
+                <span>WhatsApp Support</span>
+              </a>
+            </div>
+
+            <button class="help-button" onclick="toggleHelpMenu()">
+              <span class="help-icon-text">
+                <img
+                  alt="speech"
+                  src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/f4d4080fa9f003236d48.svg"
+                />
+              </span>
+              <span>HELP</span>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <!-- My Tests Content -->
+        <section
+          class="my-tests-content"
+          id="myTestsContent"
+          style="display: none"
+        >
+          <div class="certification-hero">
+            <div class="certification-text">
+              <h1>
+                Certify your English and access<br />5,500+ institutions
+                globally
+              </h1>
+              <button class="purchase-test-btn">
+                <a href="index.html" style="text-decoration: none; color: #fff"
+                  >PRACTICE ON A TEST</a
+                >
+              </button>
+            </div>
+            <div class="certification-characters">
+              <img
+                alt=""
+                class="_3PEpx"
+                src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/f104a14cc2ea377b5143.svg"
+              />
+            </div>
+          </div>
+
+          <div class="action-cards">
+            <div class="action-card practice-card">
+              <div class="card-icon">
+                <img
+                  alt=""
+                  class="uAGm2"
+                  src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/ad95399c5574c59eb46b.svg"
+                />
+              </div>
+              <div class="card-content">
+                <h3>Practice free</h3>
+              </div>
+            </div>
+
+            <div class="action-card learn-card">
+              <div class="card-icon">
+                <img
+                  alt=""
+                  class="uAGm2"
+                  src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/ebf6bd9ddb507547534d.svg"
+                />
+              </div>
+              <div class="card-content">
+                <h3>Learn about the test</h3>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Test Info Content -->
+        <section
+          class="test-info-content"
+          id="testInfoContent"
+          style="display: none"
+        >
+          <div class="test-info-hero">
+            <div class="test-info-text">
+              <h1>Learn about the test</h1>
+            </div>
+            <div class="test-info-characters">
+              <img
+                alt=""
+                class="test-info-img"
+                src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/03740b1e7e77ad332349.svg"
+              />
+            </div>
+          </div>
+
+          <div class="info-cards">
+            <!-- Row 1 -->
+            <div class="info-cards-row">
+              <div class="info-card">
+                <div class="info-card-icon">
+                  <img
+                    alt=""
+                    class="uAGm2"
+                    src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/06673382cd86b57dc38f.svg"
+                  />
+                </div>
+                <div class="info-card-content">
+                  <h3>Review rules</h3>
+                </div>
+              </div>
+
+              <div class="info-card">
+                <div class="info-card-icon">
+                  <img
+                    alt=""
+                    class="uAGm2"
+                    src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/a774c4c6406b0272c8f6.svg"
+                  />
+                </div>
+                <div class="info-card-content">
+                  <h3>Prepare your space</h3>
+                </div>
+              </div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="info-cards-row">
+              <div class="info-card">
+                <div class="info-card-icon">
+                  <img
+                    alt=""
+                    class="uAGm2"
+                    src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/6f1decb733c5f3d2c480.svg"
+                  />
+                </div>
+                <div class="info-card-content">
+                  <h3>Understand scoring</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Practice Content -->
+        <section class="practice-content" id="practiceContent">
+          <!-- Practice Test Hero Section -->
+          <section class="hero-section">
+            <div class="hero-content">
+              <div class="hero-text">
+                <h1>Take a full length practice test</h1>
+                <button class="practice-free-btn">PRACTICE NOW</button>
+              </div>
+              <div class="hero-image">
+                <img
+                  alt=""
+                  class="_3klvD _3zRF-"
+                  src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/5633d8d9cf720599890c.svg"
+                />
+              </div>
+            </div>
+          </section>
+
+          <!-- Practice Skills Section -->
+          <section class="practice-skills">
+            <h2>Practice skills</h2>
+
+            <!-- Skill Categories -->
+            <div class="skill-categories">
+              <button class="category-btn active">ALL</button>
+              <button class="category-btn">SPEAKING</button>
+              <button class="category-btn">WRITING</button>
+              <button class="category-btn">READING</button>
+              <button class="category-btn">LISTENING</button>
+            </div>
+
+            <!-- Skills Grid -->
+            <div class="skills-grid">
+              <!-- Row 1 -->
+              <div class="skills-row">
+                <!-- Read and Select -->
+                <div class="skill-card">
+                  <div class="skill-icon read-select-icon">
+                    <img
+                      alt=""
+                      class="_1DNrh"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/dee39e1c1718bb2288e0.svg"
+                    />
+                  </div>
+                  <div class="skill-info">
+                    <h3>Read and Select</h3>
+                    <div class="progress-container">
+                      <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                      </div>
+                      <span class="progress-text">0/6</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Fill in the Blanks -->
+                <div class="skill-card">
+                  <div class="skill-icon fill-blanks-icon">
+                    <span class="brackets-icon"
+                      ><img
+                        alt=""
+                        class="_1DNrh"
+                        src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/ba1d587f3e70a8481757.svg"
+                    /></span>
+                  </div>
+                  <div class="skill-info">
+                    <h3>Fill in the Blanks</h3>
+                    <div class="progress-container">
+                      <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                      </div>
+                      <span class="progress-text">0/6</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Row 2 -->
+              <div class="skills-row">
+                <!-- Read and Complete -->
+                <div class="skill-card">
+                  <div class="skill-icon read-complete-icon">
+                    <span class="lines-icon"
+                      ><img
+                        alt=""
+                        class="_1DNrh"
+                        src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/a154291625f914c6da2c.svg"
+                    /></span>
+                  </div>
+                  <div class="skill-info">
+                    <h3>Read and Complete</h3>
+                    <div class="progress-container">
+                      <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                      </div>
+                      <span class="progress-text">0/6</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Listen and Type -->
+                <div class="skill-card">
+                  <div class="skill-icon listen-type-icon">
+                    <img
+                      alt=""
+                      class="_1DNrh"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/5c83d5fa113fffb33fb9.svg"
+                    />
+                  </div>
+                  <div class="skill-info">
+                    <h3>Listen and Type</h3>
+                    <div class="progress-container">
+                      <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                      </div>
+                      <span class="progress-text">0/6</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Row 3 -->
+              <div class="skills-row">
+                <!-- Write About the Photo -->
+                <div class="skill-card">
+                  <div class="skill-icon write-photo-icon">
+                    <img
+                      alt=""
+                      class="_1DNrh"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/2cf012d62cbb87af5b89.svg"
+                    />
+                  </div>
+                  <div class="skill-info">
+                    <h3>Write About the Photo</h3>
+                    <div class="progress-container">
+                      <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                      </div>
+                      <span class="progress-text">0/3</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Speak About the Photo -->
+                <div class="skill-card">
+                  <div class="skill-icon speak-photo-icon">
+                    <img
+                      alt=""
+                      class="_1DNrh"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/d6f321c153f20f6787cc.svg"
+                    />
+                  </div>
+                  <div class="skill-info">
+                    <h3>Speak About the Photo</h3>
+                    <div class="progress-container">
+                      <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                      </div>
+                      <span class="progress-text">0/3</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Row 4 -->
+              <div class="skills-row">
+                <!-- Read, Then Speak -->
+                <div class="skill-card">
+                  <div class="skill-icon read-speak-icon">
+                    <img
+                      alt=""
+                      class="_1DNrh"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/b7d745a8df794bb8d213.svg"
+                    />
+                  </div>
+                  <div class="skill-info">
+                    <h3>Read, Then Speak</h3>
+                    <div class="progress-container">
+                      <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                      </div>
+                      <span class="progress-text">0/3</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Interactive Reading -->
+                <div class="skill-card">
+                  <div class="skill-icon interactive-reading-icon">
+                    <img
+                      alt=""
+                      class="_1DNrh"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/d584919668c4c84971c1.svg"
+                    />
+                  </div>
+                  <div class="skill-info">
+                    <h3>Interactive Reading</h3>
+                    <div class="progress-container">
+                      <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                      </div>
+                      <span class="progress-text">0/6</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Row 5 -->
+              <div class="skills-row">
+                <!-- Interactive Listening -->
+                <div class="skill-card">
+                  <div class="skill-icon interactive-listening-icon">
+                    <img
+                      alt=""
+                      class="_1DNrh"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/6fa22e1db402cc8bc7bb.svg"
+                    />
+                  </div>
+                  <div class="skill-info">
+                    <h3>Interactive Listening</h3>
+                    <div class="progress-container">
+                      <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                      </div>
+                      <span class="progress-text">0/6</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Writing Sample -->
+                <div class="skill-card">
+                  <div class="skill-icon writing-sample-icon">
+                    <img
+                      alt=""
+                      class="_1DNrh"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/2b51889b8be8b16d7050.svg"
+                    />
+                  </div>
+                  <div class="skill-info">
+                    <h3>Writing Sample</h3>
+                    <div class="progress-container">
+                      <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                      </div>
+                      <span class="progress-text">0/3</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Row 6 -->
+              <div class="skills-row">
+                <!-- Speaking Sample -->
+                <div class="skill-card">
+                  <div class="skill-icon speaking-sample-icon">
+                    <img
+                      alt=""
+                      class="_1DNrh"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/4c574c6afc55bb5fc0b5.svg"
+                    />
+                  </div>
+                  <div class="skill-info">
+                    <h3>Speaking Sample</h3>
+                    <div class="progress-container">
+                      <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                      </div>
+                      <span class="progress-text">0/3</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+        <!-- Review Rules Content -->
+        <section
+          class="review-rules-content"
+          id="reviewRulesContent"
+          style="display: none"
+        >
+          <div class="review-rules-header">
+            <button class="back-btn" onclick="navigateToTestInfo()">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path
+                  d="M10 12L6 8L10 4"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Back
+            </button>
+
+            <div class="rules-hero">
+              <div class="rules-text">
+                <h1>Review rules</h1>
+              </div>
+              <div class="rules-video">
+                <div class="video-container">
+                  <img
+                    src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/03740b1e7e77ad332349.svg"
+                    alt="Review rules video"
+                    class="video-thumbnail"
+                  />
+                  <div class="play-button">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="white"
+                    >
+                      <path d="M8 5V19L19 12L8 5Z" />
+                    </svg>
+                  </div>
+                  <div class="video-duration">1:31</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rules-sections">
+            <!-- During the test section -->
+            <div class="rules-section">
+              <h2>During the test</h2>
+              <div class="rules-list">
+                <div class="rule-item">
+                  <div class="rule-icon prohibition">
+                    <img
+                      alt="icon"
+                      class="_1FsFu"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/e1b1961487c57b0b8654.svg"
+                    />
+                  </div>
+                  <p>Don't look away from the screen, except when typing</p>
+                </div>
+
+                <div class="rule-item">
+                  <div class="rule-icon prohibition">
+                    <img
+                      alt="icon"
+                      class="_1FsFu"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/3273aee287fce1fea04d.svg"
+                    />
+                  </div>
+                  <p>Don't memorize or read answers from other sources</p>
+                </div>
+
+                <div class="rule-item">
+                  <div class="rule-icon prohibition">
+                    <img
+                      alt="icon"
+                      class="_1FsFu"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/1ee244666bb796d3b673.svg"
+                    />
+                  </div>
+                  <p>Don't speak until instructed to</p>
+                </div>
+
+                <div class="rule-item">
+                  <div class="rule-icon prohibition">
+                    <img
+                      alt="icon"
+                      class="_1FsFu"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/fcbd8aaa32a0b302811f.svg"
+                    />
+                  </div>
+                  <p>Don't take notes or record questions</p>
+                </div>
+
+                <div class="rule-item">
+                  <div class="rule-icon prohibition">
+                    <img
+                      alt="icon"
+                      class="_1FsFu"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/7dd01d3b9cfe2f1277b0.svg"
+                    />
+                  </div>
+                  <p>Don't interact with anyone during the test</p>
+                </div>
+
+                <div class="rule-item">
+                  <div class="rule-icon prohibition">
+                    <img
+                      alt="icon"
+                      class="_1FsFu"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/6881c362b23e8208ab78.svg"
+                    />
+                  </div>
+                  <p>Don't use a VPN, virtual machine, or assistive software</p>
+                </div>
+
+                <div class="rule-item">
+                  <div class="rule-icon prohibition">
+                    <img
+                      alt="icon"
+                      class="_1FsFu"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/240cc39535f7410853fd.svg"
+                    />
+                  </div>
+                  <p>
+                    Don't use headphones or earbuds, and keep your ears visible
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Computer setup section -->
+            <div class="rules-section">
+              <h2>Computer setup</h2>
+              <div class="rules-list">
+                <div class="rule-item">
+                  <div class="rule-icon allowed">
+                    <img
+                      alt="icon"
+                      class="_1FsFu"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/70ba760992fee9ad922b.svg"
+                    />
+                  </div>
+                  <p>Use only one keyboard, mouse, and phone camera</p>
+                </div>
+
+                <div class="rule-item">
+                  <div class="rule-icon allowed">
+                    <img
+                      alt="icon"
+                      class="_1FsFu"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/c55bc681fbbb53dea00d.svg"
+                    />
+                  </div>
+                  <p>
+                    Stay in the camera frame and keep your ears, eyes, and mouth
+                    visible
+                  </p>
+                </div>
+
+                <div class="rule-item">
+                  <div class="rule-icon prohibition">
+                    <img
+                      alt="icon"
+                      class="_1FsFu"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/066ef7228b3dc25becb6.svg"
+                    />
+                  </div>
+                  <p>
+                    Remove extra screens, devices, and paper from the testing
+                    area
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Phone camera section -->
+            <div class="rules-section">
+              <h2>Phone camera</h2>
+              <div class="rules-list">
+                <div class="rule-item">
+                  <div class="rule-icon allowed">
+                    <img
+                      alt="icon"
+                      class="_1FsFu"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/49a56b24cb50018965a8.svg"
+                    />
+                  </div>
+                  <p>
+                    Capture your entire screen and keyboard with your phone
+                    camera
+                  </p>
+                </div>
+
+                <div class="rule-item">
+                  <div class="rule-icon prohibition">
+                    <img
+                      alt="icon"
+                      class="_1FsFu"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/696aa078e341314e300d.svg"
+                    />
+                  </div>
+                  <p>Don't interfere with the phone camera recording</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Prepare Your Space Content -->
+        <section
+          class="prepare-space-content"
+          id="prepareSpaceContent"
+          style="display: none"
+        >
+          <div class="prepare-space-header">
+            <button class="back-btn" onclick="navigateToTestInfo()">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path
+                  d="M10 12L6 8L10 4"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Back
+            </button>
+
+            <div class="prepare-space-hero">
+              <h1>Prepare your space</h1>
+            </div>
+          </div>
+
+          <div class="space-requirements">
+            <div class="requirement-item">
+              <div class="requirement-icon">
+                <img
+                  alt="icon"
+                  class="_1FsFu"
+                  src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/ee3f081bc16cc4e0ba87.svg"
+                />
+              </div>
+              <p>A quiet, well-lit room without distractions</p>
+            </div>
+
+            <div class="requirement-item">
+              <div class="requirement-icon">
+                <img
+                  alt="icon"
+                  class="_1FsFu"
+                  src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/3656a0d81372c821ed19.svg"
+                />
+              </div>
+              <p>Reliable internet</p>
+            </div>
+
+            <div class="requirement-item">
+              <div class="requirement-icon">
+                <img
+                  alt="icon"
+                  class="_1FsFu"
+                  src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/37677828fac71ce455b8.svg"
+                />
+              </div>
+              <p>A computer with camera, microphone, and speakers</p>
+            </div>
+
+            <div class="requirement-item">
+              <div class="requirement-icon">
+                <img
+                  alt="icon"
+                  class="_1FsFu"
+                  src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/bd645947b187ca161e33.svg"
+                />
+              </div>
+              <p>Passport, government ID, or driver's license</p>
+            </div>
+
+            <div class="requirement-item">
+              <div class="requirement-icon">
+                <img
+                  alt="icon"
+                  class="_1FsFu"
+                  src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/05be68fb49ae6bda74c9.svg"
+                />
+              </div>
+              <p>A fully charged phone with a camera</p>
+            </div>
+          </div>
+        </section>
+        <!-- Understand Scoring Content -->
+        <section
+          class="understand-scoring-content"
+          id="understandScoringContent"
+          style="display: none"
+        >
+          <div class="understand-scoring-header">
+            <button class="back-btn" onclick="navigateToTestInfo()">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path
+                  d="M10 12L6 8L10 4"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Back
+            </button>
+
+            <div class="scoring-hero">
+              <h1>Understand scoring</h1>
+            </div>
+          </div>
+
+          <!-- Individual Subscores Section -->
+          <div class="scoring-section">
+            <p class="scoring-title">
+              Scores are on a scale of 10–160. Individual subscores average to
+              the overall score.
+            </p>
+
+            <div class="subscores-grid">
+              <div class="subscore-item">
+                <div class="subscore-icon speaking">
+                  <img
+                    alt="Speaking"
+                    class="_10ECt"
+                    src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/26c740961673156f4254.svg"
+                  />
+                </div>
+                <span>Speaking</span>
+              </div>
+
+              <div class="subscore-item">
+                <div class="subscore-icon writing">
+                  <img
+                    alt="Writing"
+                    class="_10ECt"
+                    src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/fc2c89931dfbbb2073f4.svg"
+                  />
+                </div>
+                <span>Writing</span>
+              </div>
+
+              <div class="subscore-item">
+                <div class="subscore-icon reading">
+                  <img
+                    alt="Reading"
+                    class="_10ECt"
+                    src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/a7c5dea5697db0202df0.svg"
+                  />
+                </div>
+                <span>Reading</span>
+              </div>
+
+              <div class="subscore-item">
+                <div class="subscore-icon listening">
+                  <img
+                    alt="Listening"
+                    class="_10ECt"
+                    src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/c671e62051e7d2474e7d.svg"
+                  />
+                </div>
+                <span>Listening</span>
+              </div>
+            </div>
+
+            <p class="integrated-description">
+              Integrated subscores are the average of two individual subscores.
+            </p>
+
+            <div class="integrated-subscores">
+              <div class="integrated-item">
+                <div class="integrated-icons">
+                  <div class="small-icon writing">
+                    <img
+                      alt="Writing"
+                      class="_1MoQq"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/fc2c89931dfbbb2073f4.svg"
+                      style="width: 50px; height: 50px"
+                    />
+                  </div>
+                  <p class="plus-symbol">+</p>
+                  <div class="small-icon speaking">
+                    <img
+                      alt="Speaking"
+                      class="_1MoQq"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/26c740961673156f4254.svg"
+                      style="width: 50px; height: 50px"
+                    />
+                  </div>
+                </div>
+                <span>Production</span>
+              </div>
+
+              <div class="integrated-item">
+                <div class="integrated-icons">
+                  <div class="small-icon writing">
+                    <img
+                      alt="Writing"
+                      class="_1MoQq"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/a7c5dea5697db0202df0.svg"
+                      style="width: 50px; height: 50px"
+                    />
+                  </div>
+                  <p class="plus-symbol">+</p>
+                  <div class="small-icon speaking">
+                    <img
+                      alt="Speaking"
+                      class="_1MoQq"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/fc2c89931dfbbb2073f4.svg"
+                      style="width: 50px; height: 50px"
+                    />
+                  </div>
+                </div>
+                <span>Literacy</span>
+              </div>
+
+              <div class="integrated-item">
+                <div class="integrated-icons">
+                  <div class="small-icon writing">
+                    <img
+                      alt="Writing"
+                      class="_1MoQq"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/c671e62051e7d2474e7d.svg"
+                      style="width: 50px; height: 50px"
+                    />
+                  </div>
+                  <p class="plus-symbol">+</p>
+                  <div class="small-icon speaking">
+                    <img
+                      alt="Speaking"
+                      class="_1MoQq"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/a7c5dea5697db0202df0.svg"
+                      style="width: 50px; height: 50px"
+                    />
+                  </div>
+                </div>
+                <span>Comprehension</span>
+              </div>
+
+              <div class="integrated-item">
+                <div class="integrated-icons">
+                  <div class="small-icon writing">
+                    <img
+                      alt="Writing"
+                      class="_1MoQq"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/26c740961673156f4254.svg"
+                      style="width: 50px; height: 50px"
+                    />
+                  </div>
+                  <p class="plus-symbol">+</p>
+                  <div class="small-icon speaking">
+                    <img
+                      alt="Speaking"
+                      class="_1MoQq"
+                      src="https://dy8n3onijof8f.cloudfront.net/static/images/wp/c671e62051e7d2474e7d.svg"
+                      style="width: 50px; height: 50px"
+                    />
+                  </div>
+                </div>
+                <span>Conversation</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Score Comparison Section -->
+          <div class="scoring-section">
+            <h2>Overall score comparison</h2>
+
+            <div class="comparison-table">
+              <div class="comparison-column">
+                <div class="test-header duolingo">
+                  <div class="test-logo">
+                    <img
+                      alt="logo"
+                      class=""
+                      src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzkiIGhlaWdodD0iMzkiIHZpZXdCb3g9IjAgMCAzOSAzOSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d
+                        3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMzAuNzQ5NyAzMi4wMDc0TDI5LjczMDUgMzQuNjgzOEMyOS41MTUzIDM1LjI0ODIgMjkuMTEyMiAzNS43MjEyIDI4LjU4OSAzNi4wMjNDMjguMDY1OCAzNi4
+                        zMjQ5IDI3LjQ1NDYgMzYuNDM3MiAyNi44NTgzIDM2LjM0MDlMMjQuMDMxIDM1Ljg4ODJDMjMuODQ4MiAzNS44NTk1IDIzLjY2MTQgMzUuODY5MyAyMy40ODI3IDM1LjkxNzJDMjMuMzA0IDM1Ljk2NTEgMjMuM
+                        TM3MiAzNi4wNDk5IDIyLjk5MzMgMzYuMTY2MkwyMC43NzIzIDM3Ljk3MTZDMjAuMzA0MiAzOC4zNTMgMTkuNzE4OSAzOC41NjEzIDE5LjExNTEgMzguNTYxM0MxOC41MTE0IDM4LjU2MTMgMTcuOTI2IDM4LjM
+                        1MyAxNy40NTggMzcuOTcxNkwxNS4yMzcgMzYuMTY2MkMxNS4wOTI3IDM2LjA0OTYgMTQuOTI1NiAzNS45NjQ1IDE0Ljc0NjMgMzUuOTE2NkMxNC41NjcxIDM1Ljg2ODggMTQuMzc5OCAzNS44NTkxIDE0LjE5NjYg
+                        MzUuODg4MkwxMS4zNjk0IDM2LjM0MDlDMTAuNzczMSAzNi40MzcyIDEwLjE2MTggMzYuMzI0OSA5LjYzODYxIDM2LjAyM0M5LjExNTQxIDM1LjcyMTIgOC43MTIyOCAzNS4yNDgyIDguNDk3MTQgMzQuNjgzOEw
+                        3LjQ3Nzk2IDMyLjAwNzRDNy40MTE3NiAzMS44MzUgNy4zMTAyIDMxLjY3ODMgNy4xNzk4MSAzMS41NDc0QzcuMDQ5NDIgMzEuNDE2NiA2Ljg5MzA4IDMxLjMxNDUgNi43MjA4NSAzMS4yNDc3TDQuMDQ0NTEgMzA
+                        uMjI4NUMzLjQ3OTggMzAuMDEzOCAzLjAwNjUgMjkuNjEwNyAyLjcwNDU4IDI5LjA4NzRDMi40MDI2NSAyOC41NjQxIDIuMjkwNiAyNy45NTI2IDIuMzg3MzUgMjcuMzU2M0wyLjg0MDAzIDI0LjUyOUMyLjg3MDYz
+                        IDI0LjM0NzIgMi44NjI4OSAyNC4xNjA5IDIuODE3MzEgMjMuOTgyMkMyLjc3MTcyIDIzLjgwMzUgMi42ODkyOSAyMy42MzYzIDIuNTc1MzEgMjMuNDkxM0wwLjc1NjY2NiAyMS4yNzAzQzAuMzc1MjYzIDIwLjgwMj
+                        IgMC4xNjY5OTIgMjAuMjE2OSAwLjE2Njk5MiAxOS42MTMxQzAuMTY2OTkyIDE5LjAwOTMgMC4zNzUyNjMgMTguNDI0IDAuNzU2NjY2IDE3Ljk1NkwyLjU2MjA3IDE1LjczNUMyLjY3NjA1IDE1LjU5IDIuNzU4NDggMT
+                        UuNDIyOCAyLjgwNDA3IDE1LjI0NDFDMi44NDk2NiAxNS4wNjU0IDIuODU3NCAxNC44NzkxIDIuODI2NzkgMTQuNjk3MkwyLjM4NzM1IDExLjg3QzIuMjkwNiAxMS4yNzM3IDIuNDAyNjUgMTAuNjYyMiAyLjcwNDU4ID
+                        EwLjEzODlDMy4wMDY1IDkuNjE1NTYgMy40Nzk4IDkuMjEyNSA0LjA0NDUxIDguOTk3NzhMNi43MjA4NSA3Ljk3NTk1QzYuODkzNDkgNy45MTA2MSA3LjA1MDI4IDcuODA5MzIgNy4xODA4IDcuNjc4OEM3LjMxMTMzIDcuNT
+                        Q4MjcgNy40MTI2MiA3LjM5MTQ5IDcuNDc3OTYgNy4yMTg4NUw4LjQ5OTc4IDQuNTQyNTFDOC43MTQ1MSAzLjk3Nzc5IDkuMTE3NTYgMy41MDQ1IDkuNjQwODcgMy4yMDI1N0MxMC4xNjQyIDIuOTAwNjUgMTAuNzc1Ny
+                        AyLjc4ODYgMTEuMzcyIDIuODg1MzVMMTQuMTk2NiAzLjMzODAyQzE0LjM3ODUgMy4zNjg2MyAxNC41NjQ3IDMuMzYwODkgMTQuNzQzNCAzLjMxNTNDMTQuOTIyMSAzLjI2OTcxIDE1LjA4OTMgMy4xODcyOSAxNS4
+                        yMzQzIDMuMDczM0wxNy40NTUzIDEuMjY3OUMxNy45MjM0IDAuODg2NDk0IDE4LjUwODcgMC42NzgyMjMgMTkuMTEyNSAwLjY3ODIyM0MxOS43MTYzIDAuNjc4MjIzIDIwLjMwMTYgMC44ODY0OTQgMjAuNzY5NiAxL
+                        jI2NzlMMjIuOTkwNyAzLjA3MzNDMjMuMTM1NiAzLjE4NzI5IDIzLjMwMjkgMy4yNjk3MSAyMy40ODE2IDMuMzE1M0MyMy42NjAzIDMuMzYwODkgMjMuODQ2NSAzLjM2ODYzIDI0LjAyODQgMy4zMzgwMkwyNi44NTU
+                        2IDIuODg1MzVDMjcuNDUyIDIuNzg4NiAyOC4wNjM0IDIuOTAwNjUgMjguNTg2OCAzLjIwMjU3QzI5LjExMDEgMy41MDQ1IDI5LjUxMzEgMy45Nzc3OSAyOS43Mjc4IDQuNTQyNTFMMzAuNzQ3IDcuMjE4ODVDMzAuO
+                        DEzOCA3LjM5MTA3IDMwLjkxNTkgNy41NDc0MSAzMS4wNDY4IDcuNjc3ODFDMzEuMTc3NiA3LjgwODIgMzEuMzM0MyA3LjkwOTc2IDMxLjUwNjggNy45NzU5NUwzNC4xODMxIDguOTk3NzhDMzQuNzQ3NSA5LjIxMj
+                        kyIDM1LjIyMDUgOS42MTYwNiAzNS41MjI0IDEwLjEzOTNDMzUuODI0MiAxMC42NjI0IDM1LjkzNjUgMTEuMjczNyAzNS44NDAzIDExLjg3TDM1LjM5MDIgMTQuNjk0NkMzNS4zNjE1IDE0Ljg3NzQgMzUuMzcxMyAx
+                        NS4wNjQyIDM1LjQxOTIgMTUuMjQyOUMzNS40NjcxIDE1LjQyMTcgMzUuNTUxOSAxNS41ODg0IDM1LjY2ODIgMTUuNzMyM0wzNy40NzM2IDE3Ljk1MzNDMzcuODU1IDE4LjQyMTQgMzguMDYzMyAxOS4wMDY3IDM4Lj
+                        A2MzMgMTkuNjEwNUMzOC4wNjMzIDIwLjIxNDMgMzcuODU1IDIwLjc5OTYgMzcuNDczNiAyMS4yNjc2TDM1LjY2ODIgMjMuNDg4N0MzNS41NTE5IDIzLjYzMjYgMzUuNDY3MSAyMy43OTkzIDM1LjQxOTIgMjMuOTc
+                        4MUMzNS4zNzEzIDI0LjE1NjggMzUuMzYxNSAyNC4zNDM2IDM1LjM5MDIgMjQuNTI2NEwzNS44NDI5IDI3LjM1MzZDMzUuOTM5MiAyNy45NDk5IDM1LjgyNjkgMjguNTYxMiAzNS41MjUgMjkuMDg0NEMzNS4yMjMyI
+                        DI5LjYwNzYgMzQuNzUwMiAzMC4wMTA3IDM0LjE4NTggMzAuMjI1OEwzMS41MDk0IDMxLjI0NUMzMS4zMzY0IDMxLjMxMTggMzEuMTc5NCAzMS40MTQyIDMxLjA0ODUgMzEuNTQ1NUMzMC45MTc3IDMxLjY3NjggMzA
+                        uODE1OCAzMS44MzQyIDMwLjc0OTcgMzIuMDA3NFoiIGZpbGw9IiM1OENDMDIiLz48cGF0aCBkPSJNMjYuNDQ4MyAxNy4wNzU4QzI3LjE0MjEgMTguNjE3NCAyNy4yNzY5IDIwLjM1MjUgMjYuODI5NiAyMS45ODI4Q
+                        zI2LjM4MjMgMjMuNjEzIDI1LjM4MDcgMjUuMDM2NCAyMy45OTczIDI2LjAwOEMyMi42MTM5IDI2Ljk3OTYgMjAuOTM1MSAyNy40Mzg2IDE5LjI0OTggMjcuMzA2MkMxNy41NjQ1IDI3LjE3MzcgMTUuOTc4MSAyNi4
+                        0NTggMTQuNzYzNCAyNS4yODIyQzEzLjQ4MDYgMjUuNzUxMSAxMi4wODM2IDI1LjgwOTEgMTAuNzY2MyAyNS40NDgxQzkuNDQ4OTUgMjUuMDg3MiA4LjI3NjY3IDI0LjMyNTEgNy40MTIxIDIzLjI2NzZDNy4zMjY2Mi
+                        AyMy4xNjIxIDcuMjY3MzMgMjMuMDM3OSA3LjIzOTA2IDIyLjkwNTFDNy4yMTA4IDIyLjc3MjMgNy4yMTQzNyAyMi42MzQ3IDcuMjQ5NDggMjIuNTAzNUM3LjI4NDYgMjIuMzcyNCA3LjM1MDI2IDIyLjI1MTQgNy40ND
+                        ExIDIyLjE1MDRDNy41MzE5MyAyMi4wNDk1IDcuNjQ1MzcgMjEuOTcxNSA3Ljc3MjEzIDIxLjkyMjlMMTEuMjkwMyAyMC41NjIyTDkuNTAzNDEgMTguMDEyOUM5LjI3MTc3IDE3LjY4MTIgOS4xMjU3MyAxNy4yOTc0IDk
+                        uMDc4MzEgMTYuODk1NkM5LjAzMDg4IDE2LjQ5MzggOS4wODM1MyAxNi4wODY1IDkuMjMxNTcgMTUuNzFDOS4zNzk2MSAxNS4zMzM0IDkuNjE4NDYgMTQuOTk5NCA5LjkyNjgzIDE0LjczNzVDMTAuMjM1MiAxNC40NzU2I
+                        DEwLjYwMzYgMTQuMjk0IDEwLjk5OTEgMTQuMjA4OUMxMy4wMTEgMTMuNzggMTQuMzA0NiAxMy4zNjQ0IDE0Ljg3OTkgMTIuOTYyQzE1LjQ1NTIgMTIuNTU5NiAxNi4yNzQxIDExLjUwMDggMTcuMzM2NSA5Ljc4NTM1QzE3LjU1M
+                        DggOS40NDEyMiAxNy44NDcyIDkuMTU1NjEgMTguMTk5IDguOTU0MTFDMTguNTUwOCA4Ljc1MjYgMTguOTQ3IDguNjQxNSAxOS4zNTIzIDguNjMwNzVDMTkuNzU3NiA4LjYxOTk5IDIwLjE1OTIgOC43MDk5MiAyMC41MjEyIDguODkyN
+                        DhDMjAuODgzMiA5LjA3NTA0IDIxLjE5NDIgOS4zNDQ1MyAyMS40MjY1IDkuNjc2ODJMMjMuMjAyOCAxMi4yMDc2TDI1LjY0MzUgOS4zOTg4NkMyNS43MzI0IDkuMjk2MjEgMjUuODQ0NCA5LjIxNjA3IDI1Ljk3MDIgOS4xNjQ5OUM
+                        yNi4wOTYgOS4xMTM5IDI2LjIzMjEgOS4wOTMzMyAyNi4zNjc0IDkuMTA0OTVDMjYuNTAyNyA5LjExNjU3IDI2LjYzMzQgOS4xNjAwNSAyNi43NDg2IDkuMjMxODRDMjYuODYzOSA5LjMwMzYzIDI2Ljk2MDUgOS40MDE2OCAyNy4wM
+                        zA3IDkuNTE3OThDMjcuNzI1NCAxMC42ODM4IDI4LjA0MjMgMTIuMDM2MSAyNy45MzgxIDEzLjM4OTNDMjcuODMzOCAxNC43NDI0IDI3LjMxMzQgMTYuMDMwMSAyNi40NDgzIDE3LjA3NThaTTIwLjE0MjYgMjkuMTI1OUwxOC4yN
+                        TUxIDI4Ljg2MTJDMTcuOTM3NCAyOC44MTUyIDE3LjYxNDUgMjguODk3MyAxNy4zNTczIDI5LjA4OTVDMTcuMTAwMiAyOS4yODE2IDE2LjkyOTggMjkuNTY4IDE2Ljg4MzkgMjkuODg1N0MxNi44Mzc5IDMwLjIwMzQgMTYu
+                        OTIgMzAuNTI2MyAxNy4xMTIxIDMwLjc4MzVDMTcuMzA0MiAzMS4wNDA3IDE3LjU5MDYgMzEuMjExIDE3LjkwODMgMzEuMjU3TDE5Ljc5NTggMzEuNTIxN0MyMC4xMTM4IDMxLjU2NTkgMjAuNDM2NCAzMS40ODIg
+                        MjAuNjkyNiAzMS4yODg0QzIwLjk0ODggMzEuMDk0OCAyMS4xMTc1IDMwLjgwNzMgMjEuMTYxOCAzMC40ODkzQzIxLjIwNiAzMC4xNzEyIDIxLjEyMjEgMjkuODQ4NiAyMC45Mjg1IDI5LjU5MjVDMjAuNzM0OCAy
+                        OS4zMzYzIDIwLjQ0NzQgMjkuMTY3NSAyMC4xMjk0IDI5LjEyMzNMMjAuMTQyNiAyOS4xMjU5Wk0zMC4wNjE3IDIwLjY1NDhDMjkuNzQ4MyAyMC41ODgxIDI5LjQyMTEgMjAuNjQ4NCAyOS4xNTIxIDIwLjgyMjZD
+                        MjguODgzMSAyMC45OTY4IDI4LjY5NDIgMjEuMjcwNyAyOC42MjY5IDIxLjU4NEwyOC4yMzI1IDIzLjQ2MDlDMjguMTk0MiAyMy42MTg0IDI4LjE4NzkgMjMuNzgxOSAyOC4yMTQxIDIzLjk0MThDMjguMjQwMiAy
+                        NC4xMDE4IDI4LjI5ODIgMjQuMjU0OCAyOC4zODQ2IDI0LjM5MTlDMjguNDcxMSAyNC41MjkgMjguNTg0MSAyNC42NDczIDI4LjcxNzIgMjQuNzM5OUMyOC44NTAyIDI0LjgzMjQgMjkuMDAwNSAyNC44OTczIDI5
+                        LjE1OTEgMjQuOTMwNkMyOS4zMTc2IDI0Ljk2NCAyOS40ODEzIDI0Ljk2NTEgMjkuNjQwMyAyNC45MzRDMjkuNzk5NCAyNC45MDI5IDI5Ljk1MDYgMjQuODQwMSAzMC4wODQ5IDI0Ljc0OTVDMzAuMjE5MiAyNC42
+                        NTg4IDMwLjMzMzkgMjQuNTQyMSAzMC40MjIzIDI0LjQwNjJDMzAuNTEwNiAyNC4yNzAzIDMwLjU3MDcgMjQuMTE4MSAzMC41OTkxIDIzLjk1ODZMMzAuOTkzNSAyMi4xMDU1QzMxLjA2MTEgMjEuNzkwNiAzMS4w
+                        MDA5IDIxLjQ2MTggMzAuODI2MiAyMS4xOTEzQzMwLjY1MTUgMjAuOTIwOCAzMC4zNzY1IDIwLjczMDcgMzAuMDYxNyAyMC42NjI4VjIwLjY1NDhaIiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg=="
+                    />
+                  </div>
+
+                  <span class="test-name">CEFR</span>
+                </div>
+                <div class="score-row">160</div>
+                <div class="score-row">155</div>
+                <div class="score-row">150</div>
+                <div class="score-row">145</div>
+                <div class="score-row">140</div>
+                <div class="score-row">135</div>
+                <div class="score-row">130</div>
+                <div class="score-row">125</div>
+                <div class="score-row">120</div>
+                <div class="score-row">115</div>
+                <div class="score-row">110</div>
+                <div class="score-row">105</div>
+                <div class="score-row">100</div>
+                <div class="score-row">95</div>
+                <div class="score-row">90</div>
+                <div class="score-row">85</div>
+                <div class="score-row">80</div>
+                <div class="score-row">75</div>
+                <div class="score-row">70</div>
+                <div class="score-row">65</div>
+                <div class="score-row">60</div>
+                <div class="score-row bottom">10-55</div>
+                <div class="cefr-level c2">C2</div>
+                <div class="cefr-level c1">C1</div>
+                <div class="cefr-level b2">B2</div>
+                <div class="cefr-level b1">B1</div>
+                <div class="cefr-level a1-a2">A1 A2</div>
+              </div>
+
+              <div class="comparison-column">
+                <div class="test-header toefl">
+                  <div class="test-logo">
+                    <img
+                      alt="logo"
+                      class=""
+                      src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzkiIGhlaWdodD0iMzkiIHZpZXdCb3g9IjAgMCAzOSAzOSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d
+                        3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMzAuNzQ5NyAzMi4wMDc0TDI5LjczMDUgMzQuNjgzOEMyOS41MTUzIDM1LjI0ODIgMjkuMTEyMiAzNS43MjEyIDI4LjU4OSAzNi4wMjNDMjguMDY1OCAzNi4
+                        zMjQ5IDI3LjQ1NDYgMzYuNDM3MiAyNi44NTgzIDM2LjM0MDlMMjQuMDMxIDM1Ljg4ODJDMjMuODQ4MiAzNS44NTk1IDIzLjY2MTQgMzUuODY5MyAyMy40ODI3IDM1LjkxNzJDMjMuMzA0IDM1Ljk2NTEgMjMuM
+                        TM3MiAzNi4wNDk5IDIyLjk5MzMgMzYuMTY2MkwyMC43NzIzIDM3Ljk3MTZDMjAuMzA0MiAzOC4zNTMgMTkuNzE4OSAzOC41NjEzIDE5LjExNTEgMzguNTYxM0MxOC41MTE0IDM4LjU2MTMgMTcuOTI2IDM4LjM
+                        1MyAxNy40NTggMzcuOTcxNkwxNS4yMzcgMzYuMTY2MkMxNS4wOTI3IDM2LjA0OTYgMTQuOTI1NiAzNS45NjQ1IDE0Ljc0NjMgMzUuOTE2NkMxNC41NjcxIDM1Ljg2ODggMTQuMzc5OCAzNS44NTkxIDE0LjE5NjYg
+                        MzUuODg4MkwxMS4zNjk0IDM2LjM0MDlDMTAuNzczMSAzNi40MzcyIDEwLjE2MTggMzYuMzI0OSA5LjYzODYxIDM2LjAyM0M5LjExNTQxIDM1LjcyMTIgOC43MTIyOCAzNS4yNDgyIDguNDk3MTQgMzQuNjgzOEw
+                        3LjQ3Nzk2IDMyLjAwNzRDNy40MTE3NiAzMS44MzUgNy4zMTAyIDMxLjY3ODMgNy4xNzk4MSAzMS41NDc0QzcuMDQ5NDIgMzEuNDE2NiA2Ljg5MzA4IDMxLjMxNDUgNi43MjA4NSAzMS4yNDc3TDQuMDQ0NTEgMzA
+                        uMjI4NUMzLjQ3OTggMzAuMDEzOCAzLjAwNjUgMjkuNjEwNyAyLjcwNDU4IDI5LjA4NzRDMi40MDI2NSAyOC41NjQxIDIuMjkwNiAyNy45NTI2IDIuMzg3MzUgMjcuMzU2M0wyLjg0MDAzIDI0LjUyOUMyLjg3MDYz
+                        IDI0LjM0NzIgMi44NjI4OSAyNC4xNjA5IDIuODE3MzEgMjMuOTgyMkMyLjc3MTcyIDIzLjgwMzUgMi42ODkyOSAyMy42MzYzIDIuNTc1MzEgMjMuNDkxM0wwLjc1NjY2NiAyMS4yNzAzQzAuMzc1MjYzIDIwLjgwMj
+                        IgMC4xNjY5OTIgMjAuMjE2OSAwLjE2Njk5MiAxOS42MTMxQzAuMTY2OTkyIDE5LjAwOTMgMC4zNzUyNjMgMTguNDI0IDAuNzU2NjY2IDE3Ljk1NkwyLjU2MjA3IDE1LjczNUMyLjY3NjA1IDE1LjU5IDIuNzU4NDggMT
+                        UuNDIyOCAyLjgwNDA3IDE1LjI0NDFDMi44NDk2NiAxNS4wNjU0IDIuODU3NCAxNC44NzkxIDIuODI2NzkgMTQuNjk3MkwyLjM4NzM1IDExLjg3QzIuMjkwNiAxMS4yNzM3IDIuNDAyNjUgMTAuNjYyMiAyLjcwNDU4ID
+                        EwLjEzODlDMy4wMDY1IDkuNjE1NTYgMy40Nzk4IDkuMjEyNSA0LjA0NDUxIDguOTk3NzhMNi43MjA4NSA3Ljk3NTk1QzYuODkzNDkgNy45MTA2MSA3LjA1MDI4IDcuODA5MzIgNy4xODA4IDcuNjc4OEM3LjMxMTMzIDcuNT
+                        Q4MjcgNy40MTI2MiA3LjM5MTQ5IDcuNDc3OTYgNy4yMTg4NUw4LjQ5OTc4IDQuNTQyNTFDOC43MTQ1MSAzLjk3Nzc5IDkuMTE3NTYgMy41MDQ1IDkuNjQwODcgMy4yMDI1N0MxMC4xNjQyIDIuOTAwNjUgMTAuNzc1Ny
+                        AyLjc4ODYgMTEuMzcyIDIuODg1MzVMMTQuMTk2NiAzLjMzODAyQzE0LjM3ODUgMy4zNjg2MyAxNC41NjQ3IDMuMzYwODkgMTQuNzQzNCAzLjMxNTNDMTQuOTIyMSAzLjI2OTcxIDE1LjA4OTMgMy4xODcyOSAxNS4
+                        yMzQzIDMuMDczM0wxNy40NTUzIDEuMjY3OUMxNy45MjM0IDAuODg2NDk0IDE4LjUwODcgMC42NzgyMjMgMTkuMTEyNSAwLjY3ODIyM0MxOS43MTYzIDAuNjc4MjIzIDIwLjMwMTYgMC44ODY0OTQgMjAuNzY5NiAxL
+                        jI2NzlMMjIuOTkwNyAzLjA3MzNDMjMuMTM1NiAzLjE4NzI5IDIzLjMwMjkgMy4yNjk3MSAyMy40ODE2IDMuMzE1M0MyMy42NjAzIDMuMzYwODkgMjMuODQ2NSAzLjM2ODYzIDI0LjAyODQgMy4zMzgwMkwyNi44NTU
+                        2IDIuODg1MzVDMjcuNDUyIDIuNzg4NiAyOC4wNjM0IDIuOTAwNjUgMjguNTg2OCAzLjIwMjU3QzI5LjExMDEgMy41MDQ1IDI5LjUxMzEgMy45Nzc3OSAyOS43Mjc4IDQuNTQyNTFMMzAuNzQ3IDcuMjE4ODVDMzAuO
+                        DEzOCA3LjM5MTA3IDMwLjkxNTkgNy41NDc0MSAzMS4wNDY4IDcuNjc3ODFDMzEuMTc3NiA3LjgwODIgMzEuMzM0MyA3LjkwOTc2IDMxLjUwNjggNy45NzU5NUwzNC4xODMxIDguOTk3NzhDMzQuNzQ3NSA5LjIxMj
+                        kyIDM1LjIyMDUgOS42MTYwNiAzNS41MjI0IDEwLjEzOTNDMzUuODI0MiAxMC42NjI0IDM1LjkzNjUgMTEuMjczNyAzNS44NDAzIDExLjg3TDM1LjM5MDIgMTQuNjk0NkMzNS4zNjE1IDE0Ljg3NzQgMzUuMzcxMyAx
+                        NS4wNjQyIDM1LjQxOTIgMTUuMjQyOUMzNS40NjcxIDE1LjQyMTcgMzUuNTUxOSAxNS41ODg0IDM1LjY2ODIgMTUuNzMyM0wzNy40NzM2IDE3Ljk1MzNDMzcuODU1IDE4LjQyMTQgMzguMDYzMyAxOS4wMDY3IDM4Lj
+                        A2MzMgMTkuNjEwNUMzOC4wNjMzIDIwLjIxNDMgMzcuODU1IDIwLjc5OTYgMzcuNDczNiAyMS4yNjc2TDM1LjY2ODIgMjMuNDg4N0MzNS41NTE5IDIzLjYzMjYgMzUuNDY3MSAyMy43OTkzIDM1LjQxOTIgMjMuOTc
+                        4MUMzNS4zNzEzIDI0LjE1NjggMzUuMzYxNSAyNC4zNDM2IDM1LjM5MDIgMjQuNTI2NEwzNS44NDI5IDI3LjM1MzZDMzUuOTM5MiAyNy45NDk5IDM1LjgyNjkgMjguNTYxMiAzNS41MjUgMjkuMDg0NEMzNS4yMjMyI
+                        DI5LjYwNzYgMzQuNzUwMiAzMC4wMTA3IDM0LjE4NTggMzAuMjI1OEwzMS41MDk0IDMxLjI0NUMzMS4zMzY0IDMxLjMxMTggMzEuMTc5NCAzMS40MTQyIDMxLjA0ODUgMzEuNTQ1NUMzMC45MTc3IDMxLjY3NjggMzA
+                        uODE1OCAzMS44MzQyIDMwLjc0OTcgMzIuMDA3NFoiIGZpbGw9IiM1OENDMDIiLz48cGF0aCBkPSJNMjYuNDQ4MyAxNy4wNzU4QzI3LjE0MjEgMTguNjE3NCAyNy4yNzY5IDIwLjM1MjUgMjYuODI5NiAyMS45ODI4Q
+                        zI2LjM4MjMgMjMuNjEzIDI1LjM4MDcgMjUuMDM2NCAyMy45OTczIDI2LjAwOEMyMi42MTM5IDI2Ljk3OTYgMjAuOTM1MSAyNy40Mzg2IDE5LjI0OTggMjcuMzA2MkMxNy41NjQ1IDI3LjE3MzcgMTUuOTc4MSAyNi4
+                        0NTggMTQuNzYzNCAyNS4yODIyQzEzLjQ4MDYgMjUuNzUxMSAxMi4wODM2IDI1LjgwOTEgMTAuNzY2MyAyNS40NDgxQzkuNDQ4OTUgMjUuMDg3MiA4LjI3NjY3IDI0LjMyNTEgNy40MTIxIDIzLjI2NzZDNy4zMjY2Mi
+                        AyMy4xNjIxIDcuMjY3MzMgMjMuMDM3OSA3LjIzOTA2IDIyLjkwNTFDNy4yMTA4IDIyLjc3MjMgNy4yMTQzNyAyMi42MzQ3IDcuMjQ5NDggMjIuNTAzNUM3LjI4NDYgMjIuMzcyNCA3LjM1MDI2IDIyLjI1MTQgNy40ND
+                        ExIDIyLjE1MDRDNy41MzE5MyAyMi4wNDk1IDcuNjQ1MzcgMjEuOTcxNSA3Ljc3MjEzIDIxLjkyMjlMMTEuMjkwMyAyMC41NjIyTDkuNTAzNDEgMTguMDEyOUM5LjI3MTc3IDE3LjY4MTIgOS4xMjU3MyAxNy4yOTc0IDk
+                        uMDc4MzEgMTYuODk1NkM5LjAzMDg4IDE2LjQ5MzggOS4wODM1MyAxNi4wODY1IDkuMjMxNTcgMTUuNzFDOS4zNzk2MSAxNS4zMzM0IDkuNjE4NDYgMTQuOTk5NCA5LjkyNjgzIDE0LjczNzVDMTAuMjM1MiAxNC40NzU2I
+                        DEwLjYwMzYgMTQuMjk0IDEwLjk5OTEgMTQuMjA4OUMxMy4wMTEgMTMuNzggMTQuMzA0NiAxMy4zNjQ0IDE0Ljg3OTkgMTIuOTYyQzE1LjQ1NTIgMTIuNTU5NiAxNi4yNzQxIDExLjUwMDggMTcuMzM2NSA5Ljc4NTM1QzE3LjU1M
+                        DggOS40NDEyMiAxNy44NDcyIDkuMTU1NjEgMTguMTk5IDguOTU0MTFDMTguNTUwOCA4Ljc1MjYgMTguOTQ3IDguNjQxNSAxOS4zNTIzIDguNjMwNzVDMTkuNzU3NiA4LjYxOTk5IDIwLjE1OTIgOC43MDk5MiAyMC41MjEyIDguODkyN
+                        DhDMjAuODgzMiA5LjA3NTA0IDIxLjE5NDIgOS4zNDQ1MyAyMS40MjY1IDkuNjc2ODJMMjMuMjAyOCAxMi4yMDc2TDI1LjY0MzUgOS4zOTg4NkMyNS43MzI0IDkuMjk2MjEgMjUuODQ0NCA5LjIxNjA3IDI1Ljk3MDIgOS4xNjQ5OUM
+                        yNi4wOTYgOS4xMTM5IDI2LjIzMjEgOS4wOTMzMyAyNi4zNjc0IDkuMTA0OTVDMjYuNTAyNyA5LjExNjU3IDI2LjYzMzQgOS4xNjAwNSAyNi43NDg2IDkuMjMxODRDMjYuODYzOSA5LjMwMzYzIDI2Ljk2MDUgOS40MDE2OCAyNy4wM
+                        zA3IDkuNTE3OThDMjcuNzI1NCAxMC42ODM4IDI4LjA0MjMgMTIuMDM2MSAyNy45MzgxIDEzLjM4OTNDMjcuODMzOCAxNC43NDI0IDI3LjMxMzQgMTYuMDMwMSAyNi40NDgzIDE3LjA3NThaTTIwLjE0MjYgMjkuMTI1OUwxOC4yN
+                        TUxIDI4Ljg2MTJDMTcuOTM3NCAyOC44MTUyIDE3LjYxNDUgMjguODk3MyAxNy4zNTczIDI5LjA4OTVDMTcuMTAwMiAyOS4yODE2IDE2LjkyOTggMjkuNTY4IDE2Ljg4MzkgMjkuODg1N0MxNi44Mzc5IDMwLjIwMzQgMTYu
+                        OTIgMzAuNTI2MyAxNy4xMTIxIDMwLjc4MzVDMTcuMzA0MiAzMS4wNDA3IDE3LjU5MDYgMzEuMjExIDE3LjkwODMgMzEuMjU3TDE5Ljc5NTggMzEuNTIxN0MyMC4xMTM4IDMxLjU2NTkgMjAuNDM2NCAzMS40ODIg
+                        MjAuNjkyNiAzMS4yODg0QzIwLjk0ODggMzEuMDk0OCAyMS4xMTc1IDMwLjgwNzMgMjEuMTYxOCAzMC40ODkzQzIxLjIwNiAzMC4xNzEyIDIxLjEyMjEgMjkuODQ4NiAyMC45Mjg1IDI5LjU5MjVDMjAuNzM0OCAy
+                        OS4zMzYzIDIwLjQ0NzQgMjkuMTY3NSAyMC4xMjk0IDI5LjEyMzNMMjAuMTQyNiAyOS4xMjU5Wk0zMC4wNjE3IDIwLjY1NDhDMjkuNzQ4MyAyMC41ODgxIDI5LjQyMTEgMjAuNjQ4NCAyOS4xNTIxIDIwLjgyMjZD
+                        MjguODgzMSAyMC45OTY4IDI4LjY5NDIgMjEuMjcwNyAyOC42MjY5IDIxLjU4NEwyOC4yMzI1IDIzLjQ2MDlDMjguMTk0MiAyMy42MTg0IDI4LjE4NzkgMjMuNzgxOSAyOC4yMTQxIDIzLjk0MThDMjguMjQwMiAy
+                        NC4xMDE4IDI4LjI5ODIgMjQuMjU0OCAyOC4zODQ2IDI0LjM5MTlDMjguNDcxMSAyNC41MjkgMjguNTg0MSAyNC42NDczIDI4LjcxNzIgMjQuNzM5OUMyOC44NTAyIDI0LjgzMjQgMjkuMDAwNSAyNC44OTczIDI5
+                        LjE1OTEgMjQuOTMwNkMyOS4zMTc2IDI0Ljk2NCAyOS40ODEzIDI0Ljk2NTEgMjkuNjQwMyAyNC45MzRDMjkuNzk5NCAyNC45MDI5IDI5Ljk1MDYgMjQuODQwMSAzMC4wODQ5IDI0Ljc0OTVDMzAuMjE5MiAyNC42
+                        NTg4IDMwLjMzMzkgMjQuNTQyMSAzMC40MjIzIDI0LjQwNjJDMzAuNTEwNiAyNC4yNzAzIDMwLjU3MDcgMjQuMTE4MSAzMC41OTkxIDIzLjk1ODZMMzAuOTkzNSAyMi4xMDU1QzMxLjA2MTEgMjEuNzkwNiAzMS4w
+                        MDA5IDIxLjQ2MTggMzAuODI2MiAyMS4xOTEzQzMwLjY1MTUgMjAuOTIwOCAzMC4zNzY1IDIwLjczMDcgMzAuMDYxNyAyMC42NjI4VjIwLjY1NDhaIiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg=="
+                    />
+                  </div>
+                  <span class="test-name">TOEFL iBT</span>
+                </div>
+                <div class="score-row">160</div>
+                <div class="score-row">155</div>
+                <div class="score-row">150</div>
+                <div class="score-row">145</div>
+                <div class="score-row">140</div>
+                <div class="score-row">135</div>
+                <div class="score-row">130</div>
+                <div class="score-row">125</div>
+                <div class="score-row">120</div>
+                <div class="score-row">115</div>
+                <div class="score-row">110</div>
+                <div class="score-row">105</div>
+                <div class="score-row">100</div>
+                <div class="score-row">95</div>
+                <div class="score-row">90</div>
+                <div class="score-row">85</div>
+                <div class="score-row">80</div>
+                <div class="score-row">75</div>
+                <div class="score-row">70</div>
+                <div class="score-row">65</div>
+                <div class="score-row">60</div>
+                <div class="score-row bottom">10-55</div>
+                <div class="toefl-score">120</div>
+                <div class="toefl-score">119</div>
+                <div class="toefl-score">117-118</div>
+                <div class="toefl-score">113-116</div>
+                <div class="toefl-score">109-112</div>
+                <div class="toefl-score">104-108</div>
+                <div class="toefl-score">98-103</div>
+                <div class="toefl-score">93-97</div>
+                <div class="toefl-score">87-92</div>
+                <div class="toefl-score">82-86</div>
+                <div class="toefl-score">76-81</div>
+                <div class="toefl-score">76-75</div>
+                <div class="toefl-score">65-69</div>
+                <div class="toefl-score">59-64</div>
+                <div class="toefl-score">53-58</div>
+                <div class="toefl-score">47-52</div>
+                <div class="toefl-score">41-46</div>
+                <div class="toefl-score">35-40</div>
+                <div class="toefl-score">30-34</div>
+                <div class="toefl-score">24-29</div>
+                <div class="toefl-score">18-23</div>
+                <div class="toefl-score">0-17</div>
+              </div>
+
+              <div class="comparison-column">
+                <div class="test-header ielts">
+                  <div class="test-logo">
+                    <img
+                      alt="logo"
+                      class=""
+                      src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzkiIGhlaWdodD0iMzkiIHZpZXdCb3g9IjAgMCAzOSAzOSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d
+                        3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMzAuNzQ5NyAzMi4wMDc0TDI5LjczMDUgMzQuNjgzOEMyOS41MTUzIDM1LjI0ODIgMjkuMTEyMiAzNS43MjEyIDI4LjU4OSAzNi4wMjNDMjguMDY1OCAzNi4
+                        zMjQ5IDI3LjQ1NDYgMzYuNDM3MiAyNi44NTgzIDM2LjM0MDlMMjQuMDMxIDM1Ljg4ODJDMjMuODQ4MiAzNS44NTk1IDIzLjY2MTQgMzUuODY5MyAyMy40ODI3IDM1LjkxNzJDMjMuMzA0IDM1Ljk2NTEgMjMuM
+                        TM3MiAzNi4wNDk5IDIyLjk5MzMgMzYuMTY2MkwyMC43NzIzIDM3Ljk3MTZDMjAuMzA0MiAzOC4zNTMgMTkuNzE4OSAzOC41NjEzIDE5LjExNTEgMzguNTYxM0MxOC41MTE0IDM4LjU2MTMgMTcuOTI2IDM4LjM
+                        1MyAxNy40NTggMzcuOTcxNkwxNS4yMzcgMzYuMTY2MkMxNS4wOTI3IDM2LjA0OTYgMTQuOTI1NiAzNS45NjQ1IDE0Ljc0NjMgMzUuOTE2NkMxNC41NjcxIDM1Ljg2ODggMTQuMzc5OCAzNS44NTkxIDE0LjE5NjYg
+                        MzUuODg4MkwxMS4zNjk0IDM2LjM0MDlDMTAuNzczMSAzNi40MzcyIDEwLjE2MTggMzYuMzI0OSA5LjYzODYxIDM2LjAyM0M5LjExNTQxIDM1LjcyMTIgOC43MTIyOCAzNS4yNDgyIDguNDk3MTQgMzQuNjgzOEw
+                        3LjQ3Nzk2IDMyLjAwNzRDNy40MTE3NiAzMS44MzUgNy4zMTAyIDMxLjY3ODMgNy4xNzk4MSAzMS41NDc0QzcuMDQ5NDIgMzEuNDE2NiA2Ljg5MzA4IDMxLjMxNDUgNi43MjA4NSAzMS4yNDc3TDQuMDQ0NTEgMzA
+                        uMjI4NUMzLjQ3OTggMzAuMDEzOCAzLjAwNjUgMjkuNjEwNyAyLjcwNDU4IDI5LjA4NzRDMi40MDI2NSAyOC41NjQxIDIuMjkwNiAyNy45NTI2IDIuMzg3MzUgMjcuMzU2M0wyLjg0MDAzIDI0LjUyOUMyLjg3MDYz
+                        IDI0LjM0NzIgMi44NjI4OSAyNC4xNjA5IDIuODE3MzEgMjMuOTgyMkMyLjc3MTcyIDIzLjgwMzUgMi42ODkyOSAyMy42MzYzIDIuNTc1MzEgMjMuNDkxM0wwLjc1NjY2NiAyMS4yNzAzQzAuMzc1MjYzIDIwLjgwMj
+                        IgMC4xNjY5OTIgMjAuMjE2OSAwLjE2Njk5MiAxOS42MTMxQzAuMTY2OTkyIDE5LjAwOTMgMC4zNzUyNjMgMTguNDI0IDAuNzU2NjY2IDE3Ljk1NkwyLjU2MjA3IDE1LjczNUMyLjY3NjA1IDE1LjU5IDIuNzU4NDggMT
+                        UuNDIyOCAyLjgwNDA3IDE1LjI0NDFDMi44NDk2NiAxNS4wNjU0IDIuODU3NCAxNC44NzkxIDIuODI2NzkgMTQuNjk3MkwyLjM4NzM1IDExLjg3QzIuMjkwNiAxMS4yNzM3IDIuNDAyNjUgMTAuNjYyMiAyLjcwNDU4ID
+                        EwLjEzODlDMy4wMDY1IDkuNjE1NTYgMy40Nzk4IDkuMjEyNSA0LjA0NDUxIDguOTk3NzhMNi43MjA4NSA3Ljk3NTk1QzYuODkzNDkgNy45MTA2MSA3LjA1MDI4IDcuODA5MzIgNy4xODA4IDcuNjc4OEM3LjMxMTMzIDcuNT
+                        Q4MjcgNy40MTI2MiA3LjM5MTQ5IDcuNDc3OTYgNy4yMTg4NUw4LjQ5OTc4IDQuNTQyNTFDOC43MTQ1MSAzLjk3Nzc5IDkuMTE3NTYgMy41MDQ1IDkuNjQwODcgMy4yMDI1N0MxMC4xNjQyIDIuOTAwNjUgMTAuNzc1Ny
+                        AyLjc4ODYgMTEuMzcyIDIuODg1MzVMMTQuMTk2NiAzLjMzODAyQzE0LjM3ODUgMy4zNjg2MyAxNC41NjQ3IDMuMzYwODkgMTQuNzQzNCAzLjMxNTNDMTQuOTIyMSAzLjI2OTcxIDE1LjA4OTMgMy4xODcyOSAxNS4
+                        yMzQzIDMuMDczM0wxNy40NTUzIDEuMjY3OUMxNy45MjM0IDAuODg2NDk0IDE4LjUwODcgMC42NzgyMjMgMTkuMTEyNSAwLjY3ODIyM0MxOS43MTYzIDAuNjc4MjIzIDIwLjMwMTYgMC44ODY0OTQgMjAuNzY5NiAxL
+                        jI2NzlMMjIuOTkwNyAzLjA3MzNDMjMuMTM1NiAzLjE4NzI5IDIzLjMwMjkgMy4yNjk3MSAyMy40ODE2IDMuMzE1M0MyMy42NjAzIDMuMzYwODkgMjMuODQ2NSAzLjM2ODYzIDI0LjAyODQgMy4zMzgwMkwyNi44NTU
+                        2IDIuODg1MzVDMjcuNDUyIDIuNzg4NiAyOC4wNjM0IDIuOTAwNjUgMjguNTg2OCAzLjIwMjU3QzI5LjExMDEgMy41MDQ1IDI5LjUxMzEgMy45Nzc3OSAyOS43Mjc4IDQuNTQyNTFMMzAuNzQ3IDcuMjE4ODVDMzAuO
+                        DEzOCA3LjM5MTA3IDMwLjkxNTkgNy41NDc0MSAzMS4wNDY4IDcuNjc3ODFDMzEuMTc3NiA3LjgwODIgMzEuMzM0MyA3LjkwOTc2IDMxLjUwNjggNy45NzU5NUwzNC4xODMxIDguOTk3NzhDMzQuNzQ3NSA5LjIxMj
+                        kyIDM1LjIyMDUgOS42MTYwNiAzNS41MjI0IDEwLjEzOTNDMzUuODI0MiAxMC42NjI0IDM1LjkzNjUgMTEuMjczNyAzNS44NDAzIDExLjg3TDM1LjM5MDIgMTQuNjk0NkMzNS4zNjE1IDE0Ljg3NzQgMzUuMzcxMyAx
+                        NS4wNjQyIDM1LjQxOTIgMTUuMjQyOUMzNS40NjcxIDE1LjQyMTcgMzUuNTUxOSAxNS41ODg0IDM1LjY2ODIgMTUuNzMyM0wzNy40NzM2IDE3Ljk1MzNDMzcuODU1IDE4LjQyMTQgMzguMDYzMyAxOS4wMDY3IDM4Lj
+                        A2MzMgMTkuNjEwNUMzOC4wNjMzIDIwLjIxNDMgMzcuODU1IDIwLjc5OTYgMzcuNDczNiAyMS4yNjc2TDM1LjY2ODIgMjMuNDg4N0MzNS41NTE5IDIzLjYzMjYgMzUuNDY3MSAyMy43OTkzIDM1LjQxOTIgMjMuOTc
+                        4MUMzNS4zNzEzIDI0LjE1NjggMzUuMzYxNSAyNC4zNDM2IDM1LjM5MDIgMjQuNTI2NEwzNS44NDI5IDI3LjM1MzZDMzUuOTM5MiAyNy45NDk5IDM1LjgyNjkgMjguNTYxMiAzNS41MjUgMjkuMDg0NEMzNS4yMjMyI
+                        DI5LjYwNzYgMzQuNzUwMiAzMC4wMTA3IDM0LjE4NTggMzAuMjI1OEwzMS41MDk0IDMxLjI0NUMzMS4zMzY0IDMxLjMxMTggMzEuMTc5NCAzMS40MTQyIDMxLjA0ODUgMzEuNTQ1NUMzMC45MTc3IDMxLjY3NjggMzA
+                        uODE1OCAzMS44MzQyIDMwLjc0OTcgMzIuMDA3NFoiIGZpbGw9IiM1OENDMDIiLz48cGF0aCBkPSJNMjYuNDQ4MyAxNy4wNzU4QzI3LjE0MjEgMTguNjE3NCAyNy4yNzY5IDIwLjM1MjUgMjYuODI5NiAyMS45ODI4Q
+                        zI2LjM4MjMgMjMuNjEzIDI1LjM4MDcgMjUuMDM2NCAyMy45OTczIDI2LjAwOEMyMi42MTM5IDI2Ljk3OTYgMjAuOTM1MSAyNy40Mzg2IDE5LjI0OTggMjcuMzA2MkMxNy41NjQ1IDI3LjE3MzcgMTUuOTc4MSAyNi4
+                        0NTggMTQuNzYzNCAyNS4yODIyQzEzLjQ4MDYgMjUuNzUxMSAxMi4wODM2IDI1LjgwOTEgMTAuNzY2MyAyNS40NDgxQzkuNDQ4OTUgMjUuMDg3MiA4LjI3NjY3IDI0LjMyNTEgNy40MTIxIDIzLjI2NzZDNy4zMjY2Mi
+                        AyMy4xNjIxIDcuMjY3MzMgMjMuMDM3OSA3LjIzOTA2IDIyLjkwNTFDNy4yMTA4IDIyLjc3MjMgNy4yMTQzNyAyMi42MzQ3IDcuMjQ5NDggMjIuNTAzNUM3LjI4NDYgMjIuMzcyNCA3LjM1MDI2IDIyLjI1MTQgNy40ND
+                        ExIDIyLjE1MDRDNy41MzE5MyAyMi4wNDk1IDcuNjQ1MzcgMjEuOTcxNSA3Ljc3MjEzIDIxLjkyMjlMMTEuMjkwMyAyMC41NjIyTDkuNTAzNDEgMTguMDEyOUM5LjI3MTc3IDE3LjY4MTIgOS4xMjU3MyAxNy4yOTc0IDk
+                        uMDc4MzEgMTYuODk1NkM5LjAzMDg4IDE2LjQ5MzggOS4wODM1MyAxNi4wODY1IDkuMjMxNTcgMTUuNzFDOS4zNzk2MSAxNS4zMzM0IDkuNjE4NDYgMTQuOTk5NCA5LjkyNjgzIDE0LjczNzVDMTAuMjM1MiAxNC40NzU2I
+                        DEwLjYwMzYgMTQuMjk0IDEwLjk5OTEgMTQuMjA4OUMxMy4wMTEgMTMuNzggMTQuMzA0NiAxMy4zNjQ0IDE0Ljg3OTkgMTIuOTYyQzE1LjQ1NTIgMTIuNTU5NiAxNi4yNzQxIDExLjUwMDggMTcuMzM2NSA5Ljc4NTM1QzE3LjU1M
+                        DggOS40NDEyMiAxNy44NDcyIDkuMTU1NjEgMTguMTk5IDguOTU0MTFDMTguNTUwOCA4Ljc1MjYgMTguOTQ3IDguNjQxNSAxOS4zNTIzIDguNjMwNzVDMTkuNzU3NiA4LjYxOTk5IDIwLjE1OTIgOC43MDk5MiAyMC41MjEyIDguODkyN
+                        DhDMjAuODgzMiA5LjA3NTA0IDIxLjE5NDIgOS4zNDQ1MyAyMS40MjY1IDkuNjc2ODJMMjMuMjAyOCAxMi4yMDc2TDI1LjY0MzUgOS4zOTg4NkMyNS43MzI0IDkuMjk2MjEgMjUuODQ0NCA5LjIxNjA3IDI1Ljk3MDIgOS4xNjQ5OUM
+                        yNi4wOTYgOS4xMTM5IDI2LjIzMjEgOS4wOTMzMyAyNi4zNjc0IDkuMTA0OTVDMjYuNTAyNyA5LjExNjU3IDI2LjYzMzQgOS4xNjAwNSAyNi43NDg2IDkuMjMxODRDMjYuODYzOSA5LjMwMzYzIDI2Ljk2MDUgOS40MDE2OCAyNy4wM
+                        zA3IDkuNTE3OThDMjcuNzI1NCAxMC42ODM4IDI4LjA0MjMgMTIuMDM2MSAyNy45MzgxIDEzLjM4OTNDMjcuODMzOCAxNC43NDI0IDI3LjMxMzQgMTYuMDMwMSAyNi40NDgzIDE3LjA3NThaTTIwLjE0MjYgMjkuMTI1OUwxOC4yN
+                        TUxIDI4Ljg2MTJDMTcuOTM3NCAyOC44MTUyIDE3LjYxNDUgMjguODk3MyAxNy4zNTczIDI5LjA4OTVDMTcuMTAwMiAyOS4yODE2IDE2LjkyOTggMjkuNTY4IDE2Ljg4MzkgMjkuODg1N0MxNi44Mzc5IDMwLjIwMzQgMTYu
+                        OTIgMzAuNTI2MyAxNy4xMTIxIDMwLjc4MzVDMTcuMzA0MiAzMS4wNDA3IDE3LjU5MDYgMzEuMjExIDE3LjkwODMgMzEuMjU3TDE5Ljc5NTggMzEuNTIxN0MyMC4xMTM4IDMxLjU2NTkgMjAuNDM2NCAzMS40ODIg
+                        MjAuNjkyNiAzMS4yODg0QzIwLjk0ODggMzEuMDk0OCAyMS4xMTc1IDMwLjgwNzMgMjEuMTYxOCAzMC40ODkzQzIxLjIwNiAzMC4xNzEyIDIxLjEyMjEgMjkuODQ4NiAyMC45Mjg1IDI5LjU5MjVDMjAuNzM0OCAy
+                        OS4zMzYzIDIwLjQ0NzQgMjkuMTY3NSAyMC4xMjk0IDI5LjEyMzNMMjAuMTQyNiAyOS4xMjU5Wk0zMC4wNjE3IDIwLjY1NDhDMjkuNzQ4MyAyMC41ODgxIDI5LjQyMTEgMjAuNjQ4NCAyOS4xNTIxIDIwLjgyMjZD
+                        MjguODgzMSAyMC45OTY4IDI4LjY5NDIgMjEuMjcwNyAyOC42MjY5IDIxLjU4NEwyOC4yMzI1IDIzLjQ2MDlDMjguMTk0MiAyMy42MTg0IDI4LjE4NzkgMjMuNzgxOSAyOC4yMTQxIDIzLjk0MThDMjguMjQwMiAy
+                        NC4xMDE4IDI4LjI5ODIgMjQuMjU0OCAyOC4zODQ2IDI0LjM5MTlDMjguNDcxMSAyNC41MjkgMjguNTg0MSAyNC42NDczIDI4LjcxNzIgMjQuNzM5OUMyOC44NTAyIDI0LjgzMjQgMjkuMDAwNSAyNC44OTczIDI5
+                        LjE1OTEgMjQuOTMwNkMyOS4zMTc2IDI0Ljk2NCAyOS40ODEzIDI0Ljk2NTEgMjkuNjQwMyAyNC45MzRDMjkuNzk5NCAyNC45MDI5IDI5Ljk1MDYgMjQuODQwMSAzMC4wODQ5IDI0Ljc0OTVDMzAuMjE5MiAyNC42
+                        NTg4IDMwLjMzMzkgMjQuNTQyMSAzMC40MjIzIDI0LjQwNjJDMzAuNTEwNiAyNC4yNzAzIDMwLjU3MDcgMjQuMTE4MSAzMC41OTkxIDIzLjk1ODZMMzAuOTkzNSAyMi4xMDU1QzMxLjA2MTEgMjEuNzkwNiAzMS4w
+                        MDA5IDIxLjQ2MTggMzAuODI2MiAyMS4xOTEzQzMwLjY1MTUgMjAuOTIwOCAzMC4zNzY1IDIwLjczMDcgMzAuMDYxNyAyMC42NjI4VjIwLjY1NDhaIiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg=="
+                    />
+                  </div>
+                  <span class="test-name">IELTS</span>
+                </div>
+                <div class="score-row">160</div>
+                <div class="score-row">155</div>
+                <div class="score-row">150</div>
+                <div class="score-row">145</div>
+                <div class="score-row">140</div>
+                <div class="score-row">135</div>
+                <div class="score-row">130</div>
+                <div class="score-row">125</div>
+                <div class="score-row">120</div>
+                <div class="score-row">115</div>
+                <div class="score-row">110</div>
+                <div class="score-row">105</div>
+                <div class="score-row">100</div>
+                <div class="score-row">95</div>
+                <div class="score-row">90</div>
+                <div class="score-row">85</div>
+                <div class="score-row">80</div>
+                <div class="score-row">75</div>
+                <div class="score-row">70</div>
+                <div class="score-row">65</div>
+                <div class="score-row">60</div>
+                <div class="score-row bottom">10-55</div>
+                <div class="ielts-score">8.5-9</div>
+                <div class="ielts-score">8</div>
+                <div class="ielts-score">7.5</div>
+                <div class="ielts-score">7</div>
+                <div class="ielts-score">6.5</div>
+                <div class="ielts-score">6</div>
+                <div class="ielts-score">5.5</div>
+                <div class="ielts-score">5</div>
+                <div class="ielts-score">4.5</div>
+                <div class="ielts-score">4</div>
+                <div class="ielts-score">0-4</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
