@@ -29,6 +29,15 @@
         color: #334155;
       }
 
+      /* Fix background on mobile */
+      @media (max-width: 768px) {
+        body {
+          background-attachment: scroll;
+          background-size: cover;
+          background-position: center top;
+        }
+      }
+
       /* Loading Screen */
       .loading-screen {
         position: fixed;

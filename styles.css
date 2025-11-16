@@ -19,6 +19,15 @@ body {
   color: #334155;
 }
 
+/* Fix background on mobile */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+    background-size: cover;
+    background-position: center top;
+  }
+}
+
 /* Header */
 .header {
   background: white;
@@ -225,7 +234,7 @@ body {
 .main-content {
   flex: 1;
   padding: 30px 40px;
-  background: #f8f9fa;
+  background: transparent;
 }
 /* Help Menu Styles */
 .help-menu {
@@ -247,7 +256,7 @@ body {
 }
 /* Hero Section */
 .hero-section {
-  background: white;
+  background: transparent;
   border-radius: 12px;
   padding: 30px;
   margin-bottom: 30px;
@@ -374,7 +383,7 @@ body {
 
 /* Practice Skills Section */
 .practice-skills {
-  background: white;
+  background: transparent;
   border-radius: 12px;
   padding: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);

@@ -28,6 +28,15 @@
         line-height: 1.6;
         color: #334155;
       }
+
+      /* Fix background on mobile */
+      @media (max-width: 768px) {
+        body {
+          background-attachment: scroll;
+          background-size: cover;
+          background-position: center top;
+        }
+      }
       img {
         width: 450px;
         height: 300px;
@@ -124,6 +133,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        background: transparent;
       }
 
       /* Question Card */
