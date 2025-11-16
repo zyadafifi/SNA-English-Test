@@ -3,11 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Interactive Reading - Duolingo English Test Practice</title>
+    <title>Interactive Reading - SNA English Test Practice</title>
+
+    <!-- Resource Hints for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+
+    <!-- Preload Critical Assets -->
+    <link
+      rel="preload"
+      href="assets/gradient-background.png"
+      as="image"
+      type="image/png"
+      fetchpriority="high"
+    />
+    <link
+      rel="prefetch"
+      href="interactive reading data.json"
+      as="fetch"
+      type="application/json"
+    />
+
+    <!-- Optimized Font Loading -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
     <style>
       * {
         margin: 0;
