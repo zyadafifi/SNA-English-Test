@@ -6,143 +6,143 @@
   "questions": [
     {
       "id": 1,
-      "title": "Solar Energy",
-      "passage": "Solar energy comes from the sun. It is # and clean. The sun gives us # every day. Solar energy does not # the air. Many people use solar # on their houses.",
-      "correctAnswers": ["free", "light", "pollute", "panels"],
-      "visibleLetters": ["f__e", "l___t", "p_____e", "p____s"]
+      "title": "Morning Routine",
+      "passage": "Every morning, I # up at seven o'clock. I take a shower and get #. Then I have breakfast with my family. After breakfast, I # my teeth and leave for work.",
+      "correctAnswers": ["wake", "dressed", "brush"],
+      "visibleLetters": ["w__e", "dr____d", "br__h"]
     },
     {
       "id": 2,
-      "title": "Reading Books",
-      "passage": "Reading is very # for everyone. It helps you learn new # and improves your thinking. People who read often have better # skills. Reading also helps you # and feel better.",
-      "correctAnswers": ["good", "words", "communication", "relax"],
-      "visibleLetters": ["g__d", "w___s", "c_________on", "r___x"]
+      "title": "The Library",
+      "passage": "The public library is a great place to #. You can borrow books for free. It is # and peaceful. Many people go there to study or read #.",
+      "correctAnswers": ["visit", "quiet", "newspapers"],
+      "visibleLetters": ["v___t", "qu__t", "ne_____rs"]
     },
     {
       "id": 3,
-      "title": "Climate Change",
-      "passage": "Climate change is a big # today. The Earth is getting warmer because of human activities. This # ice to melt and sea levels to rise. We need to # action to protect our planet.",
-      "correctAnswers": ["problem", "causes", "take"],
-      "visibleLetters": ["p_____m", "c____s", "t__e"]
+      "title": "Healthy Food",
+      "passage": "Eating healthy food is very #. Fruits and vegetables give us important vitamins. We should eat # meals every day and drink plenty of #.",
+      "correctAnswers": ["important", "balanced", "water"],
+      "visibleLetters": ["im______t", "ba____d", "w___r"]
     },
     {
       "id": 4,
-      "title": "The Internet",
-      "passage": "The Internet has # how we live and work. It started as a small # but now connects billions of people. Online shopping and social media have become # of daily life.",
-      "correctAnswers": ["changed", "network", "part"],
-      "visibleLetters": ["c_____d", "n_____k", "p__t"]
+      "title": "Weekend Plans",
+      "passage": "This weekend, I plan to # my grandparents. We will have lunch together and talk about family news. In the evening, I might # a movie at home.",
+      "correctAnswers": ["visit", "watch"],
+      "visibleLetters": ["v___t", "w___h"]
     },
     {
       "id": 5,
-      "title": "Ocean Life",
-      "passage": "The ocean is # to many sea animals. But human activities are # the water and harming sea life. We must # the ocean for future generations.",
-      "correctAnswers": ["home", "polluting", "protect"],
-      "visibleLetters": ["h__e", "p______ng", "p_____t"]
+      "title": "Public Transport",
+      "passage": "Many people use public # to go to work. Buses and trains help reduce traffic. They are also better for the # because fewer cars means less pollution.",
+      "correctAnswers": ["transport", "environment"],
+      "visibleLetters": ["tr______t", "en________t"]
     },
     {
       "id": 6,
-      "title": "Exercise Benefits",
-      "passage": "Regular exercise is # for good health. It makes your heart # and helps you feel better. Exercise also helps you # better at night.",
-      "correctAnswers": ["important", "stronger", "sleep"],
-      "visibleLetters": ["i______nt", "s______r", "s___p"]
+      "title": "Learning English",
+      "passage": "Learning English # time and practice. You should # every day and try to speak with others. Reading books and watching movies in English also #.",
+      "correctAnswers": ["takes", "study", "helps"],
+      "visibleLetters": ["t___s", "st__y", "he__s"]
     },
     {
       "id": 7,
-      "title": "Renewable Energy",
-      "passage": "Wind and solar power are # energy sources. They don't run out like oil and gas. Many countries are # more renewable energy to help the environment.",
-      "correctAnswers": ["renewable", "using"],
-      "visibleLetters": ["r_______e", "u___g"]
+      "title": "The Supermarket",
+      "passage": "I go to the supermarket once a #. I buy fresh vegetables, fruit, and other food. I always make a shopping # before I go so I don't forget anything.",
+      "correctAnswers": ["week", "list"],
+      "visibleLetters": ["w__k", "l__t"]
     },
     {
       "id": 8,
-      "title": "Digital Age",
-      "passage": "We live in a digital age where # are everywhere. Smartphones and computers have # how we communicate and work. Social media has created new ways to # with others.",
-      "correctAnswers": ["computers", "changed", "connect"],
-      "visibleLetters": ["c_______s", "c_____d", "c_____t"]
+      "title": "My Pet",
+      "passage": "I have a pet dog named Max. He is very # and loves to play. Every day, I take him for a walk in the park. He enjoys # with other dogs.",
+      "correctAnswers": ["friendly", "playing"],
+      "visibleLetters": ["fr____y", "pl___ng"]
     },
     {
       "id": 9,
-      "title": "Space Exploration",
-      "passage": "Space exploration has helped us # more about the universe. Astronauts have # to the moon and space stations. These missions have led to many new #.",
-      "correctAnswers": ["learn", "traveled", "discoveries"],
-      "visibleLetters": ["l___n", "t______d", "d________s"]
+      "title": "The Seasons",
+      "passage": "There are four seasons in a year. Spring brings flowers and warm #. Summer is hot and sunny. In autumn, the leaves # color. Winter is cold and sometimes it snows.",
+      "correctAnswers": ["weather", "change"],
+      "visibleLetters": ["we____r", "ch___e"]
     },
     {
       "id": 10,
-      "title": "City Planning",
-      "passage": "Good city planning makes cities better places to #. It includes parks, schools, and good transportation. Planning also helps # traffic and pollution problems.",
-      "correctAnswers": ["live", "reduce"],
-      "visibleLetters": ["l__e", "r____e"]
+      "title": "Exercise",
+      "passage": "Regular exercise keeps you #. You can go to the gym, swim, or just walk. Exercise makes your heart # and helps you feel better.",
+      "correctAnswers": ["healthy", "stronger"],
+      "visibleLetters": ["he____y", "st____er"]
     },
     {
       "id": 11,
-      "title": "Artificial Intelligence",
-      "passage": "Artificial Intelligence is changing many #. AI can help doctors find diseases and help cars drive themselves. But we must be # about how we use this technology.",
-      "correctAnswers": ["industries", "careful"],
-      "visibleLetters": ["i________s", "c_____l"]
+      "title": "The Beach",
+      "passage": "I love going to the beach in summer. The sand is warm and the # is blue. You can swim, build sandcastles, or just # and enjoy the sunshine.",
+      "correctAnswers": ["water", "relax"],
+      "visibleLetters": ["w___r", "re__x"]
     },
     {
       "id": 12,
-      "title": "Healthy Eating",
-      "passage": "Eating healthy food is # for your body. Fresh fruits and vegetables give you important #. Drinking water and eating less sugar helps you stay #.",
-      "correctAnswers": ["important", "vitamins", "healthy"],
-      "visibleLetters": ["i______nt", "v______s", "h_____y"]
+      "title": "Cooking at Home",
+      "passage": "Cooking at home is # than eating out. You can choose fresh ingredients and make healthy meals. It also # money and you can cook exactly what you like.",
+      "correctAnswers": ["cheaper", "saves"],
+      "visibleLetters": ["ch____r", "sa__s"]
     },
     {
       "id": 13,
-      "title": "Music in Society",
-      "passage": "Music plays an important # in every culture. It can make people feel happy or sad. Music also helps people # together and express their feelings.",
-      "correctAnswers": ["role", "come"],
-      "visibleLetters": ["r__e", "c__e"]
+      "title": "My Hobby",
+      "passage": "My favorite hobby is #. I enjoy taking photos of nature and people. Photography helps me see the world in a different #. I share my photos with friends online.",
+      "correctAnswers": ["photography", "way"],
+      "visibleLetters": ["ph______y", "w_y"]
     },
     {
       "id": 14,
-      "title": "Transportation",
-      "passage": "Transportation helps people # from one place to another. Cars, buses, and trains are common ways to travel. Electric vehicles are becoming more # because they don't pollute the air.",
-      "correctAnswers": ["move", "popular"],
-      "visibleLetters": ["m__e", "p_____r"]
+      "title": "Traffic Problems",
+      "passage": "Big cities often have traffic #. Too many cars cause delays and pollution. People should use public transport or ride # to help reduce traffic.",
+      "correctAnswers": ["problems", "bicycles"],
+      "visibleLetters": ["pr____ms", "bi____es"]
     },
     {
       "id": 15,
-      "title": "Water Conservation",
-      "passage": "Water is very # for all life on Earth. We should not # water and should use it wisely. Simple actions like shorter showers can help # water.",
-      "correctAnswers": ["important", "waste", "save"],
-      "visibleLetters": ["i______nt", "w___e", "s__e"]
+      "title": "Sleep",
+      "passage": "Getting enough sleep is # for good health. Adults need about eight hours of sleep each #. Good sleep helps your body rest and your brain work better.",
+      "correctAnswers": ["important", "night"],
+      "visibleLetters": ["im______t", "ni__t"]
     },
     {
       "id": 16,
-      "title": "Education Technology",
-      "passage": "Technology has changed how students #. Online classes and educational apps make learning more interesting. However, students still need to # with teachers and other students.",
-      "correctAnswers": ["learn", "interact"],
-      "visibleLetters": ["l___n", "i_____t"]
+      "title": "Shopping Online",
+      "passage": "Many people now shop #. You can buy almost anything from home. Online shopping is convenient, but you should check the # carefully before buying.",
+      "correctAnswers": ["online", "price"],
+      "visibleLetters": ["on___e", "pr__e"]
     },
     {
       "id": 17,
-      "title": "Mental Health",
-      "passage": "Mental health is as important as physical health. People should talk about their # and ask for help when needed. Exercise and good sleep can # mental health.",
-      "correctAnswers": ["feelings", "improve"],
-      "visibleLetters": ["f_____s", "i_____e"]
+      "title": "Family Dinner",
+      "passage": "We have family dinner every Sunday. Everyone helps to # the meal. After dinner, we clean up together and sometimes play # or watch a movie.",
+      "correctAnswers": ["prepare", "games"],
+      "visibleLetters": ["pr____e", "ga__s"]
     },
     {
       "id": 18,
-      "title": "Global Trade",
-      "passage": "Countries around the world # goods with each other. This helps people get products from different countries. Trade also helps countries # economically.",
-      "correctAnswers": ["trade", "grow"],
-      "visibleLetters": ["t___e", "g__w"]
+      "title": "The Museum",
+      "passage": "Museums are places where you can learn about history and #. Many museums are free to #. They have interesting exhibits that teach us about the past.",
+      "correctAnswers": ["culture", "visit"],
+      "visibleLetters": ["cu____e", "v___t"]
     },
     {
       "id": 19,
-      "title": "Tourism",
-      "passage": "Tourism brings many # to local communities. It creates jobs and helps the economy. However, too many tourists can # the environment and local culture.",
-      "correctAnswers": ["benefits", "damage"],
-      "visibleLetters": ["b_____s", "d____e"]
+      "title": "Mobile Phones",
+      "passage": "Mobile phones are very useful. We use them to call people, send messages, and find #. However, we should not use our phones too # or they can become a distraction.",
+      "correctAnswers": ["information", "much"],
+      "visibleLetters": ["in________n", "mu__"]
     },
     {
       "id": 20,
-      "title": "Future Cities",
-      "passage": "Future cities will be smarter and more #. They will use technology to # energy and reduce waste. Green buildings and clean transportation will make cities better places to live.",
-      "correctAnswers": ["sustainable", "save"],
-      "visibleLetters": ["s________e", "s__e"]
+      "title": "Recycling",
+      "passage": "Recycling helps protect the #. We should recycle paper, plastic, and glass. Recycling reduces waste and saves natural #. Everyone can help by separating their trash.",
+      "correctAnswers": ["environment", "resources"],
+      "visibleLetters": ["en________t", "re_____s"]
     }
   ]
 }

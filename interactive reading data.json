@@ -1,263 +1,378 @@
 {
-    "config": {
-      "title": "Select the best option for each missing word",
-      "shuffleQuestions": true
+  "config": {
+    "title": "Read the passage and answer the questions",
+    "shuffleQuestions": true
+  },
+  "questions": [
+    {
+      "id": 1,
+      "title": "Morning Coffee",
+      "passage": "Coffee is one of the most popular drinks in the world. Many people drink coffee every morning to help them wake up. Coffee contains caffeine, which makes people feel more alert. Some people like their coffee black, while others add milk and sugar. Coffee shops are popular places where people meet friends or work on their computers.",
+      "questions": [
+        {
+          "question": "Why do people drink coffee in the morning?",
+          "options": [
+            "To help them sleep",
+            "To help them wake up",
+            "To make them hungry",
+            "To cool down"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "What do some people add to their coffee?",
+          "options": [
+            "Salt and pepper",
+            "Juice and water",
+            "Milk and sugar",
+            "Tea and honey"
+          ],
+          "correctAnswer": 2
+        }
+      ]
     },
-    "questions": [
-      {
-        "id": 1,
-        "title": "City Transportation",
-        "passage": "Many cities have traffic problems. People use cars every day. Cities are making bike paths and electric buses. These help # pollution and make the air cleaner. More people should use public #.",
-        "questions": [
-          {
-            "question": "These help _____ pollution",
-            "options": ["increase", "reduce", "create", "ignore"],
-            "correctAnswer": 1
-          },
-          {
-            "question": "More people should use public _____",
-            "options": ["cars", "transportation", "houses", "phones"],
-            "correctAnswer": 1
-          }
-        ]
-      },
-      {
-        "id": 2,
-        "title": "Learning Online",
-        "passage": "Many students now learn online. They can take classes from home. Online learning makes education # to access for everyone. Students can learn from teachers in different countries. This helps them learn new #.",
-        "questions": [
-          {
-            "question": "Online learning makes education _____ to access",
-            "options": ["harder", "easier", "impossible", "expensive"],
-            "correctAnswer": 1
-          },
-          {
-            "question": "This helps them learn new _____",
-            "options": ["problems", "skills", "worries", "fears"],
-            "correctAnswer": 1
-          }
-        ]
-      },
-      {
-        "id": 3,
-        "title": "Healthy Farming",
-        "passage": "Farmers are using new ways to grow food. They use less water and fewer chemicals. This helps # the soil healthy. Good farming practices also help protect animals and #.",
-        "questions": [
-          {
-            "question": "This helps _____ the soil healthy",
-            "options": ["make", "keep", "destroy", "waste"],
-            "correctAnswer": 1
-          },
-          {
-            "question": "Good farming helps protect animals and _____",
-            "options": ["cars", "plants", "buildings", "roads"],
-            "correctAnswer": 1
-          }
-        ]
-      },
-      {
-        "id": 4,
-        "title": "Space Travel",
-        "passage": "Space travel is becoming more popular. Private companies are building # to take people to space. These trips are expensive but many people want to # space.",
-        "questions": [
-          {
-            "question": "Private companies are building _____",
-            "options": ["cars", "rockets", "houses", "schools"],
-            "correctAnswer": 1
-          },
-          {
-            "question": "Many people want to _____ space",
-            "options": ["avoid", "visit", "destroy", "forget"],
-            "correctAnswer": 1
-          }
-        ]
-      },
-      {
-        "id": 5,
-        "title": "Ocean Protection",
-        "passage": "The ocean has many problems. Plastic waste is # marine animals. People are working to clean the ocean and protect sea #.",
-        "questions": [
-          {
-            "question": "Plastic waste is _____ marine animals",
-            "options": ["helping", "harming", "feeding", "teaching"],
-            "correctAnswer": 1
-          },
-          {
-            "question": "People want to protect sea _____",
-            "options": ["pollution", "life", "plastic", "waste"],
-            "correctAnswer": 1
-          }
-        ]
-      },
-      {
-        "id": 6,
-        "title": "Clean Energy",
-        "passage": "Solar and wind power are clean energy sources. They don't create # like coal and oil. Many countries are using more clean # to protect the environment.",
-        "questions": [
-          {
-            "question": "They don't create _____",
-            "options": ["energy", "pollution", "power", "electricity"],
-            "correctAnswer": 1
-          },
-          {
-            "question": "Many countries are using more clean _____",
-            "options": ["pollution", "energy", "waste", "problems"],
-            "correctAnswer": 1
-          }
-        ]
-      },
-      {
-        "id": 7,
-        "title": "City Farming",
-        "passage": "People are growing food in cities. They use rooftops and small spaces to grow vegetables. City farming helps provide # food and reduces transportation costs.",
-        "questions": [
-          {
-            "question": "City farming helps provide _____ food",
-            "options": ["expensive", "fresh", "old", "bad"],
-            "correctAnswer": 1
-          },
-          {
-            "question": "It also reduces transportation _____",
-            "options": ["benefits", "costs", "speed", "quality"],
-            "correctAnswer": 1
-          }
-        ]
-      },
-      {
-        "id": 8,
-        "title": "Smart Medicine",
-        "passage": "Computers are helping doctors treat patients better. Smart programs can # diseases faster than before. This helps doctors give the right # to patients quickly.",
-        "questions": [
-          {
-            "question": "Smart programs can _____ diseases faster",
-            "options": ["create", "find", "hide", "spread"],
-            "correctAnswer": 1
-          },
-          {
-            "question": "This helps doctors give the right _____ to patients",
-            "options": ["problems", "treatment", "disease", "pain"],
-            "correctAnswer": 1
-          }
-        ]
-      },
-      {
-        "id": 9,
-        "title": "Climate Change",
-        "passage": "The Earth's temperature is getting warmer. This causes problems like floods and storms. People need to # less energy and use clean power to help the #.",
-        "questions": [
-          {
-            "question": "People need to _____ less energy",
-            "options": ["make", "use", "create", "find"],
-            "correctAnswer": 1
-          },
-          {
-            "question": "This helps the _____",
-            "options": ["problems", "environment", "storms", "floods"],
-            "correctAnswer": 1
-          }
-        ]
-      },
-      {
-        "id": 10,
-        "title": "Digital Privacy",
-        "passage": "People share a lot of personal information online. Companies collect this data to sell products. People should be # about what information they share and protect their #.",
-        "questions": [
-          {
-            "question": "People should be _____ about sharing information",
-            "options": ["careless", "careful", "happy", "sad"],
-            "correctAnswer": 1
-          },
-          {
-            "question": "They should protect their _____",
-            "options": ["money", "privacy", "computers", "phones"],
-            "correctAnswer": 1
-          }
-        ]
-      },
-      {
-        "id": 11,
-        "title": "Good Tourism",
-        "passage": "Tourism can help or hurt local communities. Good tourism creates # for local people and protects the environment. Tourists should respect local # and traditions.",
-        "questions": [
-          {
-            "question": "Good tourism creates _____ for local people",
-            "options": ["problems", "jobs", "pollution", "waste"],
-            "correctAnswer": 1
-          },
-          {
-            "question": "Tourists should respect local _____",
-            "options": ["problems", "culture", "pollution", "noise"],
-            "correctAnswer": 1
-          }
-        ]
-      },
-      {
-        "id": 12,
-        "title": "Mental Health",
-        "passage": "Mental health is as important as physical health. People should talk about their # and ask for help when needed. Exercise and good sleep can improve mental #.",
-        "questions": [
-          {
-            "question": "People should talk about their _____",
-            "options": ["money", "feelings", "cars", "food"],
-            "correctAnswer": 1
-          },
-          {
-            "question": "Exercise can improve mental _____",
-            "options": ["problems", "health", "illness", "pain"],
-            "correctAnswer": 1
-          }
-        ]
-      },
-      {
-        "id": 13,
-        "title": "Food Security",
-        "passage": "The world needs more food for growing populations. New farming methods help grow more # using less water and land. We also need to reduce food # to feed everyone.",
-        "questions": [
-          {
-            "question": "New methods help grow more _____",
-            "options": ["problems", "food", "waste", "pollution"],
-            "correctAnswer": 1
-          },
-          {
-            "question": "We need to reduce food _____",
-            "options": ["production", "waste", "quality", "taste"],
-            "correctAnswer": 1
-          }
-        ]
-      },
-      {
-        "id": 14,
-        "title": "Internet Security",
-        "passage": "Cyber attacks are becoming more common. People and companies need to protect their computers and #. Strong passwords and updated software help keep information #.",
-        "questions": [
-          {
-            "question": "People need to protect their computers and _____",
-            "options": ["food", "data", "cars", "clothes"],
-            "correctAnswer": 1
-          },
-          {
-            "question": "This helps keep information _____",
-            "options": ["public", "safe", "slow", "expensive"],
-            "correctAnswer": 1
-          }
-        ]
-      },
-      {
-        "id": 15,
-        "title": "Animal Protection",
-        "passage": "Many animals are losing their homes because of human activities. We need to # natural areas and create safe spaces for wildlife. Education helps people understand why animal # is important.",
-        "questions": [
-          {
-            "question": "We need to _____ natural areas",
-            "options": ["destroy", "protect", "sell", "ignore"],
-            "correctAnswer": 1
-          },
-          {
-            "question": "Education helps people understand animal _____",
-            "options": ["hunting", "protection", "selling", "training"],
-            "correctAnswer": 1
-          }
-        ]
-      }
-    ]
-  }
+    {
+      "id": 2,
+      "title": "Public Libraries",
+      "passage": "Public libraries are important places in communities. They provide free access to books, magazines, and newspapers. Many libraries also have computers and internet access that people can use. Libraries are quiet spaces where students can study. Librarians help people find the information they need. Libraries often have reading programs for children during the summer.",
+      "questions": [
+        {
+          "question": "What can people do at libraries?",
+          "options": [
+            "Only buy books",
+            "Use computers and read books",
+            "Watch movies only",
+            "Play sports"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Who helps people find information at libraries?",
+          "options": ["Teachers", "Doctors", "Librarians", "Police officers"],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Recycling",
+      "passage": "Recycling is the process of turning old materials into new products. Paper, plastic, glass, and metal can all be recycled. Recycling helps reduce waste and saves natural resources. It also uses less energy than making new products from raw materials. Many cities have recycling programs where residents separate their trash. Recycling is an easy way for everyone to help protect the environment.",
+      "questions": [
+        {
+          "question": "What does recycling help reduce?",
+          "options": ["Fresh air", "Waste", "Water", "Food"],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Which materials can be recycled?",
+          "options": [
+            "Only paper",
+            "Only plastic",
+            "Paper, plastic, glass, and metal",
+            "None of these"
+          ],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "The Internet",
+      "passage": "The Internet has changed how people communicate and find information. It allows people to send messages instantly to anyone in the world. People use the Internet for work, education, shopping, and entertainment. Social media websites let people share photos and stay connected with friends. However, people should be careful about what personal information they share online. The Internet is a powerful tool that continues to grow and change.",
+      "questions": [
+        {
+          "question": "What can people do on the Internet?",
+          "options": [
+            "Only send letters",
+            "Work, shop, and communicate",
+            "Only watch TV",
+            "Only read newspapers"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "What should people be careful about online?",
+          "options": [
+            "Reading too much",
+            "Watching videos",
+            "Sharing personal information",
+            "Using search engines"
+          ],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Learning a New Language",
+      "passage": "Learning a new language takes time and practice. The best way to learn is to use the language every day. Listening to music, watching movies, and reading books in the new language all help. Speaking with native speakers is very important for improving pronunciation. Making mistakes is a natural part of learning. Many people use language apps and online courses to help them study. With patience and dedication, anyone can learn a new language.",
+      "questions": [
+        {
+          "question": "What is the best way to learn a language?",
+          "options": [
+            "Study only once a month",
+            "Use it every day",
+            "Never speak it",
+            "Only read grammar books"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Why is speaking with native speakers important?",
+          "options": [
+            "To learn grammar rules",
+            "To improve pronunciation",
+            "To buy things",
+            "To find a job"
+          ],
+          "correctAnswer": 1
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Healthy Eating",
+      "passage": "Eating a balanced diet is important for good health. A healthy diet includes fruits, vegetables, whole grains, and protein. These foods provide the nutrients our bodies need to function properly. Drinking plenty of water is also essential. People should limit sugar, salt, and unhealthy fats. Eating breakfast gives you energy for the day. Preparing meals at home is often healthier than eating fast food.",
+      "questions": [
+        {
+          "question": "What should a healthy diet include?",
+          "options": [
+            "Only candy and soda",
+            "Fruits, vegetables, grains, and protein",
+            "Only meat",
+            "Only bread"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Why should people eat breakfast?",
+          "options": [
+            "To lose weight",
+            "To give energy for the day",
+            "To sleep better",
+            "To watch TV"
+          ],
+          "correctAnswer": 1
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Public Transportation",
+      "passage": "Public transportation includes buses, trains, and subways that many people use together. Using public transportation has several benefits. It reduces traffic congestion on roads. It is often cheaper than owning and driving a car. Public transportation is also better for the environment because it produces less pollution per person. Many cities are improving their public transportation systems to make them more efficient and comfortable.",
+      "questions": [
+        {
+          "question": "What does public transportation include?",
+          "options": [
+            "Only personal cars",
+            "Buses, trains, and subways",
+            "Only bicycles",
+            "Only taxis"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Why is public transportation good for the environment?",
+          "options": [
+            "It produces more pollution",
+            "It is slower",
+            "It produces less pollution per person",
+            "It costs more money"
+          ],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Exercise and Health",
+      "passage": "Regular exercise is essential for physical and mental health. Exercise strengthens the heart, muscles, and bones. It helps people maintain a healthy weight and reduces the risk of many diseases. Exercise also improves mood by releasing chemicals in the brain that make people feel happy. Adults should try to exercise for at least thirty minutes most days of the week. Walking, swimming, and cycling are all good forms of exercise.",
+      "questions": [
+        {
+          "question": "What does regular exercise strengthen?",
+          "options": [
+            "Only the brain",
+            "Heart, muscles, and bones",
+            "Only the eyes",
+            "Only the hair"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "How often should adults exercise?",
+          "options": [
+            "Once a year",
+            "Never",
+            "At least thirty minutes most days",
+            "Only on weekends"
+          ],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Solar Energy",
+      "passage": "Solar energy comes from the sun and is a clean, renewable source of power. Solar panels convert sunlight into electricity. Many homes and businesses now use solar panels to reduce their energy costs. Solar energy does not produce pollution or greenhouse gases. It is available everywhere the sun shines. Although solar panels can be expensive to install, they save money over time. Solar energy is becoming more popular as technology improves and costs decrease.",
+      "questions": [
+        {
+          "question": "Where does solar energy come from?",
+          "options": ["The moon", "The sun", "The ocean", "The wind"],
+          "correctAnswer": 1
+        },
+        {
+          "question": "What do solar panels convert into electricity?",
+          "options": ["Rain", "Wind", "Sunlight", "Snow"],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Water Conservation",
+      "passage": "Water is essential for all life on Earth, but clean water is becoming scarce in many places. Water conservation means using water wisely and not wasting it. Simple actions can save water. Taking shorter showers, fixing leaky faucets, and turning off water while brushing teeth all help. Watering gardens early in the morning reduces evaporation. Everyone should do their part to conserve water for future generations.",
+      "questions": [
+        {
+          "question": "What does water conservation mean?",
+          "options": [
+            "Using more water",
+            "Using water wisely and not wasting it",
+            "Never drinking water",
+            "Polluting water"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "When is the best time to water gardens?",
+          "options": [
+            "During midday",
+            "At night only",
+            "Early in the morning",
+            "Never"
+          ],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Dolphins",
+      "passage": "Dolphins are intelligent marine mammals that live in oceans around the world. They are known for their playful behavior and social nature. Dolphins communicate with each other using clicks and whistles. They travel in groups called pods. Dolphins are excellent swimmers and can jump high out of the water. They eat fish and squid. Many people enjoy watching dolphins in the wild or at marine parks.",
+      "questions": [
+        {
+          "question": "Where do dolphins live?",
+          "options": ["In deserts", "In forests", "In oceans", "In mountains"],
+          "correctAnswer": 2
+        },
+        {
+          "question": "How do dolphins communicate?",
+          "options": [
+            "By writing",
+            "Through colors",
+            "Using clicks and whistles",
+            "By dancing"
+          ],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Composting",
+      "passage": "Composting is a natural process that turns organic waste into nutrient-rich soil. Food scraps like fruit peels and vegetable stems can be composted. Leaves, grass clippings, and coffee grounds are also good for compost. The organic materials break down over time with the help of bacteria and worms. Compost improves soil quality and helps plants grow better. Composting reduces the amount of waste sent to landfills. Many people keep compost bins in their backyards.",
+      "questions": [
+        {
+          "question": "What does composting turn organic waste into?",
+          "options": ["Plastic", "Metal", "Nutrient-rich soil", "Water"],
+          "correctAnswer": 2
+        },
+        {
+          "question": "What helps organic materials break down in compost?",
+          "options": ["Fire", "Ice", "Bacteria and worms", "Wind"],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "The Importance of Sleep",
+      "passage": "Sleep is essential for good health and well-being. During sleep, the body repairs itself and the brain processes information from the day. Adults need about seven to eight hours of sleep each night. Children and teenagers need even more. Lack of sleep can cause problems with memory, mood, and concentration. It can also weaken the immune system. Good sleep habits include going to bed at the same time each night and avoiding screens before bedtime.",
+      "questions": [
+        {
+          "question": "How much sleep do adults need each night?",
+          "options": [
+            "Two hours",
+            "Seven to eight hours",
+            "Twelve hours",
+            "One hour"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "What happens to the body during sleep?",
+          "options": [
+            "It grows taller",
+            "It repairs itself",
+            "It stops working",
+            "It gets cold"
+          ],
+          "correctAnswer": 1
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Farmers Markets",
+      "passage": "Farmers markets are places where local farmers sell their fresh produce directly to customers. These markets usually happen once or twice a week in town centers or parks. People can buy fruits, vegetables, eggs, honey, and other farm products. The food is often fresher than in supermarkets because it travels a shorter distance. Shopping at farmers markets supports local farmers and the local economy. Many markets also sell handmade crafts and baked goods.",
+      "questions": [
+        {
+          "question": "Who sells products at farmers markets?",
+          "options": [
+            "Large corporations",
+            "Local farmers",
+            "Foreign companies",
+            "Online stores"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Why is food at farmers markets often fresher?",
+          "options": [
+            "It is frozen",
+            "It costs more",
+            "It travels a shorter distance",
+            "It is older"
+          ],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Volunteering",
+      "passage": "Volunteering means doing work to help others without getting paid. People volunteer at hospitals, schools, animal shelters, and many other places. Volunteering benefits both the volunteer and the community. Volunteers learn new skills and meet new people. They feel good about helping others. Communities benefit from the work volunteers do. Volunteering can also help people explore career interests. Many students volunteer to gain experience and build their resumes.",
+      "questions": [
+        {
+          "question": "What does volunteering mean?",
+          "options": [
+            "Working for high pay",
+            "Helping others without getting paid",
+            "Only working at home",
+            "Buying things for yourself"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "What do volunteers gain from volunteering?",
+          "options": [
+            "Only money",
+            "Nothing at all",
+            "New skills and meeting new people",
+            "A house"
+          ],
+          "correctAnswer": 2
+        }
+      ]
+    }
+  ]
+}

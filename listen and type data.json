@@ -6,203 +6,203 @@
   "questions": [
     {
       "id": 1,
-      "correctText": "I am going to school today."
+      "correctText": "The cat is sleeping on the sofa."
     },
     {
       "id": 2,
-      "correctText": "The weather is nice and sunny."
+      "correctText": "I have a meeting at three o'clock."
     },
     {
       "id": 3,
-      "correctText": "There is a coffee shop near here."
+      "correctText": "She walks to work every morning."
     },
     {
       "id": 4,
-      "correctText": "The meeting starts at nine."
+      "correctText": "The store opens at nine."
     },
     {
       "id": 5,
-      "correctText": "I left my keys at home."
+      "correctText": "We are having pizza for dinner."
     },
     {
       "id": 6,
-      "correctText": "The library is very quiet."
+      "correctText": "My phone is on the table."
     },
     {
       "id": 7,
-      "correctText": "The bus is late today."
+      "correctText": "The children are playing outside."
     },
     {
       "id": 8,
-      "correctText": "She is studying for her test."
+      "correctText": "I need to buy some milk."
     },
     {
       "id": 9,
-      "correctText": "The restaurant looks busy."
+      "correctText": "The weather is nice today."
     },
     {
       "id": 10,
-      "correctText": "We need to buy food tomorrow."
+      "correctText": "He is reading a book."
     },
     {
       "id": 11,
-      "correctText": "It is a beautiful day today."
+      "correctText": "My birthday is in June."
     },
     {
       "id": 12,
-      "correctText": "This book is very interesting."
+      "correctText": "The bus is late again."
     },
     {
       "id": 13,
-      "correctText": "The plane is landing now."
+      "correctText": "She has two brothers."
     },
     {
       "id": 14,
-      "correctText": "Children are playing in the park."
+      "correctText": "I like to drink tea."
     },
     {
       "id": 15,
-      "correctText": "My computer is working slowly."
+      "correctText": "The movie starts at seven."
     },
     {
       "id": 16,
-      "correctText": "I have a doctor visit on Tuesday."
+      "correctText": "We live near the park."
     },
     {
       "id": 17,
-      "correctText": "The movie starts at eight."
+      "correctText": "He works in a hospital."
     },
     {
       "id": 18,
-      "correctText": "Traffic is heavy this morning."
+      "correctText": "The dog is barking loudly."
     },
     {
       "id": 19,
-      "correctText": "We are having a party on Saturday."
+      "correctText": "I am learning Spanish."
     },
     {
       "id": 20,
-      "correctText": "My phone battery is low."
+      "correctText": "The teacher is very kind."
     },
     {
       "id": 21,
-      "correctText": "He starts work on Monday."
+      "correctText": "My car is in the garage."
     },
     {
       "id": 22,
-      "correctText": "The flowers are very beautiful."
+      "correctText": "She cooks dinner every night."
     },
     {
       "id": 23,
-      "correctText": "Class is canceled today."
+      "correctText": "The baby is crying."
     },
     {
       "id": 24,
-      "correctText": "The store closes at ten."
+      "correctText": "I want to go home."
     },
     {
       "id": 25,
-      "correctText": "This homework is difficult."
+      "correctText": "The water is cold."
     },
     {
       "id": 26,
-      "correctText": "The bus comes in fifteen minutes."
+      "correctText": "We are going to the beach."
     },
     {
       "id": 27,
-      "correctText": "She forgot her lunch today."
+      "correctText": "He plays soccer on weekends."
     },
     {
       "id": 28,
-      "correctText": "The concert was amazing."
+      "correctText": "The flowers are beautiful."
     },
     {
       "id": 29,
-      "correctText": "We should visit the museum."
+      "correctText": "I forgot my umbrella."
     },
     {
       "id": 30,
-      "correctText": "The coffee tastes good."
+      "correctText": "The coffee is hot."
     },
     {
       "id": 31,
-      "correctText": "My sister lives in New York."
+      "correctText": "She wears glasses."
     },
     {
       "id": 32,
-      "correctText": "The package will arrive tomorrow."
+      "correctText": "The train arrives at noon."
     },
     {
       "id": 33,
-      "correctText": "He is learning to play guitar."
+      "correctText": "I am tired today."
     },
     {
       "id": 34,
-      "correctText": "The hotel has a nice view."
+      "correctText": "He has a new job."
     },
     {
       "id": 35,
-      "correctText": "I must finish this work by Friday."
+      "correctText": "The park is very quiet."
     },
     {
       "id": 36,
-      "correctText": "It got cold last night."
+      "correctText": "We eat breakfast together."
     },
     {
       "id": 37,
-      "correctText": "She studies English at university."
+      "correctText": "She is my best friend."
     },
     {
       "id": 38,
-      "correctText": "The restaurant has good food."
+      "correctText": "The room is too small."
     },
     {
       "id": 39,
-      "correctText": "We decided to go on vacation."
+      "correctText": "I can swim very well."
     },
     {
       "id": 40,
-      "correctText": "The presentation went very well."
+      "correctText": "The door is open."
     },
     {
       "id": 41,
-      "correctText": "My grandfather taught me to fish."
+      "correctText": "He drives to school."
     },
     {
       "id": 42,
-      "correctText": "The new mall opens next month."
+      "correctText": "The apple tastes sweet."
     },
     {
       "id": 43,
-      "correctText": "She drinks tea every morning."
+      "correctText": "I need a new pen."
     },
     {
       "id": 44,
-      "correctText": "The mechanic fixed my car."
+      "correctText": "She is watching television."
     },
     {
       "id": 45,
-      "correctText": "We are planning a surprise party."
+      "correctText": "The sky is blue."
     },
     {
       "id": 46,
-      "correctText": "The bakery sells good cake."
+      "correctText": "We have class tomorrow."
     },
     {
       "id": 47,
-      "correctText": "I lost my wallet at the mall."
+      "correctText": "He likes to run."
     },
     {
       "id": 48,
-      "correctText": "The dentist visit is at three."
+      "correctText": "The book is interesting."
     },
     {
       "id": 49,
-      "correctText": "My neighbor has a friendly dog."
+      "correctText": "I am going shopping."
     },
     {
       "id": 50,
-      "correctText": "The walk was harder than expected."
+      "correctText": "The birds are singing."
     }
   ]
 }

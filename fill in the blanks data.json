@@ -6,195 +6,194 @@
   "questions": [
     {
       "id": 1,
-      "sentence": "I need to # my water bottle.",
-      "correctAnswer": "fill",
-      "alternatives": ["refill", "add water to"],
+      "sentence": "I like to # books in my free time.",
+      "correctAnswer": "read",
+      "alternatives": ["study", "look at"],
       "type": "complete"
     },
     {
       "id": 2,
-      "sentence": "Please # your homework today.",
-      "correctAnswer": "submit",
-      "alternatives": ["give", "hand in"],
+      "sentence": "Can you # me the salt please?",
+      "correctAnswer": "pass",
+      "alternatives": ["give", "hand"],
       "type": "complete"
     },
     {
       "id": 3,
-      "sentence": "She wants to # her old books.",
-      "correctAnswer": "donate",
-      "alternatives": ["give", "sell"],
+      "sentence": "She needs to # a dentist appointment.",
+      "correctAnswer": "make",
+      "alternatives": ["book", "schedule"],
       "type": "partial",
-      "visibleLetters": "do__te"
+      "visibleLetters": "m__e"
     },
     {
       "id": 4,
-      "sentence": "The shop will # at 9 PM.",
-      "correctAnswer": "close",
-      "alternatives": ["shut", "end"],
+      "sentence": "The sun # in the morning.",
+      "correctAnswer": "rises",
+      "alternatives": ["comes up", "appears"],
       "type": "partial",
-      "visibleLetters": "cl__e"
+      "visibleLetters": "r___s"
     },
     {
       "id": 5,
-      "sentence": "Don't forget to # the door.",
-      "correctAnswer": "lock",
-      "alternatives": ["close", "secure"],
+      "sentence": "I # coffee every morning.",
+      "correctAnswer": "drink",
+      "alternatives": ["have", "take"],
       "type": "partial",
-      "visibleLetters": "l_ck"
+      "visibleLetters": "dr__k"
     },
     {
       "id": 6,
-      "sentence": "I need to # for my test.",
-      "correctAnswer": "study",
-      "alternatives": ["prepare", "learn"],
-      "type": "partial",
-      "visibleLetters": "st_dy"
+      "sentence": "They will # to the park tomorrow.",
+      "correctAnswer": "go",
+      "alternatives": ["walk", "travel"],
+      "type": "complete"
     },
     {
       "id": 7,
-      "sentence": "Can you # me carry this?",
-      "correctAnswer": "help",
-      "alternatives": ["assist", "aid"],
+      "sentence": "Please # the lights before you leave.",
+      "correctAnswer": "turn off",
+      "alternatives": ["switch off", "close"],
       "type": "complete"
     },
     {
       "id": 8,
-      "sentence": "They will # a new phone soon.",
-      "correctAnswer": "launch",
-      "alternatives": ["release", "make"],
+      "sentence": "My sister is # than me.",
+      "correctAnswer": "younger",
+      "alternatives": ["smaller", "little"],
       "type": "partial",
-      "visibleLetters": "la_n_h"
+      "visibleLetters": "yo___er"
     },
     {
       "id": 9,
-      "sentence": "I must # my passport soon.",
-      "correctAnswer": "renew",
-      "alternatives": ["update", "fix"],
+      "sentence": "We should # our hands before eating.",
+      "correctAnswer": "wash",
+      "alternatives": ["clean", "rinse"],
       "type": "partial",
-      "visibleLetters": "r_n_w"
+      "visibleLetters": "w__h"
     },
     {
       "id": 10,
-      "sentence": "Kids love to # outside.",
-      "correctAnswer": "play",
-      "alternatives": ["have fun", "run"],
-      "type": "complete"
+      "sentence": "The train # at six o'clock.",
+      "correctAnswer": "arrives",
+      "alternatives": ["comes", "gets here"],
+      "type": "partial",
+      "visibleLetters": "ar___es"
     },
     {
       "id": 11,
-      "sentence": "We should # home early today.",
-      "correctAnswer": "leave",
-      "alternatives": ["go", "start"],
-      "type": "partial",
-      "visibleLetters": "lea_e"
+      "sentence": "He likes to # music when he studies.",
+      "correctAnswer": "listen to",
+      "alternatives": ["hear", "play"],
+      "type": "complete"
     },
     {
       "id": 12,
-      "sentence": "The doctor will # you tomorrow.",
-      "correctAnswer": "examine",
-      "alternatives": ["check", "see"],
+      "sentence": "I need to # my room today.",
+      "correctAnswer": "clean",
+      "alternatives": ["tidy", "organize"],
       "type": "partial",
-      "visibleLetters": "ex_m_ne"
+      "visibleLetters": "cl__n"
     },
     {
       "id": 13,
-      "sentence": "Please # your seatbelt.",
-      "correctAnswer": "fasten",
-      "alternatives": ["close", "buckle"],
+      "sentence": "Can you # the window? It's hot.",
+      "correctAnswer": "open",
+      "alternatives": ["unlock", "unfasten"],
       "type": "partial",
-      "visibleLetters": "f_st_n"
+      "visibleLetters": "o__n"
     },
     {
       "id": 14,
-      "sentence": "She will # a nice drawing.",
-      "correctAnswer": "create",
-      "alternatives": ["make", "draw"],
+      "sentence": "She wants to # a new language.",
+      "correctAnswer": "learn",
+      "alternatives": ["study", "master"],
       "type": "partial",
-      "visibleLetters": "cr__te"
+      "visibleLetters": "le__n"
     },
     {
       "id": 15,
-      "sentence": "I forgot to # my phone last night.",
-      "correctAnswer": "charge",
-      "alternatives": ["plug in", "power"],
-      "type": "partial",
-      "visibleLetters": "ch_r_e"
+      "sentence": "We # dinner at seven every day.",
+      "correctAnswer": "eat",
+      "alternatives": ["have", "take"],
+      "type": "complete"
     },
     {
       "id": 16,
-      "sentence": "We need to # harder for the game.",
-      "correctAnswer": "practice",
-      "alternatives": ["train", "work"],
+      "sentence": "The baby is # now.",
+      "correctAnswer": "sleeping",
+      "alternatives": ["resting", "napping"],
       "type": "partial",
-      "visibleLetters": "pr_ct_ce"
+      "visibleLetters": "sl___ing"
     },
     {
       "id": 17,
-      "sentence": "She will # her ideas to the class.",
-      "correctAnswer": "present",
-      "alternatives": ["show", "tell"],
-      "type": "partial",
-      "visibleLetters": "pr_s_nt"
+      "sentence": "I # to school by bus.",
+      "correctAnswer": "go",
+      "alternatives": ["travel", "get"],
+      "type": "complete"
     },
     {
       "id": 18,
-      "sentence": "The store will # good prices today.",
-      "correctAnswer": "offer",
-      "alternatives": ["give", "have"],
-      "type": "complete"
+      "sentence": "Please # down and relax.",
+      "correctAnswer": "sit",
+      "alternatives": ["be seated", "rest"],
+      "type": "partial",
+      "visibleLetters": "s_t"
     },
     {
       "id": 19,
-      "sentence": "Please # the book carefully.",
-      "correctAnswer": "read",
-      "alternatives": ["look at", "study"],
-      "type": "complete"
+      "sentence": "The dog is # in the garden.",
+      "correctAnswer": "playing",
+      "alternatives": ["running", "having fun"],
+      "type": "partial",
+      "visibleLetters": "pl___ng"
     },
     {
       "id": 20,
-      "sentence": "I will # my bicycle tomorrow.",
-      "correctAnswer": "repair",
-      "alternatives": ["fix", "check"],
+      "sentence": "I want to # a doctor when I grow up.",
+      "correctAnswer": "become",
+      "alternatives": ["be", "work as"],
       "type": "partial",
-      "visibleLetters": "r_p_ir"
+      "visibleLetters": "bec__e"
     },
     {
       "id": 21,
-      "sentence": "It will # tomorrow morning.",
-      "correctAnswer": "rain",
-      "alternatives": ["be wet", "storm"],
-      "type": "complete"
+      "sentence": "She # her teeth twice a day.",
+      "correctAnswer": "brushes",
+      "alternatives": ["cleans", "washes"],
+      "type": "partial",
+      "visibleLetters": "br___es"
     },
     {
       "id": 22,
-      "sentence": "I need to # my doctor visit.",
-      "correctAnswer": "cancel",
-      "alternatives": ["change", "stop"],
-      "type": "partial",
-      "visibleLetters": "c_n_el"
-    },
-    {
-      "id": 23,
-      "sentence": "Mom will # dinner tonight.",
-      "correctAnswer": "prepare",
-      "alternatives": ["cook", "make"],
-      "type": "partial",
-      "visibleLetters": "pr_p_re"
-    },
-    {
-      "id": 24,
-      "sentence": "Don't forget to # your books.",
-      "correctAnswer": "bring",
-      "alternatives": ["take", "carry"],
+      "sentence": "We need to # some groceries.",
+      "correctAnswer": "buy",
+      "alternatives": ["get", "purchase"],
       "type": "complete"
     },
     {
-      "id": 25,
-      "sentence": "The movie will # at 8 PM.",
-      "correctAnswer": "start",
-      "alternatives": ["begin", "play"],
+      "id": 23,
+      "sentence": "He can # three languages.",
+      "correctAnswer": "speak",
+      "alternatives": ["talk", "use"],
       "type": "partial",
-      "visibleLetters": "st_rt"
+      "visibleLetters": "sp__k"
+    },
+    {
+      "id": 24,
+      "sentence": "The children # to the teacher carefully.",
+      "correctAnswer": "listen",
+      "alternatives": ["pay attention", "hear"],
+      "type": "partial",
+      "visibleLetters": "li___n"
+    },
+    {
+      "id": 25,
+      "sentence": "I like to # pictures with my camera.",
+      "correctAnswer": "take",
+      "alternatives": ["make", "capture"],
+      "type": "complete"
     }
   ]
 }
