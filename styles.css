@@ -398,7 +398,7 @@ body::before {
   justify-content: center;
 }
 
-.duolingo-logo {
+.sna-logo {
   width: 28px;
   height: 28px;
   background: #ffc515;
@@ -879,7 +879,7 @@ body::before {
     height: 50px;
   }
 
-  .duolingo-logo {
+  .sna-logo {
     width: 22px;
     height: 22px;
     font-size: 13px;
@@ -2287,7 +2287,7 @@ body::before {
   text-transform: uppercase;
 }
 
-.category-duolingo-score {
+.category-sna-score {
   font-size: 24px;
   font-weight: 700;
   color: #ffc515;
@@ -2472,7 +2472,7 @@ body::before {
     font-size: 32px;
   }
 
-  .category-duolingo-score {
+  .category-sna-score {
     font-size: 20px;
   }
   .cefr-level {

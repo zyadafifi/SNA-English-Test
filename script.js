@@ -908,7 +908,7 @@ window.addEventListener("unhandledrejection", function (event) {
   showNotification("A network error occurred. Please check your connection.");
 });
 
-console.log("Duolingo English Test Practice App initialized successfully!");
+console.log("SNAEnglish Test Practice App initialized successfully!");
 // Function to update skill progress
 // Function to update skill progress
 function updateSkillProgress(skillName, completed, total) {
@@ -1592,101 +1592,101 @@ function getDefaultCategoryScore(category) {
 }
 
 // Function to convert scores to different standards
-function convertScores(duolingoScore) {
+function convertScores(snaScore) {
   const conversions = {};
 
   // Handle CEFR conversion based on comparison table
-  if (duolingoScore >= 160) {
+  if (snaScore >= 160) {
     conversions.CEFR = "C2";
-  } else if (duolingoScore >= 155) {
+  } else if (snaScore >= 155) {
     conversions.CEFR = "C2";
-  } else if (duolingoScore >= 135) {
+  } else if (snaScore >= 135) {
     conversions.CEFR = "C1";
-  } else if (duolingoScore >= 110) {
+  } else if (snaScore >= 110) {
     conversions.CEFR = "B2";
-  } else if (duolingoScore >= 75) {
+  } else if (snaScore >= 75) {
     conversions.CEFR = "B1";
   } else {
     conversions.CEFR = "A1-A2";
   }
 
   // Handle TOEFL conversion based on comparison table
-  if (duolingoScore >= 160) {
+  if (snaScore >= 160) {
     conversions.TOEFL = "120";
-  } else if (duolingoScore >= 155) {
+  } else if (snaScore >= 155) {
     conversions.TOEFL = "119";
-  } else if (duolingoScore >= 150) {
+  } else if (snaScore >= 150) {
     conversions.TOEFL = "117-118";
-  } else if (duolingoScore >= 145) {
+  } else if (snaScore >= 145) {
     conversions.TOEFL = "113-116";
-  } else if (duolingoScore >= 140) {
+  } else if (snaScore >= 140) {
     conversions.TOEFL = "109-112";
-  } else if (duolingoScore >= 135) {
+  } else if (snaScore >= 135) {
     conversions.TOEFL = "104-108";
-  } else if (duolingoScore >= 130) {
+  } else if (snaScore >= 130) {
     conversions.TOEFL = "98-103";
-  } else if (duolingoScore >= 125) {
+  } else if (snaScore >= 125) {
     conversions.TOEFL = "93-97";
-  } else if (duolingoScore >= 120) {
+  } else if (snaScore >= 120) {
     conversions.TOEFL = "87-92";
-  } else if (duolingoScore >= 115) {
+  } else if (snaScore >= 115) {
     conversions.TOEFL = "82-86";
-  } else if (duolingoScore >= 110) {
+  } else if (snaScore >= 110) {
     conversions.TOEFL = "76-81";
-  } else if (duolingoScore >= 105) {
+  } else if (snaScore >= 105) {
     conversions.TOEFL = "70-75";
-  } else if (duolingoScore >= 100) {
+  } else if (snaScore >= 100) {
     conversions.TOEFL = "65-69";
-  } else if (duolingoScore >= 95) {
+  } else if (snaScore >= 95) {
     conversions.TOEFL = "59-64";
-  } else if (duolingoScore >= 90) {
+  } else if (snaScore >= 90) {
     conversions.TOEFL = "53-58";
-  } else if (duolingoScore >= 85) {
+  } else if (snaScore >= 85) {
     conversions.TOEFL = "47-52";
-  } else if (duolingoScore >= 80) {
+  } else if (snaScore >= 80) {
     conversions.TOEFL = "41-46";
-  } else if (duolingoScore >= 75) {
+  } else if (snaScore >= 75) {
     conversions.TOEFL = "35-40";
-  } else if (duolingoScore >= 70) {
+  } else if (snaScore >= 70) {
     conversions.TOEFL = "30-34";
-  } else if (duolingoScore >= 65) {
+  } else if (snaScore >= 65) {
     conversions.TOEFL = "24-29";
-  } else if (duolingoScore >= 60) {
+  } else if (snaScore >= 60) {
     conversions.TOEFL = "18-23";
   } else {
     conversions.TOEFL = "0-17";
   }
 
   // Handle IELTS conversion based on comparison table
-  if (duolingoScore >= 160) {
+  if (snaScore >= 160) {
     conversions.IELTS = "8.5-9";
-  } else if (duolingoScore >= 155) {
+  } else if (snaScore >= 155) {
     conversions.IELTS = "8";
-  } else if (duolingoScore >= 150) {
+  } else if (snaScore >= 150) {
     conversions.IELTS = "8";
-  } else if (duolingoScore >= 145) {
+  } else if (snaScore >= 145) {
     conversions.IELTS = "7.5";
-  } else if (duolingoScore >= 140) {
+  } else if (snaScore >= 140) {
     conversions.IELTS = "7";
-  } else if (duolingoScore >= 135) {
+  } else if (snaScore >= 135) {
     conversions.IELTS = "7";
-  } else if (duolingoScore >= 130) {
+  } else if (snaScore >= 130) {
     conversions.IELTS = "6.5";
-  } else if (duolingoScore >= 125) {
+  } else if (snaScore >= 125) {
     conversions.IELTS = "6.5";
-  } else if (duolingoScore >= 120) {
+  } else if (snaScore >= 120) {
     conversions.IELTS = "6";
-  } else if (duolingoScore >= 115) {
+  } else if (snaScore >= 115) {
     conversions.IELTS = "6";
-  } else if (duolingoScore >= 110) {
+  } else if (snaScore >= 110) {
     conversions.IELTS = "5.5";
-  } else if (duolingoScore >= 105) {
+  } else if (snaScore >= 105) {
     conversions.IELTS = "5.5";
-  } else if (duolingoScore >= 85) {
+  } else if (snaScore >= 85) {
     conversions.IELTS = "5";
-  } else if (duolingoScore >= 80) {
+  } else if (snaScore >= 80) {
     conversions.IELTS = "4.5";
-  } else if (duolingoScore >= 70) {
+  } else if (snaScore >= 70) {
     conversions.IELTS = "4";
   } else {
     conversions.IELTS = "0-4";
@@ -1697,8 +1697,8 @@ function convertScores(duolingoScore) {
 
 // Function to toggle score table visibility
 
-function showScoreConversions(duolingoScore) {
-  const conversions = convertScores(duolingoScore);
+function showScoreConversions(snaScore) {
+  const conversions = convertScores(snaScore);
 
   return `
     <div class="score-conversion-card">
@@ -1733,7 +1733,7 @@ function showScoreConversions(duolingoScore) {
       </div>
       
       <div class="conversion-note">
-        <p>These conversions are based on Duolingo's official score concordance tables.</p>
+        <p>These conversions are based on SNA's official score concordance tables.</p>
         <p>Actual test results may vary slightly.</p>
       </div>
     </div>
@@ -1798,7 +1798,7 @@ function showAverageScoreResults() {
                       </div>
                       <div class="category-info">
                         <div class="category-name">${category}</div>
-                        <div class="category-duolingo-score">${score}</div>
+                        <div class="category-sna-score">${score}</div>
                       </div>
                     </div>
                     <div class="category-conversions">
@@ -1895,7 +1895,7 @@ function shareScores() {
   const scores = calculateAverageScores();
   const overallConversions = convertScores(scores.OVERALL);
 
-  const shareText = `🎉 I completed all Duolingo English Test practice skills!
+  const shareText = `🎉 I completed all SNAEnglish Test practice skills!
 
 My Average Scores:
 • Overall: ${scores.OVERALL}/160
@@ -1909,11 +1909,11 @@ Category Breakdown:
 • Listening: ${scores.LISTENING}
 • Speaking: ${scores.SPEAKING}
 
-#DuolingoEnglishTest #EnglishProficiency`;
+#SNAEnglishTest #EnglishProficiency`;
 
   if (navigator.share) {
     navigator.share({
-      title: "My Duolingo English Test Scores",
+      title: "My SNAEnglish Test Scores",
       text: shareText,
     });
   } else {
