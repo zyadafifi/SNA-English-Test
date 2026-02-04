@@ -1280,7 +1280,7 @@ function toggleHelpMenu() {
 // Function to open WhatsApp
 function openWhatsApp() {
   const phoneNumber = "966578288175"; // Your phone number
-  const message = "Hello, I need help with the Duolingo English Test";
+  const message = "Hello, I need help with the SNA English Test";
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
     message
   )}`;
