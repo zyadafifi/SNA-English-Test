@@ -1,0 +1,200 @@
+{
+  "config": {
+    "title": "Listen to the scenario and answer questions",
+    "shuffleQuestions": true
+  },
+  "questions": [
+    {
+      "id": 1,
+      "scenario": "You are at a restaurant with your friend. The waiter asks what you want to order. You want a salad and some water.",
+      "questions": [
+        {
+          "text": "What do you want to eat?",
+          "type": "fill",
+          "template": "I would like a ___________."
+        },
+        {
+          "text": "What do you want to drink?",
+          "type": "fill",
+          "template": "I would like some ___________."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "scenario": "You need to catch a bus to the city center. The next bus comes in fifteen minutes.",
+      "questions": [
+        {
+          "text": "Where do you need to go?",
+          "type": "fill",
+          "template": "I need to go to the ___________."
+        },
+        {
+          "text": "When does the bus come?",
+          "type": "fill",
+          "template": "The bus comes in ___________ minutes."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "scenario": "Your friend invites you to see a movie on Saturday evening. You are free that day.",
+      "questions": [
+        {
+          "text": "What does your friend want to do?",
+          "type": "fill",
+          "template": "My friend wants to see a ___________."
+        },
+        {
+          "text": "When is it?",
+          "type": "fill",
+          "template": "It is on ___________ evening."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "scenario": "You are looking for your keys. You think you left them on the kitchen table.",
+      "questions": [
+        {
+          "text": "What are you looking for?",
+          "type": "fill",
+          "template": "I am looking for my ___________."
+        },
+        {
+          "text": "Where do you think they are?",
+          "type": "fill",
+          "template": "I think they are on the ___________."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "scenario": "You want to buy a new phone. You will go to the store after work today.",
+      "questions": [
+        {
+          "text": "What do you want to buy?",
+          "type": "fill",
+          "template": "I want to buy a new ___________."
+        },
+        {
+          "text": "When will you go shopping?",
+          "type": "fill",
+          "template": "I will go ___________ work."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "scenario": "The weather is very cold today. You need to wear a warm jacket and a scarf.",
+      "questions": [
+        {
+          "text": "How is the weather?",
+          "type": "fill",
+          "template": "The weather is very ___________."
+        },
+        {
+          "text": "What do you need to wear?",
+          "type": "fill",
+          "template": "I need to wear a warm ___________ and scarf."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "scenario": "Your mother is cooking dinner in the kitchen. She is making pasta with tomato sauce.",
+      "questions": [
+        {
+          "text": "Who is cooking dinner?",
+          "type": "fill",
+          "template": "My ___________ is cooking dinner."
+        },
+        {
+          "text": "What is she making?",
+          "type": "fill",
+          "template": "She is making ___________."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "scenario": "You have a test tomorrow. You need to study tonight and go to bed early.",
+      "questions": [
+        {
+          "text": "When is your test?",
+          "type": "fill",
+          "template": "My test is ___________."
+        },
+        {
+          "text": "What do you need to do tonight?",
+          "type": "fill",
+          "template": "I need to ___________ tonight."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "scenario": "Your dog is hungry. You will give him some food and fresh water.",
+      "questions": [
+        {
+          "text": "How is your dog feeling?",
+          "type": "fill",
+          "template": "My dog is ___________."
+        },
+        {
+          "text": "What will you give him?",
+          "type": "fill",
+          "template": "I will give him ___________ and water."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "scenario": "You are learning to play the guitar. You practice every day for thirty minutes.",
+      "questions": [
+        {
+          "text": "What are you learning?",
+          "type": "fill",
+          "template": "I am learning to play the ___________."
+        },
+        {
+          "text": "How often do you practice?",
+          "type": "fill",
+          "template": "I practice ___________ day."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "scenario": "Your sister is sick. She has a headache and a fever. She needs to rest.",
+      "questions": [
+        {
+          "text": "How is your sister feeling?",
+          "type": "fill",
+          "template": "My sister is ___________."
+        },
+        {
+          "text": "What does she need to do?",
+          "type": "fill",
+          "template": "She needs to ___________."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "scenario": "You are planning a picnic in the park on Sunday. You will bring sandwiches and fruit.",
+      "questions": [
+        {
+          "text": "What are you planning?",
+          "type": "fill",
+          "template": "I am planning a ___________."
+        },
+        {
+          "text": "What will you bring?",
+          "type": "fill",
+          "template": "I will bring ___________ and fruit."
+        }
+      ]
+    }
+  ]
+}

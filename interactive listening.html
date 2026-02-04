@@ -1,0 +1,2335 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Listening - SNA English Test Practice</title>
+
+    <!-- Resource Hints for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+
+    <!-- Preload Critical Assets -->
+    <link
+      rel="prefetch"
+      href="interactive listening data.json"
+      as="fetch"
+      type="application/json"
+    />
+
+    <!-- Optimized Font Loading -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+    <link rel="stylesheet" href="background.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+        background-color: #f8f9fa;
+        min-height: 100vh;
+        line-height: 1.6;
+        color: #334155;
+      }
+
+      /* Loading Screen */
+      .loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #f8f9fa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .loading-spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid #e0e0e0;
+        border-top: 4px solid #ffc515;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .loading-text {
+        margin-top: 20px;
+        font-size: 16px;
+        color: #6b7280;
+      }
+
+      /* Error Screen */
+      .error-screen {
+        display: none;
+        text-align: center;
+        padding: 40px;
+        background-color: #ffebee;
+        border-radius: 12px;
+        border: 1px solid #f44336;
+        margin: 20px;
+      }
+
+      .error-title {
+        font-size: 24px;
+        font-weight: 600;
+        color: #f44336;
+        margin-bottom: 10px;
+      }
+
+      .error-message {
+        color: #6b7280;
+        margin-bottom: 20px;
+      }
+
+      .retry-data-btn {
+        background: #ffc515;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .retry-data-btn:hover {
+        background: #ffb300;
+      }
+
+      /* Quiz Container */
+      .quiz-container {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 40px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: transparent;
+      }
+
+      /* Question Card */
+      .question-card {
+        background: white;
+        border-radius: 12px 12px 0 0;
+        padding: 50px 60px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+        width: 100%;
+        max-width: 1200px;
+        text-align: center;
+        position: relative;
+        min-height: 600px;
+        display: flex;
+        margin: 0 auto;
+        margin-bottom: 0;
+        box-sizing: border-box;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      /* Timer */
+      .timer {
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        background: transparent;
+        padding: 0;
+        border-radius: 0;
+        font-weight: 400;
+        color: #888;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .timer-icon {
+        width: 20px;
+        height: 20px;
+        fill: currentColor;
+      }
+
+      .timer.warning {
+        color: #f44336;
+        font-weight: 600;
+      }
+
+      /* Close Button */
+      .close-btn {
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 4px;
+        transition: background 0.2s;
+        color: #ddd;
+      }
+
+      .close-btn:hover {
+        background: #f8f8f8;
+      }
+
+      /* Question Content */
+      .question-title {
+        font-size: 28px;
+        font-weight: 400;
+        color: #6b7280;
+        margin-bottom: 40px;
+        line-height: 1.2;
+      }
+
+      /* Audio Player */
+      .audio-player {
+        margin-bottom: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 20px;
+      }
+
+      .audio-container {
+        background: white;
+        border: 2px solid #e0e0e0;
+        border-radius: 20px;
+        padding: 16px 24px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        width: 100%;
+        max-width: 500px;
+        min-height: 70px;
+      }
+
+      .play-button {
+        width: 48px;
+        height: 48px;
+        background: #ffc515;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+      }
+
+      .play-button:hover {
+        background: #ffb300;
+        transform: scale(1.05);
+      }
+
+      .play-button:active {
+        transform: scale(0.95);
+      }
+
+      .play-button.playing {
+        background: #ffc515;
+      }
+
+      .speaker-icon {
+        width: 20px;
+        height: 20px;
+        fill: white;
+      }
+
+      .audio-waveform {
+        flex-grow: 1;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        padding: 0 8px;
+        overflow: hidden;
+      }
+
+      .waveform-bar {
+        width: 3px;
+        background: #e0e0e0;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+      }
+
+      .waveform-bar.active {
+        background: #ffc515;
+      }
+
+      .waveform-bar:nth-child(odd) {
+        height: 8px;
+      }
+
+      .waveform-bar:nth-child(even) {
+        height: 16px;
+      }
+
+      .waveform-bar:nth-child(3n) {
+        height: 24px;
+      }
+
+      .waveform-bar:nth-child(4n) {
+        height: 12px;
+      }
+
+      .waveform-bar:nth-child(5n) {
+        height: 20px;
+      }
+
+      .waveform-bar.playing-animation {
+        animation: waveformPulse 1.5s ease-in-out infinite;
+      }
+
+      @keyframes waveformPulse {
+        0%,
+        100% {
+          transform: scaleY(1);
+          background: #e0e0e0;
+        }
+        50% {
+          transform: scaleY(1.5);
+          background: #ffc515;
+        }
+      }
+
+      /* Questions Section */
+      .questions-section {
+        margin-bottom: 40px;
+        text-align: left;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .question-item {
+        margin-bottom: 25px;
+      }
+
+      .question-text {
+        font-size: 16px;
+        font-weight: 500;
+        color: #333;
+        margin-bottom: 8px;
+      }
+
+      .question-input {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 16px;
+        font-family: inherit;
+        color: #333;
+        background: #f8f9fa;
+        outline: none;
+        transition: all 0.3s ease;
+      }
+
+      .question-input:focus {
+        border-color: #ffc515;
+        background: white;
+        box-shadow: 0 0 0 3px rgba(28, 176, 246, 0.1);
+      }
+
+      .question-input.correct {
+        border-color: #ffc515;
+        background: rgba(76, 175, 80, 0.05);
+      }
+
+      .question-input.incorrect {
+        border-color: #f44336;
+        background: rgba(244, 67, 54, 0.05);
+      }
+
+      .question-input.submitted {
+        background: #f5f5f5;
+        border-color: #ccc;
+        color: #6b7280;
+      }
+
+      /* Submit Button */
+      .submit-btn {
+        background: #e0e0e0;
+        color: #999;
+        border: none;
+        padding: 14px 28px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: not-allowed;
+        transition: all 0.2s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: absolute;
+        bottom: 30px;
+        right: 30px;
+      }
+
+      .submit-btn.active {
+        background: #ffc515;
+        color: white;
+        cursor: pointer;
+      }
+
+      .submit-btn.active:hover {
+        background: #ffb300;
+      }
+
+      .submit-btn.submitted {
+        background: #ffc515;
+        color: white;
+        cursor: default;
+      }
+
+      /* Feedback Section */
+      .feedback-section {
+        background: #ffcdd2;
+        border-radius: 0 0 12px 12px;
+        padding: 18px 60px;
+        margin: 0 auto;
+        margin-top: 0;
+        margin-bottom: 0;
+        border: none;
+        display: none;
+        position: relative;
+        width: 100%;
+        max-width: 1200px;
+        box-sizing: border-box;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+        text-align: left;
+      }
+
+      .feedback-section.correct {
+        background: #ffe8b0;
+      }
+
+      .feedback-section.incorrect {
+        background: #ffcdd2;
+      }
+
+      .feedback-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+
+      .feedback-icon {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+      }
+
+      .feedback-title {
+        font-size: 16px;
+        font-weight: 700;
+        margin: 0;
+      }
+
+      .feedback-title.correct {
+        color: #2e7d32;
+      }
+
+      .feedback-title.incorrect {
+        color: #c62828;
+      }
+
+      .feedback-details {
+        margin-top: 16px;
+      }
+
+      .feedback-answer {
+        margin-bottom: 12px;
+        font-size: 14px;
+      }
+
+      .feedback-answer .question-label {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 4px;
+      }
+
+      .feedback-answer .user-answer {
+        color: #c62828;
+        font-style: italic;
+      }
+
+      .feedback-answer .correct-answer {
+        color: #2e7d32;
+        font-weight: 600;
+      }
+
+      /* Next Button */
+      .next-btn {
+        background: #ff4757;
+        color: white;
+        border: none;
+        padding: 14px 24px;
+        border-radius: 9999px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: absolute;
+        bottom: 24px;
+        right: 24px;
+      }
+
+      .next-btn:hover {
+        background: #ff3742;
+      }
+
+      .next-btn.correct {
+        background: #ffc515;
+      }
+
+      .next-btn.correct:hover {
+        background: #ffb300;
+      }
+
+      /* Results Screen */
+      .results-screen {
+        display: none;
+        text-align: center;
+        background: white;
+        border-radius: 12px;
+        padding: 80px 60px;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+        width: 100%;
+        max-width: 600px;
+        min-height: 400px;
+        position: relative;
+      }
+
+      .results-icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 40px;
+      }
+
+      .result-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .check-result-icon {
+        background: #ffc515;
+      }
+
+      .x-result-icon {
+        background: #ffc515;
+      }
+
+      .result-icon svg {
+        width: 40px;
+        height: 40px;
+        stroke: white;
+        stroke-width: 3;
+      }
+
+      .results-title {
+        font-size: 24px;
+        font-weight: 500;
+        color: #777;
+        margin-bottom: 10px;
+        line-height: 1.3;
+      }
+
+      .results-subtitle {
+        font-size: 18px;
+        font-weight: 400;
+        color: #777;
+        margin-bottom: 60px;
+      }
+
+      .done-btn {
+        background: #ffc515;
+        color: white;
+        border: none;
+        padding: 16px 32px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: absolute;
+        bottom: 30px;
+        right: 30px;
+      }
+
+      .done-btn:hover {
+        background: #ffb300;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .quiz-container {
+          padding: 20px;
+        }
+
+        .question-card {
+          padding: 35px 30px;
+          min-height: 500px;
+          border-radius: 12px 12px 0 0;
+        }
+
+        .feedback-section {
+          border-radius: 0 0 12px 12px;
+          padding: 18px 50px;
+        }
+
+        .question-title {
+          font-size: 24px;
+          margin-bottom: 30px;
+        }
+
+        .audio-container {
+          max-width: 100%;
+          padding: 12px 20px;
+          min-height: 60px;
+        }
+
+        .play-button {
+          width: 40px;
+          height: 40px;
+        }
+
+        .speaker-icon {
+          width: 24px;
+          height: 24px;
+        }
+
+        .audio-waveform {
+          height: 28px;
+          gap: 2px;
+        }
+
+        .waveform-bar {
+          width: 2px;
+        }
+
+        .submit-btn {
+          bottom: 20px;
+          right: 20px;
+          padding: 12px 24px;
+          font-size: 14px;
+        }
+
+        .timer {
+          top: 20px;
+          left: 20px;
+          font-size: 14px;
+        }
+
+        .close-btn {
+          top: 15px;
+          right: 15px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .question-card {
+          padding: 25px 20px;
+          border-radius: 12px 12px 0 0;
+        }
+
+        .feedback-section {
+          border-radius: 0 0 12px 12px;
+          padding: 18px 40px;
+        }
+
+        .question-title {
+          font-size: 20px;
+        }
+
+        .audio-container {
+          padding: 10px 16px;
+          min-height: 55px;
+          gap: 12px;
+        }
+
+        .play-button {
+          width: 36px;
+          height: 36px;
+        }
+
+        .speaker-icon {
+          width: 16px;
+          height: 16px;
+        }
+
+        .audio-waveform {
+          height: 24px;
+          gap: 1px;
+        }
+
+        .waveform-bar {
+          width: 2px;
+        }
+
+        .results-screen {
+          padding: 50px 30px;
+        }
+      }
+
+      /* Audio Status */
+      .audio-status {
+        margin-bottom: 20px;
+        padding: 10px;
+        border-radius: 8px;
+        font-size: 14px;
+        text-align: center;
+      }
+
+      .audio-status.error {
+        background: #ffcdd2;
+        color: #c62828;
+      }
+
+      .audio-status.warning {
+        background: #fff3cd;
+        color: #856404;
+      }
+
+      .audio-status.success {
+        background: #ffe8b0;
+        color: #2e7d32;
+      }
+
+      /* Scenario Text */
+      .scenario-text {
+        display: none;
+        background: #f8f9fa;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 30px;
+        text-align: left;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #555;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+      <div>
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading quiz data...</div>
+      </div>
+    </div>
+
+    <!-- Error Screen -->
+    <div class="error-screen" id="errorScreen">
+      <div class="error-title">Failed to Load Quiz Data</div>
+      <div class="error-message" id="errorMessage">
+        Could not load the quiz questions. Please check your internet connection
+        and try again.
+      </div>
+      <button class="retry-data-btn" onclick="loadQuizData()">Retry</button>
+      <button
+        class="retry-data-btn"
+        onclick="goBack()"
+        style="background: #f0f0f0; color: #666; margin-left: 10px"
+      >
+        Go Back
+      </button>
+    </div>
+
+    <div class="quiz-container" id="quizContainer" style="display: none">
+      <!-- Question Card -->
+      <div class="question-card" id="questionCard">
+        <!-- Timer -->
+        <div class="timer" id="timer">
+          <svg
+            class="timer-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12,6 12,12 16,14" />
+          </svg>
+          <span id="timerText">0:00</span>
+          <span style="color: #999; margin-left: 6px">for 8 questions</span>
+        </div>
+
+        <!-- Close Button -->
+        <button class="close-btn" onclick="goBack()">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <!-- Question Content -->
+        <div class="question-content" id="questionContent">
+          <h1 class="question-title" id="questionTitle">
+            Listen to the scenario and then answer questions
+          </h1>
+
+          <!-- Audio Status -->
+          <div
+            class="audio-status"
+            id="audioStatus"
+            style="display: none"
+          ></div>
+
+          <!-- Audio Player -->
+          <div class="audio-player">
+            <div class="audio-container">
+              <button class="play-button" id="playButton" onclick="playAudio()">
+                <svg
+                  class="speaker-icon"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M8 5v14l11-7z"
+                    style="width: 17px !important; height: 20px !important"
+                  />
+                </svg>
+              </button>
+              <div class="audio-waveform" id="audioWaveform">
+                <!-- Waveform bars will be generated by JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Scenario Text (Hidden by default) -->
+          <div class="scenario-text" id="scenarioText"></div>
+
+          <!-- Questions Section -->
+          <div class="questions-section" id="questionsSection">
+            <!-- Questions will be populated here -->
+          </div>
+
+          <!-- Submit Button -->
+          <button class="submit-btn" id="submitBtn" onclick="submitAnswers()">
+            CONTINUE
+          </button>
+        </div>
+      </div>
+
+      <!-- Feedback Section -->
+      <div class="feedback-section" id="feedbackSection">
+        <div class="feedback-header">
+          <svg
+            class="feedback-icon"
+            id="feedbackIcon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <line x1="15" y1="9" x2="9" y2="15" />
+            <line x1="9" y1="9" x2="15" y2="15" />
+          </svg>
+          <div class="feedback-title" id="feedbackTitle">Incorrect</div>
+        </div>
+        <div class="feedback-details" id="feedbackDetails">
+          <!-- Feedback details will be populated here -->
+        </div>
+        <button class="next-btn" onclick="nextQuestion()">GOT IT</button>
+      </div>
+
+      <!-- Results Screen -->
+      <div class="results-screen" id="resultsScreen">
+        <div class="results-icons">
+          <div class="result-icon check-result-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <polyline points="20,6 9,17 4,12" />
+            </svg>
+          </div>
+          <div class="result-icon x-result-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </div>
+        </div>
+        <div class="results-title">Practice complete! You</div>
+        <div class="results-subtitle">improved your listening skills.</div>
+        <button class="done-btn" onclick="goToPractice()">DONE</button>
+      </div>
+    </div>
+
+    <!-- Hidden Audio Element -->
+    <audio id="audioElement" preload="auto"></audio>
+
+    <script>
+      // Quiz Data (will be loaded from JSON)
+      let allQuizData = [];
+      let quizData = [];
+      let quizConfig = {};
+
+      // Quiz State
+      let currentQuestion = 0;
+      let score = 0;
+      let answers = [];
+      let questionStartTime = 0;
+      let timerInterval;
+      let dataLoaded = false;
+      let timeoutInterval;
+      let speechSynthesis = window.speechSynthesis;
+      let currentQuestionData = null;
+
+      // Configuration
+      const QUESTIONS_PER_QUIZ = 8;
+      const USED_QUESTIONS_KEY = "interactive_listening_used_questions";
+      const QUESTION_TIMEOUT = 120000; // 2 minutes in milliseconds
+
+      // Load Quiz Data from JSON
+      async function loadQuizData() {
+        try {
+          showLoadingScreen();
+
+          const response = await fetch("interactive listening data.json");
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+
+          // Validate data structure
+          if (
+            !data.questions ||
+            !Array.isArray(data.questions) ||
+            data.questions.length === 0
+          ) {
+            throw new Error(
+              "Invalid data format: questions array is missing or empty"
+            );
+          }
+
+          allQuizData = data.questions;
+          quizConfig = data.config || {};
+
+          // Select random questions avoiding previously used ones
+          quizData = selectRandomQuestions(allQuizData, QUESTIONS_PER_QUIZ);
+
+          if (quizData.length === 0) {
+            throw new Error(
+              "No new questions available. All questions have been used."
+            );
+          }
+
+          dataLoaded = true;
+          hideLoadingScreen();
+          initializeQuiz();
+        } catch (error) {
+          console.error("Error loading quiz data:", error);
+          showErrorScreen(error.message);
+        }
+      }
+
+      // Select random questions avoiding previously used ones
+      function selectRandomQuestions(allQuestions, count) {
+        const usedQuestions = getUsedQuestions();
+        const availableQuestions = allQuestions.filter(
+          (question) => !usedQuestions.includes(question.id.toString())
+        );
+
+        if (availableQuestions.length === 0) {
+          console.log("All questions have been used. Resetting question pool.");
+          clearUsedQuestions();
+          return selectRandomQuestions(allQuestions, count);
+        }
+
+        if (availableQuestions.length <= count) {
+          console.log(
+            `Only ${availableQuestions.length} questions available. Using all.`
+          );
+          saveUsedQuestions(availableQuestions.map((q) => q.id.toString()));
+          return [...availableQuestions];
+        }
+
+        // Randomly select questions
+        const shuffled = [...availableQuestions];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+
+        const selectedQuestions = shuffled.slice(0, count);
+        const selectedIds = selectedQuestions.map((q) => q.id.toString());
+        saveUsedQuestions([...usedQuestions, ...selectedIds]);
+
+        return selectedQuestions;
+      }
+
+      // LocalStorage functions
+      function getUsedQuestions() {
+        try {
+          const stored = localStorage.getItem(USED_QUESTIONS_KEY);
+          return stored ? JSON.parse(stored) : [];
+        } catch (error) {
+          console.error("Error reading used questions:", error);
+          return [];
+        }
+      }
+
+      function saveUsedQuestions(questions) {
+        try {
+          localStorage.setItem(USED_QUESTIONS_KEY, JSON.stringify(questions));
+        } catch (error) {
+          console.error("Error saving used questions:", error);
+        }
+      }
+
+      function clearUsedQuestions() {
+        try {
+          localStorage.removeItem(USED_QUESTIONS_KEY);
+        } catch (error) {
+          console.error("Error clearing used questions:", error);
+        }
+      }
+
+      // Show/Hide Loading Screen
+      function showLoadingScreen() {
+        document.getElementById("loadingScreen").style.display = "flex";
+        document.getElementById("errorScreen").style.display = "none";
+        document.getElementById("quizContainer").style.display = "none";
+      }
+
+      function hideLoadingScreen() {
+        document.getElementById("loadingScreen").style.display = "none";
+        document.getElementById("quizContainer").style.display = "flex";
+      }
+
+      function showErrorScreen(errorMessage) {
+        document.getElementById("loadingScreen").style.display = "none";
+        document.getElementById("quizContainer").style.display = "none";
+        document.getElementById("errorScreen").style.display = "block";
+        document.getElementById("errorMessage").textContent = errorMessage;
+      }
+
+      // Initialize Quiz
+      function initializeQuiz() {
+        if (!dataLoaded || quizData.length === 0) {
+          showErrorScreen("No quiz data available");
+          return;
+        }
+
+        currentQuestion = 0;
+        score = 0;
+        answers = [];
+
+        // Initialize waveform
+        generateWaveform();
+
+        console.log(`Starting quiz with ${quizData.length} questions`);
+        showQuestion();
+      }
+
+      // Generate waveform bars
+      function generateWaveform() {
+        const waveform = document.getElementById("audioWaveform");
+        waveform.innerHTML = "";
+
+        // Create approximately 40-50 bars for the waveform
+        for (let i = 0; i < 45; i++) {
+          const bar = document.createElement("div");
+          bar.className = "waveform-bar";
+          waveform.appendChild(bar);
+        }
+      }
+
+      // Show Current Question
+      function showQuestion() {
+        if (currentQuestion >= quizData.length) {
+          showResults();
+          return;
+        }
+
+        currentQuestionData = quizData[currentQuestion];
+
+        // Reset UI
+        const submitBtn = document.getElementById("submitBtn");
+        const playButton = document.getElementById("playButton");
+        const audioStatus = document.getElementById("audioStatus");
+        const questionsSection = document.getElementById("questionsSection");
+
+        submitBtn.className = "submit-btn";
+        submitBtn.textContent = "CONTINUE";
+        submitBtn.style.display = "block";
+
+        playButton.className = "play-button";
+
+        // Hide audio status
+        audioStatus.style.display = "none";
+
+        // Populate questions
+        populateQuestions(currentQuestionData.questions);
+
+        // Hide feedback
+        document.getElementById("feedbackSection").style.display = "none";
+
+        // Start question timer and timeout
+        startQuestionTimer();
+        startQuestionTimeout();
+      }
+
+      function populateQuestions(questions) {
+        const questionsSection = document.getElementById("questionsSection");
+        questionsSection.innerHTML = "";
+
+        questions.forEach((question, index) => {
+          const questionDiv = document.createElement("div");
+          questionDiv.className = "question-item";
+          questionDiv.innerHTML = `
+            <div class="question-text">${question.text}</div>
+            <input 
+              type="text" 
+              class="question-input" 
+              id="question-${index}"
+              placeholder="${question.template}"
+              data-template="${question.template}"
+            />
+          `;
+          questionsSection.appendChild(questionDiv);
+
+          // Add input listener
+          const input = questionDiv.querySelector(".question-input");
+          input.addEventListener("input", checkAllInputsFilled);
+        });
+      }
+
+      function playAudio() {
+        const playButton = document.getElementById("playButton");
+        const audioStatus = document.getElementById("audioStatus");
+        const waveformBars = document.querySelectorAll(".waveform-bar");
+
+        // Check if speech synthesis is supported
+        if (!speechSynthesis) {
+          showAudioStatus(
+            "Text-to-speech is not supported in your browser",
+            "error"
+          );
+          return;
+        }
+
+        try {
+          // Stop any current speech
+          speechSynthesis.cancel();
+
+          // Use scenario text for speech synthesis
+          const textToSpeak = currentQuestionData.scenario;
+
+          // Create utterance
+          const utterance = new SpeechSynthesisUtterance(textToSpeak);
+
+          // Configure speech
+          utterance.rate = 0.8; // Slower for better comprehension
+          utterance.pitch = 1.0;
+          utterance.volume = 0.8;
+
+          // Try to use an English voice
+          const voices = speechSynthesis.getVoices();
+          const englishVoice =
+            voices.find(
+              (voice) =>
+                voice.lang.startsWith("en") && !voice.name.includes("Google")
+            ) || voices.find((voice) => voice.lang.startsWith("en"));
+
+          if (englishVoice) {
+            utterance.voice = englishVoice;
+          }
+
+          // Event handlers
+          utterance.onstart = function () {
+            playButton.classList.add("playing");
+            // Animate waveform bars
+            waveformBars.forEach((bar, index) => {
+              setTimeout(() => {
+                bar.classList.add("playing-animation");
+              }, index * 50);
+            });
+          };
+
+          utterance.onend = function () {
+            playButton.classList.remove("playing");
+            // Stop waveform animation
+            waveformBars.forEach((bar) => {
+              bar.classList.remove("playing-animation");
+            });
+            hideAudioStatus();
+          };
+
+          utterance.onerror = function (event) {
+            playButton.classList.remove("playing");
+            // Stop waveform animation
+            waveformBars.forEach((bar) => {
+              bar.classList.remove("playing-animation");
+            });
+            showAudioStatus("Error playing audio: " + event.error, "error");
+            console.error("Speech synthesis error:", event);
+          };
+
+          // Speak the text
+          speechSynthesis.speak(utterance);
+        } catch (error) {
+          console.error("Error with text-to-speech:", error);
+          showAudioStatus("Error playing audio", "error");
+          playButton.classList.remove("playing");
+        }
+      }
+
+      function showAudioStatus(message, type) {
+        const audioStatus = document.getElementById("audioStatus");
+        if (type === "error") {
+          audioStatus.textContent = message;
+          audioStatus.className = `audio-status ${type}`;
+          audioStatus.style.display = "block";
+        }
+      }
+
+      function hideAudioStatus() {
+        const audioStatus = document.getElementById("audioStatus");
+        audioStatus.style.display = "none";
+      }
+
+      function checkAllInputsFilled() {
+        const inputs = document.querySelectorAll(".question-input");
+        const submitBtn = document.getElementById("submitBtn");
+
+        let allFilled = true;
+        inputs.forEach((input) => {
+          if (input.value.trim().length === 0) {
+            allFilled = false;
+          }
+        });
+
+        if (allFilled) {
+          submitBtn.className = "submit-btn active";
+        } else {
+          submitBtn.className = "submit-btn";
+        }
+      }
+
+      function startQuestionTimer() {
+        questionStartTime = Date.now();
+        let seconds = 0;
+
+        timerInterval = setInterval(() => {
+          seconds++;
+          const minutes = Math.floor(seconds / 60);
+          const remainingSeconds = seconds % 60;
+
+          const timerElement = document.getElementById("timer");
+          const timerText = document.getElementById("timerText");
+
+          timerText.textContent = `${minutes}:${remainingSeconds
+            .toString()
+            .padStart(2, "0")}`;
+
+          // Warning color after 90 seconds
+          if (seconds >= 90) {
+            timerElement.classList.add("warning");
+          }
+        }, 1000);
+      }
+
+      function startQuestionTimeout() {
+        timeoutInterval = setTimeout(() => {
+          console.log("Question timed out");
+          submitAnswers(true); // true indicates timeout
+        }, QUESTION_TIMEOUT);
+      }
+
+      function stopQuestionTimer() {
+        if (timerInterval) {
+          clearInterval(timerInterval);
+        }
+        if (timeoutInterval) {
+          clearTimeout(timeoutInterval);
+        }
+
+        // Reset timer color
+        document.getElementById("timer").classList.remove("warning");
+      }
+
+      function submitAnswers(isTimeout = false) {
+        const submitBtn = document.getElementById("submitBtn");
+
+        // Don't allow double submission
+        if (submitBtn.classList.contains("submitted")) {
+          return;
+        }
+
+        if (!isTimeout && !submitBtn.classList.contains("active")) {
+          return;
+        }
+
+        stopQuestionTimer();
+
+        const inputs = document.querySelectorAll(".question-input");
+        const userAnswers = [];
+        const questionAnswers = currentQuestionData.questions;
+        let correctCount = 0;
+
+        // Collect answers and check correctness
+        inputs.forEach((input, index) => {
+          const userAnswer = input.value.trim();
+          const correctAnswer = getCorrectAnswer(questionAnswers[index]);
+          const isCorrect =
+            !isTimeout &&
+            checkAnswerCorrectness(userAnswer, questionAnswers[index]);
+
+          userAnswers.push({
+            question: questionAnswers[index].text,
+            userAnswer: userAnswer,
+            correctAnswer: correctAnswer,
+            template: questionAnswers[index].template,
+            isCorrect: isCorrect,
+          });
+
+          if (isCorrect) {
+            correctCount++;
+            input.classList.add("correct");
+          } else {
+            input.classList.add("incorrect");
+          }
+
+          input.classList.add("submitted");
+          input.disabled = true;
+        });
+
+        // Store answer
+        const timeSpent = Date.now() - questionStartTime;
+        const overallCorrect = correctCount === questionAnswers.length;
+
+        // Format question results for analytics
+        const questionResults = userAnswers.map((answer) => ({
+          questionText: answer.question,
+          userAnswer: answer.userAnswer,
+          correctAnswer: answer.correctAnswer,
+          template: answer.template,
+          isCorrect: answer.isCorrect,
+        }));
+
+        answers.push({
+          scenarioId: currentQuestionData.id,
+          scenario: currentQuestionData.scenario,
+          userAnswers: userAnswers,
+          isCorrect: overallCorrect,
+          isTimeout: isTimeout,
+          timeSpent: timeSpent,
+          correctInScenario: correctCount,
+          questionsInScenario: questionAnswers.length,
+          questionResults: questionResults,
+        });
+
+        if (overallCorrect) {
+          score++;
+        }
+
+        // Update UI
+        submitBtn.style.display = "none";
+
+        // Show feedback
+        showFeedback(overallCorrect, userAnswers, isTimeout);
+      }
+
+      function getCorrectAnswer(questionObj) {
+        // Extract the correct answer from the template
+        // This is a simplified approach - you might want to make this more sophisticated
+        const template = questionObj.template;
+        const blanks = template.match(/___+/g);
+        if (blanks) {
+          // For demonstration, we'll provide sample correct answers
+          // In a real application, you'd have these in your data
+          const sampleAnswers = {
+            "I need to choose ___________.": "a destination",
+            "My classmate and I are both ___________.": "good planners",
+            "I am thinking about the use of ___________.": "social media",
+            "I will start working ___________.": "next Monday",
+            "I need to get ready by ___________.":
+              "buying professional clothes",
+            "My ___________ has been giving me guidance.": "mentor",
+            "I am organizing a ___________.": "birthday party",
+            "The party will be ___________.": "this Saturday evening",
+            "This is special because it's a ___________.": "milestone birthday",
+          };
+          return sampleAnswers[template] || "sample answer";
+        }
+        return "sample answer";
+      }
+
+      function checkAnswerCorrectness(userAnswer, questionObj) {
+        // This is a simplified check - in a real application you'd have more sophisticated matching
+        const correctAnswer = getCorrectAnswer(questionObj);
+
+        // Normalize both answers for comparison
+        const normalizeText = (text) => {
+          return text
+            .toLowerCase()
+            .replace(/[.,!?;:"']/g, "")
+            .replace(/\s+/g, " ")
+            .trim();
+        };
+
+        const normalizedUser = normalizeText(userAnswer);
+        const normalizedCorrect = normalizeText(correctAnswer);
+
+        // Check for exact match or partial match
+        return (
+          normalizedUser.includes(normalizedCorrect) ||
+          normalizedCorrect.includes(normalizedUser) ||
+          calculateSimilarity(normalizedUser, normalizedCorrect) >= 0.7
+        );
+      }
+
+      function calculateSimilarity(str1, str2) {
+        const longer = str1.length > str2.length ? str1 : str2;
+        const shorter = str1.length > str2.length ? str2 : str1;
+
+        if (longer.length === 0) {
+          return 1.0;
+        }
+
+        const editDistance = getEditDistance(longer, shorter);
+        return (longer.length - editDistance) / longer.length;
+      }
+
+      function getEditDistance(str1, str2) {
+        const matrix = [];
+
+        for (let i = 0; i <= str2.length; i++) {
+          matrix[i] = [i];
+        }
+
+        for (let j = 0; j <= str1.length; j++) {
+          matrix[0][j] = j;
+        }
+
+        for (let i = 1; i <= str2.length; i++) {
+          for (let j = 1; j <= str1.length; j++) {
+            if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
+              matrix[i][j] = matrix[i - 1][j - 1];
+            } else {
+              matrix[i][j] = Math.min(
+                matrix[i - 1][j - 1] + 1,
+                matrix[i][j - 1] + 1,
+                matrix[i - 1][j] + 1
+              );
+            }
+          }
+        }
+
+        return matrix[str2.length][str1.length];
+      }
+
+      function showFeedback(isCorrect, userAnswers, isTimeout) {
+        const feedbackSection = document.getElementById("feedbackSection");
+        const feedbackTitle = document.getElementById("feedbackTitle");
+        const feedbackIcon = document.getElementById("feedbackIcon");
+        const feedbackDetails = document.getElementById("feedbackDetails");
+        const nextBtn = document.querySelector(".next-btn");
+
+        feedbackSection.style.display = "block";
+
+        if (isCorrect) {
+          playSound("right answer SFX.wav");
+          feedbackSection.className = "feedback-section correct";
+          feedbackTitle.className = "feedback-title correct";
+          feedbackTitle.textContent = "Correct!";
+          nextBtn.className = "next-btn correct";
+          feedbackIcon.innerHTML = `
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="16,8 10,14 8,12"/>
+          `;
+          feedbackDetails.innerHTML =
+            "<p style='color: #2e7d32; font-weight: 600;'>Well done! All your answers were correct.</p>";
+        } else {
+          playSound("wrong answer SFX.wav");
+          feedbackSection.className = "feedback-section incorrect";
+          feedbackTitle.className = "feedback-title incorrect";
+          feedbackTitle.textContent = isTimeout ? "Time's up!" : "Incorrect";
+          nextBtn.className = "next-btn";
+          feedbackIcon.innerHTML = `
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="15" y1="9" x2="9" y2="15"/>
+            <line x1="9" y1="9" x2="15" y2="15"/>
+          `;
+
+          // Show detailed feedback
+          let feedbackHTML = "";
+          userAnswers.forEach((answer, index) => {
+            feedbackHTML += `
+              <div class="feedback-answer">
+                <div class="question-label">${answer.question}</div>
+                <div>Your answer: <span class="user-answer">${
+                  answer.userAnswer || "(no answer)"
+                }</span></div>
+                <div>Correct answer: <span class="correct-answer">${
+                  answer.correctAnswer
+                }</span></div>
+              </div>
+            `;
+          });
+          feedbackDetails.innerHTML = feedbackHTML;
+        }
+      }
+
+      function playSound(filename) {
+        try {
+          const audio = new Audio(filename);
+          audio.volume = 0.5;
+          audio.play().catch((error) => {
+            console.log("Could not play sound:", error);
+          });
+        } catch (error) {
+          console.log("Error creating audio:", error);
+        }
+      }
+
+      function nextQuestion() {
+        currentQuestion++;
+
+        if (currentQuestion < quizData.length) {
+          showQuestion();
+        } else {
+          showResults();
+        }
+      }
+
+      function showResults() {
+        document.getElementById("questionCard").style.display = "none";
+        document.getElementById("feedbackSection").style.display = "none";
+        document.getElementById("resultsScreen").style.display = "block";
+      }
+
+      // Go to Practice Page
+      function goToPractice() {
+        // Calculate and save detailed session result
+        saveDetailedQuizResult("Interactive Listening");
+
+        // Update progress for main page
+        incrementSkillProgress("Interactive Listening");
+
+        // Navigate back to main page
+        window.location.href = "index.html";
+      }
+      // Function to save detailed quiz result
+      function saveDetailedQuizResult(skillName) {
+        const sessionData = calculateSessionMetrics();
+
+        // Create session result object
+        const sessionResult = {
+          skillName: skillName,
+          sessionId: Date.now(),
+          date: new Date().toISOString(),
+
+          // Basic performance data
+          totalQuestions: getTotalQuestions(),
+          correctAnswers: score,
+          accuracy: (score / getTotalQuestions()) * 100,
+
+          // Time analysis
+          totalTimeSpent: sessionData.totalTime,
+          averageTimePerQuestion: sessionData.avgTime,
+
+          // Performance analysis for interactive listening
+          consistency: sessionData.consistency,
+          difficultyHandling: sessionData.difficultyScore,
+          listeningComprehension: sessionData.listeningComprehension,
+          scenarioUnderstanding: sessionData.scenarioUnderstanding,
+          responseAccuracy: sessionData.responseAccuracy,
+
+          // Final session score
+          sessionScore: calculateSessionScore(sessionData),
+
+          // Individual scenario details
+          scenarioDetails: answers.map((answer, index) => ({
+            scenarioId: answer.scenarioId,
+            scenarioType: "interactive_listening",
+            difficulty: determineScenarioDifficulty(quizData[index]),
+            questionsInScenario: answer.questionsInScenario,
+            correctInScenario: answer.correctInScenario,
+            scenarioAccuracy:
+              (answer.correctInScenario / answer.questionsInScenario) * 100,
+            timeSpent: answer.timeSpent,
+            questionResults: answer.questionResults || answer.userAnswers,
+            scenario: answer.scenario,
+            isTimeout: answer.isTimeout || false,
+          })),
+        };
+
+        // Save result to localStorage
+        saveSessionToHistory(skillName, sessionResult);
+        console.log(`Session saved for ${skillName}:`, sessionResult);
+      }
+
+      // Calculate total questions across all scenarios
+      function getTotalQuestions() {
+        return answers.reduce(
+          (total, answer) => total + answer.questionsInScenario,
+          0
+        );
+      }
+
+      // Calculate session metrics specific to Interactive Listening
+      function calculateSessionMetrics() {
+        const totalTime = answers.reduce(
+          (sum, answer) => sum + answer.timeSpent,
+          0
+        );
+        const totalQuestions = getTotalQuestions();
+        const avgTime = totalTime / totalQuestions;
+
+        // Calculate consistency - how stable performance is across scenarios
+        const scenarioAccuracies = answers.map(
+          (answer) =>
+            (answer.correctInScenario / answer.questionsInScenario) * 100
+        );
+        const avgScenarioAccuracy =
+          scenarioAccuracies.reduce((sum, acc) => sum + acc, 0) /
+          scenarioAccuracies.length;
+
+        const accuracyDeviations = scenarioAccuracies.map((acc) =>
+          Math.abs(acc - avgScenarioAccuracy)
+        );
+        const avgDeviation =
+          accuracyDeviations.reduce((sum, dev) => sum + dev, 0) /
+          accuracyDeviations.length;
+        const consistency = Math.max(
+          0,
+          100 - (avgDeviation / avgScenarioAccuracy) * 100
+        );
+
+        // Calculate difficulty handling score
+        const difficultyScore = calculateDifficultyHandling();
+
+        // Calculate listening comprehension score
+        const listeningComprehension = calculateListeningComprehension();
+
+        // Calculate scenario understanding
+        const scenarioUnderstanding = calculateScenarioUnderstanding();
+
+        // Calculate response accuracy (how well answers match context)
+        const responseAccuracy = calculateResponseAccuracy();
+
+        return {
+          totalTime: Math.round(totalTime / 1000), // Convert to seconds
+          avgTime: Math.round(avgTime / 1000), // Convert to seconds
+          consistency: Math.round(consistency),
+          difficultyScore: difficultyScore,
+          listeningComprehension: listeningComprehension,
+          scenarioUnderstanding: scenarioUnderstanding,
+          responseAccuracy: responseAccuracy,
+        };
+      }
+
+      // Determine scenario difficulty based on complexity
+      function determineScenarioDifficulty(scenario) {
+        let difficulty = 1; // Base difficulty (Easy)
+
+        const scenarioText = scenario.scenario.toLowerCase();
+        const words = scenarioText.split(" ");
+        const wordCount = words.length;
+
+        // Length-based difficulty
+        if (wordCount >= 25) {
+          difficulty += 1; // Long scenarios are harder
+        } else if (wordCount >= 15) {
+          difficulty += 0.5; // Medium scenarios
+        }
+
+        // Complexity indicators
+        const hasMultipleCharacters =
+          (scenarioText.match(/\b[A-Z][a-z]+\b/g) || []).length >= 2;
+        if (hasMultipleCharacters) {
+          difficulty += 0.5; // Multiple people make it harder
+        }
+
+        // Complex situations
+        const complexSituations = [
+          "decision",
+          "choose",
+          "problem",
+          "conflict",
+          "plan",
+          "prepare",
+        ];
+        const hasComplexSituation = complexSituations.some((word) =>
+          scenarioText.includes(word)
+        );
+        if (hasComplexSituation) {
+          difficulty += 0.5;
+        }
+
+        // Time references and specific details
+        const hasTimeReferences =
+          /\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday|tomorrow|next|last)\b/i.test(
+            scenarioText
+          );
+        const hasSpecificDetails =
+          /\b(mountains|beach|work|clothes|job)\b/i.test(scenarioText);
+        if (hasTimeReferences || hasSpecificDetails) {
+          difficulty += 0.3;
+        }
+
+        // Number of questions in scenario
+        const questionCount = scenario.questions.length;
+        if (questionCount >= 3) {
+          difficulty += 0.3;
+        }
+
+        // Clamp difficulty between 1-3
+        difficulty = Math.max(1, Math.min(3, difficulty));
+
+        if (difficulty <= 1.5) return "easy";
+        if (difficulty <= 2.5) return "medium";
+        return "hard";
+      }
+
+      // Calculate how well user handles different difficulty levels
+      function calculateDifficultyHandling() {
+        const difficultyStats = {
+          easy: { correct: 0, total: 0, scenarios: 0 },
+          medium: { correct: 0, total: 0, scenarios: 0 },
+          hard: { correct: 0, total: 0, scenarios: 0 },
+        };
+
+        // Analyze performance by difficulty
+        answers.forEach((answer, index) => {
+          const difficulty = determineScenarioDifficulty(quizData[index]);
+          difficultyStats[difficulty].correct += answer.correctInScenario;
+          difficultyStats[difficulty].total += answer.questionsInScenario;
+          difficultyStats[difficulty].scenarios++;
+        });
+
+        // Calculate weighted score based on difficulty handling
+        let weightedScore = 0;
+        let totalWeight = 0;
+
+        Object.entries(difficultyStats).forEach(([difficulty, stats]) => {
+          if (stats.total > 0) {
+            const accuracy = (stats.correct / stats.total) * 100;
+            const weight =
+              difficulty === "easy" ? 1 : difficulty === "medium" ? 1.5 : 2;
+            weightedScore += accuracy * weight;
+            totalWeight += weight;
+          }
+        });
+
+        return totalWeight > 0 ? Math.round(weightedScore / totalWeight) : 0;
+      }
+
+      // Calculate listening comprehension ability
+      function calculateListeningComprehension() {
+        let comprehensionScore = 0;
+        let totalScenarios = 0;
+
+        answers.forEach((answer, index) => {
+          const scenario = quizData[index];
+          const difficulty = determineScenarioDifficulty(scenario);
+
+          // Base score from accuracy
+          let scenarioScore =
+            (answer.correctInScenario / answer.questionsInScenario) * 100;
+
+          // Bonus for difficult scenarios
+          if (difficulty === "hard") {
+            scenarioScore *= 1.15;
+          } else if (difficulty === "medium") {
+            scenarioScore *= 1.05;
+          }
+
+          // Time bonus for efficient processing
+          const timeBonus = calculateProcessingTimeBonus(
+            answer.timeSpent,
+            scenario.scenario.length,
+            answer.questionsInScenario
+          );
+          scenarioScore += timeBonus;
+
+          comprehensionScore += Math.min(scenarioScore, 110); // Cap at 110
+          totalScenarios++;
+        });
+
+        return totalScenarios > 0 ? comprehensionScore / totalScenarios : 0;
+      }
+
+      // Calculate processing time bonus
+      function calculateProcessingTimeBonus(
+        timeSpent,
+        scenarioLength,
+        questionCount
+      ) {
+        const timeInSeconds = timeSpent / 1000;
+        const wordsInScenario = scenarioLength / 5; // Approximate word count
+        const optimalProcessingTime = wordsInScenario * 2 + questionCount * 15; // 2 sec per word + 15 sec per question
+
+        if (timeInSeconds < optimalProcessingTime * 1.3) {
+          // Within 130% of optimal time
+          const efficiency = optimalProcessingTime / timeInSeconds;
+          return Math.min(efficiency * 5, 10); // Max 10 bonus points
+        }
+
+        return 0;
+      }
+
+      // Calculate scenario understanding
+      function calculateScenarioUnderstanding() {
+        let understandingScore = 0;
+        let totalScenarios = 0;
+
+        answers.forEach((answer) => {
+          // Perfect scenario understanding = all questions correct
+          if (answer.correctInScenario === answer.questionsInScenario) {
+            understandingScore += 100;
+          } else {
+            // Partial understanding
+            const partialScore =
+              (answer.correctInScenario / answer.questionsInScenario) * 80;
+            understandingScore += partialScore;
+          }
+          totalScenarios++;
+        });
+
+        return totalScenarios > 0 ? understandingScore / totalScenarios : 0;
+      }
+
+      // Calculate response accuracy (contextual appropriateness)
+      function calculateResponseAccuracy() {
+        let accuracyScore = 0;
+        let totalResponses = 0;
+
+        answers.forEach((answer) => {
+          // Use questionResults if available, otherwise use userAnswers
+          const results = answer.questionResults || answer.userAnswers || [];
+
+          results.forEach((result) => {
+            const userAnswer = result.userAnswer || "";
+            const questionText = result.questionText || result.question || "";
+            const template = result.template || "";
+
+            if (userAnswer && userAnswer.trim().length > 0) {
+              // Check if response is contextually appropriate
+              const contextScore = evaluateContextualAccuracy(
+                userAnswer,
+                questionText,
+                template
+              );
+              accuracyScore += contextScore;
+            }
+            totalResponses++;
+          });
+        });
+
+        return totalResponses > 0 ? accuracyScore / totalResponses : 0;
+      }
+
+      // Evaluate contextual accuracy of response
+      function evaluateContextualAccuracy(userAnswer, questionText, template) {
+        let score = 50; // Base score
+
+        // Length appropriateness (not too short, not too long)
+        const answerLength = userAnswer.trim().length;
+        if (answerLength >= 3 && answerLength <= 20) {
+          score += 20;
+        } else if (answerLength >= 1 && answerLength <= 30) {
+          score += 10;
+        }
+
+        // Contextual relevance (basic keyword matching)
+        const questionLower = questionText.toLowerCase();
+        const answerLower = userAnswer.toLowerCase();
+
+        if (questionLower.includes("when") || questionLower.includes("time")) {
+          if (
+            answerLower.includes("monday") ||
+            answerLower.includes("next") ||
+            answerLower.includes("tomorrow") ||
+            /\d/.test(answerLower)
+          ) {
+            score += 20;
+          }
+        }
+
+        if (questionLower.includes("what") || questionLower.includes("need")) {
+          if (
+            answerLower.includes("clothes") ||
+            answerLower.includes("buy") ||
+            answerLower.includes("prepare") ||
+            answerLower.includes("choose")
+          ) {
+            score += 20;
+          }
+        }
+
+        if (questionLower.includes("who") || questionLower.includes("advice")) {
+          if (
+            answerLower.includes("friend") ||
+            answerLower.includes("family") ||
+            answerLower.includes("people") ||
+            answerLower.includes("boss")
+          ) {
+            score += 20;
+          }
+        }
+
+        // Grammar basic check (has some structure)
+        if (userAnswer.includes(" ")) {
+          score += 10; // Multi-word response
+        }
+
+        return Math.min(score, 100);
+      }
+
+      // Calculate final session score
+      function calculateSessionScore(sessionData) {
+        const accuracy = (score / getTotalQuestions()) * 100;
+
+        // Scoring weights for interactive listening
+        const weights = {
+          accuracy: 0.35, // 35% - Overall correctness
+          listeningComprehension: 0.25, // 25% - Understanding scenarios
+          scenarioUnderstanding: 0.2, // 20% - Grasping full context
+          responseAccuracy: 0.1, // 10% - Contextual appropriateness
+          consistency: 0.05, // 5% - Performance stability
+          difficulty: 0.05, // 5% - Handling complex scenarios
+        };
+
+        // Calculate final weighted score
+        const finalScore =
+          accuracy * weights.accuracy +
+          sessionData.listeningComprehension * weights.listeningComprehension +
+          sessionData.scenarioUnderstanding * weights.scenarioUnderstanding +
+          sessionData.responseAccuracy * weights.responseAccuracy +
+          sessionData.consistency * weights.consistency +
+          sessionData.difficultyScore * weights.difficulty;
+
+        return Math.round(Math.max(0, Math.min(100, finalScore)));
+      }
+
+      // Save session to localStorage history
+      function saveSessionToHistory(skillName, sessionResult) {
+        const historyKey = `${skillName
+          .replace(/\s+/g, "_")
+          .toLowerCase()}_sessions`;
+
+        try {
+          // Get existing sessions
+          const existingSessions = localStorage.getItem(historyKey);
+          const sessions = existingSessions ? JSON.parse(existingSessions) : [];
+
+          // Add new session
+          sessions.push(sessionResult);
+
+          // Keep only last 20 sessions to prevent storage overflow
+          if (sessions.length > 20) {
+            sessions.splice(0, sessions.length - 20);
+          }
+
+          // Save back to localStorage
+          localStorage.setItem(historyKey, JSON.stringify(sessions));
+
+          console.log(
+            `Saved session to ${historyKey}. Total sessions: ${sessions.length}`
+          );
+
+          // Update overall skill assessment
+          updateSkillOverallAssessment(skillName, sessions);
+        } catch (error) {
+          console.error("Error saving session to history:", error);
+        }
+      }
+
+      // Update overall skill assessment based on all sessions
+      function updateSkillOverallAssessment(skillName, allSessions) {
+        if (!allSessions || allSessions.length === 0) return;
+
+        // Calculate overall metrics
+        const totalQuestions = allSessions.reduce(
+          (sum, session) => sum + session.totalQuestions,
+          0
+        );
+        const totalCorrect = allSessions.reduce(
+          (sum, session) => sum + session.correctAnswers,
+          0
+        );
+        const overallAccuracy = (totalCorrect / totalQuestions) * 100;
+
+        // Calculate listening-specific metrics
+        const avgListeningComprehension =
+          allSessions.reduce(
+            (sum, session) => sum + session.listeningComprehension,
+            0
+          ) / allSessions.length;
+
+        const avgScenarioUnderstanding =
+          allSessions.reduce(
+            (sum, session) => sum + session.scenarioUnderstanding,
+            0
+          ) / allSessions.length;
+
+        // Calculate improvement (compare first vs last session)
+        const firstSession = allSessions[0];
+        const lastSession = allSessions[allSessions.length - 1];
+        const improvement = lastSession.accuracy - firstSession.accuracy;
+
+        // Calculate average session score
+        const avgSessionScore =
+          allSessions.reduce((sum, session) => sum + session.sessionScore, 0) /
+          allSessions.length;
+
+        // Calculate consistency across sessions
+        const sessionScores = allSessions.map((s) => s.sessionScore);
+        const scoreStdDev = calculateStandardDeviation(sessionScores);
+        const crossSessionConsistency = Math.max(0, 100 - scoreStdDev);
+
+        // Final skill score calculation
+        const skillWeights = {
+          overallAccuracy: 0.3,
+          listeningComprehension: 0.25,
+          scenarioUnderstanding: 0.2,
+          avgScore: 0.15,
+          improvement: 0.1,
+        };
+
+        const normalizedImprovement = Math.max(
+          0,
+          Math.min(100, improvement + 50)
+        ); // Normalize to 0-100
+
+        const finalSkillScore =
+          overallAccuracy * skillWeights.overallAccuracy +
+          avgListeningComprehension * skillWeights.listeningComprehension +
+          avgScenarioUnderstanding * skillWeights.scenarioUnderstanding +
+          avgSessionScore * skillWeights.avgScore +
+          normalizedImprovement * skillWeights.improvement;
+
+        // Create overall assessment
+        const skillAssessment = {
+          skillName: skillName,
+          lastUpdated: new Date().toISOString(),
+          sessionsCompleted: allSessions.length,
+
+          // Performance metrics
+          overallAccuracy: Math.round(overallAccuracy),
+          averageListeningComprehension: Math.round(avgListeningComprehension),
+          averageScenarioUnderstanding: Math.round(avgScenarioUnderstanding),
+          averageSessionScore: Math.round(avgSessionScore),
+          improvement: Math.round(improvement),
+          consistency: Math.round(crossSessionConsistency),
+
+          // Interactive listening specific metrics
+          averageTimePerQuestion: Math.round(
+            allSessions.reduce((sum, s) => sum + s.averageTimePerQuestion, 0) /
+              allSessions.length
+          ),
+          averageResponseAccuracy: Math.round(
+            allSessions.reduce((sum, s) => sum + s.responseAccuracy, 0) /
+              allSessions.length
+          ),
+
+          // Final score
+          finalScore: Math.round(finalSkillScore),
+          level: determineSkillLevel(finalSkillScore),
+
+          // Additional insights
+          strongPoints: identifyStrongPoints(allSessions),
+          weakPoints: identifyWeakPoints(allSessions),
+          recommendations: generateRecommendations(
+            allSessions,
+            finalSkillScore
+          ),
+        };
+
+        // Save overall assessment
+        const assessmentKey = `${skillName
+          .replace(/\s+/g, "_")
+          .toLowerCase()}_assessment`;
+        localStorage.setItem(assessmentKey, JSON.stringify(skillAssessment));
+
+        console.log(
+          `Updated overall assessment for ${skillName}:`,
+          skillAssessment
+        );
+      }
+
+      // Helper function to calculate standard deviation
+      function calculateStandardDeviation(values) {
+        const mean = values.reduce((sum, val) => sum + val, 0) / values.length;
+        const squaredDiffs = values.map((val) => Math.pow(val - mean, 2));
+        const avgSquaredDiff =
+          squaredDiffs.reduce((sum, val) => sum + val, 0) / values.length;
+        return Math.sqrt(avgSquaredDiff);
+      }
+
+      // Determine skill level based on final score
+      function determineSkillLevel(score) {
+        if (score >= 90) return "Advanced";
+        if (score >= 75) return "Upper-Intermediate";
+        if (score >= 60) return "Intermediate";
+        if (score >= 45) return "Lower-Intermediate";
+        if (score >= 30) return "Elementary";
+        return "Beginner";
+      }
+
+      // Identify strong points from session data
+      function identifyStrongPoints(sessions) {
+        const strongPoints = [];
+
+        // Check accuracy trend
+        const recentSessions = sessions.slice(-3);
+        const avgRecentAccuracy =
+          recentSessions.reduce((sum, s) => sum + s.accuracy, 0) /
+          recentSessions.length;
+        if (avgRecentAccuracy >= 80) {
+          strongPoints.push("High accuracy in recent sessions");
+        }
+
+        // Check listening comprehension
+        const avgListeningComprehension =
+          sessions.reduce((sum, s) => sum + s.listeningComprehension, 0) /
+          sessions.length;
+        if (avgListeningComprehension >= 85) {
+          strongPoints.push("Excellent listening comprehension");
+        }
+
+        // Check scenario understanding
+        const avgScenarioUnderstanding =
+          sessions.reduce((sum, s) => sum + s.scenarioUnderstanding, 0) /
+          sessions.length;
+        if (avgScenarioUnderstanding >= 80) {
+          strongPoints.push("Strong scenario understanding");
+        }
+
+        // Check response accuracy
+        const avgResponseAccuracy =
+          sessions.reduce((sum, s) => sum + s.responseAccuracy, 0) /
+          sessions.length;
+        if (avgResponseAccuracy >= 75) {
+          strongPoints.push("Contextually appropriate responses");
+        }
+
+        return strongPoints.length > 0
+          ? strongPoints
+          : ["Shows improvement potential"];
+      }
+
+      // Identify weak points from session data
+      function identifyWeakPoints(sessions) {
+        const weakPoints = [];
+
+        // Check accuracy
+        const recentSessions = sessions.slice(-3);
+        const avgRecentAccuracy =
+          recentSessions.reduce((sum, s) => sum + s.accuracy, 0) /
+          recentSessions.length;
+        if (avgRecentAccuracy < 60) {
+          weakPoints.push("Overall accuracy needs improvement");
+        }
+
+        // Check listening comprehension
+        const avgListeningComprehension =
+          sessions.reduce((sum, s) => sum + s.listeningComprehension, 0) /
+          sessions.length;
+        if (avgListeningComprehension < 65) {
+          weakPoints.push("Focus on listening comprehension skills");
+        }
+
+        // Check scenario understanding
+        const avgScenarioUnderstanding =
+          sessions.reduce((sum, s) => sum + s.scenarioUnderstanding, 0) /
+          sessions.length;
+        if (avgScenarioUnderstanding < 60) {
+          weakPoints.push("Work on understanding complete scenarios");
+        }
+
+        // Check response accuracy
+        const avgResponseAccuracy =
+          sessions.reduce((sum, s) => sum + s.responseAccuracy, 0) /
+          sessions.length;
+        if (avgResponseAccuracy < 65) {
+          weakPoints.push(
+            "Focus on providing contextually appropriate answers"
+          );
+        }
+
+        return weakPoints.length > 0
+          ? weakPoints
+          : ["Keep practicing to maintain progress"];
+      }
+
+      // Generate personalized recommendations
+      function generateRecommendations(sessions, finalScore) {
+        const recommendations = [];
+
+        if (finalScore < 50) {
+          recommendations.push("Focus on basic listening comprehension");
+          recommendations.push("Practice with simple scenarios first");
+          recommendations.push("Take time to understand the full context");
+        } else if (finalScore < 70) {
+          recommendations.push("Work on understanding complex scenarios");
+          recommendations.push("Practice identifying key information");
+          recommendations.push("Focus on providing relevant answers");
+        } else if (finalScore < 85) {
+          recommendations.push("Challenge yourself with longer scenarios");
+          recommendations.push("Work on processing information quickly");
+          recommendations.push(
+            "Practice with scenarios involving multiple people"
+          );
+        } else {
+          recommendations.push(
+            "Excellent work! Try advanced listening materials"
+          );
+          recommendations.push("Practice with real-world scenarios");
+          recommendations.push("Help others improve their listening skills");
+        }
+
+        // Specific recommendations based on weak areas
+        const avgResponseAccuracy =
+          sessions.reduce((sum, s) => sum + s.responseAccuracy, 0) /
+          sessions.length;
+        if (avgResponseAccuracy < 70) {
+          recommendations.push(
+            "Focus on giving answers that match the question context"
+          );
+        }
+
+        const avgTime =
+          sessions.reduce((sum, s) => sum + s.averageTimePerQuestion, 0) /
+          sessions.length;
+        if (avgTime > 30) {
+          recommendations.push(
+            "Practice processing scenarios more efficiently"
+          );
+        }
+
+        return recommendations;
+      }
+
+      // Function to increment progress by 1
+      function incrementSkillProgress(skillName) {
+        const currentProgress = getCurrentSkillProgress(skillName);
+        const newCompleted = Math.min(currentProgress + 1, 6);
+
+        const progressData = {
+          skill: skillName,
+          completed: newCompleted,
+          total: 6,
+          timestamp: new Date().toISOString(),
+        };
+
+        localStorage.setItem(
+          "interactiveListeningProgress",
+          JSON.stringify(progressData)
+        );
+        console.log(`Progress updated: ${skillName} - ${newCompleted}/6`);
+      }
+
+      function getCurrentSkillProgress(skillName) {
+        try {
+          const mainProgressData = localStorage.getItem("skillProgress");
+          if (mainProgressData) {
+            const allProgress = JSON.parse(mainProgressData);
+            if (allProgress[skillName]) {
+              return allProgress[skillName].completed || 0;
+            }
+          }
+          return 0;
+        } catch (error) {
+          console.error("Error reading current progress:", error);
+          return 0;
+        }
+      }
+
+      function goBack() {
+        if (confirm("Are you sure you want to exit the quiz?")) {
+          window.history.back();
+        }
+      }
+
+      // Keyboard Support
+      document.addEventListener("keydown", function (event) {
+        if (
+          !dataLoaded ||
+          document.getElementById("quizContainer").style.display === "none"
+        ) {
+          return;
+        }
+
+        if (event.key === "Escape") {
+          goBack();
+        } else if (event.key === "Enter" && event.ctrlKey) {
+          const submitBtn = document.getElementById("submitBtn");
+          if (submitBtn.classList.contains("active")) {
+            submitAnswers();
+          }
+        } else if (event.key === " " && event.ctrlKey) {
+          event.preventDefault();
+          playAudio();
+        }
+      });
+
+      // Initialize App on Load
+      window.addEventListener("load", function () {
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+          speechSynthesis.onvoiceschanged = function () {
+            console.log("Voices loaded:", speechSynthesis.getVoices().length);
+          };
+        }
+
+        loadQuizData();
+      });
+    </script>
+  </body>
+</html>

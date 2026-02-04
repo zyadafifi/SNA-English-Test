@@ -1,0 +1,85 @@
+{
+  "config": {
+    "title": "Speak About the Photo",
+    "shuffleQuestions": true,
+    "prepareTime": 15,
+    "speakingTime": 90
+  },
+  "questions": [
+    {
+      "id": 1,
+      "imageUrl": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1000&q=80",
+      "sampleAnswer": "In this photo, I can see beautiful mountains with snow on the peaks. The sky is clear and blue, which suggests good weather. In the foreground, there appears to be a valley or meadow area. The landscape looks peaceful and natural. This type of scenery would be perfect for hiking or photography. The mountains look very tall and impressive. The image shows the natural beauty of mountainous regions. It makes me want to visit such a place to enjoy the fresh air and stunning views."
+    },
+    {
+      "id": 2,
+      "imageUrl": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1000&q=80",
+      "sampleAnswer": "This picture shows a beautiful forest with tall trees. The trees look healthy and green, creating a natural environment. There is sunlight coming through the leaves, which creates a warm and peaceful atmosphere. The forest appears dense with lots of vegetation. This would be a great place for walking or enjoying nature. The image represents the importance of protecting forests and natural habitats. Being in a place like this would be very relaxing and good for mental health. The natural colors are very soothing to look at."
+    },
+    {
+      "id": 3,
+      "imageUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1000&q=80",
+      "sampleAnswer": "In this image, I see a tropical beach with clear blue water and white sand. The water looks very clean and inviting for swimming. The sky is mostly blue with some white clouds. This is the kind of beach that people dream about for vacations. The scene is very peaceful and relaxing. The colors are bright and beautiful. This type of location would be perfect for swimming, sunbathing, or just walking along the shore. The beach represents a perfect escape from busy city life."
+    },
+    {
+      "id": 4,
+      "imageUrl": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1000&q=80",
+      "sampleAnswer": "This photo shows a modern city skyline with many tall buildings. The buildings look new and well-designed, showing urban development. From this angle, I can see how densely populated the city is. This type of cityscape is common in major metropolitan areas. The architecture demonstrates how cities grow upward to accommodate more people. Living in such a city would offer many opportunities for work and entertainment. However, it might also be crowded and noisy. The image shows both the excitement and challenges of modern city life."
+    },
+    {
+      "id": 5,
+      "imageUrl": "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=1000&q=80",
+      "sampleAnswer": "In this picture, I see a beautiful lake with crystal clear water. There's a wooden dock extending into the water, which looks perfect for sitting or fishing. The water is so clear that you can see through it to the bottom. The surrounding area looks natural and peaceful. This would be an ideal place for relaxation and outdoor activities. The calm water creates a mirror-like reflection. Being near such a clean lake would be very refreshing. This type of environment is important for both recreation and wildlife."
+    },
+    {
+      "id": 6,
+      "imageUrl": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1000&q=80",
+      "sampleAnswer": "This image shows a modern workspace with a laptop on a clean desk. There are some office supplies and what appears to be a small plant for decoration. The workspace looks organized and minimal with good lighting. This setup is typical of modern office work or working from home. The clean environment would help with concentration and productivity. Having plants in the workspace can improve air quality and mood. This type of organized workspace is important for being efficient at work. Many people now work in similar setups, especially with remote work becoming more common."
+    },
+    {
+      "id": 7,
+      "imageUrl": "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=1000&q=80",
+      "sampleAnswer": "In this photo, I can see the interior of a cozy café or coffee shop. There are wooden tables and chairs that create a warm atmosphere. The lighting appears comfortable and inviting. This is the type of place where people meet friends or work on their laptops. Coffee shops like this are popular for their relaxing environment. You can have conversations, read a book, or just enjoy a good cup of coffee. The warm wooden furniture makes the space feel friendly and welcoming. Such places play an important social role in communities."
+    },
+    {
+      "id": 8,
+      "imageUrl": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1000&q=80",
+      "sampleAnswer": "This picture shows people working together in what looks like an office or meeting room. The individuals seem to be collaborating on a project or discussing ideas. Teamwork is very important in modern workplaces. Working together allows people to share different perspectives and solve problems more effectively. The atmosphere looks professional but friendly. This type of collaboration helps companies be more successful. Good communication among team members is essential. The image represents the importance of cooperation in achieving common goals."
+    },
+    {
+      "id": 9,
+      "imageUrl": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=1000&q=80",
+      "sampleAnswer": "In this image, I see various fresh and healthy foods arranged nicely. There are colorful vegetables and fruits that look very fresh. The presentation emphasizes the importance of eating nutritious food. Fresh produce provides essential vitamins and minerals that our bodies need. Eating a variety of colorful foods is part of a healthy diet. The wooden surface gives the image a natural, organic feel. This type of food is much better than processed items. Choosing fresh ingredients is an important part of maintaining good health."
+    },
+    {
+      "id": 10,
+      "imageUrl": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1000&q=80",
+      "sampleAnswer": "This photo captures a stunning mountain landscape during what appears to be golden hour. The lighting creates beautiful warm colors across the scene. Multiple mountain ranges are visible in the distance, creating layers of depth. The natural beauty on display is breathtaking. This type of scenery attracts tourists and nature lovers from around the world. Mountains like these offer opportunities for hiking, camping, and outdoor adventures. The image reminds us of the importance of preserving natural environments. Such landscapes provide a sense of peace and perspective on life."
+    },
+    {
+      "id": 11,
+      "imageUrl": "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1000&q=80",
+      "sampleAnswer": "In this picture, I can see a beautiful garden with colorful flowers and green plants. The garden appears well-maintained with various types of flowers blooming. Gardens like this bring beauty and life to any space. They provide a peaceful environment for relaxation and contemplation. Taking care of a garden requires time and effort but is very rewarding. Gardens also support local wildlife like butterflies and bees. The vibrant colors create a cheerful atmosphere. Having access to green spaces like this improves quality of life in communities."
+    },
+    {
+      "id": 12,
+      "imageUrl": "https://images.unsplash.com/photo-1532453288672-3a27e9be9ce9?w=1000&q=80",
+      "sampleAnswer": "This image shows what appears to be a farmers market or outdoor market scene. There are fresh products displayed for sale. Markets like this are important because they support local farmers and provide fresh food to the community. Shopping at farmers markets helps the local economy. The atmosphere at such markets is usually friendly and social. People can meet their neighbors and learn where their food comes from. Fresh produce from local farms is often healthier and tastes better. These markets create a sense of community connection."
+    },
+    {
+      "id": 13,
+      "imageUrl": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1000&q=80",
+      "sampleAnswer": "In this photo, I see a modern gym or fitness center with exercise equipment. The facility looks clean and well-equipped for various types of workouts. Gyms provide people with the tools they need to stay healthy and fit. Regular exercise is essential for physical and mental health. Having access to proper equipment makes working out more effective. Many people use gyms to achieve their fitness goals. The clean environment encourages people to maintain their health routines. Fitness centers play an important role in promoting healthy lifestyles in communities."
+    },
+    {
+      "id": 14,
+      "imageUrl": "https://images.unsplash.com/photo-1551632811-561732d1e306?w=1000&q=80",
+      "sampleAnswer": "This picture shows a library with bookshelves and study areas. I can see many books organized on shelves. Libraries are important community resources that provide free access to information and knowledge. They offer quiet spaces for reading and studying. Libraries serve people of all ages and backgrounds. They also provide computers and internet access for those who need it. The peaceful atmosphere makes libraries ideal for concentration and learning. Modern libraries continue to be relevant by adapting to new technologies while preserving their traditional role."
+    },
+    {
+      "id": 15,
+      "imageUrl": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1000&q=80",
+      "sampleAnswer": "In this image, I can see people engaged in what appears to be a work meeting or discussion. The participants look focused and professional. Meetings like this are common in business environments where teams need to coordinate and make decisions. Good communication in meetings helps organizations run smoothly. Everyone appears to be paying attention and contributing to the conversation. This type of collaboration is essential for solving complex problems. The professional atmosphere shows the importance of teamwork in modern workplaces. Effective meetings can lead to better outcomes for companies and their employees."
+    }
+  ]
+}

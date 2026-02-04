@@ -1,0 +1,160 @@
+{
+  "config": {
+    "title": "Read Then Speak",
+    "shuffleQuestions": true,
+    "prepareTime": 15,
+    "speakingTime": 90
+  },
+  "questions": [
+    {
+      "id": 1,
+      "topicText": "Describe a typical day in your life.",
+      "topicQuestions": [
+        "What time do you wake up?",
+        "What do you do during the day?",
+        "What do you do in the evening?"
+      ],
+      "sampleAnswer": "I usually wake up at seven in the morning. First, I have breakfast and get ready for work. During the day, I work in an office from nine to five. I have lunch at noon with my coworkers. In the evening, I come home and cook dinner. After dinner, I watch TV or read a book. I go to bed around eleven o'clock. On weekends, my routine is different because I can relax and spend time with friends and family."
+    },
+    {
+      "id": 2,
+      "topicText": "Talk about your favorite food.",
+      "topicQuestions": [
+        "What is your favorite food?",
+        "Why do you like it?",
+        "When do you usually eat it?"
+      ],
+      "sampleAnswer": "My favorite food is pasta with tomato sauce. I like it because it tastes delicious and is easy to make. The tomatoes give it a fresh flavor, and I can add vegetables or cheese to make it healthier. I usually eat pasta once or twice a week for dinner. Sometimes I eat it at Italian restaurants, but I also cook it at home. My family enjoys pasta too, so it's a meal we can all share together."
+    },
+    {
+      "id": 3,
+      "topicText": "Describe your home.",
+      "topicQuestions": [
+        "Where do you live?",
+        "What does your home look like?",
+        "What is your favorite room?"
+      ],
+      "sampleAnswer": "I live in a small apartment in the city. It has two bedrooms, a living room, a kitchen, and a bathroom. The living room has a comfortable sofa and a big window with lots of light. My favorite room is the kitchen because I love cooking. It has modern appliances and enough space to prepare meals. The apartment is not very big, but it's perfect for me. I like living in the city because everything is close by."
+    },
+    {
+      "id": 4,
+      "topicText": "Talk about a hobby you enjoy.",
+      "topicQuestions": [
+        "What hobby do you have?",
+        "How often do you do it?",
+        "Why do you enjoy it?"
+      ],
+      "sampleAnswer": "I enjoy playing basketball as a hobby. I play two or three times a week with friends at a local park. I like basketball because it's good exercise and very fun. It helps me stay healthy and active. Playing with friends also gives us time to talk and enjoy each other's company. Basketball teaches me teamwork and helps me make new friends. When I play, I forget about my problems and just focus on the game."
+    },
+    {
+      "id": 5,
+      "topicText": "Describe a place you like to visit.",
+      "topicQuestions": [
+        "Where is this place?",
+        "What can you do there?",
+        "Why do you like it?"
+      ],
+      "sampleAnswer": "I like to visit the park near my house. It's a beautiful place with lots of trees, flowers, and walking paths. I can walk, jog, or just sit on a bench and relax. There's also a small lake where ducks swim. I like this park because it's peaceful and quiet. When I feel stressed, I go there to clear my mind. The fresh air and natural surroundings help me feel calm and happy. Many families bring their children to play there on weekends."
+    },
+    {
+      "id": 6,
+      "topicText": "Talk about learning a new skill.",
+      "topicQuestions": [
+        "What skill would you like to learn?",
+        "Why is it interesting to you?",
+        "How would you learn it?"
+      ],
+      "sampleAnswer": "I would like to learn how to speak French. It's interesting to me because French is a beautiful language spoken in many countries. I think learning French would help me when I travel to France or other French-speaking places. I would learn it by taking classes at a language school or using online apps. I would also try to practice speaking with native speakers. Learning a new language takes time, but I believe it would be very rewarding and useful in my future."
+    },
+    {
+      "id": 7,
+      "topicText": "Describe your favorite season.",
+      "topicQuestions": [
+        "Which season do you like best?",
+        "What is the weather like?",
+        "What activities do you do?"
+      ],
+      "sampleAnswer": "My favorite season is spring. The weather is warm but not too hot, and everything starts to grow again. Trees get new leaves and flowers bloom everywhere. I like spring because the days are longer and I can spend more time outside. I enjoy going for walks in the park and having picnics. Spring is also a good time for planting a garden. The fresh air and sunshine make me feel energetic and happy after the cold winter months."
+    },
+    {
+      "id": 8,
+      "topicText": "Talk about transportation.",
+      "topicQuestions": [
+        "How do you usually travel?",
+        "What are the advantages?",
+        "Are there any problems?"
+      ],
+      "sampleAnswer": "I usually travel by bus to work every day. The bus is convenient because it stops near my home and my office. The advantages are that I don't need to drive or find parking, and it's cheaper than using a car. I can also read or use my phone during the trip. However, sometimes the bus is late or very crowded. During rush hour, there are too many people and not enough seats. Despite these problems, I prefer taking the bus because it's better for the environment."
+    },
+    {
+      "id": 9,
+      "topicText": "Describe your family.",
+      "topicQuestions": [
+        "Who is in your family?",
+        "What do they do?",
+        "How often do you see them?"
+      ],
+      "sampleAnswer": "My family consists of my parents, my younger sister, and me. My father works as an engineer and my mother is a nurse at a hospital. My sister is still in high school and studies very hard. I see my family almost every day because we live together. On weekends, we have dinner together and talk about our week. My family is very important to me. They support me and help me when I have problems. We also enjoy spending time together during holidays and special occasions."
+    },
+    {
+      "id": 10,
+      "topicText": "Talk about a recent experience.",
+      "topicQuestions": [
+        "What did you do recently?",
+        "Who were you with?",
+        "How did you feel about it?"
+      ],
+      "sampleAnswer": "Last weekend, I went to a concert with my friends. We saw a famous band that we all like. The concert was in a big stadium with thousands of people. The music was loud and everyone was singing and dancing. I felt very happy and excited to see the band perform live. The atmosphere was amazing with lights and special effects. After the concert, we went to a restaurant and talked about our favorite songs. It was a memorable experience that I will remember for a long time."
+    },
+    {
+      "id": 11,
+      "topicText": "Describe your daily commute.",
+      "topicQuestions": [
+        "How do you get to work or school?",
+        "How long does it take?",
+        "What do you do during the journey?"
+      ],
+      "sampleAnswer": "I get to work by taking the subway. The journey takes about thirty minutes from my home to my office. During the trip, I usually listen to music or read the news on my phone. Sometimes I read a book if I have a seat. The subway is usually crowded in the morning, but it's the fastest way to travel in the city. I like this time because I can relax before starting my workday. When I arrive at my stop, I walk five minutes to reach my office building."
+    },
+    {
+      "id": 12,
+      "topicText": "Talk about staying healthy.",
+      "topicQuestions": [
+        "What do you do to stay healthy?",
+        "Why is health important?",
+        "What could you improve?"
+      ],
+      "sampleAnswer": "To stay healthy, I try to exercise regularly and eat nutritious food. I go to the gym three times a week and do cardio and weight training. I also eat lots of fruits and vegetables and try to avoid junk food. Health is important because it affects everything in life, including work and happiness. When I'm healthy, I have more energy and feel better. However, I could improve by sleeping more. Sometimes I stay up too late and don't get enough rest. I'm trying to develop better sleep habits."
+    },
+    {
+      "id": 13,
+      "topicText": "Describe a book or movie you enjoyed.",
+      "topicQuestions": [
+        "What was it about?",
+        "Why did you like it?",
+        "Would you recommend it?"
+      ],
+      "sampleAnswer": "I recently watched a movie called 'The Journey' about a young woman traveling alone around the world. She visits different countries and meets interesting people who teach her life lessons. I liked the movie because it had beautiful scenery and an inspiring message about following your dreams. The main character learns to be independent and confident. I would definitely recommend this movie to others, especially people who love adventure and travel. It made me want to explore new places and step out of my comfort zone."
+    },
+    {
+      "id": 14,
+      "topicText": "Talk about using technology.",
+      "topicQuestions": [
+        "What technology do you use daily?",
+        "How does it help you?",
+        "Are there any disadvantages?"
+      ],
+      "sampleAnswer": "I use my smartphone and computer every day for work and personal communication. My phone helps me stay connected with family and friends through messages and calls. I also use it for navigation, checking the weather, and reading news. Technology makes many tasks easier and faster. However, there are disadvantages too. Sometimes I spend too much time on my phone and this can be distracting. It's important to balance technology use with real-world interactions and activities. I try to limit my screen time in the evenings."
+    },
+    {
+      "id": 15,
+      "topicText": "Describe your weekend routine.",
+      "topicQuestions": [
+        "What do you usually do on weekends?",
+        "Do you prefer to stay home or go out?",
+        "What makes your weekend special?"
+      ],
+      "sampleAnswer": "On weekends, I usually wake up later than on weekdays, around nine or ten o'clock. I prefer to have a relaxing morning with a good breakfast. Sometimes I stay home and clean my apartment or do laundry. Other times I go out to meet friends for lunch or coffee. On Sunday, I often visit my parents for dinner. What makes my weekend special is having free time to do things I enjoy without work pressure. I can read, watch movies, or just rest. Weekends help me recharge for the busy week ahead."
+    }
+  ]
+}

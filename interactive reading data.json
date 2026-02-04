@@ -1,0 +1,378 @@
+{
+  "config": {
+    "title": "Read the passage and answer the questions",
+    "shuffleQuestions": true
+  },
+  "questions": [
+    {
+      "id": 1,
+      "title": "Morning Coffee",
+      "passage": "Coffee is one of the most popular drinks in the world. Many people drink coffee every morning to help them wake up. Coffee contains caffeine, which makes people feel more alert. Some people like their coffee black, while others add milk and sugar. Coffee shops are popular places where people meet friends or work on their computers.",
+      "questions": [
+        {
+          "question": "Why do people drink coffee in the morning?",
+          "options": [
+            "To help them sleep",
+            "To help them wake up",
+            "To make them hungry",
+            "To cool down"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "What do some people add to their coffee?",
+          "options": [
+            "Salt and pepper",
+            "Juice and water",
+            "Milk and sugar",
+            "Tea and honey"
+          ],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Public Libraries",
+      "passage": "Public libraries are important places in communities. They provide free access to books, magazines, and newspapers. Many libraries also have computers and internet access that people can use. Libraries are quiet spaces where students can study. Librarians help people find the information they need. Libraries often have reading programs for children during the summer.",
+      "questions": [
+        {
+          "question": "What can people do at libraries?",
+          "options": [
+            "Only buy books",
+            "Use computers and read books",
+            "Watch movies only",
+            "Play sports"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Who helps people find information at libraries?",
+          "options": ["Teachers", "Doctors", "Librarians", "Police officers"],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Recycling",
+      "passage": "Recycling is the process of turning old materials into new products. Paper, plastic, glass, and metal can all be recycled. Recycling helps reduce waste and saves natural resources. It also uses less energy than making new products from raw materials. Many cities have recycling programs where residents separate their trash. Recycling is an easy way for everyone to help protect the environment.",
+      "questions": [
+        {
+          "question": "What does recycling help reduce?",
+          "options": ["Fresh air", "Waste", "Water", "Food"],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Which materials can be recycled?",
+          "options": [
+            "Only paper",
+            "Only plastic",
+            "Paper, plastic, glass, and metal",
+            "None of these"
+          ],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "The Internet",
+      "passage": "The Internet has changed how people communicate and find information. It allows people to send messages instantly to anyone in the world. People use the Internet for work, education, shopping, and entertainment. Social media websites let people share photos and stay connected with friends. However, people should be careful about what personal information they share online. The Internet is a powerful tool that continues to grow and change.",
+      "questions": [
+        {
+          "question": "What can people do on the Internet?",
+          "options": [
+            "Only send letters",
+            "Work, shop, and communicate",
+            "Only watch TV",
+            "Only read newspapers"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "What should people be careful about online?",
+          "options": [
+            "Reading too much",
+            "Watching videos",
+            "Sharing personal information",
+            "Using search engines"
+          ],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Learning a New Language",
+      "passage": "Learning a new language takes time and practice. The best way to learn is to use the language every day. Listening to music, watching movies, and reading books in the new language all help. Speaking with native speakers is very important for improving pronunciation. Making mistakes is a natural part of learning. Many people use language apps and online courses to help them study. With patience and dedication, anyone can learn a new language.",
+      "questions": [
+        {
+          "question": "What is the best way to learn a language?",
+          "options": [
+            "Study only once a month",
+            "Use it every day",
+            "Never speak it",
+            "Only read grammar books"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Why is speaking with native speakers important?",
+          "options": [
+            "To learn grammar rules",
+            "To improve pronunciation",
+            "To buy things",
+            "To find a job"
+          ],
+          "correctAnswer": 1
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Healthy Eating",
+      "passage": "Eating a balanced diet is important for good health. A healthy diet includes fruits, vegetables, whole grains, and protein. These foods provide the nutrients our bodies need to function properly. Drinking plenty of water is also essential. People should limit sugar, salt, and unhealthy fats. Eating breakfast gives you energy for the day. Preparing meals at home is often healthier than eating fast food.",
+      "questions": [
+        {
+          "question": "What should a healthy diet include?",
+          "options": [
+            "Only candy and soda",
+            "Fruits, vegetables, grains, and protein",
+            "Only meat",
+            "Only bread"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Why should people eat breakfast?",
+          "options": [
+            "To lose weight",
+            "To give energy for the day",
+            "To sleep better",
+            "To watch TV"
+          ],
+          "correctAnswer": 1
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Public Transportation",
+      "passage": "Public transportation includes buses, trains, and subways that many people use together. Using public transportation has several benefits. It reduces traffic congestion on roads. It is often cheaper than owning and driving a car. Public transportation is also better for the environment because it produces less pollution per person. Many cities are improving their public transportation systems to make them more efficient and comfortable.",
+      "questions": [
+        {
+          "question": "What does public transportation include?",
+          "options": [
+            "Only personal cars",
+            "Buses, trains, and subways",
+            "Only bicycles",
+            "Only taxis"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Why is public transportation good for the environment?",
+          "options": [
+            "It produces more pollution",
+            "It is slower",
+            "It produces less pollution per person",
+            "It costs more money"
+          ],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Exercise and Health",
+      "passage": "Regular exercise is essential for physical and mental health. Exercise strengthens the heart, muscles, and bones. It helps people maintain a healthy weight and reduces the risk of many diseases. Exercise also improves mood by releasing chemicals in the brain that make people feel happy. Adults should try to exercise for at least thirty minutes most days of the week. Walking, swimming, and cycling are all good forms of exercise.",
+      "questions": [
+        {
+          "question": "What does regular exercise strengthen?",
+          "options": [
+            "Only the brain",
+            "Heart, muscles, and bones",
+            "Only the eyes",
+            "Only the hair"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "How often should adults exercise?",
+          "options": [
+            "Once a year",
+            "Never",
+            "At least thirty minutes most days",
+            "Only on weekends"
+          ],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Solar Energy",
+      "passage": "Solar energy comes from the sun and is a clean, renewable source of power. Solar panels convert sunlight into electricity. Many homes and businesses now use solar panels to reduce their energy costs. Solar energy does not produce pollution or greenhouse gases. It is available everywhere the sun shines. Although solar panels can be expensive to install, they save money over time. Solar energy is becoming more popular as technology improves and costs decrease.",
+      "questions": [
+        {
+          "question": "Where does solar energy come from?",
+          "options": ["The moon", "The sun", "The ocean", "The wind"],
+          "correctAnswer": 1
+        },
+        {
+          "question": "What do solar panels convert into electricity?",
+          "options": ["Rain", "Wind", "Sunlight", "Snow"],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Water Conservation",
+      "passage": "Water is essential for all life on Earth, but clean water is becoming scarce in many places. Water conservation means using water wisely and not wasting it. Simple actions can save water. Taking shorter showers, fixing leaky faucets, and turning off water while brushing teeth all help. Watering gardens early in the morning reduces evaporation. Everyone should do their part to conserve water for future generations.",
+      "questions": [
+        {
+          "question": "What does water conservation mean?",
+          "options": [
+            "Using more water",
+            "Using water wisely and not wasting it",
+            "Never drinking water",
+            "Polluting water"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "When is the best time to water gardens?",
+          "options": [
+            "During midday",
+            "At night only",
+            "Early in the morning",
+            "Never"
+          ],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Dolphins",
+      "passage": "Dolphins are intelligent marine mammals that live in oceans around the world. They are known for their playful behavior and social nature. Dolphins communicate with each other using clicks and whistles. They travel in groups called pods. Dolphins are excellent swimmers and can jump high out of the water. They eat fish and squid. Many people enjoy watching dolphins in the wild or at marine parks.",
+      "questions": [
+        {
+          "question": "Where do dolphins live?",
+          "options": ["In deserts", "In forests", "In oceans", "In mountains"],
+          "correctAnswer": 2
+        },
+        {
+          "question": "How do dolphins communicate?",
+          "options": [
+            "By writing",
+            "Through colors",
+            "Using clicks and whistles",
+            "By dancing"
+          ],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Composting",
+      "passage": "Composting is a natural process that turns organic waste into nutrient-rich soil. Food scraps like fruit peels and vegetable stems can be composted. Leaves, grass clippings, and coffee grounds are also good for compost. The organic materials break down over time with the help of bacteria and worms. Compost improves soil quality and helps plants grow better. Composting reduces the amount of waste sent to landfills. Many people keep compost bins in their backyards.",
+      "questions": [
+        {
+          "question": "What does composting turn organic waste into?",
+          "options": ["Plastic", "Metal", "Nutrient-rich soil", "Water"],
+          "correctAnswer": 2
+        },
+        {
+          "question": "What helps organic materials break down in compost?",
+          "options": ["Fire", "Ice", "Bacteria and worms", "Wind"],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "The Importance of Sleep",
+      "passage": "Sleep is essential for good health and well-being. During sleep, the body repairs itself and the brain processes information from the day. Adults need about seven to eight hours of sleep each night. Children and teenagers need even more. Lack of sleep can cause problems with memory, mood, and concentration. It can also weaken the immune system. Good sleep habits include going to bed at the same time each night and avoiding screens before bedtime.",
+      "questions": [
+        {
+          "question": "How much sleep do adults need each night?",
+          "options": [
+            "Two hours",
+            "Seven to eight hours",
+            "Twelve hours",
+            "One hour"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "What happens to the body during sleep?",
+          "options": [
+            "It grows taller",
+            "It repairs itself",
+            "It stops working",
+            "It gets cold"
+          ],
+          "correctAnswer": 1
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Farmers Markets",
+      "passage": "Farmers markets are places where local farmers sell their fresh produce directly to customers. These markets usually happen once or twice a week in town centers or parks. People can buy fruits, vegetables, eggs, honey, and other farm products. The food is often fresher than in supermarkets because it travels a shorter distance. Shopping at farmers markets supports local farmers and the local economy. Many markets also sell handmade crafts and baked goods.",
+      "questions": [
+        {
+          "question": "Who sells products at farmers markets?",
+          "options": [
+            "Large corporations",
+            "Local farmers",
+            "Foreign companies",
+            "Online stores"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "Why is food at farmers markets often fresher?",
+          "options": [
+            "It is frozen",
+            "It costs more",
+            "It travels a shorter distance",
+            "It is older"
+          ],
+          "correctAnswer": 2
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Volunteering",
+      "passage": "Volunteering means doing work to help others without getting paid. People volunteer at hospitals, schools, animal shelters, and many other places. Volunteering benefits both the volunteer and the community. Volunteers learn new skills and meet new people. They feel good about helping others. Communities benefit from the work volunteers do. Volunteering can also help people explore career interests. Many students volunteer to gain experience and build their resumes.",
+      "questions": [
+        {
+          "question": "What does volunteering mean?",
+          "options": [
+            "Working for high pay",
+            "Helping others without getting paid",
+            "Only working at home",
+            "Buying things for yourself"
+          ],
+          "correctAnswer": 1
+        },
+        {
+          "question": "What do volunteers gain from volunteering?",
+          "options": [
+            "Only money",
+            "Nothing at all",
+            "New skills and meeting new people",
+            "A house"
+          ],
+          "correctAnswer": 2
+        }
+      ]
+    }
+  ]
+}

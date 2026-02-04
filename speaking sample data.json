@@ -1,0 +1,111 @@
+{
+  "config": {
+    "title": "Speaking Sample",
+    "shuffleQuestions": true,
+    "prepareTime": 30,
+    "speakingTime": 180,
+    "enableContinueAfter": 60
+  },
+  "questions": [
+    {
+      "id": 1,
+      "topicText": "Describe a family tradition that is important to you.",
+      "sampleAnswer": "In my family, we have a tradition of having dinner together every Sunday. Everyone brings something to share, like a dish or dessert. We sit around the table and talk about our week. My grandmother usually tells stories from when she was young. The children play games after dinner while adults have coffee. This tradition is important because it keeps our family connected even though we are all busy during the week. It gives us time to catch up with each other's lives and share our problems and happy moments. These Sunday dinners create strong family bonds and wonderful memories."
+    },
+    {
+      "id": 2,
+      "topicText": "Talk about a national holiday in your country.",
+      "sampleAnswer": "One important national holiday in my country is Independence Day. We celebrate our freedom on this day with many activities. People hang flags on their houses and buildings. There are parades in the streets with music, dancing, and traditional costumes. Families have picnics in parks and children play games. In the evening, there are fireworks displays that everyone watches. Many people wear clothes in the national colors to show their pride. It is a day when everyone comes together to remember our history and celebrate being a free nation. The atmosphere is joyful and patriotic."
+    },
+    {
+      "id": 3,
+      "topicText": "Describe a wedding or marriage ceremony you attended.",
+      "sampleAnswer": "I recently attended my friend's wedding. The ceremony was held in a beautiful garden with white decorations and flowers everywhere. The bride wore a white dress and looked very happy. The groom wore a dark suit. Their families and friends gathered to witness their marriage. After the ceremony, everyone threw rice or flower petals. There was a reception with music, dancing, and delicious food. People gave speeches about the couple and shared funny stories. The couple cut a large wedding cake together. Everyone celebrated their love and wished them happiness. It was a joyful day full of love and celebration."
+    },
+    {
+      "id": 4,
+      "topicText": "Talk about a festival that involves food.",
+      "sampleAnswer": "Every autumn, we celebrate a harvest festival in my town. This festival is all about food and giving thanks for the harvest. Families prepare traditional dishes using fresh vegetables and fruits from their gardens. We make special breads, soups, and sweet cakes. Everyone brings food to share in the town square. There are long tables filled with different dishes and everyone can try everything. Local farmers sell their best produce. The festival celebrates the hard work of farmers and the blessing of having enough food. It brings the whole community together to eat, talk, and enjoy each other's company."
+    },
+    {
+      "id": 5,
+      "topicText": "Describe how people celebrate New Year in your culture.",
+      "sampleAnswer": "New Year celebration in my culture is very special. We start by cleaning our entire house to remove bad luck from the old year. On New Year's Eve, families cook special foods that represent good luck and prosperity. At midnight, we all gather together, hug each other, and make wishes for the new year. We exchange small gifts and children receive money in red envelopes. The next morning, we have a big breakfast with traditional foods. Many people visit temples or churches to pray for a good year. For the first few days, we visit relatives and friends to give them good wishes. It is a time of hope, celebration, and new beginnings."
+    },
+    {
+      "id": 6,
+      "topicText": "Talk about a memorable birthday celebration.",
+      "sampleAnswer": "I remember my eighteenth birthday very clearly because it was a special milestone. My family threw a surprise party for me. When I came home from school, all my friends and relatives were hiding inside the house. They jumped out and shouted 'surprise' when I opened the door. I was so shocked and happy. There was a big cake with eighteen candles. Everyone sang the birthday song and I made a wish before blowing out the candles. I received many nice gifts including books and clothes. We had delicious food, played music, and danced. The best part was being surrounded by people who cared about me. That birthday made me feel loved and special."
+    },
+    {
+      "id": 7,
+      "topicText": "Describe a religious or cultural ceremony.",
+      "sampleAnswer": "In my culture, we have a coming-of-age ceremony when young people turn sixteen. This ceremony marks their transition from childhood to adulthood. The ceremony is held at a community center with family and friends present. The young person wears special traditional clothing. They read promises about being responsible and contributing to society. Elder family members give advice about adult life and share their wisdom. After the ceremony, there is a meal where everyone celebrates together. The young person receives gifts that symbolize their new status. This ceremony is meaningful because it connects young people to their culture and helps them understand their new responsibilities as adults."
+    },
+    {
+      "id": 8,
+      "topicText": "Talk about a festival with music and dancing.",
+      "sampleAnswer": "Our spring festival is famous for its music and dancing. The festival happens in the town square over three days. Local musicians play traditional instruments and sing folk songs. People of all ages dance in circles, holding hands and following traditional steps. The music is lively and makes everyone feel happy. Children learn the dances from their grandparents, which helps preserve our cultural heritage. Visitors from other cities come to join the celebration. The atmosphere is joyful with people laughing, singing, and dancing together. Food vendors sell traditional snacks. The festival celebrates the arrival of spring and brings the community together through music and dance."
+    },
+    {
+      "id": 9,
+      "topicText": "Describe a yearly family tradition.",
+      "sampleAnswer": "Every summer, my family goes camping for one week. We have done this since I was a child. We drive to a lake in the mountains and set up tents. During the day, we go fishing, swimming, and hiking. We cook our meals over a campfire. At night, we sit around the fire telling stories and looking at the stars. This tradition is important because it is the only time we are all together without phones or computers. We focus on each other and enjoy nature. These camping trips have given me some of my best childhood memories. Even though we are all adults now, we continue this tradition because it keeps us close."
+    },
+    {
+      "id": 10,
+      "topicText": "Talk about giving or receiving a meaningful gift.",
+      "sampleAnswer": "For my mother's birthday last year, I gave her a handmade photo album. I spent weeks collecting family photos from different times in our lives. I arranged them chronologically and wrote small notes about each memory. The album showed our family history from when I was a baby until now. When my mother opened the gift, she started crying tears of joy. She said it was the most thoughtful gift she ever received because it showed how much I value our family memories. We spent hours together looking through the album and remembering happy times. This gift was meaningful because it came from my heart and showed my love for her."
+    },
+    {
+      "id": 11,
+      "topicText": "Describe a graduation ceremony.",
+      "sampleAnswer": "I attended my sister's university graduation ceremony last year. It was held in a large auditorium filled with graduating students wearing caps and gowns. Their families sat in the audience feeling proud and excited. The university president gave a speech about the future and success. Then they called each student's name one by one. When my sister walked across the stage to receive her diploma, our whole family cheered loudly. We took many photos after the ceremony. Everyone was celebrating their achievements and feeling happy about completing their studies. It was an emotional day marking the end of one chapter and the beginning of another in my sister's life."
+    },
+    {
+      "id": 12,
+      "topicText": "Talk about a seasonal celebration in your area.",
+      "sampleAnswer": "Every autumn, our community has a harvest festival in the main park. Local farmers bring their best vegetables, fruits, and flowers to display. There are competitions for the biggest pumpkin or the prettiest flower arrangement. Children participate in games like sack races and apple bobbing. There are booths selling homemade jams, honey, and baked goods. Local artists display their crafts. The whole community comes together to organize and enjoy the event. It creates a strong sense of belonging and friendship among neighbors. People who moved away often return for this festival. It is a celebration of the autumn harvest and community spirit."
+    },
+    {
+      "id": 13,
+      "topicText": "Describe celebrating a new baby in the family.",
+      "sampleAnswer": "When my sister had her first baby, our family organized a special celebration. We decorated her house with balloons and baby decorations. Family members from different cities came to visit and meet the new baby. Everyone brought gifts like clothes, toys, and baby supplies. We prepared my sister's favorite foods because she was tired from taking care of the baby. We took turns holding the baby and helping with household tasks. Grandparents gave advice about parenting based on their experience. It was a joyful time that marked the beginning of a new generation in our family. The baby brought everyone together and made us all feel happy and hopeful."
+    },
+    {
+      "id": 14,
+      "topicText": "Talk about learning about another culture's festival.",
+      "sampleAnswer": "I learned about the Chinese Mid-Autumn Festival from my Chinese friend. She explained that families gather to admire the full moon and eat special moon cakes. The moon cakes have sweet filling and are very delicious. People give moon cakes as gifts to friends and family. Children carry colorful lanterns and walk around the neighborhood. The festival celebrates family unity and harvest. My friend shared some moon cakes with me and they were different from any food I had tried before. I found it interesting how different cultures have their own special ways of celebrating seasons and family. Learning about this festival helped me understand and appreciate Chinese culture better."
+    },
+    {
+      "id": 15,
+      "topicText": "Describe a simple but meaningful family gathering.",
+      "sampleAnswer": "Last month, we had a simple Sunday lunch at my grandparents' house that became very special. My grandfather had been sick and was finally feeling better. The whole family came to visit him. We did not plan anything elaborate, just shared a home-cooked meal and talked. My grandfather was in a good mood and told us funny stories from his youth. We all laughed together and enjoyed being in each other's company. My grandmother made our favorite dishes. Sometimes the simplest gatherings are the most meaningful because they remind us what is truly important - being together and appreciating the time we have with loved ones. That day reminded me to cherish every moment with family."
+    },
+    {
+      "id": 16,
+      "topicText": "Talk about a neighborhood or community celebration.",
+      "sampleAnswer": "Every summer, our neighborhood organizes a street party. We close the street to cars for the day and set up tables and chairs outside. Each family brings food to share with neighbors. There is a lot of delicious food from different cultures because our neighborhood is very diverse. We play music and children run around playing games together. Neighbors who usually just say hello get to know each other better through conversation. Older people sit and talk while young people dance. This street party is wonderful because it builds community spirit. People feel more connected to their neighbors and the neighborhood becomes friendlier. It shows how celebrations can bring people together."
+    },
+    {
+      "id": 17,
+      "topicText": "Describe helping organize a surprise party.",
+      "sampleAnswer": "I helped organize a surprise birthday party for my best friend. We planned secretly for three weeks. First, we made a list of all her friends to invite. Then we chose a theme and decorations. We booked a room at a restaurant and ordered a cake. The hardest part was keeping it secret because my friend and I talk every day. On the day of the party, we told her we were just going to dinner. When she walked into the room and saw everyone, she was completely surprised. She started crying happy tears. Seeing her face light up made all the planning worth it. The party was a success and she said it was the best birthday she ever had. Organizing the surprise taught me about teamwork and keeping secrets."
+    },
+    {
+      "id": 18,
+      "topicText": "Talk about when a celebration didn't go as planned.",
+      "sampleAnswer": "We planned an outdoor birthday party for my nephew, but heavy rain started just as guests arrived. Instead of canceling, we quickly moved everything inside the house. The space was much smaller and more crowded than we planned. We had to change all the outdoor games to indoor activities. At first, we were disappointed, but then something wonderful happened. Being in a small space together actually made the party more fun and intimate. Everyone helped move furniture and set up. We played card games and told stories instead of running around outside. The cozy atmosphere created more meaningful conversations. This experience taught me that celebrations are about being together, not perfect planning. Sometimes unexpected changes make events more memorable."
+    },
+    {
+      "id": 19,
+      "topicText": "Describe learning something new about your culture through celebration.",
+      "sampleAnswer": "At my great-aunt's eightieth birthday party, she taught us traditional songs from our culture. She explained that these songs were passed down through generations in our family. She told us the meaning behind each song and why they were important to our ancestors. We all learned to sing them together as a group. She also showed us traditional dances that went with the songs. I realized how much of our cultural heritage I did not know. The younger generation, including me, had never learned these songs. That day made me want to learn more about my culture and traditions. My great-aunt was happy to see us interested in preserving these traditions. Now our family sings these songs at every gathering."
+    },
+    {
+      "id": 20,
+      "topicText": "Explain why celebrations and festivals are important.",
+      "sampleAnswer": "Celebrations and festivals are important for many reasons. First, they bring people together and create shared memories. When we celebrate, we strengthen our relationships with family and friends. Festivals help us maintain cultural traditions and pass them to younger generations. They give us reasons to take breaks from work and daily stress, allowing us to focus on what matters most. Celebrations mark important life events like births, marriages, and achievements. They provide moments of joy and happiness that we can remember during difficult times. Festivals also strengthen community bonds as neighbors and friends gather together. They remind us of our shared values and cultural identity. Without celebrations, life would be only work and routine. Celebrations add color, meaning, and joy to human existence."
+    }
+  ]
+}

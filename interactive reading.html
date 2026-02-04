@@ -1,0 +1,2417 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Reading - SNA English Test Practice</title>
+
+    <!-- Resource Hints for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+
+    <!-- Preload Critical Assets -->
+    <link
+      rel="prefetch"
+      href="interactive reading data.json"
+      as="fetch"
+      type="application/json"
+    />
+
+    <!-- Optimized Font Loading -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+    <link rel="stylesheet" href="background.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+        background-color: #f8f9fa;
+        min-height: 100vh;
+        line-height: 1.6;
+        color: #334155;
+      }
+
+      /* Loading Screen */
+      .loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #f8f9fa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .loading-spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid #e0e0e0;
+        border-top: 4px solid #ffc515;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .loading-text {
+        margin-top: 20px;
+        font-size: 16px;
+        color: #6b7280;
+      }
+
+      /* Error Screen */
+      .error-screen {
+        display: none;
+        text-align: center;
+        padding: 40px;
+        background-color: #ffebee;
+        border-radius: 12px;
+        border: 1px solid #f44336;
+        margin: 20px;
+      }
+
+      .error-title {
+        font-size: 24px;
+        font-weight: 600;
+        color: #f44336;
+        margin-bottom: 10px;
+      }
+
+      .error-message {
+        color: #6b7280;
+        margin-bottom: 20px;
+      }
+
+      .retry-data-btn {
+        background: #ffc515;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .retry-data-btn:hover {
+        background: #ffb300;
+      }
+
+      /* Quiz Container */
+      .quiz-container {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 40px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: transparent;
+      }
+
+      /* Question Card */
+      .question-card {
+        background: white;
+        border-radius: 12px 12px 0 0;
+        padding: 50px 60px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+        width: 100%;
+        max-width: 1200px;
+        text-align: center;
+        position: relative;
+        min-height: 600px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin: 0 auto;
+        margin-bottom: 0;
+        box-sizing: border-box;
+      }
+
+      /* Timer - Updated to match screenshot */
+      .timer {
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        background: transparent;
+        padding: 0;
+        border-radius: 0;
+        font-weight: 400;
+        color: #888;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .timer-icon {
+        width: 18px;
+        height: 18px;
+        fill: currentColor;
+      }
+
+      .timer.warning {
+        color: #f44336;
+        font-weight: 600;
+      }
+
+      /* Close Button */
+      .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 4px;
+        transition: background 0.2s;
+        color: #ccc;
+      }
+
+      .close-btn:hover {
+        background: #f8f8f8;
+        color: #999;
+      }
+
+      /* Main Content Layout - Updated */
+      .main-content {
+        display: flex;
+        gap: 60px;
+        width: 100%;
+        max-width: 1000px;
+        margin: 40px auto 0;
+        flex: 1;
+        align-items: flex-start;
+      }
+
+      /* Passage Section */
+      .passage-section {
+        flex: 1;
+        text-align: left;
+        min-width: 0; /* Allow shrinking */
+      }
+
+      .passage-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: #888;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .passage-container {
+        font-size: 16px;
+        line-height: 1.7;
+        color: #333;
+        text-align: left;
+        padding: 25px;
+        border: none;
+        border-radius: 8px;
+        background: #f9f9f9;
+        max-height: 350px;
+        overflow-y: auto;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .passage-text {
+        display: inline;
+      }
+
+      /* Blank spaces for answers */
+      .answer-blank {
+        display: inline-block;
+        border-bottom: 2px solid #ccc;
+        min-width: 80px;
+        height: 20px;
+        margin: 0 3px;
+        vertical-align: baseline;
+        position: relative;
+        word-wrap: break-word;
+        text-align: center;
+      }
+
+      /* Number markers above blanks */
+      .blank-number {
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        background: #888;
+        color: white;
+        text-align: center;
+        line-height: 18px;
+        border-radius: 50%;
+        font-size: 11px;
+        font-weight: bold;
+        margin: 0 3px 0 0;
+        vertical-align: baseline;
+        flex-shrink: 0;
+      }
+
+      /* Questions Section */
+      .questions-section {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding-left: 0;
+        min-width: 0; /* Allow shrinking */
+      }
+
+      .questions-title {
+        font-size: 16px;
+        font-weight: 500;
+        color: #555;
+        margin-bottom: 25px;
+        text-align: left;
+        line-height: 1.4;
+        word-wrap: break-word;
+      }
+
+      /* Question Item */
+      .question-item {
+        margin-bottom: 24px;
+      }
+
+      .question-number {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 12px;
+        flex-wrap: wrap;
+      }
+
+      .question-circle {
+        width: 22px;
+        height: 22px;
+        background: white;
+        border: 2px solid #ffc515;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: bold;
+        color: #ffc515;
+        flex-shrink: 0;
+      }
+
+      .question-label {
+        color: #777;
+        font-size: 13px;
+        font-weight: 400;
+        word-wrap: break-word;
+      }
+      /* Dropdown Styles */
+      .question-dropdown {
+        width: 100%;
+        max-width: 280px;
+      }
+
+      .dropdown-select {
+        width: 100%;
+        background: white;
+        border: 1px solid #d0d0d0;
+        border-radius: 4px 9999px 9999px 4px;
+        padding: 11px 14px;
+        font-size: 14px;
+        color: #999;
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        background-size: 14px;
+        padding-right: 35px;
+        transition: all 0.2s ease;
+        box-sizing: border-box;
+      }
+
+      .dropdown-select:focus {
+        outline: none;
+        border-color: #ffc515;
+        color: #333;
+      }
+
+      .dropdown-select:hover {
+        border-color: #ffc515;
+      }
+
+      .dropdown-select.selected {
+        border-color: #ffc515;
+        color: #333;
+        background-color: rgba(28, 176, 246, 0.03);
+      }
+
+      .dropdown-select.correct {
+        border-color: #ffc515;
+        background-color: rgba(76, 175, 80, 0.1);
+        color: #2e7d32;
+      }
+
+      .dropdown-select.incorrect {
+        border-color: #f44336;
+        background-color: rgba(244, 67, 54, 0.1);
+        color: #c62828;
+      }
+
+      .dropdown-select.submitted {
+        cursor: default;
+        pointer-events: none;
+      }
+
+      .dropdown-select option {
+        padding: 8px;
+        background: white;
+        color: #333;
+      }
+
+      .dropdown-select option:hover {
+        background: #f0f0f0;
+      }
+
+      /* Continue Button */
+      .continue-btn {
+        background: #e0e0e0;
+        color: #999;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 9999px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: not-allowed;
+        transition: all 0.2s;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        position: absolute;
+        bottom: 25px;
+        right: 25px;
+        display: block;
+      }
+
+      .continue-btn.active {
+        background: #ffc515;
+        color: white;
+        cursor: pointer;
+      }
+
+      .continue-btn.active:hover {
+        background: #ffb300;
+      }
+
+      /* Feedback Section */
+      .feedback-section {
+        background: #ffcdd2;
+        border-radius: 0 0 12px 12px;
+        padding: 18px 60px;
+        margin: 0 auto;
+        margin-top: 0;
+        margin-bottom: 0;
+        border: none;
+        display: none;
+        position: relative;
+        width: 100%;
+        max-width: 1200px;
+        box-sizing: border-box;
+        text-align: left;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .feedback-section.correct {
+        background: #ffe8b0;
+      }
+
+      .feedback-section.incorrect {
+        background: #ffcdd2;
+      }
+
+      .feedback-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+
+      .feedback-icon {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+      }
+
+      .feedback-title {
+        font-size: 16px;
+        font-weight: 700;
+        margin: 0;
+      }
+
+      .feedback-title.correct {
+        color: #2e7d32;
+      }
+
+      .feedback-title.incorrect {
+        color: #c62828;
+      }
+
+      .correct-answer-text {
+        color: #2e7d32;
+        font-size: 16px;
+        margin: 8px 0 0 0;
+        font-weight: 500;
+        line-height: 1.6;
+      }
+
+      .correct-answer-text.incorrect-feedback {
+        color: #c62828;
+      }
+
+      /* Next Button */
+      .next-btn {
+        background: #ff4757;
+        color: white;
+        border: none;
+        padding: 14px 24px;
+        border-radius: 9999px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: absolute;
+        bottom: 24px;
+        right: 24px;
+      }
+
+      .next-btn:hover {
+        background: #ff3742;
+      }
+
+      .next-btn.correct {
+        background: #ffc515;
+      }
+
+      .next-btn.correct:hover {
+        background: #ffb300;
+      }
+
+      /* Results Screen */
+      .results-screen {
+        display: none;
+        text-align: center;
+        background: white;
+        border-radius: 12px;
+        padding: 80px 60px;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+        width: 100%;
+        max-width: 600px;
+        min-height: 400px;
+        position: relative;
+      }
+
+      .results-icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 40px;
+      }
+
+      .result-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .check-result-icon {
+        background: #ffc515;
+      }
+
+      .x-result-icon {
+        background: #ffc515;
+      }
+
+      .result-icon svg {
+        width: 40px;
+        height: 40px;
+        stroke: white;
+        stroke-width: 3;
+      }
+
+      .results-title {
+        font-size: 24px;
+        font-weight: 500;
+        color: #777;
+        margin-bottom: 10px;
+        line-height: 1.3;
+      }
+
+      .results-subtitle {
+        font-size: 18px;
+        font-weight: 400;
+        color: #777;
+        margin-bottom: 60px;
+      }
+
+      .done-btn {
+        background: #ffc515;
+        color: white;
+        border: none;
+        padding: 16px 32px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: absolute;
+        bottom: 30px;
+        right: 30px;
+      }
+
+      .done-btn:hover {
+        background: #ffb300;
+      }
+
+      /* Responsive Design */
+
+      /* Desktop (1024px to 1439px) */
+      @media (min-width: 1024px) and (max-width: 1439px) {
+        .quiz-container {
+          padding: 40px;
+        }
+
+        .question-card {
+          max-width: 1200px;
+          padding: 50px 60px;
+          border-radius: 12px 12px 0 0;
+        }
+
+        .feedback-section {
+          max-width: 1200px;
+          border-radius: 0 0 12px 12px;
+          padding: 18px 60px;
+        }
+      }
+
+      /* Tablet Landscape (768px to 1023px) */
+      @media (min-width: 768px) and (max-width: 1023px) {
+        .quiz-container {
+          padding: 30px;
+        }
+
+        .question-card {
+          max-width: 100%;
+          padding: 40px 50px;
+          border-radius: 12px 12px 0 0;
+        }
+
+        .feedback-section {
+          max-width: 100%;
+          border-radius: 0 0 12px 12px;
+          padding: 18px 50px;
+        }
+
+        .main-content {
+          flex-direction: column;
+          gap: 30px;
+        }
+
+        .questions-section {
+          padding-left: 0;
+          padding-top: 20px;
+          border-top: 1px solid #e0e0e0;
+        }
+
+        .passage-container {
+          max-height: 300px;
+        }
+      }
+
+      /* Tablet Portrait (481px to 767px) */
+      @media (min-width: 481px) and (max-width: 767px) {
+        .quiz-container {
+          padding: 20px;
+        }
+
+        .question-card {
+          max-width: 100%;
+          padding: 35px 40px;
+          border-radius: 12px 12px 0 0;
+        }
+
+        .feedback-section {
+          border-radius: 0 0 12px 12px;
+          padding: 18px 40px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .quiz-container {
+          padding: 20px;
+        }
+
+        .question-card {
+          padding: 30px 25px;
+          min-height: 500px;
+          border-radius: 12px 12px 0 0;
+        }
+
+        .feedback-section {
+          border-radius: 0 0 12px 12px;
+          padding: 18px 40px;
+        }
+
+        .main-content {
+          gap: 25px;
+          margin-top: 30px;
+        }
+
+        .passage-container {
+          padding: 20px;
+          font-size: 15px;
+          max-height: 250px;
+        }
+
+        .questions-section {
+          padding-left: 0;
+        }
+
+        .dropdown-select {
+          font-size: 13px;
+          padding: 10px 12px;
+        }
+
+        .continue-btn {
+          bottom: 20px;
+          right: 20px;
+          padding: 11px 20px;
+          font-size: 13px;
+        }
+
+        .timer {
+          top: 20px;
+          left: 20px;
+          font-size: 14px;
+        }
+
+        .close-btn {
+          top: 15px;
+          right: 15px;
+        }
+      }
+
+      /* Mobile (320px to 480px) */
+      @media (max-width: 480px) {
+        .quiz-container {
+          padding: 16px;
+        }
+
+        .question-card {
+          padding: 25px 20px;
+          border-radius: 12px 12px 0 0;
+        }
+
+        .feedback-section {
+          border-radius: 0 0 12px 12px;
+          padding: 18px 20px;
+        }
+
+        .passage-container {
+          padding: 15px;
+          font-size: 14px;
+          max-height: 200px;
+        }
+
+        .dropdown-select {
+          font-size: 12px;
+          padding: 8px 10px;
+        }
+
+        .results-screen {
+          padding: 50px 30px;
+        }
+
+        .answer-blank {
+          min-width: 60px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+      <div>
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading quiz data...</div>
+      </div>
+    </div>
+
+    <!-- Error Screen -->
+    <div class="error-screen" id="errorScreen">
+      <div class="error-title">Failed to Load Quiz Data</div>
+      <div class="error-message" id="errorMessage">
+        Could not load the quiz questions. Please check your internet connection
+        and try again.
+      </div>
+      <button class="retry-data-btn" onclick="loadQuizData()">Retry</button>
+      <button
+        class="retry-data-btn"
+        onclick="goBack()"
+        style="background: #f0f0f0; color: #666; margin-left: 10px"
+      >
+        Go Back
+      </button>
+    </div>
+
+    <div class="quiz-container" id="quizContainer" style="display: none">
+      <!-- Question Card -->
+      <div class="question-card" id="questionCard">
+        <!-- Timer -->
+        <div class="timer" id="timer">
+          <svg
+            class="timer-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12,6 12,12 16,14" />
+          </svg>
+          <span id="timerText">0:00</span>
+          <span style="color: #999; margin-left: 6px">for 6 questions</span>
+        </div>
+
+        <!-- Close Button -->
+        <button class="close-btn" onclick="goBack()">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <!-- Question Content -->
+        <div class="question-content" id="questionContent">
+          <!-- Main Content -->
+          <div class="main-content">
+            <!-- Passage Section -->
+            <div class="passage-section">
+              <div class="passage-title" id="passageTitle">PASSAGE</div>
+              <div class="passage-container" id="passageContainer">
+                <!-- Passage with blank spaces will be dynamically generated here -->
+              </div>
+            </div>
+
+            <!-- Questions Section -->
+            <div class="questions-section">
+              <div class="questions-title">
+                Select the best option for each missing word
+              </div>
+              <div id="questionsContainer">
+                <!-- Questions will be dynamically generated here -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Continue Button -->
+          <button class="continue-btn" id="continueBtn" onclick="checkAnswer()">
+            CONTINUE
+          </button>
+        </div>
+      </div>
+
+      <!-- Feedback Section -->
+      <div class="feedback-section" id="feedbackSection">
+        <div class="feedback-header">
+          <svg
+            class="feedback-icon"
+            id="feedbackIcon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <line x1="15" y1="9" x2="9" y2="15" />
+            <line x1="9" y1="9" x2="15" y2="15" />
+          </svg>
+          <div class="feedback-title" id="feedbackTitle">Incorrect</div>
+        </div>
+        <div class="correct-answer-text" id="correctAnswerText"></div>
+        <button class="next-btn" onclick="nextQuestion()">GOT IT</button>
+      </div>
+
+      <!-- Results Screen -->
+      <div class="results-screen" id="resultsScreen">
+        <div class="results-icons">
+          <div class="result-icon check-result-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <polyline points="20,6 9,17 4,12" />
+            </svg>
+          </div>
+          <div class="result-icon x-result-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </div>
+        </div>
+        <div class="results-title">Practice complete! You</div>
+        <div class="results-subtitle">improved your reading skills.</div>
+        <button class="done-btn" onclick="goToPractice()">DONE</button>
+      </div>
+    </div>
+
+    <script>
+      // Quiz Data (will be loaded from JSON)
+      let allQuizData = [];
+      let quizData = [];
+      let quizConfig = {};
+
+      // Quiz State
+      let currentQuestion = 0;
+      let score = 0;
+      let answers = [];
+      let questionStartTime = 0;
+      let timerInterval;
+      let questionTimeout;
+      let dataLoaded = false;
+      let userAnswers = {};
+
+      // Configuration
+      const QUESTIONS_PER_QUIZ = 3;
+      const USED_QUESTIONS_KEY = "interactive_reading_used_questions";
+      const QUESTION_TIMEOUT = 420000; // 7 minutes in milliseconds
+
+      // Load Quiz Data from JSON only
+      async function loadQuizData() {
+        try {
+          showLoadingScreen();
+
+          const response = await fetch("interactive reading data.json");
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+
+          // Validate data structure
+          if (
+            !data.questions ||
+            !Array.isArray(data.questions) ||
+            data.questions.length === 0
+          ) {
+            throw new Error(
+              "Invalid data format: questions array is missing or empty"
+            );
+          }
+
+          allQuizData = data.questions;
+          quizConfig = data.config || {};
+
+          // Select random questions avoiding previously used ones
+          quizData = selectRandomQuestions(allQuizData, QUESTIONS_PER_QUIZ);
+
+          if (quizData.length === 0) {
+            throw new Error(
+              "No new questions available. All questions have been used."
+            );
+          }
+
+          dataLoaded = true;
+          hideLoadingScreen();
+          initializeQuiz();
+        } catch (error) {
+          console.error("Error loading quiz data:", error);
+          showErrorScreen(error.message);
+        }
+      }
+
+      // Select random questions avoiding previously used ones
+      function selectRandomQuestions(allQuestions, count) {
+        const usedQuestions = getUsedQuestions();
+        const availableQuestions = allQuestions.filter(
+          (question) => !usedQuestions.includes(question.id.toString())
+        );
+
+        if (availableQuestions.length === 0) {
+          console.log("All questions have been used. Resetting question pool.");
+          clearUsedQuestions();
+          return selectRandomQuestions(allQuestions, count);
+        }
+
+        if (availableQuestions.length <= count) {
+          console.log(
+            `Only ${availableQuestions.length} questions available. Using all.`
+          );
+          saveUsedQuestions(availableQuestions.map((q) => q.id.toString()));
+          return [...availableQuestions];
+        }
+
+        // Randomly select questions
+        const shuffled = [...availableQuestions];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+
+        const selectedQuestions = shuffled.slice(0, count);
+        const selectedIds = selectedQuestions.map((q) => q.id.toString());
+        saveUsedQuestions([...usedQuestions, ...selectedIds]);
+
+        return selectedQuestions;
+      }
+
+      // LocalStorage functions
+      function getUsedQuestions() {
+        try {
+          const stored = localStorage.getItem(USED_QUESTIONS_KEY);
+          return stored ? JSON.parse(stored) : [];
+        } catch (error) {
+          console.error("Error reading used questions:", error);
+          return [];
+        }
+      }
+
+      function saveUsedQuestions(questions) {
+        try {
+          localStorage.setItem(USED_QUESTIONS_KEY, JSON.stringify(questions));
+        } catch (error) {
+          console.error("Error saving used questions:", error);
+        }
+      }
+
+      function clearUsedQuestions() {
+        try {
+          localStorage.removeItem(USED_QUESTIONS_KEY);
+        } catch (error) {
+          console.error("Error clearing used questions:", error);
+        }
+      }
+
+      // Show/Hide Loading Screen
+      function showLoadingScreen() {
+        document.getElementById("loadingScreen").style.display = "flex";
+        document.getElementById("errorScreen").style.display = "none";
+        document.getElementById("quizContainer").style.display = "none";
+      }
+
+      function hideLoadingScreen() {
+        document.getElementById("loadingScreen").style.display = "none";
+        document.getElementById("quizContainer").style.display = "flex";
+      }
+
+      function showErrorScreen(errorMessage) {
+        document.getElementById("loadingScreen").style.display = "none";
+        document.getElementById("quizContainer").style.display = "none";
+        document.getElementById("errorScreen").style.display = "block";
+        document.getElementById("errorMessage").textContent = errorMessage;
+      }
+
+      // Initialize Quiz
+      function initializeQuiz() {
+        if (!dataLoaded || quizData.length === 0) {
+          showErrorScreen("No quiz data available");
+          return;
+        }
+
+        currentQuestion = 0;
+        score = 0;
+        answers = [];
+        userAnswers = {};
+
+        // Remove this line since questionTitle element doesn't exist
+
+        if (quizConfig.shuffleQuestions) {
+          shuffleArray(quizData);
+        }
+
+        console.log(`Starting quiz with ${quizData.length} questions`);
+        showQuestion();
+      }
+
+      function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+      }
+
+      // Show Current Question
+      function showQuestion() {
+        if (currentQuestion >= quizData.length) {
+          showResults();
+          return;
+        }
+
+        const question = quizData[currentQuestion];
+        userAnswers = {};
+
+        // Update passage title
+        document.getElementById("passageTitle").textContent = "PASSAGE";
+
+        // Create passage with blank spaces and questions
+        createPassageAndQuestions(question);
+
+        // Reset and show continue button
+        const continueBtn = document.getElementById("continueBtn");
+        continueBtn.className = "continue-btn";
+        continueBtn.textContent = "CONTINUE";
+        continueBtn.style.display = "block";
+
+        // Make sure question card is visible
+        document.getElementById("questionCard").style.display = "block";
+        document.getElementById("feedbackSection").style.display = "none";
+
+        // Start question timer and timeout
+        startQuestionTimer();
+        startQuestionTimeout();
+      }
+
+      function createPassageAndQuestions(question) {
+        const passageContainer = document.getElementById("passageContainer");
+        const questionsContainer =
+          document.getElementById("questionsContainer");
+
+        // Clear containers
+        passageContainer.innerHTML = "";
+        questionsContainer.innerHTML = "";
+
+        // Split passage by # markers
+        const parts = question.passage.split("#");
+        let questionIndex = 0;
+
+        parts.forEach((part, index) => {
+          // Add text part
+          if (part.trim()) {
+            const textSpan = document.createElement("span");
+            textSpan.className = "passage-text";
+            textSpan.textContent = part;
+            passageContainer.appendChild(textSpan);
+          }
+
+          // Add blank space and create question (except for the last part)
+          if (index < parts.length - 1 && question.questions[questionIndex]) {
+            // Add number marker before blank space
+            const numberMarker = document.createElement("span");
+            numberMarker.className = "blank-number";
+            numberMarker.textContent = (questionIndex + 1).toString();
+            passageContainer.appendChild(numberMarker);
+
+            // Add blank space to passage
+            const blankSpace = document.createElement("span");
+            blankSpace.className = "answer-blank";
+            blankSpace.setAttribute("data-question-index", questionIndex);
+            passageContainer.appendChild(blankSpace);
+
+            // Create question in right panel
+            createQuestionItem(
+              question.questions[questionIndex],
+              questionIndex
+            );
+
+            questionIndex++;
+          }
+        });
+      }
+
+      function createQuestionItem(questionData, index) {
+        const questionsContainer =
+          document.getElementById("questionsContainer");
+
+        const questionDiv = document.createElement("div");
+        questionDiv.className = "question-item";
+
+        // Question number and label
+        const questionNumber = document.createElement("div");
+        questionNumber.className = "question-number";
+
+        const circle = document.createElement("div");
+        circle.className = "question-circle";
+        circle.textContent = (index + 1).toString();
+
+        const label = document.createElement("div");
+        label.className = "question-label";
+        label.textContent = "Select a word";
+
+        questionNumber.appendChild(circle);
+        questionNumber.appendChild(label);
+
+        // Dropdown container
+        const dropdownContainer = document.createElement("div");
+        dropdownContainer.className = "question-dropdown";
+
+        const select = document.createElement("select");
+        select.className = "dropdown-select";
+        select.setAttribute("data-question-index", index);
+
+        // Add default option
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "";
+        defaultOption.textContent = "Select a word";
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        select.appendChild(defaultOption);
+
+        // Add options from question data
+        questionData.options.forEach((option, optionIndex) => {
+          const optionElement = document.createElement("option");
+          optionElement.value = optionIndex;
+          optionElement.textContent = option;
+          select.appendChild(optionElement);
+        });
+
+        // Add change event listener
+        select.addEventListener("change", function () {
+          handleDropdownChange(index, parseInt(this.value), this);
+        });
+
+        dropdownContainer.appendChild(select);
+        questionDiv.appendChild(questionNumber);
+        questionDiv.appendChild(dropdownContainer);
+        questionsContainer.appendChild(questionDiv);
+      }
+
+      function handleDropdownChange(
+        questionIndex,
+        selectedValue,
+        selectElement
+      ) {
+        // Store the answer
+        userAnswers[questionIndex] = selectedValue;
+
+        // Update dropdown style to show selection
+        selectElement.classList.add("selected");
+
+        // Update the corresponding blank space in the passage
+        const blankSpace = document.querySelector(
+          `[data-question-index="${questionIndex}"]`
+        );
+        if (blankSpace) {
+          const selectedOption = selectElement.options[selectedValue + 1]; // +1 because of default option
+          if (selectedOption) {
+            blankSpace.textContent = selectedOption.textContent;
+            blankSpace.style.color = "#666";
+            blankSpace.style.fontWeight = "500";
+            blankSpace.style.backgroundColor = "rgba(102, 102, 102, 0.1)";
+            blankSpace.style.padding = "2px 4px";
+            blankSpace.style.borderRadius = "3px";
+          }
+        }
+
+        // Check if all questions are answered
+        checkAllQuestionsAnswered();
+      }
+
+      function checkAllQuestionsAnswered() {
+        const totalQuestions = quizData[currentQuestion].questions.length;
+        const answeredQuestions = Object.keys(userAnswers).length;
+
+        const continueBtn = document.getElementById("continueBtn");
+        if (answeredQuestions === totalQuestions) {
+          continueBtn.className = "continue-btn active";
+        } else {
+          continueBtn.className = "continue-btn";
+        }
+      }
+
+      function startQuestionTimer() {
+        questionStartTime = Date.now();
+        let seconds = 0;
+
+        timerInterval = setInterval(() => {
+          seconds++;
+          const minutes = Math.floor(seconds / 60);
+          const remainingSeconds = seconds % 60;
+
+          const timerElement = document.getElementById("timer");
+          const timerText = document.getElementById("timerText");
+
+          timerText.textContent = `${minutes}:${remainingSeconds
+            .toString()
+            .padStart(2, "0")}`;
+
+          // Warning color after 5 minutes (300 seconds)
+          if (seconds >= 300) {
+            timerElement.classList.add("warning");
+          }
+        }, 1000);
+      }
+
+      function startQuestionTimeout() {
+        questionTimeout = setTimeout(() => {
+          // Auto-submit as incorrect if no answer after 7 minutes
+          console.log("Question timed out after 7 minutes");
+          checkAnswer(true); // true indicates timeout
+        }, QUESTION_TIMEOUT);
+      }
+
+      function stopQuestionTimer() {
+        if (timerInterval) {
+          clearInterval(timerInterval);
+        }
+
+        if (questionTimeout) {
+          clearTimeout(questionTimeout);
+        }
+
+        // Reset timer color
+        document.getElementById("timer").classList.remove("warning");
+      }
+
+      function checkAnswer(isTimeout = false) {
+        const continueBtn = document.getElementById("continueBtn");
+        if (!isTimeout && !continueBtn.classList.contains("active")) {
+          return;
+        }
+
+        stopQuestionTimer();
+
+        const question = quizData[currentQuestion];
+        const questionsData = question.questions;
+
+        let correctCount = 0;
+        let totalQuestions = questionsData.length;
+        let correctAnswers = [];
+
+        // Check each answer
+        questionsData.forEach((q, index) => {
+          const userAnswer = userAnswers[index];
+          const correctAnswer = q.correctAnswer;
+          correctAnswers.push(correctAnswer);
+
+          if (userAnswer === correctAnswer) {
+            correctCount++;
+          }
+        });
+
+        const isCorrect = !isTimeout && correctCount === totalQuestions;
+
+        // Store answer
+        const timeSpent = Date.now() - questionStartTime;
+        answers.push({
+          question: question.id,
+          userAnswers: userAnswers,
+          correctAnswers: correctAnswers,
+          isCorrect: isCorrect,
+          isTimeout: isTimeout,
+          timeSpent: timeSpent,
+          correctCount: correctCount,
+          totalQuestions: totalQuestions,
+          questionResults: quizData[currentQuestion].questions.map((q, i) => ({
+            userAnswer: userAnswers[i],
+            correctAnswer: q.correctAnswer,
+            isCorrect: userAnswers[i] === q.correctAnswer,
+          })),
+        });
+
+        if (isCorrect) {
+          score++;
+        }
+
+        // Update dropdown states and blank spaces
+        const dropdowns = document.querySelectorAll(".dropdown-select");
+        dropdowns.forEach((dropdown, index) => {
+          const questionIndex = parseInt(
+            dropdown.getAttribute("data-question-index")
+          );
+          const userAnswer = userAnswers[questionIndex];
+          const correctAnswer = questionsData[questionIndex].correctAnswer;
+
+          dropdown.classList.add("submitted");
+
+          // Update blank space with correct answer
+          const blankSpace = document.querySelector(
+            `[data-question-index="${questionIndex}"]`
+          );
+          if (blankSpace) {
+            const correctOption =
+              questionsData[questionIndex].options[correctAnswer];
+            blankSpace.textContent = correctOption;
+            blankSpace.style.padding = "2px 4px";
+            blankSpace.style.borderRadius = "3px";
+            blankSpace.style.fontWeight = "500";
+
+            if (userAnswer === correctAnswer) {
+              dropdown.classList.add("correct");
+              blankSpace.style.color = "#2e7d32";
+              blankSpace.style.backgroundColor = "rgba(76, 175, 80, 0.2)";
+            } else {
+              dropdown.classList.add("incorrect");
+              blankSpace.style.color = "#c62828";
+              blankSpace.style.backgroundColor = "rgba(244, 67, 54, 0.2)";
+            }
+          }
+
+          if (userAnswer === correctAnswer) {
+            dropdown.classList.add("correct");
+          } else {
+            dropdown.classList.add("incorrect");
+            // Show correct answer in dropdown
+            dropdown.value = correctAnswer;
+            dropdown.classList.remove("incorrect");
+            dropdown.classList.add("correct");
+          }
+        });
+
+        // Hide continue button
+        continueBtn.style.display = "none";
+
+        // Show feedback
+        showFeedback(
+          isCorrect,
+          correctAnswers,
+          isTimeout,
+          correctCount,
+          totalQuestions
+        );
+      }
+
+      function showFeedback(
+        isCorrect,
+        correctAnswers,
+        isTimeout,
+        correctCount,
+        totalQuestions
+      ) {
+        const feedbackSection = document.getElementById("feedbackSection");
+        const feedbackTitle = document.getElementById("feedbackTitle");
+        const feedbackIcon = document.getElementById("feedbackIcon");
+        const correctAnswerText = document.getElementById("correctAnswerText");
+        const nextBtn = document.querySelector(".next-btn");
+
+        feedbackSection.style.display = "block";
+
+        if (isCorrect) {
+          playSound("right answer SFX.wav");
+          feedbackSection.className = "feedback-section correct";
+          feedbackTitle.className = "feedback-title correct";
+          feedbackTitle.textContent = "Correct!";
+          correctAnswerText.className = "correct-answer-text";
+          correctAnswerText.textContent = `Perfect! You got all ${totalQuestions} questions correct.`;
+          nextBtn.className = "next-btn correct";
+          feedbackIcon.innerHTML = `
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="16,8 10,14 8,12"/>
+          `;
+        } else {
+          playSound("wrong answer SFX.wav");
+          feedbackSection.className = "feedback-section incorrect";
+          feedbackTitle.className = "feedback-title incorrect";
+          feedbackTitle.textContent = isTimeout
+            ? "Time's up! (7 minutes)"
+            : "Incorrect";
+          correctAnswerText.className =
+            "correct-answer-text incorrect-feedback";
+
+          let feedbackText = "";
+          if (isTimeout) {
+            feedbackText =
+              "Time ran out! Here are the correct answers:<br><br>";
+          } else {
+            feedbackText = `You got ${correctCount} out of ${totalQuestions} questions correct.<br><br><strong>Correct Answers:</strong><br><br>`;
+          }
+
+          const questionsData = quizData[currentQuestion].questions;
+          const correctAnswersList = [];
+          questionsData.forEach((q, index) => {
+            const correctOption = q.options[q.correctAnswer];
+            correctAnswersList.push(`${index + 1}. ${correctOption}`);
+          });
+
+          feedbackText += correctAnswersList.join(", ");
+
+          correctAnswerText.innerHTML = feedbackText;
+
+          nextBtn.className = "next-btn";
+          feedbackIcon.innerHTML = `
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="15" y1="9" x2="9" y2="15"/>
+            <line x1="9" y1="9" x2="15" y2="15"/>
+          `;
+        }
+      }
+
+      function playSound(filename) {
+        try {
+          const audio = new Audio(filename);
+          audio.volume = 0.5;
+          audio.play().catch((error) => {
+            console.log("Could not play sound:", error);
+          });
+        } catch (error) {
+          console.log("Error creating audio:", error);
+        }
+      }
+
+      function nextQuestion() {
+        currentQuestion++;
+
+        if (currentQuestion < quizData.length) {
+          // Reset and show the question card
+          document.getElementById("questionCard").style.display = "block";
+          document.getElementById("feedbackSection").style.display = "none";
+
+          // Show the continue button
+          const continueBtn = document.getElementById("continueBtn");
+          continueBtn.style.display = "block";
+          continueBtn.className = "continue-btn";
+          continueBtn.textContent = "CONTINUE";
+
+          showQuestion();
+        } else {
+          showResults();
+        }
+      }
+
+      function showResults() {
+        document.getElementById("questionCard").style.display = "none";
+        document.getElementById("feedbackSection").style.display = "none";
+        document.getElementById("resultsScreen").style.display = "block";
+      }
+
+      // Go to Practice Page
+      function goToPractice() {
+        // Calculate and save detailed session result
+        saveDetailedQuizResult("Interactive Reading");
+
+        // Update progress for main page
+        incrementSkillProgress("Interactive Reading");
+
+        // Navigate back to main page
+        window.location.href = "index.html";
+      }
+      // Function to save detailed quiz result
+      function saveDetailedQuizResult(skillName) {
+        const sessionData = calculateSessionMetrics();
+
+        // Create session result object
+        const sessionResult = {
+          skillName: skillName,
+          sessionId: Date.now(),
+          date: new Date().toISOString(),
+
+          // Basic performance data
+          totalQuestions: getTotalQuestions(),
+          correctAnswers: score,
+          accuracy: (score / getTotalQuestions()) * 100,
+
+          // Time analysis
+          totalTimeSpent: sessionData.totalTime,
+          averageTimePerQuestion: sessionData.avgTime,
+
+          // Performance analysis specific to Interactive Reading
+          passageComprehension: sessionData.passageComprehension,
+          contextualInference: sessionData.contextualInference,
+          multipleChoiceStrategy: sessionData.multipleChoiceStrategy,
+          topicAnalysis: sessionData.topicAnalysis,
+
+          // Final session score
+          sessionScore: calculateSessionScore(sessionData),
+
+          // Individual passage details
+          passageDetails: answers.map((answer, index) => ({
+            passageId: quizData[index].id,
+            topic: quizData[index].title,
+            passageLength: quizData[index].passage.length,
+            questionsInPassage: quizData[index].questions.length,
+            passageCorrect: answer.questionsCorrect,
+            passageTotal: answer.questionsTotal,
+            passageAccuracy:
+              (answer.questionsCorrect / answer.questionsTotal) * 100,
+            timeSpent: answer.timeSpent,
+            difficulty: determinePassageDifficulty(quizData[index]),
+            questionDetails: answer.questionResults.map((result, qIndex) => ({
+              questionText: quizData[index].questions[qIndex].question,
+              userChoice: result.userAnswer,
+              correctChoice: result.correctAnswer,
+              isCorrect: result.isCorrect,
+              options: quizData[index].questions[qIndex].options,
+              questionType: analyzeQuestionType(
+                quizData[index].questions[qIndex]
+              ),
+            })),
+          })),
+        };
+
+        // Save result to localStorage
+        saveSessionToHistory(skillName, sessionResult);
+
+        console.log(`Session saved for ${skillName}:`, sessionResult);
+      }
+
+      // Calculate total questions across all passages
+      function getTotalQuestions() {
+        return quizData.reduce(
+          (total, passage) => total + passage.questions.length,
+          0
+        );
+      }
+
+      // Calculate session metrics specific to Interactive Reading
+      function calculateSessionMetrics() {
+        const totalTime = answers.reduce(
+          (sum, answer) => sum + answer.timeSpent,
+          0
+        );
+        const totalQuestions = getTotalQuestions();
+        const avgTime = totalTime / totalQuestions;
+
+        // Calculate passage comprehension score
+        const passageComprehension = calculatePassageComprehension();
+
+        // Calculate contextual inference ability
+        const contextualInference = calculateContextualInference();
+
+        // Analyze multiple choice strategy effectiveness
+        const multipleChoiceStrategy = analyzeMultipleChoiceStrategy();
+
+        // Analyze performance by topic
+        const topicAnalysis = analyzeTopicPerformance();
+
+        return {
+          totalTime: Math.round(totalTime / 1000), // Convert to seconds
+          avgTime: Math.round(avgTime / 1000), // Convert to seconds
+          passageComprehension: Math.round(passageComprehension),
+          contextualInference: Math.round(contextualInference),
+          multipleChoiceStrategy: multipleChoiceStrategy,
+          topicAnalysis: topicAnalysis,
+        };
+      }
+
+      // Calculate passage comprehension ability
+      function calculatePassageComprehension() {
+        let totalScore = 0;
+        let totalPassages = 0;
+
+        answers.forEach((answer, index) => {
+          const passage = quizData[index];
+          const difficulty = determinePassageDifficulty(passage);
+
+          // Base score from accuracy
+          let passageScore =
+            (answer.questionsCorrect / answer.questionsTotal) * 100;
+
+          // Bonus for difficult passages
+          if (difficulty === "hard") {
+            passageScore *= 1.15;
+          } else if (difficulty === "medium") {
+            passageScore *= 1.05;
+          }
+
+          // Time bonus for efficient reading
+          const timeBonus = calculateReadingTimeBonus(
+            answer.timeSpent,
+            passage.passage.length
+          );
+          passageScore += timeBonus;
+
+          totalScore += Math.min(passageScore, 110); // Cap at 110
+          totalPassages++;
+        });
+
+        return totalPassages > 0 ? totalScore / totalPassages : 0;
+      }
+
+      // Calculate contextual inference ability
+      function calculateContextualInference() {
+        let inferenceScore = 0;
+        let inferenceQuestions = 0;
+
+        answers.forEach((answer, passageIndex) => {
+          const passage = quizData[passageIndex];
+
+          answer.questionResults.forEach((result, questionIndex) => {
+            const question = passage.questions[questionIndex];
+            const questionType = analyzeQuestionType(question);
+
+            if (questionType === "inference" || questionType === "contextual") {
+              if (result.isCorrect) {
+                inferenceScore += 100;
+              }
+              inferenceQuestions++;
+            }
+          });
+        });
+
+        return inferenceQuestions > 0 ? inferenceScore / inferenceQuestions : 0;
+      }
+
+      // Analyze multiple choice strategy effectiveness
+      function analyzeMultipleChoiceStrategy() {
+        const strategy = {
+          totalQuestions: 0,
+          correctChoices: 0,
+          distractorAnalysis: {
+            obviousWrong: 0, // Chose obviously wrong answer
+            closeButWrong: 0, // Chose plausible but incorrect answer
+            correctChoice: 0,
+          },
+        };
+
+        answers.forEach((answer, passageIndex) => {
+          const passage = quizData[passageIndex];
+
+          answer.questionResults.forEach((result, questionIndex) => {
+            const question = passage.questions[questionIndex];
+            strategy.totalQuestions++;
+
+            if (result.isCorrect) {
+              strategy.correctChoices++;
+              strategy.distractorAnalysis.correctChoice++;
+            } else {
+              // Analyze what type of wrong answer was chosen
+              const choiceType = analyzeChoiceType(
+                question,
+                result.userAnswer,
+                result.correctAnswer
+              );
+              if (choiceType === "obvious") {
+                strategy.distractorAnalysis.obviousWrong++;
+              } else {
+                strategy.distractorAnalysis.closeButWrong++;
+              }
+            }
+          });
+        });
+
+        return {
+          accuracy:
+            strategy.totalQuestions > 0
+              ? (strategy.correctChoices / strategy.totalQuestions) * 100
+              : 0,
+          strategicThinking:
+            strategy.distractorAnalysis.obviousWrong <
+            strategy.totalQuestions * 0.2
+              ? 100
+              : 60,
+          distractorResistance:
+            strategy.distractorAnalysis.closeButWrong <
+            strategy.totalQuestions * 0.3
+              ? 100
+              : 70,
+        };
+      }
+
+      // Analyze performance by topic
+      function analyzeTopicPerformance() {
+        const topicPerformance = {};
+
+        answers.forEach((answer, index) => {
+          const passage = quizData[index];
+          const topic = categorizePassageTopic(passage.title);
+
+          if (!topicPerformance[topic]) {
+            topicPerformance[topic] = {
+              correct: 0,
+              total: 0,
+              passages: 0,
+            };
+          }
+
+          topicPerformance[topic].correct += answer.questionsCorrect;
+          topicPerformance[topic].total += answer.questionsTotal;
+          topicPerformance[topic].passages++;
+        });
+
+        // Convert to percentages
+        Object.keys(topicPerformance).forEach((topic) => {
+          const data = topicPerformance[topic];
+          data.accuracy =
+            data.total > 0 ? (data.correct / data.total) * 100 : 0;
+        });
+
+        return topicPerformance;
+      }
+
+      // Determine passage difficulty
+      function determinePassageDifficulty(passage) {
+        let difficultyScore = 1; // Base difficulty
+
+        // Passage length
+        const passageLength = passage.passage.length;
+        if (passageLength > 400) {
+          difficultyScore += 1;
+        } else if (passageLength > 250) {
+          difficultyScore += 0.5;
+        }
+
+        // Number of questions
+        const questionCount = passage.questions.length;
+        if (questionCount >= 3) {
+          difficultyScore += 0.5;
+        }
+
+        // Topic complexity
+        const topic = categorizePassageTopic(passage.title);
+        const complexTopics = ["technology", "science", "social", "academic"];
+        if (complexTopics.includes(topic)) {
+          difficultyScore += 0.5;
+        }
+
+        // Question type complexity
+        const hasInferenceQuestions = passage.questions.some(
+          (q) =>
+            analyzeQuestionType(q) === "inference" ||
+            analyzeQuestionType(q) === "contextual"
+        );
+        if (hasInferenceQuestions) {
+          difficultyScore += 0.5;
+        }
+
+        // Clamp difficulty between 1-3
+        difficultyScore = Math.max(1, Math.min(3, difficultyScore));
+
+        if (difficultyScore <= 1.5) return "easy";
+        if (difficultyScore <= 2.5) return "medium";
+        return "hard";
+      }
+
+      // Analyze question type
+      function analyzeQuestionType(question) {
+        const questionText = question.question.toLowerCase();
+
+        // Inference questions
+        if (
+          questionText.includes("suggest") ||
+          questionText.includes("imply") ||
+          questionText.includes("conclude") ||
+          questionText.includes("infer")
+        ) {
+          return "inference";
+        }
+
+        // Contextual questions (require understanding context)
+        if (
+          questionText.includes("according to") ||
+          questionText.includes("based on") ||
+          questionText.includes("context") ||
+          questionText.includes("passage")
+        ) {
+          return "contextual";
+        }
+
+        // Vocabulary questions
+        if (
+          questionText.includes("meaning") ||
+          questionText.includes("refers to") ||
+          questionText.includes("definition")
+        ) {
+          return "vocabulary";
+        }
+
+        // Detail questions (direct from text)
+        return "detail";
+      }
+
+      // Categorize passage topic
+      function categorizePassageTopic(title) {
+        const titleLower = title.toLowerCase();
+
+        if (
+          titleLower.includes("technology") ||
+          titleLower.includes("online") ||
+          titleLower.includes("digital") ||
+          titleLower.includes("computer")
+        ) {
+          return "technology";
+        }
+
+        if (
+          titleLower.includes("environment") ||
+          titleLower.includes("climate") ||
+          titleLower.includes("energy") ||
+          titleLower.includes("pollution")
+        ) {
+          return "environment";
+        }
+
+        if (
+          titleLower.includes("health") ||
+          titleLower.includes("exercise") ||
+          titleLower.includes("food") ||
+          titleLower.includes("medicine")
+        ) {
+          return "health";
+        }
+
+        if (
+          titleLower.includes("education") ||
+          titleLower.includes("learning") ||
+          titleLower.includes("school") ||
+          titleLower.includes("student")
+        ) {
+          return "education";
+        }
+
+        if (
+          titleLower.includes("city") ||
+          titleLower.includes("transport") ||
+          titleLower.includes("urban") ||
+          titleLower.includes("society")
+        ) {
+          return "social";
+        }
+
+        return "general";
+      }
+
+      // Analyze what type of wrong choice was made
+      function analyzeChoiceType(question, userChoice, correctChoice) {
+        const options = question.options;
+        const userOption = options[userChoice];
+        const correctOption = options[correctChoice];
+
+        // Simple heuristic: if the wrong choice is very different from correct answer
+        // in terms of word type or meaning, it's considered "obvious"
+        const obviouslyWrongWords = [
+          "ignore",
+          "impossible",
+          "expensive",
+          "worries",
+          "fears",
+          "problems",
+        ];
+
+        if (obviouslyWrongWords.includes(userOption.toLowerCase())) {
+          return "obvious";
+        }
+
+        return "plausible";
+      }
+
+      // Calculate reading time bonus
+      function calculateReadingTimeBonus(timeSpent, passageLength) {
+        const timeInSeconds = timeSpent / 1000;
+        const wordsInPassage = passageLength / 5; // Approximate word count
+        const optimalReadingSpeed = 200; // words per minute
+        const optimalTime = (wordsInPassage / optimalReadingSpeed) * 60; // in seconds
+
+        if (timeInSeconds < optimalTime * 1.5) {
+          // Within 150% of optimal time
+          const efficiency = optimalTime / timeInSeconds;
+          return Math.min(efficiency * 5, 10); // Max 10 bonus points
+        }
+
+        return 0;
+      }
+
+      // Calculate final session score for Interactive Reading
+      function calculateSessionScore(sessionData) {
+        const accuracy = (score / getTotalQuestions()) * 100;
+
+        // Scoring weights for Interactive Reading
+        const weights = {
+          accuracy: 0.35, // 35% - Overall accuracy
+          passageComprehension: 0.25, // 25% - Understanding passages
+          contextualInference: 0.2, // 20% - Making inferences
+          strategy: 0.15, // 15% - Multiple choice strategy
+          speed: 0.05, // 5% - Reading efficiency
+        };
+
+        // Speed score (efficient reading without rushing)
+        const optimalTime = 45; // seconds per question on average
+        const timeDiff = Math.abs(sessionData.avgTime - optimalTime);
+        const speedScore = Math.max(0, 100 - (timeDiff / optimalTime) * 50);
+
+        // Strategy score (average of strategic thinking measures)
+        const strategyScore =
+          (sessionData.multipleChoiceStrategy.strategicThinking +
+            sessionData.multipleChoiceStrategy.distractorResistance) /
+          2;
+
+        // Calculate final weighted score
+        const finalScore =
+          accuracy * weights.accuracy +
+          sessionData.passageComprehension * weights.passageComprehension +
+          sessionData.contextualInference * weights.contextualInference +
+          strategyScore * weights.strategy +
+          speedScore * weights.speed;
+
+        return Math.round(Math.max(0, Math.min(100, finalScore)));
+      }
+
+      // Save session to localStorage history
+      function saveSessionToHistory(skillName, sessionResult) {
+        const historyKey = `${skillName
+          .replace(/\s+/g, "_")
+          .toLowerCase()}_sessions`;
+
+        try {
+          // Get existing sessions
+          const existingSessions = localStorage.getItem(historyKey);
+          const sessions = existingSessions ? JSON.parse(existingSessions) : [];
+
+          // Add new session
+          sessions.push(sessionResult);
+
+          // Keep only last 20 sessions to prevent storage overflow
+          if (sessions.length > 20) {
+            sessions.splice(0, sessions.length - 20);
+          }
+
+          // Save back to localStorage
+          localStorage.setItem(historyKey, JSON.stringify(sessions));
+
+          console.log(
+            `Saved session to ${historyKey}. Total sessions: ${sessions.length}`
+          );
+
+          // Update overall skill assessment
+          updateSkillOverallAssessment(skillName, sessions);
+        } catch (error) {
+          console.error("Error saving session to history:", error);
+        }
+      }
+
+      // Update overall skill assessment based on all sessions
+      function updateSkillOverallAssessment(skillName, allSessions) {
+        if (!allSessions || allSessions.length === 0) return;
+
+        // Calculate overall metrics
+        const totalQuestions = allSessions.reduce(
+          (sum, session) => sum + session.totalQuestions,
+          0
+        );
+        const totalCorrect = allSessions.reduce(
+          (sum, session) => sum + session.correctAnswers,
+          0
+        );
+        const overallAccuracy = (totalCorrect / totalQuestions) * 100;
+
+        // Calculate improvement (compare first vs last session)
+        const firstSession = allSessions[0];
+        const lastSession = allSessions[allSessions.length - 1];
+        const improvement = lastSession.accuracy - firstSession.accuracy;
+
+        // Calculate average session score
+        const avgSessionScore =
+          allSessions.reduce((sum, session) => sum + session.sessionScore, 0) /
+          allSessions.length;
+
+        // Calculate average performance metrics
+        const avgPassageComprehension =
+          allSessions.reduce((sum, s) => sum + s.passageComprehension, 0) /
+          allSessions.length;
+        const avgContextualInference =
+          allSessions.reduce((sum, s) => sum + s.contextualInference, 0) /
+          allSessions.length;
+
+        // Calculate topic strengths and weaknesses
+        const topicAnalysis = consolidateTopicAnalysis(allSessions);
+
+        // Calculate consistency across sessions
+        const sessionScores = allSessions.map((s) => s.sessionScore);
+        const scoreStdDev = calculateStandardDeviation(sessionScores);
+        const crossSessionConsistency = Math.max(0, 100 - scoreStdDev);
+
+        // Final skill score calculation
+        const skillWeights = {
+          accuracy: 0.3,
+          avgScore: 0.25,
+          improvement: 0.2,
+          consistency: 0.15,
+          specialization: 0.1, // Bonus for strong areas
+        };
+
+        const normalizedImprovement = Math.max(
+          0,
+          Math.min(100, improvement + 50)
+        ); // Normalize to 0-100
+        const specializationBonus = Math.max(
+          avgPassageComprehension,
+          avgContextualInference
+        );
+
+        const finalSkillScore =
+          overallAccuracy * skillWeights.accuracy +
+          avgSessionScore * skillWeights.avgScore +
+          normalizedImprovement * skillWeights.improvement +
+          crossSessionConsistency * skillWeights.consistency +
+          specializationBonus * skillWeights.specialization;
+
+        // Create overall assessment
+        const skillAssessment = {
+          skillName: skillName,
+          lastUpdated: new Date().toISOString(),
+          sessionsCompleted: allSessions.length,
+
+          // Performance metrics
+          overallAccuracy: Math.round(overallAccuracy),
+          averageSessionScore: Math.round(avgSessionScore),
+          improvement: Math.round(improvement),
+          consistency: Math.round(crossSessionConsistency),
+
+          // Specific to Interactive Reading
+          passageComprehensionStrength: Math.round(avgPassageComprehension),
+          contextualInferenceStrength: Math.round(avgContextualInference),
+          topicStrengths: topicAnalysis.strongest,
+          topicWeaknesses: topicAnalysis.weakest,
+          averageTimePerQuestion: Math.round(
+            allSessions.reduce((sum, s) => sum + s.averageTimePerQuestion, 0) /
+              allSessions.length
+          ),
+
+          // Final score
+          finalScore: Math.round(finalSkillScore),
+          level: determineSkillLevel(finalSkillScore),
+
+          // Additional insights
+          strongPoints: identifyStrongPoints(allSessions),
+          weakPoints: identifyWeakPoints(allSessions),
+          recommendations: generateRecommendations(
+            allSessions,
+            finalSkillScore
+          ),
+        };
+
+        // Save overall assessment
+        const assessmentKey = `${skillName
+          .replace(/\s+/g, "_")
+          .toLowerCase()}_assessment`;
+        localStorage.setItem(assessmentKey, JSON.stringify(skillAssessment));
+
+        console.log(
+          `Updated overall assessment for ${skillName}:`,
+          skillAssessment
+        );
+      }
+
+      // Consolidate topic analysis across all sessions
+      function consolidateTopicAnalysis(sessions) {
+        const consolidatedTopics = {};
+
+        sessions.forEach((session) => {
+          Object.keys(session.topicAnalysis).forEach((topic) => {
+            if (!consolidatedTopics[topic]) {
+              consolidatedTopics[topic] = { correct: 0, total: 0 };
+            }
+            consolidatedTopics[topic].correct +=
+              session.topicAnalysis[topic].correct;
+            consolidatedTopics[topic].total +=
+              session.topicAnalysis[topic].total;
+          });
+        });
+
+        // Calculate accuracies and find strongest/weakest
+        let strongest = { topic: "", accuracy: 0 };
+        let weakest = { topic: "", accuracy: 100 };
+
+        Object.keys(consolidatedTopics).forEach((topic) => {
+          const data = consolidatedTopics[topic];
+          const accuracy =
+            data.total > 0 ? (data.correct / data.total) * 100 : 0;
+
+          if (accuracy > strongest.accuracy) {
+            strongest = { topic, accuracy };
+          }
+          if (accuracy < weakest.accuracy && data.total > 0) {
+            weakest = { topic, accuracy };
+          }
+        });
+
+        return { strongest, weakest, all: consolidatedTopics };
+      }
+
+      // Helper function to calculate standard deviation
+      function calculateStandardDeviation(values) {
+        const mean = values.reduce((sum, val) => sum + val, 0) / values.length;
+        const squaredDiffs = values.map((val) => Math.pow(val - mean, 2));
+        const avgSquaredDiff =
+          squaredDiffs.reduce((sum, val) => sum + val, 0) / values.length;
+        return Math.sqrt(avgSquaredDiff);
+      }
+
+      // Determine skill level based on final score
+      function determineSkillLevel(score) {
+        if (score >= 90) return "Advanced";
+        if (score >= 75) return "Upper-Intermediate";
+        if (score >= 60) return "Intermediate";
+        if (score >= 45) return "Lower-Intermediate";
+        if (score >= 30) return "Elementary";
+        return "Beginner";
+      }
+
+      // Identify strong points from session data
+      function identifyStrongPoints(sessions) {
+        const strongPoints = [];
+
+        // Check passage comprehension
+        const avgComprehension =
+          sessions.reduce((sum, s) => sum + s.passageComprehension, 0) /
+          sessions.length;
+        if (avgComprehension >= 80) {
+          strongPoints.push("Excellent passage comprehension skills");
+        }
+
+        // Check contextual inference
+        const avgInference =
+          sessions.reduce((sum, s) => sum + s.contextualInference, 0) /
+          sessions.length;
+        if (avgInference >= 80) {
+          strongPoints.push("Strong ability to make contextual inferences");
+        }
+
+        // Check multiple choice strategy
+        const avgStrategy =
+          sessions.reduce(
+            (sum, s) =>
+              sum +
+              (s.multipleChoiceStrategy.strategicThinking +
+                s.multipleChoiceStrategy.distractorResistance) /
+                2,
+            0
+          ) / sessions.length;
+        if (avgStrategy >= 85) {
+          strongPoints.push("Effective multiple choice test-taking strategy");
+        }
+
+        // Check reading speed
+        const avgTime =
+          sessions.reduce((sum, s) => sum + s.averageTimePerQuestion, 0) /
+          sessions.length;
+        if (avgTime <= 50) {
+          strongPoints.push("Efficient reading speed");
+        }
+
+        // Check consistency
+        const sessionScores = sessions.map((s) => s.sessionScore);
+        const scoreStdDev = calculateStandardDeviation(sessionScores);
+        if (scoreStdDev <= 10) {
+          strongPoints.push("Consistent performance across sessions");
+        }
+
+        return strongPoints.length > 0
+          ? strongPoints
+          : ["Shows potential for improvement"];
+      }
+
+      // Identify weak points from session data
+      function identifyWeakPoints(sessions) {
+        const weakPoints = [];
+
+        // Check overall accuracy
+        const avgAccuracy =
+          sessions.reduce((sum, s) => sum + s.accuracy, 0) / sessions.length;
+        if (avgAccuracy < 65) {
+          weakPoints.push("Overall accuracy needs improvement");
+        }
+
+        // Check comprehension issues
+        const avgComprehension =
+          sessions.reduce((sum, s) => sum + s.passageComprehension, 0) /
+          sessions.length;
+        if (avgComprehension < 60) {
+          weakPoints.push("Passage comprehension could be stronger");
+        }
+
+        // Check inference issues
+        const avgInference =
+          sessions.reduce((sum, s) => sum + s.contextualInference, 0) /
+          sessions.length;
+        if (avgInference < 60) {
+          weakPoints.push("Difficulty making contextual inferences");
+        }
+
+        // Check strategy issues
+        const avgStrategy =
+          sessions.reduce(
+            (sum, s) =>
+              sum +
+              (s.multipleChoiceStrategy.strategicThinking +
+                s.multipleChoiceStrategy.distractorResistance) /
+                2,
+            0
+          ) / sessions.length;
+        if (avgStrategy < 70) {
+          weakPoints.push("Multiple choice strategy needs improvement");
+        }
+
+        // Check speed issues
+        const avgTime =
+          sessions.reduce((sum, s) => sum + s.averageTimePerQuestion, 0) /
+          sessions.length;
+        if (avgTime > 80) {
+          weakPoints.push("Reading speed could be faster");
+        }
+
+        return weakPoints.length > 0
+          ? weakPoints
+          : ["Continue practicing to maintain progress"];
+      }
+
+      // Generate personalized recommendations
+      function generateRecommendations(sessions, finalScore) {
+        const recommendations = [];
+        const avgComprehension =
+          sessions.reduce((sum, s) => sum + s.passageComprehension, 0) /
+          sessions.length;
+        const avgInference =
+          sessions.reduce((sum, s) => sum + s.contextualInference, 0) /
+          sessions.length;
+
+        if (finalScore < 45) {
+          recommendations.push("Focus on basic reading comprehension skills");
+          recommendations.push("Practice with shorter passages first");
+          recommendations.push(
+            "Work on understanding main ideas before details"
+          );
+        } else if (finalScore < 65) {
+          if (avgComprehension < avgInference) {
+            recommendations.push(
+              "Practice reading longer passages for better comprehension"
+            );
+            recommendations.push(
+              "Focus on identifying main ideas and supporting details"
+            );
+          } else {
+            recommendations.push("Work on making inferences from context");
+            recommendations.push("Practice reading between the lines");
+          }
+        } else if (finalScore < 80) {
+          recommendations.push(
+            "Challenge yourself with more complex academic texts"
+          );
+          recommendations.push(
+            "Practice different question types and strategies"
+          );
+          recommendations.push(
+            "Work on increasing reading speed while maintaining accuracy"
+          );
+        } else {
+          recommendations.push(
+            "Excellent work! Try advanced reading materials"
+          );
+          recommendations.push(
+            "Focus on specialized vocabulary in different fields"
+          );
+          recommendations.push(
+            "Consider helping others improve their reading skills"
+          );
+        }
+
+        // Topic-specific recommendations
+        const topicAnalysis = consolidateTopicAnalysis(sessions);
+        if (topicAnalysis.weakest.accuracy < 50) {
+          recommendations.push(
+            `Focus on ${topicAnalysis.weakest.topic} topic materials`
+          );
+        }
+
+        return recommendations;
+      }
+      // Function to increment progress by 1
+      function incrementSkillProgress(skillName) {
+        // Get current progress first
+        const currentProgress = getCurrentSkillProgress(skillName);
+        const newCompleted = Math.min(currentProgress + 1, 6); // Don't exceed 6
+
+        const progressData = {
+          skill: skillName,
+          completed: newCompleted,
+          total: 6,
+          timestamp: new Date().toISOString(),
+        };
+
+        localStorage.setItem(
+          "interactiveReadingProgress",
+          JSON.stringify(progressData)
+        );
+        console.log(`Progress updated: ${skillName} - ${newCompleted}/6`);
+      }
+
+      // Function to get current skill progress from localStorage
+      function getCurrentSkillProgress(skillName) {
+        try {
+          // Check if there's existing progress in the main app
+          const mainProgressData = localStorage.getItem("skillProgress");
+          if (mainProgressData) {
+            const allProgress = JSON.parse(mainProgressData);
+            if (allProgress[skillName]) {
+              return allProgress[skillName].completed || 0;
+            }
+          }
+          return 0; // Start from 0 if no progress found
+        } catch (error) {
+          console.error("Error reading current progress:", error);
+          return 0;
+        }
+      }
+
+      function goBack() {
+        if (confirm("Are you sure you want to exit the quiz?")) {
+          window.history.back();
+        }
+      }
+
+      // Keyboard Support
+      document.addEventListener("keydown", function (event) {
+        if (
+          !dataLoaded ||
+          document.getElementById("quizContainer").style.display === "none"
+        ) {
+          return;
+        }
+
+        if (event.key === "Escape") {
+          goBack();
+        } else if (event.key === "Enter" && event.ctrlKey) {
+          // Ctrl+Enter to submit
+          const continueBtn = document.getElementById("continueBtn");
+          if (continueBtn.classList.contains("active")) {
+            checkAnswer();
+          }
+        }
+      });
+
+      // Initialize App on Load
+      window.addEventListener("load", function () {
+        loadQuizData();
+      });
+    </script>
+  </body>
+</html>

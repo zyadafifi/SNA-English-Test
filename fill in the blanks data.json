@@ -1,0 +1,199 @@
+{
+  "config": {
+    "title": "Complete the sentence with the correct word",
+    "shuffleQuestions": true
+  },
+  "questions": [
+    {
+      "id": 1,
+      "sentence": "I like to # books in my free time.",
+      "correctAnswer": "read",
+      "alternatives": ["study", "look at"],
+      "type": "complete"
+    },
+    {
+      "id": 2,
+      "sentence": "Can you # me the salt please?",
+      "correctAnswer": "pass",
+      "alternatives": ["give", "hand"],
+      "type": "complete"
+    },
+    {
+      "id": 3,
+      "sentence": "She needs to # a dentist appointment.",
+      "correctAnswer": "make",
+      "alternatives": ["book", "schedule"],
+      "type": "partial",
+      "visibleLetters": "m__e"
+    },
+    {
+      "id": 4,
+      "sentence": "The sun # in the morning.",
+      "correctAnswer": "rises",
+      "alternatives": ["comes up", "appears"],
+      "type": "partial",
+      "visibleLetters": "r___s"
+    },
+    {
+      "id": 5,
+      "sentence": "I # coffee every morning.",
+      "correctAnswer": "drink",
+      "alternatives": ["have", "take"],
+      "type": "partial",
+      "visibleLetters": "dr__k"
+    },
+    {
+      "id": 6,
+      "sentence": "They will # to the park tomorrow.",
+      "correctAnswer": "go",
+      "alternatives": ["walk", "travel"],
+      "type": "complete"
+    },
+    {
+      "id": 7,
+      "sentence": "Please # the lights before you leave.",
+      "correctAnswer": "turn off",
+      "alternatives": ["switch off", "close"],
+      "type": "complete"
+    },
+    {
+      "id": 8,
+      "sentence": "My sister is # than me.",
+      "correctAnswer": "younger",
+      "alternatives": ["smaller", "little"],
+      "type": "partial",
+      "visibleLetters": "yo___er"
+    },
+    {
+      "id": 9,
+      "sentence": "We should # our hands before eating.",
+      "correctAnswer": "wash",
+      "alternatives": ["clean", "rinse"],
+      "type": "partial",
+      "visibleLetters": "w__h"
+    },
+    {
+      "id": 10,
+      "sentence": "The train # at six o'clock.",
+      "correctAnswer": "arrives",
+      "alternatives": ["comes", "gets here"],
+      "type": "partial",
+      "visibleLetters": "ar___es"
+    },
+    {
+      "id": 11,
+      "sentence": "He likes to # music when he studies.",
+      "correctAnswer": "listen to",
+      "alternatives": ["hear", "play"],
+      "type": "complete"
+    },
+    {
+      "id": 12,
+      "sentence": "I need to # my room today.",
+      "correctAnswer": "clean",
+      "alternatives": ["tidy", "organize"],
+      "type": "partial",
+      "visibleLetters": "cl__n"
+    },
+    {
+      "id": 13,
+      "sentence": "Can you # the window? It's hot.",
+      "correctAnswer": "open",
+      "alternatives": ["unlock", "unfasten"],
+      "type": "partial",
+      "visibleLetters": "o__n"
+    },
+    {
+      "id": 14,
+      "sentence": "She wants to # a new language.",
+      "correctAnswer": "learn",
+      "alternatives": ["study", "master"],
+      "type": "partial",
+      "visibleLetters": "le__n"
+    },
+    {
+      "id": 15,
+      "sentence": "We # dinner at seven every day.",
+      "correctAnswer": "eat",
+      "alternatives": ["have", "take"],
+      "type": "complete"
+    },
+    {
+      "id": 16,
+      "sentence": "The baby is # now.",
+      "correctAnswer": "sleeping",
+      "alternatives": ["resting", "napping"],
+      "type": "partial",
+      "visibleLetters": "sl___ing"
+    },
+    {
+      "id": 17,
+      "sentence": "I # to school by bus.",
+      "correctAnswer": "go",
+      "alternatives": ["travel", "get"],
+      "type": "complete"
+    },
+    {
+      "id": 18,
+      "sentence": "Please # down and relax.",
+      "correctAnswer": "sit",
+      "alternatives": ["be seated", "rest"],
+      "type": "partial",
+      "visibleLetters": "s_t"
+    },
+    {
+      "id": 19,
+      "sentence": "The dog is # in the garden.",
+      "correctAnswer": "playing",
+      "alternatives": ["running", "having fun"],
+      "type": "partial",
+      "visibleLetters": "pl___ng"
+    },
+    {
+      "id": 20,
+      "sentence": "I want to # a doctor when I grow up.",
+      "correctAnswer": "become",
+      "alternatives": ["be", "work as"],
+      "type": "partial",
+      "visibleLetters": "bec__e"
+    },
+    {
+      "id": 21,
+      "sentence": "She # her teeth twice a day.",
+      "correctAnswer": "brushes",
+      "alternatives": ["cleans", "washes"],
+      "type": "partial",
+      "visibleLetters": "br___es"
+    },
+    {
+      "id": 22,
+      "sentence": "We need to # some groceries.",
+      "correctAnswer": "buy",
+      "alternatives": ["get", "purchase"],
+      "type": "complete"
+    },
+    {
+      "id": 23,
+      "sentence": "He can # three languages.",
+      "correctAnswer": "speak",
+      "alternatives": ["talk", "use"],
+      "type": "partial",
+      "visibleLetters": "sp__k"
+    },
+    {
+      "id": 24,
+      "sentence": "The children # to the teacher carefully.",
+      "correctAnswer": "listen",
+      "alternatives": ["pay attention", "hear"],
+      "type": "partial",
+      "visibleLetters": "li___n"
+    },
+    {
+      "id": 25,
+      "sentence": "I like to # pictures with my camera.",
+      "correctAnswer": "take",
+      "alternatives": ["make", "capture"],
+      "type": "complete"
+    }
+  ]
+}
