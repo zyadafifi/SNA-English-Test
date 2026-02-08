@@ -57,9 +57,18 @@
         height: 100%;
         background: #f8f9fa;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         z-index: 1000;
+      }
+
+      .loading-screen > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
       }
 
       .loading-spinner {
@@ -69,6 +78,7 @@
         border-top: 4px solid #ffc515;
         border-radius: 50%;
         animation: spin 1s linear infinite;
+        flex-shrink: 0;
       }
 
       @keyframes spin {
@@ -81,9 +91,10 @@
       }
 
       .loading-text {
-        margin-top: 20px;
         font-size: 16px;
         color: #6b7280;
+        text-align: center;
+        margin: 0;
       }
 
       /* Error Screen */
@@ -200,6 +211,42 @@
 
       .close-btn:hover {
         background: #f8f8f8;
+      }
+
+      /* Progress Bar */
+      .stage-progress-bar {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 30px;
+        width: 100%;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .progress-track {
+        flex: 1;
+        height: 8px;
+        background: #e0e0e0;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: #ffc515;
+        border-radius: 4px;
+        transition: width 0.3s ease;
+        width: 0%;
+      }
+
+      .progress-text {
+        font-size: 14px;
+        color: #666;
+        font-weight: 500;
+        min-width: 45px;
+        text-align: right;
       }
 
       /* Question Content */
@@ -777,7 +824,14 @@
         font-size: 18px;
         font-weight: 400;
         color: #777;
-        margin-bottom: 60px;
+        margin-bottom: 20px;
+      }
+
+      .results-score {
+        font-size: 17px;
+        font-weight: 500;
+        color: #666;
+        margin-bottom: 40px;
       }
 
       .done-btn {
@@ -949,6 +1003,35 @@
         .results-screen {
           padding: 50px 30px;
         }
+
+        .stage-progress-bar {
+          gap: 8px;
+          max-width: 100%;
+          margin-bottom: 20px;
+        }
+
+        .progress-track {
+          height: 6px;
+        }
+
+        .progress-text {
+          font-size: 12px;
+          min-width: 35px;
+        }
+
+        .loading-spinner {
+          width: 32px;
+          height: 32px;
+          border-width: 3px;
+        }
+
+        .loading-screen > div {
+          gap: 16px;
+        }
+
+        .loading-text {
+          font-size: 14px;
+        }
       }
 
       /* Audio Status */
@@ -1035,6 +1118,14 @@
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
         </button>
+
+        <!-- Progress Bar -->
+        <div class="stage-progress-bar">
+          <div class="progress-track">
+            <div class="progress-fill" id="stageProgressFill"></div>
+          </div>
+          <span class="progress-text" id="stageProgressText">0/15</span>
+        </div>
 
         <!-- Question Content -->
         <div class="question-content" id="questionContent">
@@ -1172,6 +1263,7 @@
         </div>
         <div class="results-title">Practice complete! You</div>
         <div class="results-subtitle">improved your listening skills.</div>
+        <div class="results-score" id="resultsScore"></div>
         <button class="done-btn" onclick="goToPractice()">DONE</button>
       </div>
     </div>
@@ -1350,6 +1442,21 @@
       }
 
       // Show Current Question
+      // Update Progress Bar
+      function updateProgressBar() {
+        const completed = currentQuestion;
+        const total = quizData.length;
+        const percentage = total > 0 ? (completed / total) * 100 : 0;
+        
+        const progressFill = document.getElementById("stageProgressFill");
+        const progressText = document.getElementById("stageProgressText");
+        
+        if (progressFill && progressText) {
+          progressFill.style.width = percentage + "%";
+          progressText.textContent = completed + "/" + total;
+        }
+      }
+
       function showQuestion() {
         if (currentQuestion >= quizData.length) {
           showResults();
@@ -1357,6 +1464,9 @@
         }
 
         const question = quizData[currentQuestion];
+
+        // Update progress bar
+        updateProgressBar();
 
         // Reset UI
         const textInput = document.getElementById("textInput");
@@ -1787,6 +1897,15 @@
       function showResults() {
         document.getElementById("questionCard").style.display = "none";
         document.getElementById("feedbackSection").style.display = "none";
+        
+        // Update results score
+        const resultsScoreEl = document.getElementById("resultsScore");
+        if (resultsScoreEl) {
+          const correct = score;
+          const total = quizData.length;
+          resultsScoreEl.textContent = `You got ${correct} out of ${total} correct.`;
+        }
+        
         document.getElementById("resultsScreen").style.display = "block";
       }
 

@@ -224,6 +224,20 @@ function addEventListeners() {
       toggleSidebar();
     }
   });
+
+  // Header scroll effect - add background when scrolled
+  const header = document.querySelector(".header");
+  if (header) {
+    function updateHeaderScrollState() {
+      if (window.scrollY > 10) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+    }
+    window.addEventListener("scroll", updateHeaderScrollState, { passive: true });
+    updateHeaderScrollState(); // Check initial state
+  }
 }
 
 function initializeSkillCards() {

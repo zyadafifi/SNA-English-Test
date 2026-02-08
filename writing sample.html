@@ -63,6 +63,14 @@
         z-index: 1000;
       }
 
+      .loading-screen > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+      }
+
       .loading-spinner {
         width: 40px;
         height: 40px;
@@ -70,7 +78,7 @@
         border-top: 4px solid #ffc515;
         border-radius: 50%;
         animation: spin 1s linear infinite;
-        margin-bottom: 20px;
+        flex-shrink: 0;
       }
 
       @keyframes spin {
@@ -85,6 +93,8 @@
       .loading-text {
         font-size: 16px;
         color: #6b7280;
+        text-align: center;
+        margin: 0;
       }
 
       /* Error Screen */
@@ -203,6 +213,42 @@
       .close-btn:hover {
         background: #f8f8f8;
         color: #999;
+      }
+
+      /* Progress Bar */
+      .stage-progress-bar {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 30px;
+        width: 100%;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .progress-track {
+        flex: 1;
+        height: 8px;
+        background: #e0e0e0;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: #ffc515;
+        border-radius: 4px;
+        transition: width 0.3s ease;
+        width: 0%;
+      }
+
+      .progress-text {
+        font-size: 14px;
+        color: #666;
+        font-weight: 500;
+        min-width: 45px;
+        text-align: right;
       }
 
       /* Stage 1: Preparation */
@@ -471,14 +517,45 @@
         .writing-area {
           height: 200px;
         }
+
+        .stage-progress-bar {
+          gap: 8px;
+          max-width: 100%;
+          margin-bottom: 20px;
+        }
+
+        .progress-track {
+          height: 6px;
+        }
+
+        .progress-text {
+          font-size: 12px;
+          min-width: 35px;
+        }
+
+        .loading-spinner {
+          width: 32px;
+          height: 32px;
+          border-width: 3px;
+        }
+
+        .loading-screen > div {
+          gap: 16px;
+        }
+
+        .loading-text {
+          font-size: 14px;
+        }
       }
     </style>
   </head>
   <body>
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
-      <div class="loading-spinner"></div>
-      <div class="loading-text">Loading quiz data...</div>
+      <div>
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading quiz data...</div>
+      </div>
     </div>
 
     <!-- Error Screen -->
@@ -531,6 +608,14 @@
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
         </button>
+
+        <!-- Progress Bar -->
+        <div class="stage-progress-bar">
+          <div class="progress-track">
+            <div class="progress-fill" id="stageProgressFill"></div>
+          </div>
+          <span class="progress-text" id="stageProgressText">0/3</span>
+        </div>
 
         <!-- Stage 1: Preparation -->
         <div class="preparation-stage" id="preparationStage">
@@ -675,8 +760,26 @@
         setupPreparationStage();
       }
 
+      // Update Progress Bar
+      function updateProgressBar() {
+        const completed = 0; // Single question quiz - always 0 until complete
+        const total = 1;
+        const percentage = 0;
+        
+        const progressFill = document.getElementById("stageProgressFill");
+        const progressText = document.getElementById("stageProgressText");
+        
+        if (progressFill && progressText) {
+          progressFill.style.width = percentage + "%";
+          progressText.textContent = completed + "/" + total;
+        }
+      }
+
       // Setup Preparation Stage
       function setupPreparationStage() {
+        // Update progress bar
+        updateProgressBar();
+
         // Populate preparation content
         document.getElementById("preparationTitle").textContent =
           quizData.preparation.title;
