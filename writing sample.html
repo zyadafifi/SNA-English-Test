@@ -436,6 +436,34 @@
         background: #ffb300;
       }
 
+      .continue-btn.outline {
+        background: white;
+        color: #ffc515;
+        border: 2px solid #ffc515;
+      }
+
+      .continue-btn.outline:hover {
+        background: #fff8e1;
+      }
+
+      .results-buttons {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 24px;
+      }
+
+      .results-buttons .continue-btn,
+      .results-buttons .done-btn {
+        position: static;
+        bottom: auto;
+        right: auto;
+        left: auto;
+      }
+
       /* Done Button */
       .done-btn {
         background: #ffc515;
@@ -672,17 +700,20 @@
             </div>
             <div class="sample-text" id="sampleText"></div>
           </div>
-          <button class="continue-btn yellow" onclick="goToPractice()">
-            CONTINUE
-          </button>
+          <div class="results-buttons">
+            <button class="continue-btn outline" onclick="continueToNextStage()">CONTINUE</button>
+            <button class="continue-btn yellow" onclick="goToPractice()">DONE</button>
+          </div>
         </div>
       </div>
     </div>
 
     <script>
       // Quiz Data
+      let allQuizData = [];
       let quizData = null;
       let currentStage = 1;
+      let stagesCompletedThisSession = 0;
       let userResponse = "";
       let questionStartTime = 0;
       let timerInterval;
@@ -716,6 +747,7 @@
             );
           }
 
+          allQuizData = data.questions;
           // Select random question
           const randomIndex = Math.floor(Math.random() * data.questions.length);
           quizData = data.questions[randomIndex];
@@ -861,6 +893,8 @@
           sampleAnswer: quizData.results.sampleAnswer,
           timeSpent: Date.now() - questionStartTime,
         });
+        stagesCompletedThisSession++;
+        saveDetailedQuizResult("Writing Sample");
         // Hide writing stage
         document.getElementById("writingStage").style.display = "none";
 
@@ -936,15 +970,26 @@
         }, WRITING_TIME_LIMIT);
       }
 
+      function continueToNextStage() {
+        const completedId = quizData?.id;
+        document.getElementById("resultsStage").style.display = "none";
+        document.getElementById("writingStage").style.display = "none";
+        document.getElementById("preparationStage").style.display = "block";
+        if (allQuizData.length > 0) {
+          let available = allQuizData;
+          if (completedId != null && allQuizData.length > 1) {
+            available = allQuizData.filter((q) => q.id !== completedId);
+          }
+          const randomIndex = Math.floor(Math.random() * available.length);
+          quizData = available[randomIndex];
+        }
+        answers = [];
+        initializeQuiz();
+      }
+
       // Navigation Functions
       function goToPractice() {
-        // Calculate and save detailed session result
-        saveDetailedQuizResult("Writing Sample");
-
-        // Update progress for main page
-        incrementSkillProgress("Writing Sample");
-
-        // Navigate back to main page
+        incrementSkillProgress("Writing Sample", stagesCompletedThisSession);
         window.location.href = "index.html";
       }
       // Function to save detailed quiz result
@@ -1583,9 +1628,9 @@
       }
 
       // Progress Functions
-      function incrementSkillProgress(skillName) {
+      function incrementSkillProgress(skillName, count = 1) {
         const currentProgress = getCurrentSkillProgress(skillName);
-        const newCompleted = Math.min(currentProgress + 1, 3);
+        const newCompleted = Math.min(currentProgress + count, 3);
 
         const progressData = {
           skill: skillName,

@@ -554,11 +554,51 @@
         margin-bottom: 40px;
       }
 
+      .results-buttons {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 40px;
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .results-buttons .continue-btn,
+      .results-buttons .done-btn {
+        position: static;
+        bottom: auto;
+        right: auto;
+        left: auto;
+      }
+
+      .continue-btn {
+        background: white;
+        color: #ffc515;
+        border: 2px solid #ffc515;
+        padding: 14px 28px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .continue-btn:hover {
+        background: #fff8e1;
+      }
+
       .done-btn {
         background: #ffc515;
         color: white;
         border: none;
-        padding: 16px 32px;
+        padding: 14px 28px;
         border-radius: 8px;
         font-size: 16px;
         font-weight: 700;
@@ -566,9 +606,6 @@
         transition: background 0.2s;
         text-transform: uppercase;
         letter-spacing: 1px;
-        position: absolute;
-        bottom: 30px;
-        right: 30px;
       }
 
       .done-btn:hover {
@@ -851,10 +888,14 @@
           margin-bottom: 40px;
         }
 
-        .done-btn {
+        .results-buttons {
+          gap: 12px;
           bottom: 25px;
-          right: 25px;
-          padding: 14px 28px;
+        }
+
+        .continue-btn,
+        .done-btn {
+          padding: 12px 24px;
           font-size: 14px;
         }
       }
@@ -998,9 +1039,13 @@
           margin-bottom: 30px;
         }
 
-        .done-btn {
+        .results-buttons {
+          gap: 10px;
           bottom: 20px;
-          right: 20px;
+        }
+
+        .continue-btn,
+        .done-btn {
           padding: 12px 24px;
           font-size: 13px;
         }
@@ -1193,7 +1238,10 @@
         <div class="results-title">Practice complete! You</div>
         <div class="results-subtitle">improved your reading skills.</div>
         <div class="results-score" id="resultsScore"></div>
-        <button class="done-btn" onclick="goToPractice()">DONE</button>
+        <div class="results-buttons">
+          <button class="continue-btn" onclick="continueToNextStage()">CONTINUE</button>
+          <button class="done-btn" onclick="goToPractice()">DONE</button>
+        </div>
       </div>
     </div>
 
@@ -1210,6 +1258,7 @@
       let questionStartTime = 0;
       let timerInterval;
       let dataLoaded = false;
+      let stagesCompletedThisSession = 0;
 
       // Configuration
       const QUESTIONS_PER_QUIZ = 20;
@@ -1281,7 +1330,8 @@
           console.log(
             `Only ${availableQuestions.length} questions available. Using all.`
           );
-          saveUsedQuestions(availableQuestions.map((q) => q.word));
+          const selectedWords = availableQuestions.map((q) => q.word);
+          saveUsedQuestions([...usedQuestions, ...selectedWords]);
           return [...availableQuestions];
         }
 
@@ -1572,6 +1622,9 @@
 
       // Show Results
       function showResults() {
+        stagesCompletedThisSession++;
+        saveDetailedQuizResult("Read and Select");
+
         document.getElementById("questionCard").style.display = "none";
         document.getElementById("feedbackSection").style.display = "none";
         
@@ -1586,15 +1639,31 @@
         document.getElementById("resultsScreen").style.display = "block";
       }
 
-      // Go to Practice Page
-      // Go to Practice Page
+      // Continue to next stage
+      function continueToNextStage() {
+        document.getElementById("questionCard").style.display = "flex";
+        document.getElementById("resultsScreen").style.display = "none";
+
+        if (allQuizData.length > 0) {
+          quizData = selectRandomQuestions(allQuizData, QUESTIONS_PER_QUIZ);
+          if (quizData.length === 0) {
+            showErrorScreen(
+              "No new questions available. All questions have been used."
+            );
+            return;
+          }
+        }
+
+        currentQuestion = 0;
+        score = 0;
+        answers = [];
+        initializeQuiz();
+      }
+
       // Go to Practice Page
       function goToPractice() {
-        // Calculate and save detailed session result
-        saveDetailedQuizResult("Read and Select");
-
-        // Update progress for main page
-        incrementSkillProgress("Read and Select");
+        // Update progress for main page (all stages completed this session)
+        incrementSkillProgress("Read and Select", stagesCompletedThisSession);
 
         // Navigate back to main page
         window.location.href = "index.html";
@@ -2168,15 +2237,14 @@
 
         return recommendations;
       }
-      // Function to increment progress by 1 - Updated
-      function incrementSkillProgress(skillName) {
-        // Get current progress first
+      // Function to increment progress - accepts count for multi-stage completion
+      function incrementSkillProgress(skillName, count = 1) {
         const currentProgress = getCurrentSkillProgress(skillName);
-        const newCompleted = Math.min(currentProgress + 1, 6); // Don't exceed 6
+        const newCompleted = Math.min(currentProgress + count, 6); // Don't exceed 6
 
         const progressData = {
           skill: skillName,
-          completed: newCompleted, // Send the new total completed count
+          completed: newCompleted,
           total: 6,
           timestamp: new Date().toISOString(),
         };

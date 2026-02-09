@@ -669,11 +669,51 @@
         margin-bottom: 60px;
       }
 
+      .results-buttons {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 40px;
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .results-buttons .results-continue-btn,
+      .results-buttons .done-btn {
+        position: static;
+        bottom: auto;
+        right: auto;
+        left: auto;
+      }
+
+      .results-continue-btn {
+        background: white;
+        color: #ffc515;
+        border: 2px solid #ffc515;
+        padding: 14px 28px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .results-continue-btn:hover {
+        background: #fff8e1;
+      }
+
       .done-btn {
         background: #ffc515;
         color: white;
         border: none;
-        padding: 16px 32px;
+        padding: 14px 28px;
         border-radius: 8px;
         font-size: 16px;
         font-weight: 700;
@@ -681,9 +721,6 @@
         transition: background 0.2s;
         text-transform: uppercase;
         letter-spacing: 1px;
-        position: absolute;
-        bottom: 30px;
-        right: 30px;
       }
 
       .done-btn:hover {
@@ -1300,7 +1337,10 @@
         </div>
         <div class="results-title">Practice complete! You</div>
         <div class="results-subtitle">improved your speaking skills.</div>
-        <button class="done-btn" onclick="goToPractice()">DONE</button>
+        <div class="results-buttons">
+          <button class="results-continue-btn" onclick="continueToNextStage()">CONTINUE</button>
+          <button class="done-btn" onclick="goToPractice()">DONE</button>
+        </div>
       </div>
     </div>
 
@@ -1330,6 +1370,7 @@
       let isPlayingSample = false;
       let isPlayingRecording = false;
       let dataLoaded = false;
+      let stagesCompletedThisSession = 0;
       // Session tracking variables
       let sessionStartTime = Date.now();
       let answers = []; // Array to store all responses
@@ -1402,8 +1443,8 @@
         document.getElementById("errorMessage").textContent = errorMessage;
       }
 
-      // Initialize Quiz
-      function initializeQuiz() {
+      // Initialize Quiz (excludeQuestionId: optional ID to exclude when continuing)
+      function initializeQuiz(excludeQuestionId) {
         if (!dataLoaded || allQuizData.length === 0) {
           showErrorScreen("No quiz data available");
           return;
@@ -1413,9 +1454,13 @@
         sessionStartTime = Date.now();
         answers = [];
 
-        // Select a random question
+        // Select a random question, excluding the one just completed if provided
+        let available = allQuizData;
+        if (excludeQuestionId != null && allQuizData.length > 1) {
+          available = allQuizData.filter((q) => q.id !== excludeQuestionId);
+        }
         currentQuestion =
-          allQuizData[Math.floor(Math.random() * allQuizData.length)];
+          available[Math.floor(Math.random() * available.length)];
 
         console.log(`Starting quiz with question ID: ${currentQuestion.id}`);
         showQuestion();
@@ -1899,33 +1944,35 @@
       }
 
       function showResults() {
+        stagesCompletedThisSession++;
+        saveDetailedQuizResult("Read Then Speak");
+
         stopAllAudio();
         document.getElementById("questionCard").style.display = "none";
         document.getElementById("reviewSection").style.display = "none";
         document.getElementById("resultsScreen").style.display = "block";
       }
 
+      function continueToNextStage() {
+        const completedId = currentQuestion?.id;
+        resetUI();
+        document.getElementById("resultsScreen").style.display = "none";
+        document.getElementById("questionCard").style.display = "flex";
+        initializeQuiz(completedId);
+      }
+
       // Go to Practice Page
       function goToPractice() {
         stopAllAudio();
-
-        // Save detailed quiz result
-        saveDetailedQuizResult("Read Then Speak");
-
-        // Get current progress
         const progressKey = "skillProgress";
         const allProgress = JSON.parse(localStorage.getItem(progressKey)) || {};
         const currentProgress = allProgress["Read, Then Speak"] || {
           completed: 0,
           total: 3,
         };
-
-        // Only increment if not already completed
         if (currentProgress.completed < currentProgress.total) {
-          incrementSkillProgress("Read, Then Speak");
+          incrementSkillProgress("Read, Then Speak", stagesCompletedThisSession);
         }
-
-        // Navigate back to main page
         window.location.href = "index.html";
       }
       function saveDetailedQuizResult(skillName) {
@@ -2723,8 +2770,8 @@
         saveSessionToHistory(skillName, sessionResult);
         console.log(`Session saved for ${skillName}:`, sessionResult);
       }
-      // Function to increment progress by 1
-      function incrementSkillProgress(skillName) {
+      // Function to increment progress by 1 or more
+      function incrementSkillProgress(skillName, count = 1) {
         try {
           // Get current progress data from localStorage
           const progressKey = "skillProgress";
@@ -2742,7 +2789,7 @@
 
           // Increment progress while ensuring it doesn't exceed the maximum
           allProgress[skillName].completed = Math.min(
-            allProgress[skillName].completed + 1,
+            allProgress[skillName].completed + count,
             allProgress[skillName].total
           );
           allProgress[skillName].lastUpdated = new Date().toISOString();

@@ -642,11 +642,51 @@
         margin-bottom: 40px;
       }
 
+      .results-buttons {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 40px;
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .results-buttons .continue-btn,
+      .results-buttons .done-btn {
+        position: static;
+        bottom: auto;
+        right: auto;
+        left: auto;
+      }
+
+      .continue-btn {
+        background: white;
+        color: #ffc515;
+        border: 2px solid #ffc515;
+        padding: 14px 28px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .continue-btn:hover {
+        background: #fff8e1;
+      }
+
       .done-btn {
         background: #ffc515;
         color: white;
         border: none;
-        padding: 16px 32px;
+        padding: 14px 28px;
         border-radius: 8px;
         font-size: 16px;
         font-weight: 700;
@@ -654,9 +694,6 @@
         transition: background 0.2s;
         text-transform: uppercase;
         letter-spacing: 1px;
-        position: absolute;
-        bottom: 30px;
-        right: 30px;
       }
 
       .done-btn:hover {
@@ -994,7 +1031,10 @@
         <div class="results-title">Practice complete! You</div>
         <div class="results-subtitle">improved your reading skills.</div>
         <div class="results-score" id="resultsScore"></div>
-        <button class="done-btn" onclick="goToPractice()">DONE</button>
+        <div class="results-buttons">
+          <button class="continue-btn" onclick="continueToNextStage()">CONTINUE</button>
+          <button class="done-btn" onclick="goToPractice()">DONE</button>
+        </div>
       </div>
     </div>
 
@@ -1013,6 +1053,7 @@
       let questionTimeout;
       let dataLoaded = false;
       let userAnswers = {};
+      let stagesCompletedThisSession = 0;
 
       // Configuration
       const QUESTIONS_PER_QUIZ = 3;
@@ -1080,7 +1121,8 @@
           console.log(
             `Only ${availableQuestions.length} questions available. Using all.`
           );
-          saveUsedQuestions(availableQuestions.map((q) => q.id.toString()));
+          const selectedIds = availableQuestions.map((q) => q.id.toString());
+          saveUsedQuestions([...usedQuestions, ...selectedIds]);
           return [...availableQuestions];
         }
 
@@ -1619,6 +1661,9 @@
       }
 
       function showResults() {
+        stagesCompletedThisSession++;
+        saveDetailedQuizResult("Interactive Reading");
+
         document.getElementById("questionCard").style.display = "none";
         document.getElementById("feedbackSection").style.display = "none";
         
@@ -1633,15 +1678,30 @@
         document.getElementById("resultsScreen").style.display = "block";
       }
 
+      function continueToNextStage() {
+        document.getElementById("questionCard").style.display = "block";
+        document.getElementById("resultsScreen").style.display = "none";
+
+        if (allQuizData.length > 0) {
+          quizData = selectRandomQuestions(allQuizData, QUESTIONS_PER_QUIZ);
+          if (quizData.length === 0) {
+            showErrorScreen(
+              "No new questions available. All questions have been used."
+            );
+            return;
+          }
+        }
+
+        currentQuestion = 0;
+        score = 0;
+        answers = [];
+        userAnswers = {};
+        initializeQuiz();
+      }
+
       // Go to Practice Page
       function goToPractice() {
-        // Calculate and save detailed session result
-        saveDetailedQuizResult("Interactive Reading");
-
-        // Update progress for main page
-        incrementSkillProgress("Interactive Reading");
-
-        // Navigate back to main page
+        incrementSkillProgress("Interactive Reading", stagesCompletedThisSession);
         window.location.href = "index.html";
       }
       // Function to save detailed quiz result
@@ -2463,11 +2523,11 @@
 
         return recommendations;
       }
-      // Function to increment progress by 1
-      function incrementSkillProgress(skillName) {
+      // Function to increment progress by 1 or more
+      function incrementSkillProgress(skillName, count = 1) {
         // Get current progress first
         const currentProgress = getCurrentSkillProgress(skillName);
-        const newCompleted = Math.min(currentProgress + 1, 6); // Don't exceed 6
+        const newCompleted = Math.min(currentProgress + count, 6); // Don't exceed 6
 
         const progressData = {
           skill: skillName,

@@ -561,11 +561,51 @@
         margin-bottom: 60px;
       }
 
+      .results-buttons {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 40px;
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .results-buttons .results-continue-btn,
+      .results-buttons .done-btn {
+        position: static;
+        bottom: auto;
+        right: auto;
+        left: auto;
+      }
+
+      .results-continue-btn {
+        background: white;
+        color: #ffc515;
+        border: 2px solid #ffc515;
+        padding: 14px 28px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .results-continue-btn:hover {
+        background: #fff8e1;
+      }
+
       .done-btn {
         background: #ffc515;
         color: white;
         border: none;
-        padding: 16px 32px;
+        padding: 14px 28px;
         border-radius: 8px;
         font-size: 16px;
         font-weight: 700;
@@ -573,9 +613,6 @@
         transition: background 0.2s;
         text-transform: uppercase;
         letter-spacing: 1px;
-        position: absolute;
-        bottom: 30px;
-        right: 30px;
       }
 
       .done-btn:hover {
@@ -1150,7 +1187,10 @@
         </div>
         <div class="results-title">Practice complete! You</div>
         <div class="results-subtitle">improved your speaking skills.</div>
-        <button class="done-btn" onclick="goToPractice()">DONE</button>
+        <div class="results-buttons">
+          <button class="results-continue-btn" onclick="continueToNextStage()">CONTINUE</button>
+          <button class="done-btn" onclick="goToPractice()">DONE</button>
+        </div>
       </div>
     </div>
 
@@ -1180,6 +1220,7 @@
       let isPlayingSample = false;
       let isPlayingRecording = false;
       let dataLoaded = false;
+      let stagesCompletedThisSession = 0;
       // Session tracking variables
       let sessionData = {
         questionId: null,
@@ -1257,16 +1298,20 @@
         document.getElementById("errorMessage").textContent = errorMessage;
       }
 
-      // Initialize Quiz
-      function initializeQuiz() {
+      // Initialize Quiz (excludeQuestionId: optional ID to exclude when continuing)
+      function initializeQuiz(excludeQuestionId) {
         if (!dataLoaded || allQuizData.length === 0) {
           showErrorScreen("No quiz data available");
           return;
         }
 
-        // Select a random question
+        // Select a random question, excluding the one just completed if provided
+        let available = allQuizData;
+        if (excludeQuestionId != null && allQuizData.length > 1) {
+          available = allQuizData.filter((q) => q.id !== excludeQuestionId);
+        }
         currentQuestion =
-          allQuizData[Math.floor(Math.random() * allQuizData.length)];
+          available[Math.floor(Math.random() * available.length)];
 
         // Initialize session tracking
         sessionData.questionId = currentQuestion.id;
@@ -1774,23 +1819,27 @@
       }
 
       function showResults() {
+        stagesCompletedThisSession++;
+        saveDetailedQuizResult("Speak About the Photo");
+
         stopAllAudio();
         document.getElementById("questionCard").style.display = "none";
         document.getElementById("reviewSection").style.display = "none";
         document.getElementById("resultsScreen").style.display = "block";
       }
 
+      function continueToNextStage() {
+        const completedId = currentQuestion?.id;
+        resetUI();
+        document.getElementById("resultsScreen").style.display = "none";
+        document.getElementById("questionCard").style.display = "flex";
+        initializeQuiz(completedId);
+      }
+
       // Go to Practice Page
       function goToPractice() {
         stopAllAudio();
-
-        // Calculate and save detailed session result
-        saveDetailedQuizResult("Speak About the Photo");
-
-        // Update progress for main page
-        incrementSkillProgress("Speak About the Photo");
-
-        // Navigate to main page
+        incrementSkillProgress("Speak About the Photo", stagesCompletedThisSession);
         window.location.href = "index.html";
       }
       // Function to save detailed quiz result
@@ -2522,10 +2571,10 @@
         return recommendations;
       }
       // Function to increment progress by 1
-      function incrementSkillProgress(skillName) {
+      function incrementSkillProgress(skillName, count = 1) {
         // Get current progress first
         const currentProgress = getCurrentSkillProgress(skillName);
-        const newCompleted = Math.min(currentProgress + 1, 3); // Don't exceed 3
+        const newCompleted = Math.min(currentProgress + count, 3); // Don't exceed 3
 
         const progressData = {
           skill: skillName,
