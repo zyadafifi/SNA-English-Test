@@ -708,6 +708,7 @@
       </div>
     </div>
 
+    <script src="skills-config.js"></script>
     <script>
       // Quiz Data
       let allQuizData = [];
@@ -721,6 +722,7 @@
       let dataLoaded = false;
       let answers = [];
       // Configuration
+      const STAGES_TOTAL = 3;
       const WRITING_TIME_LIMIT = 300000; // 5 minutes in milliseconds
       const PREPARATION_TIME_LIMIT = 6000; // 6 seconds for preparation
 
@@ -971,6 +973,13 @@
       }
 
       function continueToNextStage() {
+        if (stagesCompletedThisSession >= STAGES_TOTAL && typeof getNextQuizUrl === "function") {
+          const nextUrl = getNextQuizUrl("Writing Sample");
+          if (nextUrl) {
+            window.location.href = nextUrl;
+            return;
+          }
+        }
         const completedId = quizData?.id;
         document.getElementById("resultsStage").style.display = "none";
         document.getElementById("writingStage").style.display = "none";

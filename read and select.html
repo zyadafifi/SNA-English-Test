@@ -1244,6 +1244,7 @@
       </div>
     </div>
 
+    <script src="skills-config.js"></script>
     <script>
       // Quiz Data (will be loaded from JSON)
       let allQuizData = [];
@@ -1648,7 +1649,9 @@
         // Show CONTINUE only if more stages remain; hide when all 6 done or no more questions
         const continueBtn = document.getElementById("resultsContinueBtn");
         if (continueBtn) {
-          continueBtn.style.display = stagesCompletedThisSession < STAGES_TOTAL ? "inline-block" : "none";
+          const hasMoreStages = stagesCompletedThisSession < STAGES_TOTAL;
+          const hasNextQuiz = typeof getNextQuizUrl === "function" && getNextQuizUrl("Read and Select");
+          continueBtn.style.display = hasMoreStages || hasNextQuiz ? "inline-block" : "none";
         }
         
         document.getElementById("resultsScreen").style.display = "block";
@@ -1656,10 +1659,16 @@
 
       // Continue to next stage
       function continueToNextStage() {
+        if (stagesCompletedThisSession >= STAGES_TOTAL && typeof getNextQuizUrl === "function") {
+          const nextUrl = getNextQuizUrl("Read and Select");
+          if (nextUrl) {
+            window.location.href = nextUrl;
+            return;
+          }
+        }
         if (allQuizData.length > 0) {
           quizData = selectRandomQuestions(allQuizData, QUESTIONS_PER_QUIZ);
           if (quizData.length === 0) {
-            // No more questions: hide CONTINUE, stay on results with only DONE
             const continueBtn = document.getElementById("resultsContinueBtn");
             if (continueBtn) continueBtn.style.display = "none";
             return;

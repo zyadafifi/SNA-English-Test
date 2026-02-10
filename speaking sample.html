@@ -1050,6 +1050,7 @@
     <audio id="sampleAudio" preload="auto"></audio>
     <audio id="recordingAudio" preload="auto"></audio>
 
+    <script src="skills-config.js"></script>
     <script>
       // Quiz State
       let allQuizData = [];
@@ -1591,6 +1592,13 @@
       }
 
       function continueToNextStage() {
+        if (stagesCompletedThisSession >= STAGES_TOTAL && typeof getNextQuizUrl === "function") {
+          const nextUrl = getNextQuizUrl("Speaking Sample");
+          if (nextUrl) {
+            window.location.href = nextUrl;
+            return;
+          }
+        }
         const completedId = currentQuestion?.id;
         resetUI();
         document.getElementById("resultsScreen").style.display = "none";

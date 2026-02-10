@@ -256,136 +256,35 @@ function addEventListeners() {
   }
 }
 
+function getQuizUrlForSkill(skillName) {
+  if (typeof isSkillCompleted === "function" && typeof getNextQuizUrl === "function") {
+    if (isSkillCompleted(skillName)) {
+      const nextUrl = getNextQuizUrl(skillName);
+      if (nextUrl) return nextUrl;
+    }
+  }
+  const skill = SKILLS_ORDER && SKILLS_ORDER.find((s) => s.name === skillName);
+  return skill ? skill.url : null;
+}
+
 function initializeSkillCards() {
   const skillCards = document.querySelectorAll(".skill-card");
 
   skillCards.forEach((card) => {
     const skillName = card.querySelector("h3").textContent;
 
-    // Special handling for Read and Select
-    if (skillName === "Read and Select") {
-      card.addEventListener("click", function () {
-        // Add a brief loading state before redirect
-        this.style.opacity = "0.7";
-        this.style.transform = "translateY(-2px)";
-
-        setTimeout(() => {
-          window.location.href = "read and select.html";
-        }, 200);
-      });
-    }
-    // Special handling for Fill in the Blanks
-    else if (skillName === "Fill in the Blanks") {
-      card.addEventListener("click", function () {
-        // Add a brief loading state before redirect
-        this.style.opacity = "0.7";
-        this.style.transform = "translateY(-2px)";
-
-        setTimeout(() => {
-          window.location.href = "fill in the blanks.html";
-        }, 200);
-      });
-    }
-    // Special handling for Listen and Type
-    else if (skillName === "Listen and Type") {
+    const skill = SKILLS_ORDER && SKILLS_ORDER.find((s) => s.name === skillName);
+    if (skill) {
       card.addEventListener("click", function () {
         this.style.opacity = "0.7";
         this.style.transform = "translateY(-2px)";
 
         setTimeout(() => {
-          window.location.href = "listen and type.html";
-        }, 200);
-      });
-    }
-    // Special handling for Read and Complete - NEW
-    else if (skillName === "Read and Complete") {
-      card.addEventListener("click", function () {
-        this.style.opacity = "0.7";
-        this.style.transform = "translateY(-2px)";
-
-        setTimeout(() => {
-          window.location.href = "read and complete.html";
-        }, 200);
-      });
-    }
-    // Special handling for Write About the Photo - NEW
-    else if (skillName === "Write About the Photo") {
-      card.addEventListener("click", function () {
-        this.style.opacity = "0.7";
-        this.style.transform = "translateY(-2px)";
-
-        setTimeout(() => {
-          window.location.href = "write about the photo.html";
-        }, 200);
-      });
-    }
-    // Special handling for Interactive Reading
-    else if (skillName === "Interactive Reading") {
-      card.addEventListener("click", function () {
-        this.style.opacity = "0.7";
-        this.style.transform = "translateY(-2px)";
-
-        setTimeout(() => {
-          window.location.href = "interactive reading.html";
-        }, 200);
-      });
-    }
-    // Special handling for Interactive Listening - NEW
-    else if (skillName === "Interactive Listening") {
-      card.addEventListener("click", function () {
-        this.style.opacity = "0.7";
-        this.style.transform = "translateY(-2px)";
-
-        setTimeout(() => {
-          window.location.href = "interactive listening.html";
-        }, 200);
-      });
-    }
-    // Special handling for Writing Sample- NEW
-    else if (skillName === "Writing Sample") {
-      card.addEventListener("click", function () {
-        this.style.opacity = "0.7";
-        this.style.transform = "translateY(-2px)";
-
-        setTimeout(() => {
-          window.location.href = "writing sample.html";
-        }, 200);
-      });
-    }
-    // Special handling for Speak About the Photo - NEW
-    else if (skillName === "Speak About the Photo") {
-      card.addEventListener("click", function () {
-        this.style.opacity = "0.7";
-        this.style.transform = "translateY(-2px)";
-
-        setTimeout(() => {
-          window.location.href = "speak about the photo.html";
-        }, 200);
-      });
-    }
-    // Special handling for Read then speak - NEW
-    else if (skillName === "Read, Then Speak") {
-      card.addEventListener("click", function () {
-        this.style.opacity = "0.7";
-        this.style.transform = "translateY(-2px)";
-
-        setTimeout(() => {
-          window.location.href = "read then speak.html";
-        }, 200);
-      });
-    }
-    // Special handling for Speaking sample
-    else if (skillName === "Speaking Sample") {
-      card.addEventListener("click", function () {
-        this.style.opacity = "0.7";
-        this.style.transform = "translateY(-2px)";
-
-        setTimeout(() => {
-          window.location.href = "speaking sample.html";
+          const url = getQuizUrlForSkill(skillName);
+          if (url) window.location.href = url;
         }, 200);
       });
     } else {
-      // Default behavior for other cards
       card.addEventListener("click", function () {
         startSkillPractice(skillName);
       });
