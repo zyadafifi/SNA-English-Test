@@ -52,6 +52,21 @@ function initializeApp() {
 
   // Check for new progress from other pages
   checkForNewProgress();
+
+  // Refresh progress when returning to this page (e.g. back button, tab switch)
+  window.addEventListener("pageshow", function (e) {
+    if (e.persisted) {
+      loadSkillProgress();
+      checkForNewProgress();
+    }
+  });
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "visible") {
+      loadSkillProgress();
+      checkForNewProgress();
+    }
+  });
+
   window.addEventListener("progressUpdated", function (e) {
     if (e.detail.skill === "Read, Then Speak") {
       updateSkillProgress(

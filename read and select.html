@@ -1217,7 +1217,6 @@
           </svg>
           <div class="feedback-title" id="feedbackTitle">Incorrect</div>
         </div>
-        <button class="next-btn" onclick="nextQuestion()">Got It</button>
       </div>
 
       <!-- Results Screen -->
@@ -1239,7 +1238,7 @@
         <div class="results-subtitle">improved your reading skills.</div>
         <div class="results-score" id="resultsScore"></div>
         <div class="results-buttons">
-          <button class="continue-btn" onclick="continueToNextStage()">CONTINUE</button>
+          <button class="continue-btn" id="resultsContinueBtn" onclick="continueToNextStage()">CONTINUE</button>
           <button class="done-btn" onclick="goToPractice()">DONE</button>
         </div>
       </div>
@@ -1259,9 +1258,13 @@
       let timerInterval;
       let dataLoaded = false;
       let stagesCompletedThisSession = 0;
+      let cumulativeCorrect = 0;
+      let cumulativeTotal = 0;
+      let feedbackAutoAdvanceTimeout = null;
 
       // Configuration
       const QUESTIONS_PER_QUIZ = 20;
+      const STAGES_TOTAL = 6;
       const USED_QUESTIONS_KEY = "sna_used_questions";
 
       // Load Quiz Data from JSON
@@ -1443,19 +1446,25 @@
         }
       }
 
-      // Update Progress Bar
+      // Update Progress Bar (current stage only until CONTINUE; then cumulative)
       function updateProgressBar() {
-        const completed = currentQuestion;
-        const total = quizData.length;
-        const percentage = total > 0 ? (completed / total) * 100 : 0;
-        
         const progressFill = document.getElementById("stageProgressFill");
         const progressText = document.getElementById("stageProgressText");
-        
-        if (progressFill && progressText) {
-          progressFill.style.width = percentage + "%";
-          progressText.textContent = completed + "/" + total;
+        if (!progressFill || !progressText) return;
+
+        let completed, total, percentage;
+        if (stagesCompletedThisSession === 0) {
+          // First stage: show current stage only (e.g. 5/20)
+          completed = currentQuestion;
+          total = quizData.length;
+        } else {
+          // User chose to continue: show cumulative (e.g. 25/120)
+          total = STAGES_TOTAL * QUESTIONS_PER_QUIZ;
+          completed = stagesCompletedThisSession * QUESTIONS_PER_QUIZ + currentQuestion;
         }
+        percentage = total > 0 ? (completed / total) * 100 : 0;
+        progressFill.style.width = percentage + "%";
+        progressText.textContent = completed + "/" + total;
       }
 
       // Show Current Question
@@ -1564,10 +1573,10 @@
 
       // Show Feedback
       function showFeedback(isCorrect, correctAnswer) {
+        clearTimeout(feedbackAutoAdvanceTimeout);
         const feedbackSection = document.getElementById("feedbackSection");
         const feedbackTitle = document.getElementById("feedbackTitle");
         const feedbackIcon = document.getElementById("feedbackIcon");
-        const nextBtn = document.querySelector(".next-btn");
 
         feedbackSection.style.display = "flex";
 
@@ -1577,7 +1586,6 @@
           feedbackSection.className = "feedback-section correct";
           feedbackTitle.className = "feedback-title correct";
           feedbackTitle.textContent = "Correct!";
-          nextBtn.className = "next-btn correct";
           feedbackIcon.innerHTML = `
                     <circle cx="12" cy="12" r="10" fill="#2e7d32"/>
                     <polyline points="9,12 11,14 15,10" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1587,13 +1595,13 @@
           feedbackSection.className = "feedback-section incorrect";
           feedbackTitle.className = "feedback-title incorrect";
           feedbackTitle.textContent = "Incorrect";
-          nextBtn.className = "next-btn";
           feedbackIcon.innerHTML = `
                     <circle cx="12" cy="12" r="10" fill="#c62828"/>
                     <line x1="15" y1="9" x2="9" y2="15" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
                     <line x1="9" y1="9" x2="15" y2="15" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
                 `;
         }
+        feedbackAutoAdvanceTimeout = setTimeout(nextQuestion, 2000);
       }
 
       // Play Sound Function
@@ -1611,6 +1619,7 @@
 
       // Next Question
       function nextQuestion() {
+        clearTimeout(feedbackAutoAdvanceTimeout);
         currentQuestion++;
 
         if (currentQuestion < quizData.length) {
@@ -1623,17 +1632,23 @@
       // Show Results
       function showResults() {
         stagesCompletedThisSession++;
+        cumulativeCorrect += score;
+        cumulativeTotal += quizData.length;
         saveDetailedQuizResult("Read and Select");
 
         document.getElementById("questionCard").style.display = "none";
         document.getElementById("feedbackSection").style.display = "none";
         
-        // Update results score
+        // Update results score (cumulative)
         const resultsScoreEl = document.getElementById("resultsScore");
         if (resultsScoreEl) {
-          const correct = score;
-          const total = quizData.length;
-          resultsScoreEl.textContent = `You got ${correct} out of ${total} correct.`;
+          resultsScoreEl.textContent = `You got ${cumulativeCorrect} out of ${cumulativeTotal} correct.`;
+        }
+        
+        // Show CONTINUE only if more stages remain; hide when all 6 done or no more questions
+        const continueBtn = document.getElementById("resultsContinueBtn");
+        if (continueBtn) {
+          continueBtn.style.display = stagesCompletedThisSession < STAGES_TOTAL ? "inline-block" : "none";
         }
         
         document.getElementById("resultsScreen").style.display = "block";
@@ -1641,18 +1656,18 @@
 
       // Continue to next stage
       function continueToNextStage() {
-        document.getElementById("questionCard").style.display = "flex";
-        document.getElementById("resultsScreen").style.display = "none";
-
         if (allQuizData.length > 0) {
           quizData = selectRandomQuestions(allQuizData, QUESTIONS_PER_QUIZ);
           if (quizData.length === 0) {
-            showErrorScreen(
-              "No new questions available. All questions have been used."
-            );
+            // No more questions: hide CONTINUE, stay on results with only DONE
+            const continueBtn = document.getElementById("resultsContinueBtn");
+            if (continueBtn) continueBtn.style.display = "none";
             return;
           }
         }
+
+        document.getElementById("resultsScreen").style.display = "none";
+        document.getElementById("questionCard").style.display = "flex";
 
         currentQuestion = 0;
         score = 0;
@@ -2297,6 +2312,9 @@
       // Go Back
       function goBack() {
         if (confirm("Are you sure you want to exit the quiz?")) {
+          if (stagesCompletedThisSession > 0) {
+            incrementSkillProgress("Read and Select", stagesCompletedThisSession);
+          }
           window.history.back();
         }
       }

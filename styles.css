@@ -87,6 +87,10 @@ body::before {
   height: auto;
   max-width: 150px;
   max-height: 100px;
+  display: block;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: high-quality;
 }
 
 .logo-icon {
@@ -712,6 +716,12 @@ body::before {
 
 /* Responsive Design */
 @media (max-width: 1024px) {
+  .logo img {
+    width: 130px;
+    max-width: 130px;
+    max-height: 86px;
+  }
+
   .app-container {
     flex-direction: column;
   }
@@ -749,8 +759,36 @@ body::before {
 }
 
 @media (max-width: 768px) {
+  .header {
+    min-height: 56px;
+  }
+
   .header-content {
     padding: 0 16px;
+    min-height: 56px;
+  }
+
+  .header-icons {
+    display: none;
+  }
+
+  .menu-btn {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    padding: 0;
+    flex-shrink: 0;
+  }
+
+  .logo img {
+    width: 110px;
+    max-width: 110px;
+    max-height: 50px;
   }
 
   .logo-text {
@@ -826,6 +864,12 @@ body::before {
 }
 
 @media (max-width: 480px) {
+  .header-content .logo img {
+    width: 90px;
+    max-width: 90px;
+    max-height: 45px;
+  }
+
   .main-content {
     padding: 16px;
   }

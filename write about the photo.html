@@ -836,7 +836,6 @@
           </div>
         </div>
         <div class="sample-answer-text" id="sampleAnswerText"></div>
-        <button class="next-btn" onclick="nextQuestion()">CONTINUE</button>
       </div>
 
       <!-- Results Screen -->
@@ -851,7 +850,7 @@
         <div class="results-title">Practice complete! You</div>
         <div class="results-subtitle">improved your writing skills.</div>
         <div class="results-buttons">
-          <button class="continue-btn" onclick="continueToNextStage()">CONTINUE</button>
+          <button class="continue-btn" id="resultsContinueBtn" onclick="continueToNextStage()">CONTINUE</button>
           <button class="done-btn" onclick="goToPractice()">DONE</button>
         </div>
       </div>
@@ -870,12 +869,16 @@
       let timerInterval;
       let dataLoaded = false;
       let stagesCompletedThisSession = 0;
+      let cumulativeCorrect = 0;
+      let cumulativeTotal = 0;
+      let feedbackAutoAdvanceTimeout = null;
       let writingTimeLimit = 60; // 1 minute in seconds
       let writingTimer;
       let timeRemaining = writingTimeLimit;
 
       // Configuration
       const QUESTIONS_PER_QUIZ = 3;
+      const STAGES_TOTAL = 3;
       const USED_QUESTIONS_KEY = "write_photo_used_questions";
 
       // Load Quiz Data from JSON
@@ -1053,17 +1056,21 @@
 
       // Update Progress Bar
       function updateProgressBar() {
-        const completed = currentQuestion;
-        const total = quizData.length;
-        const percentage = total > 0 ? (completed / total) * 100 : 0;
-        
         const progressFill = document.getElementById("stageProgressFill");
         const progressText = document.getElementById("stageProgressText");
-        
-        if (progressFill && progressText) {
-          progressFill.style.width = percentage + "%";
-          progressText.textContent = completed + "/" + total;
+        if (!progressFill || !progressText) return;
+
+        let completed, total, percentage;
+        if (stagesCompletedThisSession === 0) {
+          completed = currentQuestion;
+          total = quizData.length;
+        } else {
+          total = STAGES_TOTAL * QUESTIONS_PER_QUIZ;
+          completed = stagesCompletedThisSession * QUESTIONS_PER_QUIZ + currentQuestion;
         }
+        percentage = total > 0 ? (completed / total) * 100 : 0;
+        progressFill.style.width = percentage + "%";
+        progressText.textContent = completed + "/" + total;
       }
 
       function showQuestion() {
@@ -1216,6 +1223,7 @@
       }
 
       function showFeedback(sampleAnswer) {
+        clearTimeout(feedbackAutoAdvanceTimeout);
         const feedbackSection = document.getElementById("feedbackSection");
         const sampleAnswerText = document.getElementById("sampleAnswerText");
 
@@ -1223,6 +1231,7 @@
         feedbackSection.style.display = "block";
 
         playSound("right answer SFX.wav");
+        feedbackAutoAdvanceTimeout = setTimeout(nextQuestion, 2000);
       }
 
       function playSound(filename) {
@@ -1238,6 +1247,7 @@
       }
 
       function nextQuestion() {
+        clearTimeout(feedbackAutoAdvanceTimeout);
         currentQuestion++;
 
         if (currentQuestion < quizData.length) {
@@ -1252,26 +1262,33 @@
 
       function showResults() {
         stagesCompletedThisSession++;
+        cumulativeCorrect += quizData.length;
+        cumulativeTotal += quizData.length;
         saveDetailedQuizResult("Write About the Photo");
 
         document.getElementById("questionCard").style.display = "none";
         document.getElementById("feedbackSection").style.display = "none";
+        
+        const continueBtn = document.getElementById("resultsContinueBtn");
+        if (continueBtn) {
+          continueBtn.style.display = stagesCompletedThisSession < STAGES_TOTAL ? "inline-block" : "none";
+        }
+        
         document.getElementById("resultsScreen").style.display = "block";
       }
 
       function continueToNextStage() {
-        document.getElementById("questionCard").style.display = "block";
-        document.getElementById("resultsScreen").style.display = "none";
-
         if (allQuizData.length > 0) {
           quizData = selectRandomQuestions(allQuizData, QUESTIONS_PER_QUIZ);
           if (quizData.length === 0) {
-            showErrorScreen(
-              "No new questions available. All questions have been used."
-            );
+            const continueBtn = document.getElementById("resultsContinueBtn");
+            if (continueBtn) continueBtn.style.display = "none";
             return;
           }
         }
+
+        document.getElementById("resultsScreen").style.display = "none";
+        document.getElementById("questionCard").style.display = "block";
 
         currentQuestion = 0;
         answers = [];
@@ -1915,6 +1932,9 @@
 
       function goBack() {
         if (confirm("Are you sure you want to exit the quiz?")) {
+          if (stagesCompletedThisSession > 0) {
+            incrementSkillProgress("Write About the Photo", stagesCompletedThisSession);
+          }
           window.history.back();
         }
       }

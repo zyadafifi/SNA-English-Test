@@ -832,7 +832,6 @@
           <div class="feedback-title" id="feedbackTitle">Incorrect</div>
         </div>
         <div class="correct-answer-text" id="correctAnswerText"></div>
-        <button class="next-btn" onclick="nextQuestion()">GOT IT</button>
       </div>
 
       <!-- Results Screen -->
@@ -854,7 +853,7 @@
         <div class="results-subtitle">improved your reading skills.</div>
         <div class="results-score" id="resultsScore"></div>
         <div class="results-buttons">
-          <button class="continue-btn" onclick="continueToNextStage()">CONTINUE</button>
+          <button class="continue-btn" id="resultsContinueBtn" onclick="continueToNextStage()">CONTINUE</button>
           <button class="done-btn" onclick="goToPractice()">DONE</button>
         </div>
       </div>
@@ -875,9 +874,13 @@
       let dataLoaded = false;
       let currentInputs = [];
       let stagesCompletedThisSession = 0;
+      let cumulativeCorrect = 0;
+      let cumulativeTotal = 0;
+      let feedbackAutoAdvanceTimeout = null;
 
       // Configuration
       const QUESTIONS_PER_QUIZ = 15;
+      const STAGES_TOTAL = 6;
       const USED_QUESTIONS_KEY = "fill_blanks_used_questions";
 
       // Load Quiz Data from JSON
@@ -1040,17 +1043,21 @@
       // Show Current Question
       // Update Progress Bar
       function updateProgressBar() {
-        const completed = currentQuestion;
-        const total = quizData.length;
-        const percentage = total > 0 ? (completed / total) * 100 : 0;
-        
         const progressFill = document.getElementById("stageProgressFill");
         const progressText = document.getElementById("stageProgressText");
-        
-        if (progressFill && progressText) {
-          progressFill.style.width = percentage + "%";
-          progressText.textContent = completed + "/" + total;
+        if (!progressFill || !progressText) return;
+
+        let completed, total, percentage;
+        if (stagesCompletedThisSession === 0) {
+          completed = currentQuestion;
+          total = quizData.length;
+        } else {
+          total = STAGES_TOTAL * QUESTIONS_PER_QUIZ;
+          completed = stagesCompletedThisSession * QUESTIONS_PER_QUIZ + currentQuestion;
         }
+        percentage = total > 0 ? (completed / total) * 100 : 0;
+        progressFill.style.width = percentage + "%";
+        progressText.textContent = completed + "/" + total;
       }
 
       function showQuestion() {
@@ -1371,11 +1378,11 @@
       }
 
       function showFeedback(isCorrect, correctAnswer) {
+        clearTimeout(feedbackAutoAdvanceTimeout);
         const feedbackSection = document.getElementById("feedbackSection");
         const feedbackTitle = document.getElementById("feedbackTitle");
         const feedbackIcon = document.getElementById("feedbackIcon");
         const correctAnswerText = document.getElementById("correctAnswerText");
-        const nextBtn = document.querySelector(".next-btn");
 
         feedbackSection.style.display = "block";
 
@@ -1386,7 +1393,6 @@
           feedbackTitle.textContent = "Correct!";
           correctAnswerText.className = "correct-answer-text";
           correctAnswerText.textContent = "Well done!";
-          nextBtn.className = "next-btn correct";
           feedbackIcon.innerHTML = `
                         <circle cx="12" cy="12" r="10"/>
                         <polyline points="16,8 10,14 8,12"/>
@@ -1399,13 +1405,13 @@
           correctAnswerText.className =
             "correct-answer-text incorrect-feedback";
           correctAnswerText.textContent = `Correct answer: "${correctAnswer}"`;
-          nextBtn.className = "next-btn";
           feedbackIcon.innerHTML = `
                         <circle cx="12" cy="12" r="10"/>
                         <line x1="15" y1="9" x2="9" y2="15"/>
                         <line x1="9" y1="9" x2="15" y2="15"/>
                       `;
         }
+        feedbackAutoAdvanceTimeout = setTimeout(nextQuestion, 2000);
       }
 
       function playSound(filename) {
@@ -1421,6 +1427,7 @@
       }
 
       function nextQuestion() {
+        clearTimeout(feedbackAutoAdvanceTimeout);
         currentQuestion++;
 
         if (currentQuestion < quizData.length) {
@@ -1432,35 +1439,38 @@
 
       function showResults() {
         stagesCompletedThisSession++;
+        cumulativeCorrect += score;
+        cumulativeTotal += quizData.length;
         saveDetailedQuizResult("Fill in the Blanks");
 
         document.getElementById("questionCard").style.display = "none";
         document.getElementById("feedbackSection").style.display = "none";
         
-        // Update results score
         const resultsScoreEl = document.getElementById("resultsScore");
         if (resultsScoreEl) {
-          const correct = score;
-          const total = quizData.length;
-          resultsScoreEl.textContent = `You got ${correct} out of ${total} correct.`;
+          resultsScoreEl.textContent = `You got ${cumulativeCorrect} out of ${cumulativeTotal} correct.`;
+        }
+        
+        const continueBtn = document.getElementById("resultsContinueBtn");
+        if (continueBtn) {
+          continueBtn.style.display = stagesCompletedThisSession < STAGES_TOTAL ? "inline-block" : "none";
         }
         
         document.getElementById("resultsScreen").style.display = "block";
       }
 
       function continueToNextStage() {
-        document.getElementById("questionCard").style.display = "block";
-        document.getElementById("resultsScreen").style.display = "none";
-
         if (allQuizData.length > 0) {
           quizData = selectRandomQuestions(allQuizData, QUESTIONS_PER_QUIZ);
           if (quizData.length === 0) {
-            showErrorScreen(
-              "No new questions available. All questions have been used."
-            );
+            const continueBtn = document.getElementById("resultsContinueBtn");
+            if (continueBtn) continueBtn.style.display = "none";
             return;
           }
         }
+
+        document.getElementById("resultsScreen").style.display = "none";
+        document.getElementById("questionCard").style.display = "block";
 
         currentQuestion = 0;
         score = 0;
@@ -1906,6 +1916,9 @@
 
       function goBack() {
         if (confirm("Are you sure you want to exit the quiz?")) {
+          if (stagesCompletedThisSession > 0) {
+            incrementSkillProgress("Fill in the Blanks", stagesCompletedThisSession);
+          }
           window.history.back();
         }
       }

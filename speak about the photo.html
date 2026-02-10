@@ -2614,6 +2614,9 @@
 
       function goBack() {
         if (confirm("Are you sure you want to exit the quiz?")) {
+          if (stagesCompletedThisSession > 0) {
+            incrementSkillProgress("Speak About the Photo", stagesCompletedThisSession);
+          }
           stopAllAudio();
           window.history.back();
         }

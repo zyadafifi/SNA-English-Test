@@ -1623,6 +1623,9 @@
 
       function goBack() {
         if (confirm("Are you sure you want to exit the quiz?")) {
+          if (stagesCompletedThisSession > 0) {
+            incrementSkillProgress("Writing Sample", stagesCompletedThisSession);
+          }
           window.history.back();
         }
       }
@@ -1640,7 +1643,7 @@
         };
 
         localStorage.setItem(
-          "writePhotoProgress",
+          "writingSampleProgress",
           JSON.stringify(progressData)
         );
         console.log(`Progress updated: ${skillName} - ${newCompleted}/3`);
