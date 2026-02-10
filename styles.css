@@ -309,6 +309,51 @@ body::before {
   z-index: 1000;
   border: 1px solid #e2e8f0;
 }
+/* Overall Progress Card */
+.overall-progress-card {
+  background: linear-gradient(135deg, #fff9e6 0%, #fff3e0 100%);
+  border: 1px solid #ffd84d;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(255, 197, 21, 0.15);
+}
+
+.overall-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.overall-progress-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.overall-progress-percent {
+  font-size: 15px;
+  font-weight: 700;
+  color: #b45309;
+}
+
+.overall-progress-bar {
+  height: 10px;
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #ffe8b3;
+}
+
+.overall-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #ffc515, #ffd84d);
+  border-radius: 5px;
+  transition: width 0.4s ease;
+}
+
 /* Hero Section */
 .hero-section {
   background: transparent;

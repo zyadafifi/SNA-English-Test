@@ -1,6 +1,7 @@
 // Global Variables
 let sidebarOpen = false;
 let activeCategory = "ALL";
+const OVERALL_PROGRESS_TOTAL = 51;
 
 // Initialize the application - Optimized single DOMContentLoaded listener
 (function () {
@@ -1031,6 +1032,30 @@ function saveSkillProgress(skillName, completed, total) {
   }
 }
 
+// Function to update the overall percentage progress bar
+function updateOverallProgressBar() {
+  const fillEl = document.getElementById("overallProgressFill");
+  const percentEl = document.getElementById("overallProgressPercent");
+  if (!fillEl || !percentEl) return;
+
+  let totalCompleted = 0;
+  try {
+    const stored = localStorage.getItem("skillProgress");
+    if (stored) {
+      const allProgress = JSON.parse(stored);
+      Object.values(allProgress).forEach((p) => {
+        totalCompleted += p.completed || 0;
+      });
+    }
+  } catch (e) {
+    console.error("Error reading overall progress:", e);
+  }
+
+  const percent = Math.round((totalCompleted / OVERALL_PROGRESS_TOTAL) * 100);
+  fillEl.style.width = `${percent}%`;
+  percentEl.textContent = `${percent}%`;
+}
+
 // Function to load saved progress
 function loadSkillProgress() {
   const progressKey = "skillProgress";
@@ -1046,6 +1071,7 @@ function loadSkillProgress() {
         updateSkillProgress(skillName, progress.completed, progress.total);
       });
     }
+    updateOverallProgressBar();
   } catch (error) {
     console.error("Error loading progress:", error);
   }
@@ -1284,6 +1310,7 @@ function checkForNewProgress() {
       console.error("Error processing Speaking Sample progress:", error);
     }
   }
+  updateOverallProgressBar();
 }
 // =========================
 // WHATSAPP HELP MENU
