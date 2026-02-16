@@ -1,0 +1,10 @@
+/* UI component layout – minimal, matches existing app values */
+.app-shell {
+  min-height: 100vh;
+}
+
+.ui-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}

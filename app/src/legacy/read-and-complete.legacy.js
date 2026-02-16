@@ -1,0 +1,1602 @@
+import { getNextQuizUrl } from './skills-config.legacy.js';
+import { getQuizDataUrl } from './quiz-data-url.js';
+import { initResultsScreen } from './shared/resultsScreen.js';
+import * as timerDbg from "./timer-debug.js";
+
+export function init(containerEl, options = {}) {
+  if (!containerEl) return function noop() {};
+  const getEl = (root, id) => root.querySelector('[id="' + id + '"]') || document.getElementById(id);
+  const getNextQuizUrlFn = options.getNextQuizUrl || getNextQuizUrl;
+  const unbind = [];
+
+// Quiz Data (will be loaded from JSON)
+      let allQuizData = [];
+      let quizData = [];
+      let quizConfig = {};
+
+      // Quiz State
+      let currentQuestion = 0;
+      let score = 0;
+      let answers = [];
+      let questionStartTime = 0;
+      let timerInterval;
+      let questionTimeout;
+      let dataLoaded = false;
+      let currentInputs = [];
+      let stagesCompletedThisSession = 0;
+      let cumulativeCorrect = 0;
+      let cumulativeTotal = 0;
+      let feedbackAutoAdvanceTimeout = null;
+
+      // Configuration
+      const QUESTIONS_PER_QUIZ = 15;
+      const STAGES_TOTAL = 6;
+      const USED_QUESTIONS_KEY = "read_complete_used_questions";
+      const QUESTION_TIMEOUT = 180000; // 3 minutes in milliseconds
+
+      // Load Quiz Data from JSON
+      async function loadQuizData() {
+        try {
+          showLoadingScreen();
+
+          const response = await fetch(getQuizDataUrl("read and complete data.json"));
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+
+          // Validate data structure
+          if (
+            !data.questions ||
+            !Array.isArray(data.questions) ||
+            data.questions.length === 0
+          ) {
+            throw new Error(
+              "Invalid data format: questions array is missing or empty"
+            );
+          }
+
+          allQuizData = data.questions;
+          quizConfig = data.config || {};
+
+          // Select random questions avoiding previously used ones
+          quizData = selectRandomQuestions(allQuizData, QUESTIONS_PER_QUIZ);
+
+          if (quizData.length === 0) {
+            throw new Error(
+              "No new questions available. All questions have been used."
+            );
+          }
+
+          dataLoaded = true;
+          hideLoadingScreen();
+          initializeQuiz();
+        } catch (error) {
+          console.error("Error loading quiz data:", error);
+          showErrorScreen(error.message);
+        }
+      }
+
+      // Select random questions avoiding previously used ones
+      function selectRandomQuestions(allQuestions, count) {
+        const usedQuestions = getUsedQuestions();
+        const availableQuestions = allQuestions.filter(
+          (question) => !usedQuestions.includes(question.id.toString())
+        );
+
+        if (availableQuestions.length === 0) {
+          console.log("All questions have been used. Resetting question pool.");
+          clearUsedQuestions();
+          return selectRandomQuestions(allQuestions, count);
+        }
+
+        if (availableQuestions.length <= count) {
+          console.log(
+            `Only ${availableQuestions.length} questions available. Using all.`
+          );
+          const selectedIds = availableQuestions.map((q) => q.id.toString());
+          saveUsedQuestions([...usedQuestions, ...selectedIds]);
+          return [...availableQuestions];
+        }
+
+        // Randomly select questions
+        const shuffled = [...availableQuestions];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+
+        const selectedQuestions = shuffled.slice(0, count);
+        const selectedIds = selectedQuestions.map((q) => q.id.toString());
+        saveUsedQuestions([...usedQuestions, ...selectedIds]);
+
+        return selectedQuestions;
+      }
+
+      // LocalStorage functions
+      function getUsedQuestions() {
+        try {
+          const stored = localStorage.getItem(USED_QUESTIONS_KEY);
+          return stored ? JSON.parse(stored) : [];
+        } catch (error) {
+          console.error("Error reading used questions:", error);
+          return [];
+        }
+      }
+
+      function saveUsedQuestions(questions) {
+        try {
+          localStorage.setItem(USED_QUESTIONS_KEY, JSON.stringify(questions));
+        } catch (error) {
+          console.error("Error saving used questions:", error);
+        }
+      }
+
+      function clearUsedQuestions() {
+        try {
+          localStorage.removeItem(USED_QUESTIONS_KEY);
+        } catch (error) {
+          console.error("Error clearing used questions:", error);
+        }
+      }
+
+      // Show/Hide Loading Screen
+      function showLoadingScreen() {
+        getEl(containerEl, "loadingScreen").style.display = "flex";
+        getEl(containerEl, "errorScreen").style.display = "none";
+        getEl(containerEl, "quizContainer").style.display = "none";
+      }
+
+      function hideLoadingScreen() {
+        getEl(containerEl, "loadingScreen").style.display = "none";
+        getEl(containerEl, "quizContainer").style.display = "flex";
+      }
+
+      function showErrorScreen(errorMessage) {
+        getEl(containerEl, "loadingScreen").style.display = "none";
+        getEl(containerEl, "quizContainer").style.display = "none";
+        getEl(containerEl, "errorScreen").style.display = "block";
+        getEl(containerEl, "errorMessage").textContent = errorMessage;
+      }
+
+      // Initialize Quiz
+      function initializeQuiz() {
+        if (!dataLoaded || quizData.length === 0) {
+          showErrorScreen("No quiz data available");
+          return;
+        }
+
+        currentQuestion = 0;
+        score = 0;
+        answers = [];
+
+        if (quizConfig.title) {
+          getEl(containerEl, "questionTitle").textContent =
+            quizConfig.title;
+        }
+
+        if (quizConfig.shuffleQuestions) {
+          shuffleArray(quizData);
+        }
+
+        console.log(`Starting quiz with ${quizData.length} questions`);
+        showQuestion();
+      }
+
+      function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+      }
+
+      // Show Current Question
+      // Update Progress Bar
+      function updateProgressBar() {
+        const progressFill = getEl(containerEl, "stageProgressFill");
+        const progressText = getEl(containerEl, "stageProgressText");
+        if (!progressFill || !progressText) return;
+
+        let completed, total, percentage;
+        if (stagesCompletedThisSession === 0) {
+          completed = currentQuestion;
+          total = quizData.length;
+        } else {
+          total = STAGES_TOTAL * QUESTIONS_PER_QUIZ;
+          completed = stagesCompletedThisSession * QUESTIONS_PER_QUIZ + currentQuestion;
+        }
+        percentage = total > 0 ? (completed / total) * 100 : 0;
+        progressFill.style.width = percentage + "%";
+        progressText.textContent = completed + "/" + total;
+      }
+
+      function showQuestion() {
+        if (currentQuestion >= quizData.length) {
+          showResults();
+          return;
+        }
+
+        const question = quizData[currentQuestion];
+        createPassageWithDropdowns(question);
+
+        // Reset and show continue button
+        const continueBtn = getEl(containerEl, "continueBtn");
+        continueBtn.className = "continue-btn";
+        continueBtn.textContent = "CONTINUE";
+        continueBtn.style.display = "block";
+
+        // Make sure question card is visible
+        getEl(containerEl, "questionCard").style.display = "block";
+        getEl(containerEl, "feedbackSection").style.display = "none";
+
+        // Update progress bar
+        updateProgressBar();
+
+        // Start question timer and timeout
+        startQuestionTimer();
+        startQuestionTimeout();
+      }
+
+      function createPassageWithDropdowns(question) {
+        const passageTitle = getEl(containerEl, "passageTitle");
+        const container = getEl(containerEl, "passageContainer");
+
+        passageTitle.textContent = question.title;
+        container.innerHTML = "";
+        currentInputs = [];
+
+        const parts = question.passage.split("#");
+
+        parts.forEach((part, index) => {
+          // Add text part
+          if (part.trim()) {
+            const textSpan = document.createElement("span");
+            textSpan.className = "passage-text";
+            textSpan.textContent = part;
+            container.appendChild(textSpan);
+          }
+
+          // Add input boxes for each missing word (except for the last part)
+          if (index < parts.length - 1) {
+            const wordInput = document.createElement("div");
+            wordInput.className = "word-input";
+
+            const word = question.correctAnswers[index];
+            const visibleLetters = question.visibleLetters[index] || "";
+
+            // Create input boxes for each letter of the word
+            for (let i = 0; i < word.length; i++) {
+              const letterInput = document.createElement("input");
+              letterInput.type = "text";
+              letterInput.className = "letter-input";
+              letterInput.setAttribute("maxlength", "1");
+              letterInput.setAttribute("data-word-index", index);
+              letterInput.setAttribute("data-letter-index", i);
+              letterInput.setAttribute("autocomplete", "off");
+              letterInput.setAttribute("spellcheck", "false");
+
+              // Check if this letter should be pre-filled
+              if (visibleLetters[i] && visibleLetters[i] !== "_") {
+                letterInput.value = visibleLetters[i];
+                letterInput.classList.add("prefilled");
+                letterInput.readOnly = true;
+                letterInput.tabIndex = -1;
+              } else {
+                letterInput.addEventListener("input", handleLetterInput);
+                letterInput.addEventListener("keydown", handleKeyDown);
+                letterInput.addEventListener("paste", handlePaste);
+                currentInputs.push(letterInput);
+              }
+
+              wordInput.appendChild(letterInput);
+            }
+
+            container.appendChild(wordInput);
+
+            // Add space after each word (except the last one)
+            if (index < parts.length - 2) {
+              container.appendChild(document.createTextNode(" "));
+            }
+          }
+        });
+
+        // Focus on first editable input
+        if (currentInputs.length > 0) {
+          setTimeout(() => currentInputs[0].focus(), 100);
+        }
+      }
+
+      function handleLetterInput(event) {
+        const input = event.target;
+        const wordIndex = parseInt(input.getAttribute("data-word-index"));
+        const letterIndex = parseInt(input.getAttribute("data-letter-index"));
+
+        // Convert to lowercase
+        input.value = input.value.toLowerCase();
+
+        // Move to next input if there's a value
+        if (input.value) {
+          const nextInput = findNextInput(wordIndex, letterIndex);
+          if (nextInput) {
+            nextInput.focus();
+          }
+        }
+
+        // Check if all inputs are filled
+        checkAllInputsFilled();
+      }
+
+      function handleKeyDown(event) {
+        const input = event.target;
+        const wordIndex = parseInt(input.getAttribute("data-word-index"));
+        const letterIndex = parseInt(input.getAttribute("data-letter-index"));
+
+        // Handle backspace
+        if (event.key === "Backspace" && !input.value) {
+          const prevInput = findPrevInput(wordIndex, letterIndex);
+          if (prevInput) {
+            prevInput.focus();
+          }
+        }
+
+        // Handle Enter
+        if (event.key === "Enter") {
+          const continueBtn = getEl(containerEl, "continueBtn");
+          if (continueBtn.classList.contains("active")) {
+            checkAnswer();
+          }
+        }
+
+        // Handle arrow keys
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          const prevInput = findPrevInput(wordIndex, letterIndex);
+          if (prevInput) {
+            prevInput.focus();
+          }
+        }
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          const nextInput = findNextInput(wordIndex, letterIndex);
+          if (nextInput) {
+            nextInput.focus();
+          }
+        }
+      }
+
+      function handlePaste(event) {
+        event.preventDefault();
+        const input = event.target;
+        const wordIndex = parseInt(input.getAttribute("data-word-index"));
+        const letterIndex = parseInt(input.getAttribute("data-letter-index"));
+
+        const pastedText = (event.clipboardData || window.clipboardData)
+          .getData("text")
+          .toLowerCase();
+
+        // Fill consecutive inputs with pasted text
+        let currentInput = input;
+        for (let i = 0; i < pastedText.length && currentInput; i++) {
+          if (!currentInput.readOnly) {
+            currentInput.value = pastedText[i];
+          }
+          const currentWordIndex = parseInt(
+            currentInput.getAttribute("data-word-index")
+          );
+          const currentLetterIndex = parseInt(
+            currentInput.getAttribute("data-letter-index")
+          );
+          currentInput = findNextInput(currentWordIndex, currentLetterIndex);
+        }
+
+        checkAllInputsFilled();
+      }
+
+      function findNextInput(wordIndex, letterIndex) {
+        // Find the next editable input
+        const allInputs = containerEl.querySelectorAll(
+          ".letter-input:not(.prefilled)"
+        );
+        const currentInputs = Array.from(allInputs);
+        const currentInput = containerEl.querySelector(
+          `[data-word-index="${wordIndex}"][data-letter-index="${letterIndex}"]`
+        );
+        const currentIndex = currentInputs.indexOf(currentInput);
+
+        if (currentIndex < currentInputs.length - 1) {
+          return currentInputs[currentIndex + 1];
+        }
+        return null;
+      }
+
+      function findPrevInput(wordIndex, letterIndex) {
+        // Find the previous editable input
+        const allInputs = containerEl.querySelectorAll(
+          ".letter-input:not(.prefilled)"
+        );
+        const currentInputs = Array.from(allInputs);
+        const currentInput = containerEl.querySelector(
+          `[data-word-index="${wordIndex}"][data-letter-index="${letterIndex}"]`
+        );
+        const currentIndex = currentInputs.indexOf(currentInput);
+
+        if (currentIndex > 0) {
+          return currentInputs[currentIndex - 1];
+        }
+        return null;
+      }
+
+      function handleDropdownChange() {
+        checkAllDropdownsFilled();
+      }
+
+      function checkAllInputsFilled() {
+        const continueBtn = getEl(containerEl, "continueBtn");
+        const allFilled = currentInputs.every(
+          (input) => input.value.trim() !== ""
+        );
+
+        if (allFilled) {
+          continueBtn.className = "continue-btn active";
+        } else {
+          continueBtn.className = "continue-btn";
+        }
+      }
+
+      function startQuestionTimer() {
+        timerDbg.clearOrphanedInterval("ReadAndComplete");
+        if (timerInterval) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+        }
+        questionStartTime = Date.now();
+        let seconds = 0;
+        const timerElement = getEl(containerEl, "timer");
+        const timerText = getEl(containerEl, "timerText");
+        if (timerText) timerText.textContent = "0:00";
+
+        timerInterval = setInterval(() => {
+          seconds++;
+          const minutes = Math.floor(seconds / 60);
+          const remainingSeconds = seconds % 60;
+          if (timerText) timerText.textContent = `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
+          if (seconds >= 150 && timerElement) timerElement.classList.add("warning");
+        }, 1000);
+        timerDbg.registerInterval("ReadAndComplete", timerInterval);
+      }
+
+      function startQuestionTimeout() {
+        if (questionTimeout) {
+          clearTimeout(questionTimeout);
+          questionTimeout = null;
+        }
+        questionTimeout = setTimeout(() => {
+          // Auto-submit as incorrect if no answer after 3 minutes
+          console.log("Question timed out after 3 minutes");
+          checkAnswer(true); // true indicates timeout
+        }, QUESTION_TIMEOUT);
+      }
+
+      function stopQuestionTimer() {
+        if (timerInterval) {
+          timerDbg.unregisterInterval("ReadAndComplete");
+          clearInterval(timerInterval);
+          timerInterval = null;
+        }
+        if (questionTimeout) {
+          clearTimeout(questionTimeout);
+          questionTimeout = null;
+        }
+        const timerEl = getEl(containerEl, "timer");
+        if (timerEl) timerEl.classList.remove("warning");
+      }
+
+      function checkAnswer(isTimeout = false) {
+        const continueBtn = getEl(containerEl, "continueBtn");
+        if (!isTimeout && !continueBtn.classList.contains("active")) {
+          return;
+        }
+
+        stopQuestionTimer();
+
+        const question = quizData[currentQuestion];
+
+        // Get user's answers by reconstructing each word
+        const userAnswers = [];
+        const allInputs = containerEl.querySelectorAll(".letter-input");
+
+        // Group inputs by word
+        const wordGroups = {};
+        allInputs.forEach((input) => {
+          const wordIndex = parseInt(input.getAttribute("data-word-index"));
+          if (!wordGroups[wordIndex]) {
+            wordGroups[wordIndex] = [];
+          }
+          wordGroups[wordIndex].push(input);
+        });
+
+        // Reconstruct each word
+        Object.keys(wordGroups).forEach((wordIndex) => {
+          const wordInputs = wordGroups[wordIndex].sort((a, b) => {
+            return (
+              parseInt(a.getAttribute("data-letter-index")) -
+              parseInt(b.getAttribute("data-letter-index"))
+            );
+          });
+
+          const userWord = wordInputs
+            .map((input) => input.value || "")
+            .join("");
+          userAnswers[parseInt(wordIndex)] = userWord;
+        });
+
+        const correctAnswers = question.correctAnswers;
+
+        // Check if all answers are correct
+        const isCorrect =
+          !isTimeout &&
+          userAnswers.every(
+            (answer, index) =>
+              answer.toLowerCase() === correctAnswers[index].toLowerCase()
+          );
+
+        // Store answer
+        const timeSpent = Date.now() - questionStartTime;
+        answers.push({
+          question: question.id,
+          userAnswers: userAnswers,
+          correctAnswers: correctAnswers,
+          isCorrect: isCorrect,
+          isTimeout: isTimeout,
+          timeSpent: timeSpent,
+        });
+
+        if (isCorrect) {
+          score++;
+        }
+
+        // Update input states
+        allInputs.forEach((input) => {
+          if (!input.readOnly) {
+            input.disabled = true;
+            input.classList.add("submitted");
+
+            const wordIndex = parseInt(input.getAttribute("data-word-index"));
+            const letterIndex = parseInt(
+              input.getAttribute("data-letter-index")
+            );
+            const correctLetter = correctAnswers[wordIndex][letterIndex];
+
+            if (input.value.toLowerCase() === correctLetter.toLowerCase()) {
+              input.classList.add("correct");
+            } else {
+              input.classList.add("incorrect");
+              // Show correct letter after a delay
+              setTimeout(() => {
+                input.value = correctLetter;
+                input.classList.remove("incorrect");
+                input.classList.add("correct");
+              }, 1000);
+            }
+          }
+        });
+
+        // Hide continue button
+        continueBtn.style.display = "none";
+
+        // Show feedback
+        showFeedback(isCorrect, correctAnswers, isTimeout);
+      }
+
+      function showFeedback(isCorrect, correctAnswers, isTimeout) {
+        clearTimeout(feedbackAutoAdvanceTimeout);
+        const feedbackSection = getEl(containerEl, "feedbackSection");
+        const feedbackTitle = getEl(containerEl, "feedbackTitle");
+        const feedbackIcon = getEl(containerEl, "feedbackIcon");
+        const correctAnswerText = getEl(containerEl, "correctAnswerText");
+
+        feedbackSection.style.display = "block";
+
+        if (isCorrect) {
+          playSound("right answer SFX.wav");
+          feedbackSection.className = "feedback-section correct";
+          feedbackTitle.className = "feedback-title correct";
+          feedbackTitle.textContent = "Correct!";
+          correctAnswerText.className = "correct-answer-text";
+          correctAnswerText.textContent =
+            "Well done! You completed the text correctly.";
+          feedbackIcon.innerHTML = `
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="16,8 10,14 8,12"/>
+          `;
+        } else {
+          playSound("wrong answer SFX.wav");
+          feedbackSection.className = "feedback-section incorrect";
+          feedbackTitle.className = "feedback-title incorrect";
+          feedbackTitle.textContent = isTimeout
+            ? "Time's up! (3 minutes)"
+            : "Incorrect";
+          correctAnswerText.className =
+            "correct-answer-text incorrect-feedback";
+
+          // Show correct answers
+          const question = quizData[currentQuestion];
+          const correctText = question.passage
+            .split("#")
+            .map((part, index) => {
+              if (index < question.passage.split("#").length - 1) {
+                return part + " <strong>" + correctAnswers[index] + "</strong>";
+              }
+              return part;
+            })
+            .join("");
+
+          correctAnswerText.innerHTML = `<strong>Correct Answer:</strong><br><br>${correctText}`;
+
+          feedbackIcon.innerHTML = `
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="15" y1="9" x2="9" y2="15"/>
+            <line x1="9" y1="9" x2="15" y2="15"/>
+          `;
+        }
+        feedbackAutoAdvanceTimeout = setTimeout(nextQuestion, 2000);
+      }
+
+      function playSound(filename) {
+        try {
+          const audio = new Audio(filename);
+          audio.volume = 0.5;
+          audio.play().catch((error) => {
+            console.log("Could not play sound:", error);
+          });
+        } catch (error) {
+          console.log("Error creating audio:", error);
+        }
+      }
+
+      function nextQuestion() {
+        clearTimeout(feedbackAutoAdvanceTimeout);
+        currentQuestion++;
+
+        if (currentQuestion < quizData.length) {
+          // Reset and show the question card
+          getEl(containerEl, "questionCard").style.display = "block";
+          getEl(containerEl, "feedbackSection").style.display = "none";
+
+          // Show the continue button
+          const continueBtn = getEl(containerEl, "continueBtn");
+          continueBtn.style.display = "block";
+          continueBtn.className = "continue-btn";
+          continueBtn.textContent = "CONTINUE";
+
+          showQuestion();
+        } else {
+          showResults();
+        }
+      }
+
+      const resultsHelper = initResultsScreen(containerEl, {
+        skillName: "Read and Complete",
+        stagesTotal: STAGES_TOTAL,
+        getScoreText: ({ correct, total }) => `You got ${correct} out of ${total} correct.`,
+        getNextQuizUrl: getNextQuizUrlFn,
+        navigate: (url) => (typeof options.navigate === "function" ? options.navigate(url) : (window.location.href = url)),
+        getState: () => ({ stagesCompletedThisSession }),
+        onSelectNextStage() {
+          if (allQuizData.length > 0) {
+            quizData = selectRandomQuestions(allQuizData, QUESTIONS_PER_QUIZ);
+            if (quizData.length === 0) {
+              const continueBtn = getEl(containerEl, "resultsContinueBtn");
+              if (continueBtn) continueBtn.style.display = "none";
+              return false;
+            }
+          }
+          currentQuestion = 0;
+          score = 0;
+          answers = [];
+          initializeQuiz();
+        },
+        onDone() {
+          incrementSkillProgress("Read and Complete", stagesCompletedThisSession);
+          if (typeof options.navigate === "function") options.navigate("/"); else window.location.href = "index.html";
+        },
+        selectors: { resultsScreen: "resultsScreen", resultsScore: "resultsScore", resultsContinueBtn: "resultsContinueBtn", doneBtn: ".done-btn", questionCard: "questionCard", hideWhenResults: ["feedbackSection"] },
+      });
+      if (resultsHelper.unbind && resultsHelper.unbind.length) unbind.push(...resultsHelper.unbind);
+
+      function showResults() {
+        stagesCompletedThisSession++;
+        cumulativeCorrect += score;
+        cumulativeTotal += quizData.length;
+        saveDetailedQuizResult("Read and Complete");
+        resultsHelper.showResults({ correct: cumulativeCorrect, total: cumulativeTotal, stagesCompletedThisSession });
+      }
+      // Function to save detailed quiz result
+      function saveDetailedQuizResult(skillName) {
+        const sessionData = calculateSessionMetrics();
+
+        // Create session result object
+        const sessionResult = {
+          skillName: skillName,
+          sessionId: Date.now(),
+          date: new Date().toISOString(),
+
+          // Basic performance data
+          totalQuestions: quizData.length,
+          correctAnswers: score,
+          accuracy: (score / quizData.length) * 100,
+
+          // Time analysis
+          totalTimeSpent: sessionData.totalTime,
+          averageTimePerQuestion: sessionData.avgTime,
+
+          // Performance analysis specific to Read and Complete
+          comprehensionScore: sessionData.comprehensionScore,
+          vocabularyScore: sessionData.vocabularyScore,
+          contextAnalysis: sessionData.contextAnalysis,
+          timeoutCount: sessionData.timeoutCount,
+
+          // Final session score
+          sessionScore: calculateSessionScore(sessionData),
+
+          // Individual question details
+          questionDetails: answers.map((answer, index) => ({
+            questionId: quizData[index].id,
+            topic: quizData[index].title,
+            passageLength: quizData[index].passage.length,
+            wordsToComplete: answer.correctAnswers.length,
+            userAnswers: answer.userAnswers,
+            correctAnswers: answer.correctAnswers,
+            partiallyCorrect: calculatePartialCorrectness(
+              answer.userAnswers,
+              answer.correctAnswers
+            ),
+            isCorrect: answer.isCorrect,
+            isTimeout: answer.isTimeout || false,
+            timeSpent: answer.timeSpent,
+            difficulty: determinePassageDifficulty(quizData[index]),
+          })),
+        };
+
+        // Save result to localStorage
+        saveSessionToHistory(skillName, sessionResult);
+
+        console.log(`Session saved for ${skillName}:`, sessionResult);
+      }
+
+      // Calculate session metrics specific to Read and Complete
+      function calculateSessionMetrics() {
+        const totalTime = answers.reduce(
+          (sum, answer) => sum + answer.timeSpent,
+          0
+        );
+        const avgTime = totalTime / answers.length;
+        const timeoutCount = answers.filter(
+          (answer) => answer.isTimeout
+        ).length;
+
+        // Calculate comprehension score (how well user understands context)
+        const comprehensionScore = calculateComprehensionScore();
+
+        // Calculate vocabulary score (knowledge of English words)
+        const vocabularyScore = calculateVocabularyScore();
+
+        // Analyze context usage performance
+        const contextAnalysis = analyzeContextUsage();
+
+        return {
+          totalTime: Math.round(totalTime / 1000), // Convert to seconds
+          avgTime: Math.round(avgTime / 1000), // Convert to seconds
+          comprehensionScore: Math.round(comprehensionScore),
+          vocabularyScore: Math.round(vocabularyScore),
+          contextAnalysis: contextAnalysis,
+          timeoutCount: timeoutCount,
+        };
+      }
+
+      // Calculate comprehension score based on context understanding
+      function calculateComprehensionScore() {
+        let totalScore = 0;
+        let totalQuestions = 0;
+
+        answers.forEach((answer, index) => {
+          const question = quizData[index];
+          const difficulty = determinePassageDifficulty(question);
+
+          // Award points based on correctness and difficulty
+          let questionScore = 0;
+          if (answer.isCorrect && !answer.isTimeout) {
+            questionScore = 100;
+
+            // Bonus for difficult passages
+            if (difficulty === "hard") {
+              questionScore += 10;
+            } else if (difficulty === "medium") {
+              questionScore += 5;
+            }
+
+            // Time bonus for quick completion
+            const timeScore = calculateTimeBonus(answer.timeSpent);
+            questionScore += timeScore;
+          } else if (!answer.isTimeout) {
+            // Partial credit for partial correctness
+            const partialScore = calculatePartialCorrectness(
+              answer.userAnswers,
+              answer.correctAnswers
+            );
+            questionScore = partialScore * 50; // Max 50 points for partial
+          }
+
+          totalScore += Math.min(questionScore, 110); // Cap at 110
+          totalQuestions++;
+        });
+
+        return totalQuestions > 0 ? totalScore / totalQuestions : 0;
+      }
+
+      // Calculate vocabulary score based on word difficulty and recognition
+      function calculateVocabularyScore() {
+        let totalScore = 0;
+        let totalWords = 0;
+
+        answers.forEach((answer, index) => {
+          answer.correctAnswers.forEach((correctWord, wordIndex) => {
+            const userWord = answer.userAnswers[wordIndex] || "";
+            const wordDifficulty = determineWordDifficulty(correctWord);
+
+            if (userWord.toLowerCase() === correctWord.toLowerCase()) {
+              // Award points based on word difficulty
+              let wordScore = 100;
+              if (wordDifficulty === "hard") {
+                wordScore = 120;
+              } else if (wordDifficulty === "medium") {
+                wordScore = 110;
+              }
+              totalScore += wordScore;
+            } else if (isCloseMatch(userWord, correctWord)) {
+              // Partial credit for close matches (typos, etc.)
+              totalScore += 40;
+            }
+
+            totalWords++;
+          });
+        });
+
+        return totalWords > 0 ? Math.min(totalScore / totalWords, 100) : 0;
+      }
+
+      // Analyze how well user uses context clues
+      function analyzeContextUsage() {
+        const contextTypes = {
+          grammar: 0, // Grammatical context (verb forms, etc.)
+          semantic: 0, // Meaning-based context
+          collocation: 0, // Word combinations
+        };
+
+        let totalAnalyzed = 0;
+
+        answers.forEach((answer, index) => {
+          const question = quizData[index];
+
+          answer.correctAnswers.forEach((correctWord, wordIndex) => {
+            const userWord = answer.userAnswers[wordIndex] || "";
+            const contextType = analyzeWordContext(
+              question.passage,
+              correctWord,
+              wordIndex
+            );
+
+            if (userWord.toLowerCase() === correctWord.toLowerCase()) {
+              contextTypes[contextType]++;
+            }
+            totalAnalyzed++;
+          });
+        });
+
+        return {
+          grammarAccuracy:
+            Math.round((contextTypes.grammar / totalAnalyzed) * 100) || 0,
+          semanticAccuracy:
+            Math.round((contextTypes.semantic / totalAnalyzed) * 100) || 0,
+          collocationAccuracy:
+            Math.round((contextTypes.collocation / totalAnalyzed) * 100) || 0,
+          overallContextUsage:
+            Math.round(
+              ((contextTypes.grammar +
+                contextTypes.semantic +
+                contextTypes.collocation) /
+                totalAnalyzed) *
+                100
+            ) || 0,
+        };
+      }
+
+      // Determine passage difficulty based on multiple factors
+      function determinePassageDifficulty(question) {
+        let difficultyScore = 1; // Base difficulty
+
+        // Passage length
+        const passageLength = question.passage.length;
+        if (passageLength > 300) {
+          difficultyScore += 1;
+        } else if (passageLength > 200) {
+          difficultyScore += 0.5;
+        }
+
+        // Number of words to complete
+        const wordsToComplete = question.correctAnswers.length;
+        if (wordsToComplete >= 4) {
+          difficultyScore += 1;
+        } else if (wordsToComplete >= 3) {
+          difficultyScore += 0.5;
+        }
+
+        // Average word difficulty
+        const avgWordDifficulty =
+          question.correctAnswers.reduce((sum, word) => {
+            const wordDiff = determineWordDifficulty(word);
+            return (
+              sum + (wordDiff === "hard" ? 3 : wordDiff === "medium" ? 2 : 1)
+            );
+          }, 0) / question.correctAnswers.length;
+
+        difficultyScore += (avgWordDifficulty - 1) * 0.5;
+
+        // Topic complexity (based on title keywords)
+        const complexTopics = [
+          "artificial intelligence",
+          "climate change",
+          "renewable energy",
+          "space exploration",
+          "sustainable",
+        ];
+        const topic = question.title.toLowerCase();
+        if (
+          complexTopics.some((complexTopic) => topic.includes(complexTopic))
+        ) {
+          difficultyScore += 0.5;
+        }
+
+        // Clamp difficulty between 1-3
+        difficultyScore = Math.max(1, Math.min(3, difficultyScore));
+
+        if (difficultyScore <= 1.5) return "easy";
+        if (difficultyScore <= 2.5) return "medium";
+        return "hard";
+      }
+
+      // Determine individual word difficulty
+      function determineWordDifficulty(word) {
+        const wordLength = word.length;
+
+        // Common easy words
+        const easyWords = [
+          "good",
+          "home",
+          "free",
+          "take",
+          "come",
+          "move",
+          "save",
+          "grow",
+          "live",
+          "part",
+        ];
+        if (easyWords.includes(word.toLowerCase()) || wordLength <= 4) {
+          return "easy";
+        }
+
+        // Academic/technical words
+        const hardWords = [
+          "sustainable",
+          "communication",
+          "discoveries",
+          "artificial",
+          "renewable",
+          "polluting",
+          "industries",
+        ];
+        if (hardWords.includes(word.toLowerCase()) || wordLength >= 10) {
+          return "hard";
+        }
+
+        // Medium difficulty by default
+        return "medium";
+      }
+
+      // Check if user word is close to correct word (handles typos)
+      function isCloseMatch(userWord, correctWord) {
+        if (!userWord || !correctWord) return false;
+
+        const user = userWord.toLowerCase();
+        const correct = correctWord.toLowerCase();
+
+        // Same length, different by 1-2 characters
+        if (Math.abs(user.length - correct.length) <= 1) {
+          let differences = 0;
+          const maxLength = Math.max(user.length, correct.length);
+
+          for (let i = 0; i < maxLength; i++) {
+            if (user[i] !== correct[i]) {
+              differences++;
+            }
+          }
+
+          return differences <= 2;
+        }
+
+        return false;
+      }
+
+      // Calculate partial correctness score
+      function calculatePartialCorrectness(userAnswers, correctAnswers) {
+        if (!userAnswers || !correctAnswers) return 0;
+
+        let correctCount = 0;
+        const totalWords = correctAnswers.length;
+
+        for (let i = 0; i < totalWords; i++) {
+          const userWord = userAnswers[i] || "";
+          const correctWord = correctAnswers[i] || "";
+
+          if (userWord.toLowerCase() === correctWord.toLowerCase()) {
+            correctCount++;
+          } else if (isCloseMatch(userWord, correctWord)) {
+            correctCount += 0.5; // Half credit for close matches
+          }
+        }
+
+        return correctCount / totalWords;
+      }
+
+      // Analyze what type of context clue was needed for each word
+      function analyzeWordContext(passage, word, wordIndex) {
+        const lowerWord = word.toLowerCase();
+
+        // Grammar-based context (verb forms, plurals, etc.)
+        const grammarWords = [
+          "changed",
+          "causes",
+          "using",
+          "traveled",
+          "polluting",
+          "stronger",
+        ];
+        if (
+          grammarWords.includes(lowerWord) ||
+          lowerWord.endsWith("ing") ||
+          lowerWord.endsWith("ed")
+        ) {
+          return "grammar";
+        }
+
+        // Collocation-based context (words that go together)
+        const collocationWords = [
+          "solar panels",
+          "climate change",
+          "artificial intelligence",
+          "mental health",
+        ];
+        const passageLower = passage.toLowerCase();
+        if (
+          collocationWords.some(
+            (collocation) =>
+              passageLower.includes(collocation) &&
+              collocation.includes(lowerWord)
+          )
+        ) {
+          return "collocation";
+        }
+
+        // Semantic context (meaning-based)
+        return "semantic";
+      }
+
+      // Calculate time bonus for quick completion
+      function calculateTimeBonus(timeSpent) {
+        const timeInSeconds = timeSpent / 1000;
+        const optimalTime = 120; // 2 minutes per question is considered optimal
+
+        if (timeInSeconds < optimalTime) {
+          const timeSaved = optimalTime - timeInSeconds;
+          return Math.min((timeSaved / optimalTime) * 10, 10); // Max 10 bonus points
+        }
+
+        return 0;
+      }
+
+      // Calculate final session score for Read and Complete
+      function calculateSessionScore(sessionData) {
+        const accuracy = (score / quizData.length) * 100;
+
+        // Scoring weights for Read and Complete
+        const weights = {
+          accuracy: 0.35, // 35% - Overall accuracy
+          comprehension: 0.25, // 25% - Reading comprehension
+          vocabulary: 0.2, // 20% - Vocabulary knowledge
+          contextUsage: 0.15, // 15% - Context clue usage
+          speed: 0.05, // 5% - Time efficiency
+        };
+
+        // Speed score (optimal time: 60-120 seconds per question)
+        const optimalTime = 90; // seconds
+        const timeDiff = Math.abs(sessionData.avgTime - optimalTime);
+        const speedScore = Math.max(0, 100 - (timeDiff / optimalTime) * 40);
+
+        // Timeout penalty
+        const timeoutPenalty = sessionData.timeoutCount * 10; // -10 points per timeout
+
+        // Calculate final weighted score
+        const baseScore =
+          accuracy * weights.accuracy +
+          sessionData.comprehensionScore * weights.comprehension +
+          sessionData.vocabularyScore * weights.vocabulary +
+          sessionData.contextAnalysis.overallContextUsage *
+            weights.contextUsage +
+          speedScore * weights.speed;
+
+        const finalScore = Math.max(0, baseScore - timeoutPenalty);
+
+        return Math.round(Math.min(100, finalScore));
+      }
+
+      // Save session to localStorage history
+      function saveSessionToHistory(skillName, sessionResult) {
+        const historyKey = `${skillName
+          .replace(/\s+/g, "_")
+          .toLowerCase()}_sessions`;
+
+        try {
+          // Get existing sessions
+          const existingSessions = localStorage.getItem(historyKey);
+          const sessions = existingSessions ? JSON.parse(existingSessions) : [];
+
+          // Add new session
+          sessions.push(sessionResult);
+
+          // Keep only last 20 sessions to prevent storage overflow
+          if (sessions.length > 20) {
+            sessions.splice(0, sessions.length - 20);
+          }
+
+          // Save back to localStorage
+          localStorage.setItem(historyKey, JSON.stringify(sessions));
+
+          console.log(
+            `Saved session to ${historyKey}. Total sessions: ${sessions.length}`
+          );
+
+          // Update overall skill assessment
+          updateSkillOverallAssessment(skillName, sessions);
+        } catch (error) {
+          console.error("Error saving session to history:", error);
+        }
+      }
+
+      // Update overall skill assessment based on all sessions
+      function updateSkillOverallAssessment(skillName, allSessions) {
+        if (!allSessions || allSessions.length === 0) return;
+
+        // Calculate overall metrics
+        const totalQuestions = allSessions.reduce(
+          (sum, session) => sum + session.totalQuestions,
+          0
+        );
+        const totalCorrect = allSessions.reduce(
+          (sum, session) => sum + session.correctAnswers,
+          0
+        );
+        const overallAccuracy = (totalCorrect / totalQuestions) * 100;
+
+        // Calculate improvement (compare first vs last session)
+        const firstSession = allSessions[0];
+        const lastSession = allSessions[allSessions.length - 1];
+        const improvement = lastSession.accuracy - firstSession.accuracy;
+
+        // Calculate average session score
+        const avgSessionScore =
+          allSessions.reduce((sum, session) => sum + session.sessionScore, 0) /
+          allSessions.length;
+
+        // Calculate average performance metrics
+        const avgComprehension =
+          allSessions.reduce((sum, s) => sum + s.comprehensionScore, 0) /
+          allSessions.length;
+        const avgVocabulary =
+          allSessions.reduce((sum, s) => sum + s.vocabularyScore, 0) /
+          allSessions.length;
+        const avgContextUsage =
+          allSessions.reduce(
+            (sum, s) => sum + s.contextAnalysis.overallContextUsage,
+            0
+          ) / allSessions.length;
+
+        // Calculate consistency across sessions
+        const sessionScores = allSessions.map((s) => s.sessionScore);
+        const scoreStdDev = calculateStandardDeviation(sessionScores);
+        const crossSessionConsistency = Math.max(0, 100 - scoreStdDev);
+
+        // Calculate timeout rate
+        const totalTimeouts = allSessions.reduce(
+          (sum, s) => sum + s.timeoutCount,
+          0
+        );
+        const timeoutRate = (totalTimeouts / totalQuestions) * 100;
+
+        // Final skill score calculation
+        const skillWeights = {
+          accuracy: 0.3,
+          avgScore: 0.25,
+          improvement: 0.2,
+          consistency: 0.15,
+          specialization: 0.1, // Bonus for strong areas
+        };
+
+        const normalizedImprovement = Math.max(
+          0,
+          Math.min(100, improvement + 50)
+        ); // Normalize to 0-100
+        const specializationBonus = Math.max(
+          avgComprehension,
+          avgVocabulary,
+          avgContextUsage
+        ); // Reward strongest area
+
+        const finalSkillScore =
+          overallAccuracy * skillWeights.accuracy +
+          avgSessionScore * skillWeights.avgScore +
+          normalizedImprovement * skillWeights.improvement +
+          crossSessionConsistency * skillWeights.consistency +
+          specializationBonus * skillWeights.specialization;
+
+        // Create overall assessment
+        const skillAssessment = {
+          skillName: skillName,
+          lastUpdated: new Date().toISOString(),
+          sessionsCompleted: allSessions.length,
+
+          // Performance metrics
+          overallAccuracy: Math.round(overallAccuracy),
+          averageSessionScore: Math.round(avgSessionScore),
+          improvement: Math.round(improvement),
+          consistency: Math.round(crossSessionConsistency),
+
+          // Specific to Read and Complete
+          comprehensionStrength: Math.round(avgComprehension),
+          vocabularyStrength: Math.round(avgVocabulary),
+          contextUsageStrength: Math.round(avgContextUsage),
+          timeoutRate: Math.round(timeoutRate),
+          averageTimePerQuestion: Math.round(
+            allSessions.reduce((sum, s) => sum + s.averageTimePerQuestion, 0) /
+              allSessions.length
+          ),
+
+          // Final score
+          finalScore: Math.round(finalSkillScore),
+          level: determineSkillLevel(finalSkillScore),
+
+          // Additional insights
+          strongPoints: identifyStrongPoints(allSessions),
+          weakPoints: identifyWeakPoints(allSessions),
+          recommendations: generateRecommendations(
+            allSessions,
+            finalSkillScore
+          ),
+        };
+
+        // Save overall assessment
+        const assessmentKey = `${skillName
+          .replace(/\s+/g, "_")
+          .toLowerCase()}_assessment`;
+        localStorage.setItem(assessmentKey, JSON.stringify(skillAssessment));
+
+        console.log(
+          `Updated overall assessment for ${skillName}:`,
+          skillAssessment
+        );
+      }
+
+      // Helper function to calculate standard deviation
+      function calculateStandardDeviation(values) {
+        const mean = values.reduce((sum, val) => sum + val, 0) / values.length;
+        const squaredDiffs = values.map((val) => Math.pow(val - mean, 2));
+        const avgSquaredDiff =
+          squaredDiffs.reduce((sum, val) => sum + val, 0) / values.length;
+        return Math.sqrt(avgSquaredDiff);
+      }
+
+      // Determine skill level based on final score
+      function determineSkillLevel(score) {
+        if (score >= 90) return "Advanced";
+        if (score >= 75) return "Upper-Intermediate";
+        if (score >= 60) return "Intermediate";
+        if (score >= 45) return "Lower-Intermediate";
+        if (score >= 30) return "Elementary";
+        return "Beginner";
+      }
+
+      // Identify strong points from session data
+      function identifyStrongPoints(sessions) {
+        const strongPoints = [];
+
+        // Check comprehension strength
+        const avgComprehension =
+          sessions.reduce((sum, s) => sum + s.comprehensionScore, 0) /
+          sessions.length;
+        if (avgComprehension >= 80) {
+          strongPoints.push("Excellent reading comprehension skills");
+        }
+
+        // Check vocabulary strength
+        const avgVocabulary =
+          sessions.reduce((sum, s) => sum + s.vocabularyScore, 0) /
+          sessions.length;
+        if (avgVocabulary >= 80) {
+          strongPoints.push("Strong vocabulary knowledge");
+        }
+
+        // Check context usage
+        const avgContextUsage =
+          sessions.reduce(
+            (sum, s) => sum + s.contextAnalysis.overallContextUsage,
+            0
+          ) / sessions.length;
+        if (avgContextUsage >= 75) {
+          strongPoints.push("Good use of context clues");
+        }
+
+        // Check timeout performance
+        const totalTimeouts = sessions.reduce(
+          (sum, s) => sum + s.timeoutCount,
+          0
+        );
+        if (totalTimeouts === 0) {
+          strongPoints.push("Completes questions within time limits");
+        }
+
+        // Check speed
+        const avgTime =
+          sessions.reduce((sum, s) => sum + s.averageTimePerQuestion, 0) /
+          sessions.length;
+        if (avgTime <= 90) {
+          strongPoints.push("Efficient reading and completion speed");
+        }
+
+        // Check improvement trend
+        if (sessions.length >= 3) {
+          const recentSessions = sessions.slice(-3);
+          const avgRecentScore =
+            recentSessions.reduce((sum, s) => sum + s.sessionScore, 0) /
+            recentSessions.length;
+          const earlierSessions = sessions.slice(0, -3);
+          const avgEarlierScore =
+            earlierSessions.reduce((sum, s) => sum + s.sessionScore, 0) /
+            earlierSessions.length;
+
+          if (avgRecentScore > avgEarlierScore + 7) {
+            strongPoints.push("Shows significant improvement over time");
+          }
+        }
+
+        return strongPoints.length > 0
+          ? strongPoints
+          : ["Shows potential for improvement"];
+      }
+
+      // Identify weak points from session data
+      function identifyWeakPoints(sessions) {
+        const weakPoints = [];
+
+        // Check accuracy issues
+        const avgAccuracy =
+          sessions.reduce((sum, s) => sum + s.accuracy, 0) / sessions.length;
+        if (avgAccuracy < 60) {
+          weakPoints.push("Overall accuracy needs improvement");
+        }
+
+        // Check comprehension issues
+        const avgComprehension =
+          sessions.reduce((sum, s) => sum + s.comprehensionScore, 0) /
+          sessions.length;
+        if (avgComprehension < 60) {
+          weakPoints.push("Reading comprehension could be stronger");
+        }
+
+        // Check vocabulary issues
+        const avgVocabulary =
+          sessions.reduce((sum, s) => sum + s.vocabularyScore, 0) /
+          sessions.length;
+        if (avgVocabulary < 60) {
+          weakPoints.push("Vocabulary knowledge needs expansion");
+        }
+
+        // Check timeout issues
+        const totalTimeouts = sessions.reduce(
+          (sum, s) => sum + s.timeoutCount,
+          0
+        );
+        const totalQuestions = sessions.reduce(
+          (sum, s) => sum + s.totalQuestions,
+          0
+        );
+        if (totalTimeouts / totalQuestions > 0.1) {
+          // More than 10% timeout rate
+          weakPoints.push(
+            "Frequently runs out of time - work on reading speed"
+          );
+        }
+
+        // Check speed issues
+        const avgTime =
+          sessions.reduce((sum, s) => sum + s.averageTimePerQuestion, 0) /
+          sessions.length;
+        if (avgTime > 150) {
+          weakPoints.push("Takes longer than optimal time to complete");
+        }
+
+        // Check consistency issues
+        const sessionScores = sessions.map((s) => s.sessionScore);
+        const scoreStdDev = calculateStandardDeviation(sessionScores);
+        if (scoreStdDev > 20) {
+          weakPoints.push("Performance varies significantly between sessions");
+        }
+
+        return weakPoints.length > 0
+          ? weakPoints
+          : ["Continue practicing to maintain progress"];
+      }
+
+      // Generate personalized recommendations
+      function generateRecommendations(sessions, finalScore) {
+        const recommendations = [];
+        const avgComprehension =
+          sessions.reduce((sum, s) => sum + s.comprehensionScore, 0) /
+          sessions.length;
+        const avgVocabulary =
+          sessions.reduce((sum, s) => sum + s.vocabularyScore, 0) /
+          sessions.length;
+        const avgContextUsage =
+          sessions.reduce(
+            (sum, s) => sum + s.contextAnalysis.overallContextUsage,
+            0
+          ) / sessions.length;
+
+        if (finalScore < 40) {
+          recommendations.push("Focus on basic reading comprehension skills");
+          recommendations.push("Practice with shorter, simpler texts first");
+          recommendations.push("Build fundamental vocabulary through reading");
+        } else if (finalScore < 60) {
+          if (avgComprehension < avgVocabulary) {
+            recommendations.push("Work on reading comprehension strategies");
+            recommendations.push("Practice identifying main ideas and context");
+          } else {
+            recommendations.push(
+              "Expand vocabulary through diverse reading materials"
+            );
+            recommendations.push("Use vocabulary building apps and exercises");
+          }
+        } else if (finalScore < 80) {
+          recommendations.push("Practice with more complex academic texts");
+          recommendations.push(
+            "Work on understanding context clues and implications"
+          );
+          recommendations.push("Time yourself to improve reading speed");
+        } else {
+          recommendations.push(
+            "Excellent work! Try challenging academic materials"
+          );
+          recommendations.push(
+            "Focus on specialized vocabulary in different fields"
+          );
+          recommendations.push(
+            "Consider helping others improve their reading skills"
+          );
+        }
+
+        // Context-specific recommendations
+        if (avgContextUsage < 70) {
+          recommendations.push(
+            "Practice using context clues to understand unknown words"
+          );
+        }
+
+        // Timeout-specific recommendations
+        const totalTimeouts = sessions.reduce(
+          (sum, s) => sum + s.timeoutCount,
+          0
+        );
+        if (totalTimeouts > 0) {
+          recommendations.push(
+            "Work on reading speed - try timed reading exercises"
+          );
+          recommendations.push("Skim passages first to get main ideas quickly");
+        }
+
+        return recommendations;
+      }
+      // Function to increment progress by 1
+      function incrementSkillProgress(skillName, count = 1) {
+        const currentProgress = getCurrentSkillProgress(skillName);
+        const newCompleted = Math.min(currentProgress + count, 6);
+
+        const progressData = {
+          skill: skillName,
+          completed: newCompleted,
+          total: 6,
+          timestamp: new Date().toISOString(),
+        };
+
+        localStorage.setItem(
+          "readCompleteProgress",
+          JSON.stringify(progressData)
+        );
+        console.log(`Progress updated: ${skillName} - ${newCompleted}/6`);
+      }
+
+      // Function to get current skill progress from localStorage
+      function getCurrentSkillProgress(skillName) {
+        try {
+          // Check if there's existing progress in the main app
+          const mainProgressData = localStorage.getItem("skillProgress");
+          if (mainProgressData) {
+            const allProgress = JSON.parse(mainProgressData);
+            if (allProgress[skillName]) {
+              return allProgress[skillName].completed || 0;
+            }
+          }
+          return 0; // Start from 0 if no progress found
+        } catch (error) {
+          console.error("Error reading current progress:", error);
+          return 0;
+        }
+      }
+
+      function goBack() {
+        window.showConfirmDialog("Are you sure you want to exit the quiz?").then(function(confirmed) {
+          if (confirmed) {
+            if (stagesCompletedThisSession > 0) {
+              incrementSkillProgress("Read and Complete", stagesCompletedThisSession);
+            }
+            if (typeof options.navigate === "function") options.navigate("/"); else window.location.href = "/";
+          }
+        });
+      }
+
+      // Keyboard Support
+      const keydownHandler = function (event) {
+        if (
+          !dataLoaded ||
+          getEl(containerEl, "quizContainer").style.display === "none"
+        ) {
+          return;
+        }
+
+        if (event.key === "Escape") {
+          goBack();
+        } else if (event.key === "Enter" && event.ctrlKey) {
+          // Ctrl+Enter to submit
+          const continueBtn = getEl(containerEl, "continueBtn");
+          if (continueBtn.classList.contains("active")) {
+            checkAnswer();
+          }
+        }
+      }; document.addEventListener("keydown", keydownHandler);
+      const errScreen = getEl(containerEl, "errorScreen");
+      if (errScreen) {
+        const errorBtns = errScreen.querySelectorAll(".retry-data-btn");
+        if (errorBtns[0]) { errorBtns[0].addEventListener("click", loadQuizData); unbind.push(() => errorBtns[0].removeEventListener("click", loadQuizData)); }
+        if (errorBtns[1]) { errorBtns[1].addEventListener("click", goBack); unbind.push(() => errorBtns[1].removeEventListener("click", goBack)); }
+      }
+      const closeBtn = containerEl.querySelector(".close-btn");
+      if (closeBtn) { closeBtn.addEventListener("click", goBack); unbind.push(() => closeBtn.removeEventListener("click", goBack)); }
+      const contBtn = getEl(containerEl, "continueBtn");
+      if (contBtn) { contBtn.addEventListener("click", checkAnswer); unbind.push(() => contBtn.removeEventListener("click", checkAnswer)); }
+      loadQuizData();
+      return function cleanup() {
+        document.removeEventListener("keydown", keydownHandler);
+        unbind.forEach((f) => f());
+        if (timerInterval) clearInterval(timerInterval);
+        if (feedbackAutoAdvanceTimeout) clearTimeout(feedbackAutoAdvanceTimeout);
+      };
+}

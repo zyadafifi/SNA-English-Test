@@ -1,0 +1,81 @@
+import { useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { init } from '../legacy/interactive-reading.legacy'
+import { getNextQuizUrl } from '../legacy/skills-config.legacy'
+import './styles/interactive-reading.css'
+
+export default function InteractiveReading() {
+  const rootRef = useRef(null)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const el = rootRef.current
+    if (!el) return
+    const cleanup = init(el, { navigate, getNextQuizUrl })
+    return () => { if (typeof cleanup === 'function') cleanup() }
+  }, [navigate])
+
+  return (
+    <div ref={rootRef}>
+      <div className="loading-screen" id="loadingScreen">
+        <div><div className="loading-spinner" /><div className="loading-text">Loading quiz data...</div></div>
+      </div>
+      <div className="error-screen" id="errorScreen">
+        <div className="error-title">Failed to Load Quiz Data</div>
+        <div className="error-message" id="errorMessage">Could not load the quiz questions. Please check your internet connection and try again.</div>
+        <button type="button" className="retry-data-btn">Retry</button>
+        <button type="button" className="retry-data-btn" style={{ background: '#f0f0f0', color: '#666', marginLeft: '10px' }}>Go Back</button>
+      </div>
+      <div className="quiz-container" id="quizContainer" style={{ display: 'none' }}>
+        <div className="question-card" id="questionCard">
+          <div className="timer" id="timer">
+            <svg className="timer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="12" cy="12" r="10" /><polyline points="12,6 12,12 16,14" />
+            </svg>
+            <span id="timerText">0:00</span>
+          </div>
+          <button type="button" className="close-btn">&lt; BACK</button>
+          <div className="stage-progress-bar">
+            <div className="progress-track"><div className="progress-fill" id="stageProgressFill" /></div>
+            <span className="progress-text" id="stageProgressText">0/3</span>
+          </div>
+          <div className="question-content" id="questionContent">
+            <div className="main-content">
+              <div className="passage-section">
+                <div className="passage-title" id="passageTitle">PASSAGE</div>
+                <div className="passage-container" id="passageContainer" />
+              </div>
+              <div className="questions-section">
+                <div className="questions-title">Select the best option for each missing word</div>
+                <div id="questionsContainer" />
+              </div>
+            </div>
+            <button type="button" className="continue-btn" id="continueBtn">CONTINUE</button>
+          </div>
+        </div>
+        <div className="feedback-section" id="feedbackSection">
+          <div className="feedback-header">
+            <svg className="feedback-icon" id="feedbackIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" />
+            </svg>
+            <div className="feedback-title" id="feedbackTitle">Incorrect</div>
+          </div>
+          <div className="correct-answer-text" id="correctAnswerText" />
+        </div>
+        <div className="results-screen" id="resultsScreen">
+          <div className="results-icons">
+            <div className="result-icon check-result-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20,6 9,17 4,12" /></svg></div>
+            <div className="result-icon x-result-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg></div>
+          </div>
+          <div className="results-title">Practice complete! You</div>
+          <div className="results-subtitle">improved your reading skills.</div>
+          <div className="results-score" id="resultsScore" />
+          <div className="results-buttons">
+            <button type="button" className="continue-btn" id="resultsContinueBtn">CONTINUE</button>
+            <button type="button" className="done-btn">DONE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
