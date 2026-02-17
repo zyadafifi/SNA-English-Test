@@ -1,0 +1,148 @@
+{
+  "config": {
+    "title": "Complete the text with the correct words",
+    "shuffleQuestions": true
+  },
+  "questions": [
+    {
+      "id": 1,
+      "title": "Morning Routine",
+      "passage": "Every morning, I # up at seven o'clock. I take a shower and get #. Then I have breakfast with my family. After breakfast, I # my teeth and leave for work.",
+      "correctAnswers": ["wake", "dressed", "brush"],
+      "visibleLetters": ["w__e", "dr____d", "br__h"]
+    },
+    {
+      "id": 2,
+      "title": "The Library",
+      "passage": "The public library is a great place to #. You can borrow books for free. It is # and peaceful. Many people go there to study or read #.",
+      "correctAnswers": ["visit", "quiet", "newspapers"],
+      "visibleLetters": ["v___t", "qu__t", "ne_____rs"]
+    },
+    {
+      "id": 3,
+      "title": "Healthy Food",
+      "passage": "Eating healthy food is very #. Fruits and vegetables give us important vitamins. We should eat # meals every day and drink plenty of #.",
+      "correctAnswers": ["important", "balanced", "water"],
+      "visibleLetters": ["im______t", "ba____d", "w___r"]
+    },
+    {
+      "id": 4,
+      "title": "Weekend Plans",
+      "passage": "This weekend, I plan to # my grandparents. We will have lunch together and talk about family news. In the evening, I might # a movie at home.",
+      "correctAnswers": ["visit", "watch"],
+      "visibleLetters": ["v___t", "w___h"]
+    },
+    {
+      "id": 5,
+      "title": "Public Transport",
+      "passage": "Many people use public # to go to work. Buses and trains help reduce traffic. They are also better for the # because fewer cars means less pollution.",
+      "correctAnswers": ["transport", "environment"],
+      "visibleLetters": ["tr______t", "en________t"]
+    },
+    {
+      "id": 6,
+      "title": "Learning English",
+      "passage": "Learning English # time and practice. You should # every day and try to speak with others. Reading books and watching movies in English also #.",
+      "correctAnswers": ["takes", "study", "helps"],
+      "visibleLetters": ["t___s", "st__y", "he__s"]
+    },
+    {
+      "id": 7,
+      "title": "The Supermarket",
+      "passage": "I go to the supermarket once a #. I buy fresh vegetables, fruit, and other food. I always make a shopping # before I go so I don't forget anything.",
+      "correctAnswers": ["week", "list"],
+      "visibleLetters": ["w__k", "l__t"]
+    },
+    {
+      "id": 8,
+      "title": "My Pet",
+      "passage": "I have a pet dog named Max. He is very # and loves to play. Every day, I take him for a walk in the park. He enjoys # with other dogs.",
+      "correctAnswers": ["friendly", "playing"],
+      "visibleLetters": ["fr____y", "pl___ng"]
+    },
+    {
+      "id": 9,
+      "title": "The Seasons",
+      "passage": "There are four seasons in a year. Spring brings flowers and warm #. Summer is hot and sunny. In autumn, the leaves # color. Winter is cold and sometimes it snows.",
+      "correctAnswers": ["weather", "change"],
+      "visibleLetters": ["we____r", "ch___e"]
+    },
+    {
+      "id": 10,
+      "title": "Exercise",
+      "passage": "Regular exercise keeps you #. You can go to the gym, swim, or just walk. Exercise makes your heart # and helps you feel better.",
+      "correctAnswers": ["healthy", "stronger"],
+      "visibleLetters": ["he____y", "st____er"]
+    },
+    {
+      "id": 11,
+      "title": "The Beach",
+      "passage": "I love going to the beach in summer. The sand is warm and the # is blue. You can swim, build sandcastles, or just # and enjoy the sunshine.",
+      "correctAnswers": ["water", "relax"],
+      "visibleLetters": ["w___r", "re__x"]
+    },
+    {
+      "id": 12,
+      "title": "Cooking at Home",
+      "passage": "Cooking at home is # than eating out. You can choose fresh ingredients and make healthy meals. It also # money and you can cook exactly what you like.",
+      "correctAnswers": ["cheaper", "saves"],
+      "visibleLetters": ["ch____r", "sa__s"]
+    },
+    {
+      "id": 13,
+      "title": "My Hobby",
+      "passage": "My favorite hobby is #. I enjoy taking photos of nature and people. Photography helps me see the world in a different #. I share my photos with friends online.",
+      "correctAnswers": ["photography", "way"],
+      "visibleLetters": ["ph______y", "w_y"]
+    },
+    {
+      "id": 14,
+      "title": "Traffic Problems",
+      "passage": "Big cities often have traffic #. Too many cars cause delays and pollution. People should use public transport or ride # to help reduce traffic.",
+      "correctAnswers": ["problems", "bicycles"],
+      "visibleLetters": ["pr____ms", "bi____es"]
+    },
+    {
+      "id": 15,
+      "title": "Sleep",
+      "passage": "Getting enough sleep is # for good health. Adults need about eight hours of sleep each #. Good sleep helps your body rest and your brain work better.",
+      "correctAnswers": ["important", "night"],
+      "visibleLetters": ["im______t", "ni__t"]
+    },
+    {
+      "id": 16,
+      "title": "Shopping Online",
+      "passage": "Many people now shop #. You can buy almost anything from home. Online shopping is convenient, but you should check the # carefully before buying.",
+      "correctAnswers": ["online", "price"],
+      "visibleLetters": ["on___e", "pr__e"]
+    },
+    {
+      "id": 17,
+      "title": "Family Dinner",
+      "passage": "We have family dinner every Sunday. Everyone helps to # the meal. After dinner, we clean up together and sometimes play # or watch a movie.",
+      "correctAnswers": ["prepare", "games"],
+      "visibleLetters": ["pr____e", "ga__s"]
+    },
+    {
+      "id": 18,
+      "title": "The Museum",
+      "passage": "Museums are places where you can learn about history and #. Many museums are free to #. They have interesting exhibits that teach us about the past.",
+      "correctAnswers": ["culture", "visit"],
+      "visibleLetters": ["cu____e", "v___t"]
+    },
+    {
+      "id": 19,
+      "title": "Mobile Phones",
+      "passage": "Mobile phones are very useful. We use them to call people, send messages, and find #. However, we should not use our phones too # or they can become a distraction.",
+      "correctAnswers": ["information", "much"],
+      "visibleLetters": ["in________n", "mu__"]
+    },
+    {
+      "id": 20,
+      "title": "Recycling",
+      "passage": "Recycling helps protect the #. We should recycle paper, plastic, and glass. Recycling reduces waste and saves natural #. Everyone can help by separating their trash.",
+      "correctAnswers": ["environment", "resources"],
+      "visibleLetters": ["en________t", "re_____s"]
+    }
+  ]
+}

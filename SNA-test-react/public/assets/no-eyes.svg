@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+  <!-- Left vertical eye -->
+  <ellipse cx="24" cy="32" rx="6" ry="10" fill="#FFFFFF"/>
+  <circle cx="24" cy="32" r="4" fill="#3BA3FF"/>
+  <circle cx="24" cy="32" r="2" fill="#1E293B"/>
+  <circle cx="25.5" cy="30.5" r="1" fill="#FFFFFF"/>
+
+  <!-- Right vertical eye -->
+  <ellipse cx="40" cy="32" rx="6" ry="10" fill="#FFFFFF"/>
+  <circle cx="40" cy="32" r="4" fill="#3BA3FF"/>
+  <circle cx="40" cy="32" r="2" fill="#1E293B"/>
+  <circle cx="41.5" cy="30.5" r="1" fill="#FFFFFF"/>
+
+  <!-- Red prohibition circle -->
+  <circle cx="32" cy="32" r="26" stroke="#FF4D5A" stroke-width="4"/>
+
+  <!-- Diagonal prohibition line (top-left to bottom-right) -->
+  <rect x="6" y="30" width="52" height="4.5" rx="2.25"
+        fill="#FF4D5A"
+        transform="rotate(45 32 32)"/>
+</svg>

@@ -1,0 +1,208 @@
+{
+  "config": {
+    "title": "Type what you hear",
+    "shuffleQuestions": true
+  },
+  "questions": [
+    {
+      "id": 1,
+      "correctText": "The cat is sleeping on the sofa."
+    },
+    {
+      "id": 2,
+      "correctText": "I have a meeting at three o'clock."
+    },
+    {
+      "id": 3,
+      "correctText": "She walks to work every morning."
+    },
+    {
+      "id": 4,
+      "correctText": "The store opens at nine."
+    },
+    {
+      "id": 5,
+      "correctText": "We are having pizza for dinner."
+    },
+    {
+      "id": 6,
+      "correctText": "My phone is on the table."
+    },
+    {
+      "id": 7,
+      "correctText": "The children are playing outside."
+    },
+    {
+      "id": 8,
+      "correctText": "I need to buy some milk."
+    },
+    {
+      "id": 9,
+      "correctText": "The weather is nice today."
+    },
+    {
+      "id": 10,
+      "correctText": "He is reading a book."
+    },
+    {
+      "id": 11,
+      "correctText": "My birthday is in June."
+    },
+    {
+      "id": 12,
+      "correctText": "The bus is late again."
+    },
+    {
+      "id": 13,
+      "correctText": "She has two brothers."
+    },
+    {
+      "id": 14,
+      "correctText": "I like to drink tea."
+    },
+    {
+      "id": 15,
+      "correctText": "The movie starts at seven."
+    },
+    {
+      "id": 16,
+      "correctText": "We live near the park."
+    },
+    {
+      "id": 17,
+      "correctText": "He works in a hospital."
+    },
+    {
+      "id": 18,
+      "correctText": "The dog is barking loudly."
+    },
+    {
+      "id": 19,
+      "correctText": "I am learning Spanish."
+    },
+    {
+      "id": 20,
+      "correctText": "The teacher is very kind."
+    },
+    {
+      "id": 21,
+      "correctText": "My car is in the garage."
+    },
+    {
+      "id": 22,
+      "correctText": "She cooks dinner every night."
+    },
+    {
+      "id": 23,
+      "correctText": "The baby is crying."
+    },
+    {
+      "id": 24,
+      "correctText": "I want to go home."
+    },
+    {
+      "id": 25,
+      "correctText": "The water is cold."
+    },
+    {
+      "id": 26,
+      "correctText": "We are going to the beach."
+    },
+    {
+      "id": 27,
+      "correctText": "He plays soccer on weekends."
+    },
+    {
+      "id": 28,
+      "correctText": "The flowers are beautiful."
+    },
+    {
+      "id": 29,
+      "correctText": "I forgot my umbrella."
+    },
+    {
+      "id": 30,
+      "correctText": "The coffee is hot."
+    },
+    {
+      "id": 31,
+      "correctText": "She wears glasses."
+    },
+    {
+      "id": 32,
+      "correctText": "The train arrives at noon."
+    },
+    {
+      "id": 33,
+      "correctText": "I am tired today."
+    },
+    {
+      "id": 34,
+      "correctText": "He has a new job."
+    },
+    {
+      "id": 35,
+      "correctText": "The park is very quiet."
+    },
+    {
+      "id": 36,
+      "correctText": "We eat breakfast together."
+    },
+    {
+      "id": 37,
+      "correctText": "She is my best friend."
+    },
+    {
+      "id": 38,
+      "correctText": "The room is too small."
+    },
+    {
+      "id": 39,
+      "correctText": "I can swim very well."
+    },
+    {
+      "id": 40,
+      "correctText": "The door is open."
+    },
+    {
+      "id": 41,
+      "correctText": "He drives to school."
+    },
+    {
+      "id": 42,
+      "correctText": "The apple tastes sweet."
+    },
+    {
+      "id": 43,
+      "correctText": "I need a new pen."
+    },
+    {
+      "id": 44,
+      "correctText": "She is watching television."
+    },
+    {
+      "id": 45,
+      "correctText": "The sky is blue."
+    },
+    {
+      "id": 46,
+      "correctText": "We have class tomorrow."
+    },
+    {
+      "id": 47,
+      "correctText": "He likes to run."
+    },
+    {
+      "id": 48,
+      "correctText": "The book is interesting."
+    },
+    {
+      "id": 49,
+      "correctText": "I am going shopping."
+    },
+    {
+      "id": 50,
+      "correctText": "The birds are singing."
+    }
+  ]
+}

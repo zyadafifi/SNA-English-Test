@@ -1,0 +1,490 @@
+{
+  "config": {
+    "title": "Writing Sample Practice",
+    "preparationTime": 60,
+    "writingTime": 300,
+    "shuffleQuestions": true
+  },
+  "questions": [
+    {
+      "id": 1,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Describe your favorite place and explain why it is special to you.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "My favorite place is the beach near my hometown. I love going there because it is peaceful and beautiful. The sound of the waves is very relaxing and helps me forget about my problems. I enjoy walking on the sand and watching the sunset over the ocean. The beach is special to me because I have many happy memories there from my childhood. My family used to go there every summer for picnics. We would swim, play games, and collect seashells. Even now, when I visit the beach, I feel happy and calm. The fresh sea air makes me feel refreshed and energized."
+      }
+    },
+    {
+      "id": 2,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Write about an important person in your life.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "The most important person in my life is my grandmother. She raised me when my parents were working and taught me many valuable lessons. My grandmother is kind, patient, and wise. She always knows how to make me feel better when I am sad. She taught me how to cook traditional dishes and told me stories about our family history. My grandmother shows love through her actions, like preparing my favorite meals and listening to my problems. She is now eighty years old, but she still has a positive attitude about life. I try to visit her every week to spend time together and help her with household tasks. She has influenced who I am today and I am very grateful for everything she has done for me."
+      }
+    },
+    {
+      "id": 3,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Explain the advantages and disadvantages of living in a city.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "Living in a city has both advantages and disadvantages. The main advantages are better job opportunities and access to many services. Cities have hospitals, schools, shopping centers, and entertainment options all in one place. Public transportation makes it easy to move around without a car. Cities also offer more cultural activities like museums, theaters, and concerts. However, there are disadvantages too. Cities are usually crowded and noisy, which can be stressful. The cost of living is high, especially rent and food. Air pollution and traffic are serious problems in many cities. Despite these issues, I think cities offer more opportunities for education and career development, which is why many people choose to live there."
+      }
+    },
+    {
+      "id": 4,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Describe your typical weekday routine.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "My weekday routine is quite regular. I wake up at six thirty in the morning and immediately take a shower to help me wake up. Then I have breakfast, usually bread with coffee, while checking my phone for messages. I leave home at seven thirty to catch the bus to work. Work starts at eight thirty and I spend the day at my desk doing various tasks. I have a lunch break at noon when I eat with my coworkers. After work finishes at five, I return home and usually arrive around six. In the evening, I cook dinner, watch some TV, or read a book. I try to go to bed by eleven so I can get enough sleep. On weekdays, I don't have much free time, but I use weekends to relax and do things I enjoy."
+      }
+    },
+    {
+      "id": 5,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Why is learning English important?",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "Learning English is important for many reasons. First, English is an international language used in business, science, and tourism around the world. Knowing English opens up better job opportunities because many companies need employees who can communicate with international clients. Second, most information on the internet is in English, so knowing the language gives you access to more knowledge. Third, English helps you travel more easily because people in many countries speak some English. You can also enjoy English movies, books, and music in their original form. Learning English improves your brain function and memory. Although it takes time and effort to learn, the benefits make it worthwhile. I believe everyone should try to learn at least basic English."
+      }
+    },
+    {
+      "id": 6,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Describe a memorable trip or vacation.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "Last year, I took a memorable trip to the mountains with my friends. We stayed in a small wooden cabin for three days. The area was very beautiful with tall trees, clean rivers, and fresh air. Every morning, we woke up early to go hiking on forest trails. We saw many animals including deer and colorful birds. In the afternoon, we rested by the river and sometimes went swimming in the cold water. At night, we made a campfire and cooked our meals outside while talking and laughing. What made this trip special was spending time away from technology and city life. We had no internet or phone signal, so we could really relax and enjoy each other's company. The natural beauty and peaceful atmosphere made it the best vacation I have had."
+      }
+    },
+    {
+      "id": 7,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Discuss the importance of regular exercise.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "Regular exercise is essential for maintaining good health and well-being. Exercise strengthens the heart and muscles, helping to prevent many diseases. It also helps control weight and improves overall fitness. Beyond physical benefits, exercise has positive effects on mental health. When we exercise, our body releases chemicals that make us feel happier and more relaxed. People who exercise regularly sleep better and have more energy during the day. Exercise doesn't have to be difficult or expensive. Simple activities like walking, dancing, or riding a bicycle are effective. Even thirty minutes of exercise most days of the week can make a big difference. I try to exercise regularly because I notice I feel much better both physically and mentally when I am active. Everyone should find activities they enjoy and make exercise part of their daily routine."
+      }
+    },
+    {
+      "id": 8,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Explain how technology has changed communication.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "Technology has completely changed how we communicate with each other. In the past, people mainly used letters and phone calls to stay in touch. Now we have email, text messages, video calls, and social media. These tools allow instant communication anywhere in the world. We can share photos and videos immediately, making distant friends and family feel closer. However, there are negative aspects too. People sometimes prefer texting instead of talking face-to-face, which can make conversations less personal. We may have many online friends but feel lonely in real life. Young people especially spend too much time on their phones and not enough time with people around them. Despite these problems, I believe technology has mostly improved communication by connecting people across distances and helping us share information quickly. We just need to use it wisely and remember to have real conversations too."
+      }
+    },
+    {
+      "id": 9,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Describe your dream job and why you want it.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "My dream job is to be a photographer for a travel magazine. I would get to visit beautiful places around the world and take pictures. I love photography because it allows me to capture special moments and share them with others. As a travel photographer, I could combine my passion for photography with my love of exploring new places. This job would let me meet people from different cultures and learn about their lives. I would also be outside in nature rather than sitting in an office all day. Although this career path is competitive and sometimes unstable, the freedom and creativity would make it worthwhile. To achieve this dream, I am practicing my photography skills and building a portfolio. I also study languages to help me communicate when traveling. I hope one day I can make this dream come true."
+      }
+    },
+    {
+      "id": 10,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Compare living in a big city versus a small town.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "Big cities and small towns offer very different lifestyles. Big cities have more job opportunities, cultural activities, and services. You can find good restaurants, shopping centers, and entertainment options easily. Public transportation is usually available. However, cities are expensive, crowded, and can be stressful. There is more crime and pollution. Small towns provide a quieter, slower pace of life. People know their neighbors and communities are closer. The air is cleaner and living costs are lower. Children can play outside safely. But small towns have fewer job options and less entertainment. Young people often leave for cities to find work. Healthcare and education facilities may be limited. I think the choice depends on personal priorities. If you want career opportunities and excitement, choose a city. If you prefer peace and community, a small town might be better."
+      }
+    },
+    {
+      "id": 11,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Explain the importance of eating healthy food.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "Eating healthy food is crucial for good physical and mental health. A balanced diet with fruits, vegetables, whole grains, and protein provides the nutrients our bodies need to function properly. Healthy eating helps prevent diseases like diabetes and heart problems. It gives us energy throughout the day and helps us think clearly. Fresh foods contain vitamins and minerals that processed foods often lack. Drinking water and limiting sugar and fat are also important. While healthy food might cost more or take time to prepare, the benefits are worth it. Good nutrition affects not just physical health but also mood and ability to handle stress. Children who eat well perform better in school. I try to cook meals at home using fresh ingredients rather than buying fast food. Making healthy food choices is an investment in our future well-being and quality of life."
+      }
+    },
+    {
+      "id": 12,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Describe a skill you would like to learn.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "I would like to learn how to play the piano. Music is a beautiful form of expression and playing an instrument can bring joy to yourself and others. Learning piano would help me express emotions and be creative in a new way. It could provide a peaceful activity to help me relax after stressful days. Playing music also improves concentration and memory skills. I could entertain friends and family during gatherings. If I become good enough, I might even teach my children someday. Learning piano requires patience and daily practice, which would also teach me discipline. Although it might be difficult at first, the personal satisfaction and lifelong enjoyment would make the effort worthwhile. I plan to start by taking lessons from a teacher and practicing at least thirty minutes every day."
+      }
+    },
+    {
+      "id": 13,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Discuss the role of books in education.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "Books play a fundamental role in education and personal development. Reading improves vocabulary, grammar, and writing skills while expanding knowledge on many topics. Books expose students to different cultures, ideas, and perspectives they might not see in daily life. Reading develops critical thinking as students analyze stories and arguments. Unlike digital media, books encourage deep focus and sustained attention. They allow readers to learn at their own pace and review difficult concepts. Reading before bed helps you relax and improves sleep quality. While technology offers new ways to access information, traditional books remain valuable for developing concentration and comprehension. Schools should continue to emphasize reading because it builds the foundation for all other learning. Parents should also encourage children to read for pleasure, not just for homework. Reading creates lifelong learners who can adapt to our changing world."
+      }
+    },
+    {
+      "id": 14,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Explain why friendship is important.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "Friendship is one of the most important parts of a happy life. Good friends provide emotional support during difficult times and celebrate with us during happy moments. They offer different perspectives on problems and give honest advice when we need guidance. Friends make life more enjoyable through shared activities, conversations, and experiences. Having close friends helps reduce stress and improves physical health. True friends accept us as we are while encouraging us to become better people. They give us a sense of belonging and connection. While family relationships are important, friendships are special because we choose our friends freely. Good friendships require effort, trust, and communication from both sides. We need to be good listeners and show we care. I value my friends highly and try to spend time with them regularly. Life would be very lonely without good friends to share it with."
+      }
+    },
+    {
+      "id": 15,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Describe the advantages and disadvantages of online shopping.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "Online shopping has become very popular because of its convenience. The main advantages include shopping from home at any time, comparing prices easily, and finding products not available in local stores. Online shopping saves time and transportation costs. Customer reviews help make better decisions. You can find almost anything online. However, there are disadvantages. You cannot touch or try products before buying, which sometimes leads to disappointment. Shipping takes time and may cost extra. Returning items can be complicated. There are security concerns about sharing credit card information. Some people miss the social aspect of shopping in stores. Online photos can be misleading. Despite these drawbacks, online shopping is useful when used carefully, especially for books, electronics, and items where physical inspection is not necessary. I use both online and traditional shopping depending on what I need to buy."
+      }
+    },
+    {
+      "id": 16,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Discuss the importance of protecting the environment.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "Protecting the environment is crucial for the survival of all living things on Earth. Human activities like pollution and deforestation are damaging the air, water, and soil we depend on. Climate change threatens food production, weather patterns, and sea levels. We have a responsibility to preserve nature for future generations who deserve a healthy planet. Simple actions can make a difference. We should recycle, use less energy, and choose sustainable products. Walking or using public transport instead of driving helps reduce pollution. Governments and businesses need policies that prioritize environmental protection. The cost of fixing damage is much higher than prevention. By protecting forests, oceans, and wildlife today, we ensure our children will have clean air and fresh water. Everyone must do their part, no matter how small it seems. The health of our environment directly affects human health and quality of life."
+      }
+    },
+    {
+      "id": 17,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Explain how music affects emotions and daily life.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "Music has a powerful effect on human emotions and plays an important role in daily life. Different types of music can make us feel happy, sad, excited, or calm. Many people use music to improve mood when feeling stressed or tired. Upbeat songs motivate us during exercise, while soft music helps us relax before sleep. Music helps people express feelings that are difficult to put into words. It brings people together at concerts and celebrations, creating shared experiences. Students often find that background music helps them concentrate while studying. Music therapy is used in hospitals to help patients heal faster. Throughout history, music has been part of every culture. Whether we are listening, singing, or playing instruments, music enriches our lives in meaningful ways. I listen to music every day and it always affects how I feel."
+      }
+    },
+    {
+      "id": 18,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Describe your favorite season and what you enjoy about it.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "My favorite season is autumn because of its beautiful colors and comfortable weather. The leaves on trees change from green to brilliant reds, oranges, and yellows, creating stunning natural beauty. The temperature is perfect, not too hot or too cold. I enjoy wearing cozy sweaters and drinking warm tea. Autumn is harvest time, so there are fresh apples and pumpkins available. The air feels crisp and clean, perfect for long walks in parks. I love the sound leaves make when you walk through them. Many holidays happen in autumn, bringing families together. The shorter days make evenings feel more special. Autumn reminds me that change can be beautiful. After hot summer, the cool weather is refreshing. This season has a special feeling of transition and preparation for winter. Every year I look forward to autumn and the special atmosphere it brings."
+      }
+    },
+    {
+      "id": 19,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Discuss the benefits and challenges of working from home.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "Working from home has both advantages and challenges. The main benefits include saving time and money on commuting, having a flexible schedule, and working in comfortable clothes. Parents can spend more time with children. You avoid office distractions and politics. However, working from home can be lonely and makes it difficult to separate work from personal life. Some people struggle with self-discipline and find it hard to stay motivated without colleagues around. Technical problems with internet can cause stress. Communication with team members may be harder. Career advancement opportunities might be limited if you are not visible in the office. The success of working from home depends on personality, job type, and home environment. I think a combination of home and office work might be the best solution, giving flexibility while maintaining social connections with coworkers."
+      }
+    },
+    {
+      "id": 20,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Explain why it is important to maintain traditions.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "Maintaining traditions is important for preserving cultural identity and connecting generations. Traditions give people a sense of belonging and help them understand their heritage. They provide stability in a rapidly changing world. Family traditions create special memories and strengthen bonds between relatives. Cultural customs teach children about their history and develop pride in their background. Traditions bring communities together through shared celebrations. However, we must balance tradition with progress, keeping customs that have positive value while adapting to modern life. Some traditions may need to change as society evolves, but core values should be preserved. When traditions are lost, part of human history disappears forever. By maintaining our customs while staying open to new ideas, we honor our past while building a better future. I participate in my family's traditions and hope to pass them to my children."
+      }
+    },
+    {
+      "id": 21,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Describe the qualities of a good leader.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "A good leader possesses several important qualities. First, they must be honest and trustworthy because people need to believe in their integrity. Good leaders are excellent communicators who explain ideas clearly and listen to others. They show empathy and understand the needs and feelings of team members. Strong decision-making skills are essential, especially during difficult situations. Good leaders are fair and treat everyone equally. They must be confident but not arrogant, willing to admit mistakes and learn. Most importantly, good leaders inspire others to achieve their best by setting a positive example. They focus on team success rather than personal glory. A good leader also has vision and can see the big picture. They are patient, dedicated, and work hard. These qualities help create an environment where people feel motivated to work together toward common goals."
+      }
+    },
+    {
+      "id": 22,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Discuss the impact of mobile phones on society.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "Mobile phones have revolutionized society in positive and negative ways. They make communication instant and global, allowing people to stay connected anywhere. Smartphones provide access to information, maps, entertainment, and services that make life convenient. They help in emergencies and enable new forms of business and education. However, mobile phones have created problems too. Many people become addicted, spending less time in real conversations. They can distract during work, study, or driving, sometimes causing accidents. Privacy concerns arise from location tracking and data collection. Social media accessed through phones can lead to cyberbullying and mental health issues. Young people especially struggle to balance phone use with other activities. Despite these challenges, mobile phones are now essential tools. The key is learning to use them wisely while maintaining real human connections and being present in the moment."
+      }
+    },
+    {
+      "id": 23,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Explain why teamwork is important in achieving goals.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "Teamwork is essential for achieving complex goals because it combines different skills and perspectives. When people work together, they can accomplish much more than individuals alone. Each team member brings unique strengths that complement others' abilities. Teamwork allows division of labor, making large projects manageable by breaking them into smaller tasks. Good teamwork encourages creativity through brainstorming and sharing ideas. Team members support each other during difficult times and celebrate successes together. Working in teams teaches valuable skills like communication, compromise, and leadership. However, successful teamwork requires clear goals, good communication, and mutual respect. Conflicts may arise that need constructive resolution. Despite challenges, most significant achievements in business, science, and society result from teamwork rather than individual effort. I have learned that working with others is more effective and enjoyable than working alone."
+      }
+    },
+    {
+      "id": 24,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Describe the importance of education in personal development.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "Education plays a crucial role in personal development by expanding knowledge and developing critical thinking. Through education, people learn not only facts but also how to analyze information and solve problems. Education exposes students to different cultures and ways of thinking, making them more understanding. It builds confidence by helping people discover their talents and interests. Education provides practical skills needed for employment and financial independence. Beyond job preparation, education teaches values like responsibility, discipline, and perseverance. It encourages curiosity and lifelong learning, essential in our changing world. Higher education leads to better career opportunities and earnings. Most importantly, education helps people become more complete human beings who contribute positively to society. While formal education is important, learning should continue throughout life through reading, experiences, and interaction with others. I believe education is the key to personal and societal progress."
+      }
+    },
+    {
+      "id": 25,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Discuss advantages and disadvantages of modern technology.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "Modern technology has transformed lives with both benefits and drawbacks. Advantages include improved communication, access to information, and solutions to daily problems. Technology has revolutionized healthcare, education, and transportation. It enables global business and connects people across distances. However, technology creates challenges too. Many people become overly dependent, losing basic skills and social abilities. Privacy and security concerns arise from data collection and cyber attacks. Technology can eliminate jobs and increase inequality. Environmental problems result from electronic waste and energy consumption. Children spending too much time on screens may have development issues. Despite these problems, technology will continue advancing. The key is learning to use it responsibly while maintaining human values and connections. We must maximize benefits while minimizing negative impacts through education and wise choices."
+      }
+    },
+    {
+      "id": 26,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Explain why volunteering and helping others is valuable.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "Volunteering and helping others creates value for everyone involved. When we volunteer, we contribute to solving community problems and making society better. It provides a sense of purpose and satisfaction from making a positive difference. Volunteering develops empathy by exposing us to different situations and perspectives. It teaches new skills and provides experience helpful in career development. Many friendships and connections begin through volunteer work. Helping others improves mental health by reducing stress and increasing happiness. Communities become stronger when people work together to address needs. Volunteering teaches young people about civic responsibility. While helping others requires time and effort, personal growth and community benefits make it worthwhile. Everyone has something to contribute, whether time, skills, or resources. Even small acts of kindness have significant impact. I try to volunteer regularly because it makes me feel good while helping others."
+      }
+    },
+    {
+      "id": 27,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Describe the role of family in a person's life.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "Family plays the most fundamental role in shaping who we become. From birth, family members provide love, security, and basic care needed for survival. Parents teach essential values, morals, and social skills that guide behavior throughout life. Family traditions establish cultural identity and connection to heritage. During difficult times, family offers emotional support and practical help often unavailable elsewhere. Family relationships provide opportunities to learn cooperation, compromise, and unconditional love. However, family dynamics can create challenges as conflicts and different expectations cause stress. Despite difficulties, most people maintain strong bonds with family throughout their lives. The sense of belonging and shared history that family provides is irreplaceable. Even as we grow older and create our own families, the influence of our original family continues to shape choices, relationships, and worldview. Family is the foundation of society."
+      }
+    },
+    {
+      "id": 28,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Discuss the importance of time management.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "Time management is crucial for success and well-being because we all have the same hours but unlimited demands on our time. Good time management reduces stress by preventing panic from missed deadlines and forgotten commitments. It allows accomplishing important tasks while having time for relaxation and relationships. Effective time management involves setting priorities, making schedules, and learning to say no to less important activities. It requires discipline and avoiding distractions like social media. People with good time management are more productive at work and have better work-life balance. Planning ahead prevents procrastination and allows better decision-making. However, time management should not be so rigid that it eliminates spontaneity and fun. The goal is creating structure that supports our goals while leaving room for unexpected opportunities. I am still working on improving my time management skills."
+      }
+    },
+    {
+      "id": 29,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Explain how travel can broaden a person's perspective.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "Travel broadens perspective by exposing people to different cultures and ways of life that challenge assumptions. When we visit new places, we see there are many valid approaches to organizing society. Meeting people from different backgrounds develops empathy and understanding for diverse perspectives. Travel builds confidence and independence as people navigate unfamiliar situations. It provides firsthand education about history and geography that textbooks cannot match. Travel experiences reveal both the diversity and universal similarities of human nature. People discover that despite differences, humans everywhere share common hopes and desires. Travel helps people appreciate their own culture more deeply through comparison. While travel can be expensive and challenging, the personal growth and broader understanding make it valuable. I hope to travel more in the future to learn about different cultures and expand my worldview."
+      }
+    },
+    {
+      "id": 30,
+      "preparation": {
+        "title": "Prepare to write about the topic below",
+        "subtitle": "You will have 5 minutes to write"
+      },
+      "writing": {
+        "title": "Write about the topic below for 5 minutes"
+      },
+      "topic": "Describe what makes a good community.",
+      "results": {
+        "title": "Write about the topic below for 5 minutes",
+        "sampleTitle": "Review sample answer:",
+        "sampleAnswer": "A good community is characterized by strong relationships, mutual support, and shared values among members. People in good communities know their neighbors and help each other during times of need. There is a sense of safety and trust that allows children to play freely. Good communities have effective communication channels where residents voice concerns and participate in decisions. They provide essential services like schools, healthcare, and recreational facilities. Diversity is welcomed and different perspectives are valued. Good communities matter because they provide the social support system individuals need to thrive. They offer a sense of belonging essential for mental health. Strong communities contribute to economic development and political stability. When people feel connected to their community, they participate in civic activities and work toward common goals. I try to be an active community member by attending local events and helping neighbors when possible."
+      }
+    }
+  ]
+}

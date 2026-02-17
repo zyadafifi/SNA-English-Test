@@ -1,0 +1,19 @@
+/* Background only - used by quiz pages. Main styles in styles.css. */
+body {
+  background-color: #f8f9fa;
+}
+
+/* Fixed background layer via pseudo-element: preserves visual, avoids scroll jank */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("assets/gradient-background.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  z-index: -1;
+  pointer-events: none;
+  transform: translateZ(0);
+  will-change: transform;
+}

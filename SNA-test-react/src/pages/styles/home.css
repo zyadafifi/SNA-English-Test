@@ -1,0 +1,16 @@
+/* Home page overrides */
+
+.main-content {
+  margin-top: 0 !important;
+}
+
+.header-sign-out {
+  font-size: 0.875rem;
+  color: #666;
+  text-decoration: none;
+  margin-right: 0.5rem;
+}
+.header-sign-out:hover {
+  color: #1a1a1a;
+  text-decoration: underline;
+}
